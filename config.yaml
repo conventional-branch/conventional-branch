@@ -1,7 +1,7 @@
 baseURL: 'https://conventional-branch.github.io/'
 languageCode: en-us
 theme: conventional-branch
-# defaultContentLanguageInSubdir: true
+defaultContentLanguageInSubdir: true
 defaultContentLanguage: "en"
 
 # Global parameters
