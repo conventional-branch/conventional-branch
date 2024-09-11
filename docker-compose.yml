@@ -1,0 +1,12 @@
+version: '3'
+
+services:
+  app:
+    build:
+      dockerfile: Dockerfile.dev
+      context: .
+    ports:
+     - "1313:1313"
+    working_dir: /src/
+    volumes:
+      - ./:/src/

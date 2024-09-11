@@ -1,0 +1,36 @@
+baseURL: 'https://conventional-branch.github.io/'
+languageCode: en-us
+theme: conventional-branch
+# defaultContentLanguageInSubdir: true
+defaultContentLanguage: "en"
+
+# Global parameters
+params:
+  license:
+    title: License
+    action:
+      label: Creative Commons - CC BY 3.0
+      url: 'https://creativecommons.org/licenses/by/3.0/'
+
+  footer:
+    logos:
+    - name: github
+      url: 'https://github.com/conventional-branch/conventional-branch'
+
+# Languages parameters
+languages:
+  en:
+    params:
+      weight: 1
+      languageName: "English"
+      title: Conventional Branch
+      description: A specification for adding human and machine readable meaning to branch
+      actions:
+      - label: Quick Summary
+        url: '#summary'
+      - label: Full Specification
+        url: '#specification'
+      - label: Contribute
+        url: 'https://github.com/conventional-branch/conventional-branch'
+      # versions:
+      #   current: v1.0.0

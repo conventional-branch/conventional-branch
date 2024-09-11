@@ -1,0 +1,114 @@
+@use "sass:math";
+@import "./../abstracts/index";
+
+.welcome {
+  position: relative;
+  z-index: 0;
+  background: $color-primary;
+  @include gradient-primary();
+
+  .container {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: $welcome-height;
+    min-height: $welcome-min-height;
+    color: $color-neutral-light;
+  }
+
+  .mini_container {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: $welcome-min-height;
+    color: $color-neutral-light;
+    width: 100%;
+    max-width: $desktop-width;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: $gap-md;
+    padding-right: $gap-md;
+  }
+
+  &__title {
+    font-size: 2.6em;
+    margin-bottom: $gap-sm;
+
+    @include up-to-mobile {
+      word-break: break-all;
+    }
+
+    @include desktop {
+      width: 85%;
+      font-size: 3.6em;
+    }
+  }
+
+  &__description {
+    font-size: 18px;
+    width: 100%;
+    @include desktop {
+      width: 80%;
+    }
+  }
+
+  &__actions {
+    display: flex;
+    margin-top: math.div($gap-lg * 3, 2);
+    flex-wrap: wrap;
+  }
+
+  &__action {
+    padding: 12px 16px;
+    border-radius: 50px;
+    text-decoration: none;
+    line-height: 1.5;
+    color: $welcome-action-color;
+    border: 1px solid $welcome-action-color;
+    margin-right: $gap-md;
+    margin-bottom: $gap-md;
+    transition: background-color .3s ease, color .3s ease;
+    min-width: fit-content;
+
+    &:last-child {
+      margin-right: 0;
+    }
+
+    &:hover {
+      background-color: $welcome-action-color;
+      color: get-color-accessible-for-background($welcome-action-color)
+    }
+  }
+
+  &__image {
+    display: none;
+  }
+}
+
+@include desktop {
+  .welcome__image {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: -1;
+    position: absolute;
+    top: 50%;
+    right: 0;
+    height: 70%;
+    width: 24%;
+    overflow: hidden;
+    transform: translate(0, -50%);
+
+    img {
+      display: block;
+      margin: auto;
+      max-width: 200px;
+      max-height: 100%;
+    }
+  }
+}
+
