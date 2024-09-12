@@ -67,6 +67,8 @@ jobs:
           personal_token: ${{ secrets.PERSONAL_TOKEN }}
           external_repository: conventional-branch/conventional-branch.github.io
           publish_branch: main
+          user_name: 'github-actions[bot]'
+          user_email: 'github-actions[bot]@users.noreply.github.com'
           publish_dir: ./public
           force_orphan: true
           enable_jekyll: true
