@@ -7,7 +7,7 @@ aliases: ["/en/"]
 
 ## Summary
 
-The Conventional Branch specification to define a branch based workflow for your project. When you map your workflow to branch types, you can ensure that branches are named consistently by configuring which branch types to make available. We've suggested some branch prefixes you might want to use but you can also specify your own naming convention. A consistent naming convention makes it easier to identify branches by type. You can also define which branches are your development and production branches, which allows us to better suggest source and target branches for creation and pull requests.
+The Conventional Branch specification to define a branch based workflow for your project. When you map your workflow to branch types, you can ensure that branches are named consistently by configuring which branch types to make available. We've suggested some branch prefixes you might want to use but you can also specify your own naming convention. A consistent naming convention makes it easier to identify branches by type.
 
 ## Specification
 
@@ -20,14 +20,15 @@ The branch specification by describing with `feature`, `bugfix`, `release` `hotf
 ```
 ---
 
-<br />
-The branch contains the following structural elements, to communicate intent to the
-consumers of your library:
+There are several types of branches that are frequently used in software development. This table explains what each branch type is for, and the typical prefix convention for each branch type. 
 
-1. **feature/:** Used for specific feature work or improvements. Generally branches from, and merges back into, the development branch, using pull requests.
-2. **bugfix/** Typically used to fix Release branches.
-3. **release/** Used for release tasks and long-term maintenance versions. They are branched from the development branch and then merged into the production branch.
-4. **hotfix/** Used to quickly fix a Production branch without interrupting changes in the development branch. In a Git-based workflow, changes are usually merged into the production and development branches.
+|Branch types   | Branch name  | Description  |
+|--------------|--------------|--------------|
+|Development branch |`main`, `master`, `develop`   |Usually the integration branch for feature work and is often the default branch or a named branch. For pull request workflows, the branch where new feature branches are targeted.   |
+|Feature branch     |`feature/`  | Used for specific feature work or improvements. Generally branches from, and merges back into, the development branch, using pull requests.  |
+|Bugfix branch      |`bugfix/`   | Typically used to fix issues for any branches.   |
+|Hotfix branch      |`hotfix/`   | Used to quickly fix a Production branch without interrupting changes in the development branch. In a Git-based workflow, changes are usually merged into the production and development branches.   |
+|Release branch     |`release/`  | Used for release tasks and long-term maintenance versions. They are branched from the development branch and then merged into the production branch.   |
 
 ## Examples
 
@@ -40,7 +41,6 @@ hotfix/upgrade-log4j-to-fix-vulnerabilities
 ```
 
 ### Branch with ticket number
-
 
 ```
 feature/ABC-1234
@@ -58,12 +58,11 @@ release/1.1.0
 ## Why Use Conventional Branch
 
 * Communicating the nature of changes to teammates, the public, and other stakeholders.
-* Triggering build and publish processes.
-* Making it easier for people to contribute to your projects, by allowing them to explore
-  a more structured branch history.
+* Triggering specific types of build and publish processes.
+* Making it easier for people to contribute to your projects, by allowing them to explore a more structured branch history.
 
 ## FAQ
 
 ### What tools can be used to automatically identify if a team member does not meet this specification?
 
-You can used [conventional-branch](https://github.com/conventional-branch/conventional-branch) to check branch specification or [conventional-branch-action](https://github.com/conventional-branch/conventional-branch-action) if your codes are hosted on GitHub.
+You can used [commit-check](https://github.com/commit-check/commit-check) to check branch specification or [commit-check-action](https://github.com/commit-check/commit-check-action) if your codes are hosted on GitHub.
