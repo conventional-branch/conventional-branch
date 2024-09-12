@@ -65,7 +65,7 @@ jobs:
         if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
         with:
           personal_token: ${{ secrets.PERSONAL_TOKEN }}
-          xternal_repository: conventional-branch/conventional-branch.github.io
+          external_repository: conventional-branch/conventional-branch.github.io
           publish_branch: main
           publish_dir: ./public
           force_orphan: true
