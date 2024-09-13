@@ -1,6 +1,7 @@
 ---
 draft: false
 aliases: ["/en/"]
+layout: single
 ---
 
 # Conventional Branch 1.0.0

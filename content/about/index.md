@@ -5,7 +5,7 @@ draft: false
 
 # About
 
-The Conventional Branch specification is inspired by [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/#summary).
+The Conventional Branch specification was inspired by [Conventional Commits](https://www.conventionalcommits.org).
 
 ## Tooling for Conventional Branch
 
