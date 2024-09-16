@@ -8,11 +8,11 @@ layout: single
 
 ## Summary
 
-The Conventional Branch specification to define a branch based workflow for your project. When you map your workflow to branch types, you can ensure that branches are named consistently by configuring which branch types to make available. We've suggested some branch prefixes you might want to use but you can also specify your own naming convention. A consistent naming convention makes it easier to identify branches by type.
+Git's Conventional Branch refers to a structured and standardized naming convention for Git branches which aims to make branch more readable and actionable. We've suggested some branch prefixes you might want to use but you can also specify your own naming convention. A consistent naming convention makes it easier to identify branches by type.
 
 ## Specification
 
-The branch specification by describing with `feature`, `bugfix`, `release` `hotfix` and it should be structured as follows:
+The branch specification by describing with `feature/`, `bugfix/`, `hotfix/`, `release/` and `chore/` and it should be structured as follows:
 
 ---
 
@@ -21,46 +21,29 @@ The branch specification by describing with `feature`, `bugfix`, `release` `hotf
 ```
 ---
 
-There are several types of branches that are frequently used in software development. This table explains what each branch type is for, and the typical prefix convention for each branch type. 
+## Key Points of Conventional Branch:
 
-|Branch types   | Branch name  | Description  |
-|--------------|--------------|--------------|
-|Development branch |`main`, `master`, `develop`   |Usually the integration branch for feature work and is often the default branch or a named branch. For pull request workflows, the branch where new feature branches are targeted.   |
-|Feature branch     |`feature/`  | Used for specific feature work or improvements. Generally branches from, and merges back into, the development branch, using pull requests.  |
-|Bugfix branch      |`bugfix/`   | Typically used to fix issues for any branches.   |
-|Hotfix branch      |`hotfix/`   | Used to quickly fix a Production branch without interrupting changes in the development branch. In a Git-based workflow, changes are usually merged into the production and development branches.   |
-|Release branch     |`release/`  | Used for release tasks and long-term maintenance versions. They are branched from the development branch and then merged into the production branch.   |
+1. **Purpose-driven Branch Names**: Each branch name clearly indicates its purpose, making it easy for all developers to understand what the branch is for. Common formats include:
 
-## Examples
+   - **main**: The main development branch (e.g., `main`, `master`, or `develop`)
+   - **feature/**: For new features (e.g., `feature/add-login-page`)
+   - **bugfix/**: For bug fixes (e.g., `bugfix/fix-header-bug`)
+   - **hotfix/**: For urgent fixes (e.g., `hotfix/security-patch`)
+   - **release/**: For branches preparing a release (e.g., `release/v1.2.0`)
+   - **chore/**: For non-code tasks like dependency updates (e.g., `chore/update-dependencies`)
 
-### Branch with description
+2. **Integration with CI/CD**: By using consistent branch names, it can help automated systems (like Continuous Integration/Continuous Deployment pipelines) to trigger specific actions based on the branch type (e.g., auto-deployment from release branches).
 
-```
-feature/support-cmake-build
-bugfix/adjust-makefile
-hotfix/upgrade-log4j-to-fix-vulnerabilities
-```
+3. **Team Collaboration** : It encourages collaboration within teams by making branch purpose explicit, reducing misunderstandings and making it easier for team members to switch between tasks without confusion.
 
-### Branch with ticket number
+### Benefits:
 
-```
-feature/ABC-1234
-bugfix/DEF-2345
-hotfix/XYZ-6789
-release/XYZ-6789
-```
+- **Clear Communication**: The branch name alone provides a clear understanding of its purpose without needing to dig into the code.
+- **Improved History**: When used with Conventional Commits, it ensures a clean and organized commit history.
+- **Automation-Friendly**: Easily hooks into automation processes (e.g., different workflows for `feature`, `release`, etc.).
+- **Scalability**: Works well in large teams where many developers are working on different tasks simultaneously.
 
-### Branch with version number
-
-```
-release/1.1.0
-```
-
-## Why Use Conventional Branch
-
-* Communicating the nature of changes to teammates, the public, and other stakeholders.
-* Triggering specific types of build and publish processes.
-* Making it easier for people to contribute to your projects, by allowing them to explore a more structured branch history.
+In summary, conventional branch naming is designed to improve project organization, communication, and automation within Git workflows.
 
 ## FAQ
 
