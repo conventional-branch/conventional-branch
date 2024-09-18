@@ -19,21 +19,20 @@ The branch specification by describing with `feature/`, `bugfix/`, `hotfix/`, `r
 ```
 <type>/<description>
 ```
+
+- **main**: The main development branch (e.g., `main`, `master`, or `develop`)
+- **feature/**: For new features (e.g., `feature/add-login-page`)
+- **bugfix/**: For bug fixes (e.g., `bugfix/fix-header-bug`)
+- **hotfix/**: For urgent fixes (e.g., `hotfix/security-patch`)
+- **release/**: For branches preparing a release (e.g., `release/v1.2.0`)
+- **chore/**: For non-code tasks like dependency updates (e.g., `chore/update-dependencies`)
+
 ---
 
-## Key Points of Conventional Branch:
+## Key Points
 
-1. **Purpose-driven Branch Names**: Each branch name clearly indicates its purpose, making it easy for all developers to understand what the branch is for. Common formats include:
-
-   - **main**: The main development branch (e.g., `main`, `master`, or `develop`)
-   - **feature/**: For new features (e.g., `feature/add-login-page`)
-   - **bugfix/**: For bug fixes (e.g., `bugfix/fix-header-bug`)
-   - **hotfix/**: For urgent fixes (e.g., `hotfix/security-patch`)
-   - **release/**: For branches preparing a release (e.g., `release/v1.2.0`)
-   - **chore/**: For non-code tasks like dependency updates (e.g., `chore/update-dependencies`)
-
+1. **Purpose-driven Branch Names**: Each branch name clearly indicates its purpose, making it easy for all developers to understand what the branch is for.
 2. **Integration with CI/CD**: By using consistent branch names, it can help automated systems (like Continuous Integration/Continuous Deployment pipelines) to trigger specific actions based on the branch type (e.g., auto-deployment from release branches).
-
 3. **Team Collaboration** : It encourages collaboration within teams by making branch purpose explicit, reducing misunderstandings and making it easier for team members to switch between tasks without confusion.
 
 ### Benefits:
