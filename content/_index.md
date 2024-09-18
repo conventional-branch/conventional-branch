@@ -39,7 +39,6 @@ The branch specification by describing with `feature/`, `bugfix/`, `hotfix/`, `r
 ### Benefits:
 
 - **Clear Communication**: The branch name alone provides a clear understanding of its purpose without needing to dig into the code.
-- **Improved History**: When used with Conventional Commits, it ensures a clean and organized commit history.
 - **Automation-Friendly**: Easily hooks into automation processes (e.g., different workflows for `feature`, `release`, etc.).
 - **Scalability**: Works well in large teams where many developers are working on different tasks simultaneously.
 
