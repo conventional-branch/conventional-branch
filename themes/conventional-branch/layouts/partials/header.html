@@ -16,7 +16,7 @@
         <button class="dropdown__label">Languages</button>
         <ul class="dropdown__options">
           {{ range .Site.Home.AllTranslations }}
-          <li class="dropdown__option"><a href="{{ .Permalink }}">{{ .Language.LanguageName }}</a></li>
+          <li class="dropdown__option"><a href="{{ .Permalink }}">{{ .Language.Params.LanguageName }}</a></li>
           {{ end }}
         </ul>
       </li>
