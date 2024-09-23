@@ -1,0 +1,11 @@
+name: Release Drafter
+
+on:
+  push:
+    branches:
+      - "main"
+  workflow_dispatch:
+
+jobs:
+  draft-release:
+    uses: conventional-branch/.github/.github/workflows/release-drafter.yml@main
