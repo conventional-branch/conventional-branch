@@ -34,3 +34,16 @@ languages:
         url: 'https://github.com/conventional-branch/conventional-branch'
       # versions:
       #   current: v1.0.0
+  zh:
+    params:
+      weight: 2
+      languageName: "中文"
+      title: 约定式分支
+      description: 一种用于给分支增加人机可读含义的规范
+      actions:
+      - label: 概述
+        url: '#概述'
+      - label: 完整规范
+        url: '#规范'
+      - label: 贡献
+        url: 'https://github.com/conventional-branch/conventional-branch'
