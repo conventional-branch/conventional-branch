@@ -25,7 +25,7 @@
   "devDependencies": {
     "autoprefixer": "10.4.20",
     "cssnano": "5.1.13",
-    "sass": "1.55.0",
+    "sass": "1.83.4",
     "postcss": "8.4.47",
     "postcss-cli": "11.0.0",
     "webpack": "5.94.0",
