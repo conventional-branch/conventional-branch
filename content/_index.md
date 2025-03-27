@@ -44,7 +44,7 @@ The branch specification by describing with `feature/`, `bugfix/`, `hotfix/`, `r
 3. **No Consecutive Hyphens**: Ensure that hyphens are used singly, with no consecutive hyphens (e.g., `feature/new-login`, not `feature/new--login`).
 4. **No Trailing Hyphens**: Do not add a hyphen at the end of the branch name. For instance, use `feature/new-login` instead of `feature/new-login-`.
 5. **Clear and Concise**: Make branch names descriptive but concise. The name should clearly indicate the work being done.
-6. **Include Jira (or Other Tool) Ticket Numbers**: If applicable, include the ticket number from your project management tool to make tracking easier. For example, for a ticket `T-123`, the branch name could be `feature/T-123-new-login`.
+6. **Include Jira (or Other Tool) Ticket Numbers**: If applicable, include the ticket number from your project management tool to make tracking easier. For example, for a ticket `issue-123`, the branch name could be `feature/issue-123-new-login`.
 
 ## Conclusion
 
