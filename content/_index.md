@@ -39,12 +39,10 @@ The branch specification by describing with `feature/`, `bugfix/`, `hotfix/`, `r
 
 ### Basic Rules
 
-1. **Lowercase and Hyphen-Separated**: Always use lowercase letters, and separate words with hyphens. For example, `feature/new-login` or `bugfix/header-styling`.
-2. **Alphanumeric and Hyphens Only**: Use only lowercase letters (a-z), numbers (0-9), and hyphens. Avoid special characters like spaces, punctuation, and underscores.
-3. **No Consecutive Hyphens**: Ensure that hyphens are used singly, with no consecutive hyphens (e.g., `feature/new-login`, not `feature/new--login`).
-4. **No Trailing Hyphens**: Do not add a hyphen at the end of the branch name. For instance, use `feature/new-login` instead of `feature/new-login-`.
-5. **Clear and Concise**: Make branch names descriptive but concise. The name should clearly indicate the work being done.
-6. **Include Jira (or Other Tool) Ticket Numbers**: If applicable, include the ticket number from your project management tool to make tracking easier. For example, for a ticket `issue-123`, the branch name could be `feature/issue-123-new-login`.
+1. **Use Lowercase Alphanumeric and Hyphens**: Always use lowercase letters (a-z), numbers (0-9), and hyphens to separate words. Avoid special characters, underscores, or spaces.
+2. **No Consecutive or Trailing Hyphens**: Ensure that hyphens are used singly, with no consecutive hyphens (`feature/new--login`) or at the end (`feature/new-login-`). 
+3. **Keep It Clear and Concise**: The branch name should be descriptive yet concise, clearly indicating the purpose of the work. 
+4. **Include Ticket Numbers**: If applicable, include the ticket number from your project management tool to make tracking easier. For example, for a ticket `issue-123`, the branch name could be `feature/issue-123-new-login`.
 
 ## Conclusion
 
