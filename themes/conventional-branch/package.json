@@ -23,7 +23,7 @@
     "github-markdown-css": "5.8.1"
   },
   "devDependencies": {
-    "autoprefixer": "10.4.20",
+    "autoprefixer": "10.4.21",
     "cssnano": "7.0.6",
     "sass": "1.85.1",
     "postcss": "8.5.3",
