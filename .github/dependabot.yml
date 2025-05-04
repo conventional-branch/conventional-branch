@@ -6,7 +6,15 @@ updates:
   directory: /themes/conventional-branch/
   schedule:
     interval: monthly
+  groups:
+    npm-deps:
+      patterns:
+        - "*"
 - package-ecosystem: github-actions
   directory: /
   schedule:
     interval: monthly
+  groups:
+    github-action-deps:
+      patterns:
+        - "*"
