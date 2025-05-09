@@ -15,7 +15,8 @@ The Conventional Branch specification was inspired by [Conventional Commits](htt
 
 ## Projects Using Conventional Branch
 
-* [commit-check](https://github.com/commit-check): Supports checking commit messages, branch naming, committer name/email, commit signoff, customizing error messages, suggested commands and more.
+* [ansible/metrics-utility](https://github.com/ansible/metrics-utility/blob/devel/docs/contributing/CONTRIBUTING.md): Standalone utility for https://github.com/ansible/awx/
+* [commit-check](https://github.com/commit-check): A free, powerful tool that enforces commit metadata, branch naming, and more.
 
 [![Conventional Branch](https://img.shields.io/badge/Conventional%20Branch-1.0.0-blue)](https://github.com/conventional-branch/conventional-branch)
 
