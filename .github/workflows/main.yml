@@ -27,7 +27,6 @@ defaults:
     shell: bash
 
 jobs:
-  # Build job
   build:
     runs-on: ubuntu-latest
     env:
@@ -57,12 +56,10 @@ jobs:
         with:
           path: ./public
       - name: Test website pages
-        if: github.event_name == 'pull_request'
         run: |
           nohup make all-dev &
           sleep 5
           make test
-
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v4
         # If you're changing the branch from main,
