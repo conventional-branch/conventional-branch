@@ -60,6 +60,7 @@ jobs:
         if: github.event_name == 'pull_request'
         run: |
           nohup make all-dev &
+          sleep 5
           make test
 
       - name: Deploy
