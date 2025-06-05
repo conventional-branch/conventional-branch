@@ -59,7 +59,7 @@ jobs:
       - name: Test website pages
         if: github.event_name == 'pull_request'
         run: |
-          nohup make all-dev
+          nohup make all-dev &
           make test
 
       - name: Deploy
