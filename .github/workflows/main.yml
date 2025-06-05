@@ -56,10 +56,10 @@ jobs:
         uses: actions/upload-pages-artifact@v3
         with:
           path: ./public
-      - name: test website
+      - name: Test website pages
         if: github.event_name == 'pull_request'
         run: |
-          make all-dev
+          nohup make all-dev
           make test
 
       - name: Deploy
