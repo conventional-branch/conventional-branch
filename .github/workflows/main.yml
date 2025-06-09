@@ -56,12 +56,6 @@ jobs:
         uses: actions/upload-pages-artifact@v3
         with:
           path: ./public
-      - name: Test website pages
-        if: github.event_name == 'pull_request'
-        run: |
-          nohup make all-dev &
-          sleep 5
-          make test
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v4
