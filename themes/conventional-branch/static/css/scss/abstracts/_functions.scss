@@ -1,4 +1,4 @@
-@import "./../abstracts/variables";
+@use "./../abstracts/variables";
 
 
 @function get-color-accessible-for-background($color) {
