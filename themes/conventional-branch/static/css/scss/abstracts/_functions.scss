@@ -1,11 +1,12 @@
+@use "sass:color";
 @use "./../abstracts/variables";
 
 
 @function get-color-accessible-for-background($color) {
-  @if (lightness( $color ) > 50) {
-    @return darken($color, 60%)
+  @if (color.channel($color, "lightness", $space: hsl) > 50) {
+    @return color.adjust($color, $lightness: -60%);
   }
   @else {
-    @return lighten($color, 60%)
+    @return color.adjust($color, $lightness: 60%);
   }
 }

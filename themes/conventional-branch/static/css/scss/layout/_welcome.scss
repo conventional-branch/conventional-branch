@@ -1,11 +1,11 @@
 @use "sass:math";
-@import "./../abstracts/index";
+@use "./../abstracts/index";
 
 .welcome {
   position: relative;
   z-index: 0;
-  background: $color-primary;
-  @include gradient-primary();
+  background: index.$color-primary;
+  @include index.gradient-primary();
 
   .container {
     position: relative;
@@ -13,9 +13,9 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    height: $welcome-height;
-    min-height: $welcome-min-height;
-    color: $color-neutral-light;
+    height: index.$welcome-height;
+    min-height: index.$welcome-min-height;
+    color: index.$color-neutral-light;
   }
 
   .mini_container {
@@ -24,25 +24,25 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    min-height: $welcome-min-height;
-    color: $color-neutral-light;
+    min-height: index.$welcome-min-height;
+    color: index.$color-neutral-light;
     width: 100%;
-    max-width: $desktop-width;
+    max-width: index.$desktop-width;
     margin-left: auto;
     margin-right: auto;
-    padding-left: $gap-md;
-    padding-right: $gap-md;
+    padding-left: index.$gap-md;
+    padding-right: index.$gap-md;
   }
 
   &__title {
     font-size: 2.6em;
-    margin-bottom: $gap-sm;
+    margin-bottom: index.$gap-sm;
 
-    @include up-to-mobile {
+    @include index.up-to-mobile {
       word-break: break-all;
     }
 
-    @include desktop {
+    @include index.desktop {
       width: 85%;
       font-size: 3.6em;
     }
@@ -51,14 +51,14 @@
   &__description {
     font-size: 18px;
     width: 100%;
-    @include desktop {
+    @include index.desktop {
       width: 80%;
     }
   }
 
   &__actions {
     display: flex;
-    margin-top: math.div($gap-lg * 3, 2);
+    margin-top: math.div(index.$gap-lg * 3, 2);
     flex-wrap: wrap;
   }
 
@@ -67,10 +67,10 @@
     border-radius: 50px;
     text-decoration: none;
     line-height: 1.5;
-    color: $welcome-action-color;
-    border: 1px solid $welcome-action-color;
-    margin-right: $gap-md;
-    margin-bottom: $gap-md;
+    color: index.$welcome-action-color;
+    border: 1px solid index.$welcome-action-color;
+    margin-right: index.$gap-md;
+    margin-bottom: index.$gap-md;
     transition: background-color .3s ease, color .3s ease;
     min-width: fit-content;
 
@@ -79,8 +79,8 @@
     }
 
     &:hover {
-      background-color: $welcome-action-color;
-      color: get-color-accessible-for-background($welcome-action-color)
+      background-color: index.$welcome-action-color;
+      color: index.get-color-accessible-for-background(index.$welcome-action-color);
     }
   }
 
@@ -89,7 +89,7 @@
   }
 }
 
-@include desktop {
+@include index.desktop {
   .welcome__image {
     display: flex;
     justify-content: center;

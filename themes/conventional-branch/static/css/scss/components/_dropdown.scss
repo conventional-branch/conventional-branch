@@ -1,21 +1,21 @@
 @use "sass:math";
-@import "./../abstracts/index";
+@use "./../abstracts/index";
 
 @keyframes show {
   from {
-    @include dropdown-animation-hidden;
+    @include index.dropdown-animation-hidden;
   }
   to {
-    @include dropdown-animation-visible;
+    @include index.dropdown-animation-visible;
   }
 }
 
 @keyframes hide {
   from {
-    @include dropdown-animation-visible;
+    @include index.dropdown-animation-visible;
   }
   to {
-    @include dropdown-animation-hidden;
+    @include index.dropdown-animation-hidden;
   }
 }
 
@@ -33,14 +33,14 @@
     text-decoration: inherit;
     text-transform: inherit;
     text-align: center;
-    padding: $dropdown-label-padding;
-    background-color: $dropdown-label-background-color;
-    border-radius: $dropdown-border-radius;
+    padding: index.$dropdown-label-padding;
+    background-color: index.$dropdown-label-background-color;
+    border-radius: index.$dropdown-border-radius;
     &:after {
       display: none;
       content: '';
       width: 100%;
-      height: $dropdown-options-space-from-label * 1.5;
+      height: index.$dropdown-options-space-from-label * 1.5;
       position: absolute;
       top: 100%;
       left: 0;
@@ -59,13 +59,13 @@
     transform: translate(-50%, 0);
     list-style: none;
     font-size: 13px;
-    background-color: $dropdown-options-background-color;
-    border-radius: $dropdown-border-radius;
-    box-shadow: $shadow-soft;
+    background-color: index.$dropdown-options-background-color;
+    border-radius: index.$dropdown-border-radius;
+    box-shadow: index.$shadow-soft;
     overflow: auto;
-    animation: hide math.div($dropdown-animation-timing, 2)  ease forwards;
+    animation: hide math.div(index.$dropdown-animation-timing, 2)  ease forwards;
 
-    @include up-to-mobile {
+    @include index.up-to-mobile {
       top: 75%;
     }
 
@@ -77,8 +77,8 @@
       top: 0;
       left: 50%;
       border-style: solid;
-      border-width: 0 $dropdown-arrow-size math.div($dropdown-arrow-size, 2) $dropdown-arrow-size;
-      border-color: transparent transparent $dropdown-options-background-color transparent;
+      border-width: 0 index.$dropdown-arrow-size math.div(index.$dropdown-arrow-size, 2) index.$dropdown-arrow-size;
+      border-color: transparent transparent index.$dropdown-options-background-color transparent;
       transform: translate(-50%, -100%);
     }
   }
@@ -86,17 +86,17 @@
   &__option {
     a {
       display: block;
-      padding: $dropdown-option-padding;
+      padding: index.$dropdown-option-padding;
       color: rgba(black, .6);
       text-decoration: none;
-      border-bottom: 1px solid $dropdown-option-border-bottom-color;
+      border-bottom: 1px solid index.$dropdown-option-border-bottom-color;
       transition: background-color .3s ease, color .3s ease;
       text-transform: none;
       font-weight: normal;
       &:hover,
       &:focus {
-        color: $color-primary;
-        background-color: rgba($color-neutral-dark, .025);
+        color: index.$color-primary;
+        background-color: rgba(index.$color-neutral-dark, .025);
       }
     }
     &:last-child a {
@@ -111,6 +111,6 @@
 
   &:hover &__options,
   &:focus &__options {
-    animation: show $dropdown-animation-timing ease forwards;
+    animation: show index.$dropdown-animation-timing ease forwards;
   }
 }

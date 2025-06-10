@@ -1,4 +1,4 @@
-@import "./../abstracts/index";
+@use "./../abstracts/index";
 
 .header {
   position: absolute;
@@ -11,7 +11,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    height: $header-height;
+    height: index.$header-height;
     font-size: .8em;
     font-weight: bold;
     text-transform: uppercase;
@@ -27,13 +27,13 @@
 
   &__menu {
     display: flex;
-    color: $color-neutral-light;
+    color: index.$color-neutral-light;
     list-style: none;
-    margin-left: $gap-sm * 2;
+    margin-left: index.$gap-sm * 2;
   }
 
   &__menu-item {
-    margin-right: $gap-sm;
+    margin-right: index.$gap-sm;
 
     &:last-child {
       margin-right: 0;
@@ -41,12 +41,12 @@
   }
 }
 
-@include up-to-mobile {
+@include index.up-to-mobile {
   .header {
     .container {
       align-items: flex-start;
       height: auto;
-      margin-top: $gap-sm;
+      margin-top: index.$gap-sm;
     }
 
 
@@ -54,7 +54,7 @@
       flex-direction: column;
       justify-content: flex-end;
       align-items: flex-end;
-      margin-top: $gap-sm * -1;
+      margin-top: index.$gap-sm * -1;
     }
 
     &__menu-item {

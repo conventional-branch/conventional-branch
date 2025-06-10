@@ -1,4 +1,4 @@
-@import "./../abstracts/index";
+@use "./../abstracts/index";
 
 main article.markdown-body {
   h1{
@@ -6,7 +6,7 @@ main article.markdown-body {
   }
   h1, h2, h3, h4, h5, h6, a {
     font-weight: bold;
-    color: $color-primary-heading;
+    color: index.$color-primary-heading;
   }
   a.anchorjs-link:hover {
     text-decoration: none;

@@ -1,7 +1,7 @@
-@import "./../abstracts/index";
+@use "./../abstracts/index";
 
 .footer {
-  margin: ($article-offset-top + ($gap-md*3)) 0 ($gap-md*3);
+  margin: (index.$article-offset-top + (index.$gap-md*3)) 0 (index.$gap-md*3);
 
   .container {
     display: flex;
@@ -29,7 +29,7 @@
   }
 
   .github {
-    width: $footer-logo-size;
-    height: $footer-logo-size;
+    width: index.$footer-logo-size;
+    height: index.$footer-logo-size;
   }
 }
