@@ -1,4 +1,4 @@
-@import "./../abstracts/index";
+@use "./../abstracts/index";
 
 * {
   margin: 0;
@@ -6,7 +6,7 @@
   box-sizing: border-box;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  -webkit-tap-highlight-color: rgba($color-neutral-dark, 0);
+  -webkit-tap-highlight-color: rgba(index.$color-neutral-dark, 0);
 }
 
 body {
@@ -17,11 +17,11 @@ body {
 
 .container {
   width: 100%;
-  max-width: $desktop-width;
+  max-width: index.$desktop-width;
   margin-left: auto;
   margin-right: auto;
-  padding-left: $gap-md;
-  padding-right: $gap-md;
+  padding-left: index.$gap-md;
+  padding-right: index.$gap-md;
 
 }
 
@@ -30,28 +30,28 @@ body {
 }
 
 main {
-  background-color: $main-background;
+  background-color: index.$main-background;
 }
 
 article {
-  background-color: $article-background;
-  transform: translateY($article-offset-top);
-  padding-top: $gap-md;
-  padding-bottom: $gap-md;
-  border-radius: $radius-lg;
+  background-color: index.$article-background;
+  transform: translateY(index.$article-offset-top);
+  padding-top: index.$gap-md;
+  padding-bottom: index.$gap-md;
+  border-radius: index.$radius-lg;
   min-height: 50vh;
-  box-shadow: $shadow-soft;
+  box-shadow: index.$shadow-soft;
 }
 
-@include desktop {
+@include index.desktop {
   .container {
-    padding-left: $gap-lg;
-    padding-right: $gap-lg;
+    padding-left: index.$gap-lg;
+    padding-right: index.$gap-lg;
   }
 
   article {
-    padding-top: $gap-lg - $gap-sm;
-    padding-bottom: $gap-lg - $gap-sm;
+    padding-top: index.$gap-lg - index.$gap-sm;
+    padding-bottom: index.$gap-lg - index.$gap-sm;
   }
 }
 
