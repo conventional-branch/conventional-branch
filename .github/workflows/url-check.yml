@@ -2,7 +2,7 @@ name: Check Website URLs
 
 on:
   schedule:
-    - cron: '0 * * * *' # check every hour
+    - cron: '0 */4 * * *' # check every 4 hour
   workflow_dispatch: # manual trigger
 
 permissions:
