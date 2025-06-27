@@ -17,6 +17,9 @@ Let others know your project follows the Conventional Branch spec. Add this badg
 [![Conventional Branch](https://img.shields.io/badge/Conventional%20Branch-1.0.0-blue)](https://github.com/conventional-branch/conventional-branch)
 ```
 
-## 🙏 Acknowledgments
+## 🤝 Contributing
 
-Big thanks to [Conventional Commits](https://github.com/conventional-commits/conventionalcommits.org) for inspiring this project with their awesome work.
+We welcome contributions from the community!  
+Whether it’s fixing a typo, improving documentation, or proposing a new branch naming convention — please check out our [contributing guidelines](CONTRIBUTING.md).
+
+No contribution is too small. Thank you for helping us grow! 💙
