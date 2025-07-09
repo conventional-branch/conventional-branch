@@ -1,1 +1,9 @@
+# The authors and sponsors of specs.
+
+# The spec editors are the fallback "developers" for everything in this repo.
 * @conventional-branch/developers
+
+# Individual file ownership
+content/_index.md          @shenxianpeng
+content/_index.zh.md       @shenxianpeng
+content/_index.pt-br.md    @marlondecol
