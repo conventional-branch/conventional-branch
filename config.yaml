@@ -52,7 +52,7 @@ languages:
       weight: 3
       languageName: Português brasileiro
       title: Conventional Branch
-      description: Uma especificação para dar aos nomes branches um significado legível para humanos e máquinas
+      description: Uma especificação para dar aos nomes dos branches um significado legível para humanos e máquinas
       actions:
       - label: Resumo
         url: "#resumo"
