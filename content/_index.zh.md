@@ -28,20 +28,20 @@ layout: single
 <type>/<description>
 ```
 
-- **main**：主要开发分支（例如 `main`、`master` 或 `develop`）
-- **feature/**：用于新功能（例如 `feature/add-login-page`）
-- **bugfix/**：用于错误修复（例如 `bugfix/fix-header-bug`）
-- **hotfix/**：用于紧急修复（例如 `hotfix/security-patch`）
-- **release/**：用于准备发布的分支（例如 `release/v1.2.0`）
-- **chore/**：用于非代码任务，如依赖项、文档更新（例如 `chore/update-dependencies`）
+- **`main`**：主要开发分支（例如 `main`、`master` 或 `develop`）
+- **`feature/`**：用于新功能（例如 `feature/add-login-page`）
+- **`bugfix/`**：用于错误修复（例如 `bugfix/fix-header-bug`）
+- **`hotfix/`**：用于紧急修复（例如 `hotfix/security-patch`）
+- **`release/`**：用于准备发布的分支（例如 `release/v1.2.0`）
+- **`chore/`**：用于非代码任务，如依赖项、文档更新（例如 `chore/update-dependencies`）
 
 ---
 
 ### 基本规则
 
-1. **使用小写字母、数字和连字符**：分支名称应全部使用小写字母 (a-z)、数字 (0-9) 及连字符 (-) 进行分隔。避免使用特殊字符、下划线或空格。  
-2. **禁止连续或结尾连字符**：确保连字符不连续使用 (`feature/new--login`)，且不出现在名称末尾 (`feature/new-login-`)。  
-3. **保持清晰简洁**：分支名称应简明扼要，清楚表达工作的内容和目的。  
+1. **使用小写字母、数字和连字符**：分支名称应全部使用小写字母 (a-z)、数字 (0-9) 及连字符 (-) 进行分隔。避免使用特殊字符、下划线或空格。
+2. **禁止连续或结尾连字符**：确保连字符不连续使用 (`feature/new--login`)，且不出现在名称末尾 (`feature/new-login-`)。
+3. **保持清晰简洁**：分支名称应简明扼要，清楚表达工作的内容和目的。
 4. **包含工单编号**：如果适用，应包含项目管理工具中的工单编号，以便于追踪。例如，对于工单 `issue-123`，分支名称可以是 `feature/issue-123-new-login`。
 
 ## 结论
