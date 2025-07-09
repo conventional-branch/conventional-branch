@@ -39,7 +39,7 @@ The branch specification by describing with `feature/`, `bugfix/`, `hotfix/`, `r
 
 ### Basic Rules
 
-1. **Use Lowercase Alphanumeric, Hyphens, and Dots**: Always use lowercase letters (a-z), numbers (0-9), and hyphens to separate words. Avoid special characters, underscores, or spaces. For `release/` prefixed branches, dots are allowed in the description as an exception.
+1. **Use Lowercase Alphanumeric, Hyphens, and Dots**: Always use lowercase letters (a-z), numbers (0-9), and hyphens to separate words. Avoid special characters, underscores, or spaces. Branches preparing releases may include dots in the description part to represent version numbers (e.g., `release/v1.2.0`).
 2. **No Consecutive, Leading, or Trailing Hyphens or Dots**: Ensure that hyphens and dots do not appear consecutively (e.g., `feature/new--login`, `release/v1.-2.0`), nor at the beginning or end of the description (e.g., `feature/-new-login`, `release/v1.2.0.`).
 3. **Keep It Clear and Concise**: The branch name should be descriptive yet concise, clearly indicating the purpose of the work.
 4. **Include Ticket Numbers**: If applicable, include the ticket number from your project management tool to make tracking easier. For example, for a ticket `issue-123`, the branch name could be `feature/issue-123-new-login`.
