@@ -1,8 +1,8 @@
-baseURL: '/'
+baseURL: /
 languageCode: en-us
 theme: conventional-branch
 # defaultContentLanguageInSubdir: true
-defaultContentLanguage: "en"
+defaultContentLanguage: en
 
 # Global parameters
 params:
@@ -10,40 +10,53 @@ params:
     title: License
     action:
       label: Creative Commons - CC BY 3.0
-      url: 'https://creativecommons.org/licenses/by/3.0/'
+      url: https://creativecommons.org/licenses/by/3.0/
 
   footer:
     logos:
     - name: github
-      url: 'https://github.com/conventional-branch/conventional-branch'
+      url: https://github.com/conventional-branch/conventional-branch
 
 # Languages parameters
 languages:
   en:
     params:
       weight: 1
-      languageName: "English"
+      languageName: English
       title: Conventional Branch
       description: A specification for adding human and machine readable meaning to branch
       actions:
       - label: Quick Summary
-        url: '#summary'
+        url: "#summary"
       - label: Full Specification
-        url: '#specification'
+        url: "#specification"
       - label: Contribute
-        url: 'https://github.com/conventional-branch/conventional-branch'
+        url: https://github.com/conventional-branch/conventional-branch
       # versions:
       #   current: v1.0.0
   zh:
     params:
       weight: 2
-      languageName: "中文"
+      languageName: 中文
       title: 约定式分支
       description: 一种用于给分支增加人机可读含义的规范
       actions:
       - label: 概述
-        url: '#概述'
+        url: "#概述"
       - label: 完整规范
-        url: '#规范'
+        url: "#规范"
       - label: 贡献
-        url: 'https://github.com/conventional-branch/conventional-branch'
+        url: https://github.com/conventional-branch/conventional-branch
+  pt-br:
+    params:
+      weight: 3
+      languageName: Português brasileiro
+      title: Conventional Branch
+      description: Uma especificação para dar aos nomes branches um significado legível para humanos e máquinas
+      actions:
+      - label: Resumo
+        url: "#resumo"
+      - label: Especificação Completa
+        url: "#especificação"
+      - label: GitHub
+        url: https://github.com/conventional-branch/conventional-branch
