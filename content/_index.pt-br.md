@@ -20,7 +20,7 @@ Conventional Branch é uma convenção estruturada e padronizada para nomeação
 
 ### Prefixos de nomeação de branch
 
-A especificação de um branch é descrita com `feature/`, `bugfix/`, `hotfix/`, `release/` e `chore/` e deve ser estruturada da seguinte forma:
+A especificação de branch suporta os seguintes prefixos e deve ser estruturada da seguinte forma:
 
 ---
 
@@ -29,8 +29,8 @@ A especificação de um branch é descrita com `feature/`, `bugfix/`, `hotfix/`,
 ```
 
 - **`main`**: o branch principal de desenvolvimento (ex.: `main`, `master` ou `develop`);
-- **`feature/`**: para novas funcionalidades (ex.: `feature/adicionar-pagina-login`);
-- **`bugfix/`**: para correções de bugs (ex.: `bugfix/corrigir-bug-header`);
+- **`feature/`** (or **`feat/`**): para novas funcionalidades (ex.: `feature/add-login-page`, `feat/add-login-page`);
+- **`bugfix/`** (or **`fix/`**): para correções de bugs (ex.: `bugfix/fix-header-bug`, `fix/header-bug`);
 - **`hotfix/`**: para correções urgentes (ex.: `hotfix/correcao-seguranca`);
 - **`release/`**: para branches de release (ex.: `release/v1.2.0`); e
 - **`chore/`**: para tarefas não relacionadas ao código, como atualização de dependências ou documentação (ex.: `chore/atualizar-dependencias`).
