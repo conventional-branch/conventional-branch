@@ -20,7 +20,7 @@ layout: single
 
 ### 分支命名前缀
 
-分支规范通过 `feature/`，`bugfix/`，`hotfix/`，`release/`和`chore/` 来描述，其结构应如下：
+分支规范支持以下前缀，其结构应如下：
 
 ---
 
@@ -29,8 +29,8 @@ layout: single
 ```
 
 - **`main`**：主要开发分支（例如 `main`、`master` 或 `develop`）
-- **`feature/`**：用于新功能（例如 `feature/add-login-page`）
-- **`bugfix/`**：用于错误修复（例如 `bugfix/fix-header-bug`）
+- **`feature/`** (或 **`feat/`**)：用于新功能（例如 `feature/add-login-page`, `feat/add-login-page`）
+- **`bugfix/`** (或 **`fix/`**)：用于错误修复（例如 `bugfix/fix-header-bug`, `fix/header-bug`）
 - **`hotfix/`**：用于紧急修复（例如 `hotfix/security-patch`）
 - **`release/`**：用于准备发布的分支（例如 `release/v1.2.0`）
 - **`chore/`**：用于非代码任务，如依赖项、文档更新（例如 `chore/update-dependencies`）
