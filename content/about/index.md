@@ -11,7 +11,7 @@ The Conventional Branch specification was inspired by [Conventional Commits](htt
 
 * [commit-check](https://github.com/commit-check/commit-check): Commit Check supports checking commit messages, branch naming, committer name/email, commit signoff, customizing error messages, suggested commands and more.
 * [commit-check-action](https://github.com/commit-check/commit-check-action): A Github Action for checking commit message formatting, branch naming, committer name, email, commit signoff and more.
-* [VSCode Conventional Branch](https://marketplace.visualstudio.com/items?itemName=vivaxy.vscode-conventional-commits): Add Conventional Branch supports for VSCode.
+* [VSCode Conventional Branch](https://marketplace.visualstudio.com/items?itemName=pshaddel.conventional-branch): Customizable Conventional Branch for VSCode.
 
 ## Projects Using Conventional Branch
 
@@ -19,6 +19,7 @@ The Conventional Branch specification was inspired by [Conventional Commits](htt
 * [cuhacking/2025](https://github.com/cuhacking/2025): Flagship platform for cuHacking's 2025 hackathon.
 * [commit-check](https://github.com/commit-check): A free, powerful tool that enforces commit metadata, branch naming, and more.
 * [ZeusAutomacao/DFe.NET](https://github.com/ZeusAutomacao/DFe.NET): Biblioteca em C# para emissão e impressão de NFe, NFCe, MDF-e e CT-e.
+* [RLinf/RLinf](https://github.com/RLinf/RLinf): Reinforcement Learning Infrastructure for Agentic AI.
 * _[... and more projects using Conventional Branch](https://github.com/search?q=conventional-branch.github.io&type=code&p=1)._
 
 [![Conventional Branch](https://img.shields.io/badge/Conventional%20Branch-1.0.0-blue)](https://github.com/conventional-branch/conventional-branch)
