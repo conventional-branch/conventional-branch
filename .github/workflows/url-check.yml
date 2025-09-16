@@ -27,7 +27,7 @@ jobs:
             "https://conventional-branch.github.io/pl/"
             "https://conventional-branch.github.io/pt-br/"
             "https://conventional-branch.github.io/ru/"
-            "https://conventional-branch.github.io/zh/"            
+            "https://conventional-branch.github.io/zh/"
           )
 
           failed_urls=()
