@@ -60,4 +60,4 @@ Branches are different from commits—they are temporary and mainly used until m
 
 ### What tools can be used to automatically identify if a team member does not meet this specification?
 
-You can used [commit-check](https://github.com/commit-check/commit-check) to check branch specification or [commit-check-action](https://github.com/commit-check/commit-check-action) if your codes are hosted on GitHub.
+You can use [commit-check](https://github.com/commit-check/commit-check) to check branch specification or [commit-check-action](https://github.com/commit-check/commit-check-action) if your codes are hosted on GitHub.
