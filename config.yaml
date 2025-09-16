@@ -112,3 +112,16 @@ languages:
         url: "#спецификация"
       - label: Внести вклад
         url: https://github.com/conventional-branch/conventional-branch
+  pl:
+    params:
+      weight: 8
+      languageName: Polski
+      title: Conventional Branch
+      description: Specyfikacja dodawania znaczenia czytelnego dla ludzi i maszyn do gałęzi
+      actions:
+      - label: Podsumowanie
+        url: "#podsumowanie"
+      - label: Pełna specyfikacja
+        url: "#specyfikacja"
+      - label: Wnieś wkład
+        url: https://github.com/conventional-branch/conventional-branch
