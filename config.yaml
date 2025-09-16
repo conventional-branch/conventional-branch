@@ -73,3 +73,16 @@ languages:
         url: "#spécification"
       - label: Contribuer
         url: https://github.com/conventional-branch/conventional-branch
+  ja:
+    params:
+      weight: 5
+      languageName: 日本語
+      title: 慣例的ブランチ
+      description: ブランチに人間と機械が読める意味を追加する仕様
+      actions:
+      - label: 要約
+        url: "#要約"
+      - label: 完全な仕様
+        url: "#仕様"
+      - label: 貢献
+        url: https://github.com/conventional-branch/conventional-branch
