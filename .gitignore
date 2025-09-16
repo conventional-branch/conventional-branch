@@ -1,3 +1,5 @@
 public/
 .idea/
 .hugo_build.lock
+hugo_extended_*.tar.gz
+hugo
