@@ -86,3 +86,16 @@ languages:
         url: "#仕様"
       - label: 貢献
         url: https://github.com/conventional-branch/conventional-branch
+  de:
+    params:
+      weight: 6
+      languageName: Deutsch
+      title: Conventional Branch
+      description: Eine Spezifikation zur Ergänzung von menschen- und maschinenlesbarer Bedeutung für Branches
+      actions:
+      - label: Zusammenfassung
+        url: "#zusammenfassung"
+      - label: Vollständige Spezifikation
+        url: "#spezifikation"
+      - label: Beitragen
+        url: https://github.com/conventional-branch/conventional-branch
