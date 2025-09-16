@@ -28,7 +28,7 @@ layout: single
 <type>/<description>
 ```
 
-- **`main`**: メイン開発ブランチ（例：`main`、`master`、`develop`）
+- **`main`**: メイン開発ブランチ（例：`main`、`master`）
 - **`feature/`**（または **`feat/`**）: 新機能用（例：`feature/add-login-page`、`feat/add-login-page`）
 - **`bugfix/`**（または **`fix/`**）: バグ修正用（例：`bugfix/fix-header-bug`、`fix/header-bug`）
 - **`hotfix/`**: 緊急修正用（例：`hotfix/security-patch`）
