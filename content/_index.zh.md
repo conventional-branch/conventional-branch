@@ -54,6 +54,10 @@ layout: single
 
 ## 常见问题
 
+### 为什么分支类型不像 Conventional Commits（例如 `build`、`ci`、`docs`、`style`、`refactor`）那么详细？
+
+分支与提交不同 —— 分支是临时的，大部分只出现在合并前。为分支引入过多类型是没有必要的，也会让管理和记忆变得更困难。
+
 ### 如果团队成员不符合此规范，可以使用哪些工具来自动识别？
 
 你可以使用 [commit-check](https://github.com/commit-check/commit-check) 来检查分支规范，或者如果你的代码托管在 GitHub 上，则使用 [commit-check-action](https://github.com/commit-check/commit-check-action)。

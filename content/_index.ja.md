@@ -54,6 +54,10 @@ layout: single
 
 ## よくある質問
 
+### なぜブランチの種類はConventional Commits（例：`build`、`ci`、`docs`、`style`、`refactor`）ほど詳細ではないのですか？
+
+ブランチはコミットとは異なり、一時的なもので、主にマージされるまで使用されます。ブランチにあまり多くの種類を導入することは不要で、管理や記憶が難しくなります。
+
 ### チームメンバーがこの仕様を満たしていない場合、自動的に識別するために使用できるツールは何ですか？
 
 [commit-check](https://github.com/commit-check/commit-check) を使用してブランチ仕様をチェックするか、コードが GitHub でホストされている場合は [commit-check-action](https://github.com/commit-check/commit-check-action) を使用できます。

@@ -54,6 +54,10 @@ En résumé, conventional branch est conçu pour améliorer l'organisation du pr
 
 ## FAQ
 
+### Pourquoi les types de branches ne sont-ils pas aussi détaillés que les Conventional Commits (par ex. `build`, `ci`, `docs`, `style`, `refactor`) ?
+
+Les branches sont différentes des commits : elles sont temporaires et principalement utilisées jusqu’à leur fusion. Introduire trop de types pour les branches serait inutile et rendrait leur gestion et mémorisation plus difficiles.
+
 ### Quels outils peuvent être utilisés pour identifier automatiquement si un membre de l'équipe ne respecte pas cette spécification ?
 
 Vous pouvez utiliser [commit-check](https://github.com/commit-check/commit-check) pour vérifier la spécification des branches ou [commit-check-action](https://github.com/commit-check/commit-check-action) si vos codes sont hébergés sur GitHub.

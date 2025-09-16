@@ -54,6 +54,10 @@ Zusammenfassend ist Conventional Branch darauf ausgelegt, die Projektorganisatio
 
 ## FAQ
 
+### Warum sind Branch-Typen nicht so detailliert wie Conventional Commits (z. B. `build`, `ci`, `docs`, `style`, `refactor`)?
+
+Branches unterscheiden sich von Commits – sie sind temporär und werden hauptsächlich bis zum Merge verwendet. Zu viele Typen für Branches einzuführen, wäre unnötig und würde sie schwerer zu verwalten und zu merken machen.
+
 ### Welche Tools können verwendet werden, um automatisch zu identifizieren, ob ein Teammitglied diese Spezifikation nicht erfüllt?
 
 Sie können [commit-check](https://github.com/commit-check/commit-check) verwenden, um die Branch-Spezifikation zu überprüfen, oder [commit-check-action](https://github.com/commit-check/commit-check-action), wenn Ihr Code auf GitHub gehostet wird.
