@@ -44,26 +44,16 @@ Specyfikacja gałęzi obsługuje następujące prefiksy i powinna być zorganizo
 3. **Zachowaj jasność i zwięzłość**: Nazwa gałęzi powinna być opisowa, ale zwięzła, jasno wskazująca cel pracy.
 4. **Dołącz numery biletów**: Jeśli to możliwe, dołącz numer biletu z narzędzia zarządzania projektami, aby ułatwić śledzenie. Na przykład, dla biletu `issue-123`, nazwa gałęzi mogłaby być `feature/issue-123-new-login`.
 
-## Podsumowanie
+## Wnioski
 
 - **Jasna komunikacja**: Sama nazwa gałęzi zapewnia jasne zrozumienie jej celu i zmiany kodu.
 - **Przyjazna dla automatyzacji**: Łatwo integruje się z procesami automatyzacji (np. różne przepływy pracy dla `feature`, `release`, itp.).
-- **Lepsze zarządzanie projektami**: Ułatwia śledzenie postępów i organizację pracy w zespole.
+- **Skalowalność**: Dobrze sprawdza się w dużych zespołach, gdzie wielu programistów pracuje jednocześnie nad różnymi zadaniami.
+
+Podsumowując, conventional branch został zaprojektowany w celu poprawy organizacji projektu, komunikacji i automatyzacji w przepływach pracy Git.
 
 ## FAQ
 
-### Dlaczego warto używać Conventional Branch?
+### Jakich narzędzi można użyć, aby automatycznie sprawdzić, czy członek zespołu nie spełnia tej specyfikacji?
 
-Conventional Branch pomaga zespołom pracować bardziej efektywnie poprzez:
-- Standaryzację nazewnictwa gałęzi
-- Ułatwienie automatyzacji w procesach CI/CD
-- Poprawę komunikacji w zespole
-- Lepsze zarządzanie przepływem pracy
-
-### Czy muszę używać dokładnie tych prefiksów?
-
-Nie! Podane prefiksy to sugestie. Możesz dostosować konwencję do potrzeb swojego zespołu lub projektu. Ważne jest zachowanie spójności w ramach projektu.
-
-### Jak to współgra z Conventional Commits?
-
-Conventional Branch doskonale uzupełnia Conventional Commits, tworząc spójny system nazewnictwa zarówno dla gałęzi, jak i commitów.
+Możesz użyć [commit-check](https://github.com/commit-check/commit-check) do sprawdzania specyfikacji gałęzi lub [commit-check-action](https://github.com/commit-check/commit-check-action), jeśli twój kod jest hostowany na GitHub.
