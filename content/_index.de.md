@@ -40,7 +40,7 @@ Die Branch-Spezifikation unterstützt die folgenden Präfixe und sollte wie folg
 ### Grundregeln
 
 1. **Verwenden Sie kleine alphanumerische Zeichen, Bindestriche und Punkte**: Verwenden Sie immer Kleinbuchstaben (`a-z`), Zahlen (`0-9`) und Bindestriche (`-`), um Wörter zu trennen. Vermeiden Sie Sonderzeichen, Unterstriche oder Leerzeichen. Für Release-Branches können Punkte (`.`) in der Beschreibung verwendet werden, um Versionsnummern darzustellen (z.B. `release/v1.2.0`).
-2. **Keine aufeinanderfolgenden, führenden oder nachfolgenden Bindestriche oder Punkte**: Stellen Sie sicher, dass Bindestriche und Punkte nicht aufeinanderfolgend erscheinen (z.B. `feature/new--login`, `release/v1.-2.0`), noch am Anfang oder Ende der Beschreibung (z.B. `feature/-new-login`, `release/v1.2.0.`).
+2. **Keine aufeinanderfolgenden, führenden oder nachfolgenden Bindestriche oder Punkte**: Stellen Sie sicher, dass Bindestriche und Punkte nicht aufeinanderfolgen (z.B. `feature/new--login`, `release/v1.-2.0`), noch am Anfang oder Ende der Beschreibung (z.B. `feature/-new-login`, `release/v1.2.0.`).
 3. **Halten Sie es klar und prägnant**: Der Branch-Name sollte beschreibend aber prägnant sein und den Zweck der Arbeit klar angeben.
 4. **Ticket-Nummern einbeziehen**: Falls zutreffend, beziehen Sie die Ticket-Nummer aus Ihrem Projektmanagement-Tool ein, um die Verfolgung zu erleichtern. Zum Beispiel könnte für ein Ticket `issue-123` der Branch-Name `feature/issue-123-new-login` lauten.
 
