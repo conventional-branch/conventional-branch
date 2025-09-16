@@ -99,3 +99,16 @@ languages:
         url: "#spezifikation"
       - label: Beitragen
         url: https://github.com/conventional-branch/conventional-branch
+  ru:
+    params:
+      weight: 7
+      languageName: Русский
+      title: Conventional Branch
+      description: Спецификация для добавления человеко- и машиночитаемого смысла к веткам
+      actions:
+      - label: Краткое изложение
+        url: "#краткое-изложение"
+      - label: Полная спецификация
+        url: "#спецификация"
+      - label: Внести вклад
+        url: https://github.com/conventional-branch/conventional-branch
