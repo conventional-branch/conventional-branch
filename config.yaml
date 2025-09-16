@@ -60,3 +60,16 @@ languages:
         url: "#especificação"
       - label: GitHub
         url: https://github.com/conventional-branch/conventional-branch
+  fr:
+    params:
+      weight: 4
+      languageName: Français
+      title: Conventional Branch
+      description: Une spécification pour ajouter un sens lisible par l'humain et la machine aux branches
+      actions:
+      - label: Résumé
+        url: "#résumé"
+      - label: Spécification complète
+        url: "#spécification"
+      - label: Contribuer
+        url: https://github.com/conventional-branch/conventional-branch
