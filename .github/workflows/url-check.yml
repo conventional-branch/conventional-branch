@@ -56,7 +56,7 @@ jobs:
 
       - name: Create Issue if URLs failed
         if: steps.check.outputs.has_failed == 'true'
-        uses: actions/github-script@v7
+        uses: actions/github-script@v8
         with:
           script: |
             const fs = require('fs');
