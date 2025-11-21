@@ -14,7 +14,7 @@ If you find this useful, consider giving it a ⭐️ on [GitHub](https://github.
 Let others know your project follows the Conventional Branch spec. Add this badge to your repository README:
 
 ```markdown
-[![Conventional Branch](https://img.shields.io/badge/Conventional%20Branch-1.0.0-blue)](https://github.com/conventional-branch/conventional-branch)
+[![Conventional Branch](https://img.shields.io/badge/Conventional%20Branch-1.0.0-6192c3)](https://github.com/conventional-branch/conventional-branch)
 ```
 
 ## 🤝 Contributing
