@@ -23,6 +23,6 @@ The Conventional Branch specification was inspired by [Conventional Commits](htt
 * [Curiosum](https://github.com/curiosum-dev): Building apps for innovators.
 * _[... and more projects using Conventional Branch](https://github.com/search?q=conventional-branch.github.io&type=code&p=1)._
 
-[![Conventional Branch](https://img.shields.io/badge/Conventional%20Branch-1.0.0-6192c3)](https://github.com/conventional-branch/conventional-branch)
+[![Conventional Branch](https://img.shields.io/badge/Conventional%20Branch-Spec-6192c3)](https://github.com/conventional-branch/conventional-branch)
 
 _Want your project on this list?_ [send a pull request](https://github.com/conventional-branch/conventional-branch/pulls).
