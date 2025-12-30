@@ -27,15 +27,15 @@ params:
     image: 'https://path-to-image'
     actions:
     - label: Read the specs
-      url: 'https://github.com/conventional-branch/conventional-branch'
+      url: 'https://conventional-branch.github.io/'
     - label: GitHub
       url: 'https://github.com/conventional-branch/conventional-branch'
 
   license:
     title: License
     action:
-      label: Creative Commons - CC BY 3.0
-      url: 'https://creativecommons.org/licenses/by/3.0/'
+      label: Creative Commons - CC BY 4.0
+      url: 'https://creativecommons.org/licenses/by/4.0/'
 
   footer:
     logos:
