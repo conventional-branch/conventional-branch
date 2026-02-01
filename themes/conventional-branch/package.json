@@ -23,9 +23,9 @@
     "github-markdown-css": "5.8.1"
   },
   "devDependencies": {
-    "autoprefixer": "10.4.23",
+    "autoprefixer": "10.4.24",
     "cssnano": "7.1.2",
-    "sass": "1.97.1",
+    "sass": "1.97.3",
     "postcss": "8.5.6",
     "postcss-cli": "11.0.1",
     "webpack": "5.104.1",
