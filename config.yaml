@@ -125,3 +125,16 @@ languages:
         url: "#specyfikacja"
       - label: Wnieś wkład
         url: https://github.com/conventional-branch/conventional-branch
+  zh-hant:
+    params:
+      weight: 9
+      languageName: 繁體中文
+      title: 約定式分支
+      description: 一種為 Git branch 增添人機可讀含義的規範
+      actions:
+      - label: 概述
+        url: "#概述"
+      - label: 完整規範
+        url: "#規範"
+      - label: 貢獻
+        url: https://github.com/conventional-branch/conventional-branch
