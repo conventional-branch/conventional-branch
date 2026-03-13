@@ -20,15 +20,15 @@
   "license": "MIT",
   "dependencies": {
     "anchor-js": "5.0.0",
-    "github-markdown-css": "5.8.1"
+    "github-markdown-css": "5.9.0"
   },
   "devDependencies": {
-    "autoprefixer": "10.4.24",
+    "autoprefixer": "10.4.27",
     "cssnano": "7.1.2",
     "sass": "1.97.3",
     "postcss": "8.5.6",
     "postcss-cli": "11.0.1",
-    "webpack": "5.104.1",
+    "webpack": "5.105.3",
     "webpack-cli": "6.0.1"
   }
 }
