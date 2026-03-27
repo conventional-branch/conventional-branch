@@ -138,3 +138,16 @@ languages:
         url: "#規範"
       - label: 貢獻
         url: https://github.com/conventional-branch/conventional-branch
+  es:
+    params:
+      weight: 10
+      languageName: Español
+      title: Conventional Branch
+      description: Una especificación para añadir significado legible por humanos y máquinas a las ramas
+      actions:
+      - label: Resumen
+        url: "#resumen"
+      - label: Especificación completa
+        url: "#especificación"
+      - label: Contribuir
+        url: https://github.com/conventional-branch/conventional-branch

@@ -14,6 +14,7 @@ We currently support documentation in multiple languages:
 [繁體中文](https://conventional-branch.github.io/zh-hant/) ·
 [日本語](https://conventional-branch.github.io/ja/) ·
 [Deutsch](https://conventional-branch.github.io/de/) ·
+[Español](https://conventional-branch.github.io/es/) ·
 [Français](https://conventional-branch.github.io/fr/) ·
 [Polski](https://conventional-branch.github.io/pl/) ·
 [Português (Brasil)](https://conventional-branch.github.io/pt-br/) ·
