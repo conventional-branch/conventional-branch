@@ -10,7 +10,7 @@ The Conventional Branch specification was inspired by [Conventional Commits](htt
 ## Tooling for Conventional Branch
 
 * [commit-check](https://github.com/commit-check/commit-check): Commit Check supports checking commit messages, branch naming, committer name/email, commit signoff, customizing error messages, suggested commands and more.
-* [commit-check-action](https://github.com/commit-check/commit-check-action): A Github Action for checking commit message formatting, branch naming, committer name, email, commit signoff and more.
+* [commit-check-action](https://github.com/commit-check/commit-check-action): A GitHub Action for checking commit message formatting, branch naming, committer name, email, commit signoff and more.
 * [VSCode Conventional Branch](https://marketplace.visualstudio.com/items?itemName=pshaddel.conventional-branch): Customizable Conventional Branch for VSCode.
 
 ## Projects Using Conventional Branch
@@ -25,4 +25,11 @@ The Conventional Branch specification was inspired by [Conventional Commits](htt
 
 [![Conventional Branch](https://img.shields.io/badge/Conventional%20Branch-Spec-6192c3)](https://github.com/conventional-branch/conventional-branch)
 
-_Want your project on this list?_ [send a pull request](https://github.com/conventional-branch/conventional-branch/pulls).
+_Want your project on this list?_ [Send a pull request](https://github.com/conventional-branch/conventional-branch/pulls).
+
+## How to Adopt
+
+1. **Communicate the convention** to your team and add it to your contributing guidelines.
+2. **Enforce it automatically** using one of the tools listed above.
+3. **Add the badge** to your repository README to signal adoption.
+4. **Configure your CI/CD** to trigger different workflows based on branch prefix (e.g., auto-deploy on `release/` branches).

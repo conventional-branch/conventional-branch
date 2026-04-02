@@ -44,6 +44,49 @@ La especificación de ramas admite los siguientes prefijos y debe estructurarse 
 3. **Ser claro y conciso**: El nombre de la rama debe ser descriptivo pero conciso, indicando claramente el propósito del trabajo.
 4. **Incluir números de ticket**: Si corresponde, incluya el número de ticket de su herramienta de gestión de proyectos para facilitar el seguimiento. Por ejemplo, para un ticket `issue-123`, el nombre de la rama podría ser `feature/issue-123-new-login`.
 
+
+### Gramática formal
+
+La siguiente gramática ABNF (Augmented Backus-Naur Form) define formalmente los nombres de ramas válidos:
+
+```abnf
+branch-name     = trunk-branch / prefixed-branch
+trunk-branch    = "main" / "master" / "develop"
+prefixed-branch = type "/" description
+type            = "feature" / "feat" / "bugfix" / "fix"
+                / "hotfix" / "release" / "chore"
+description     = desc-segment *("-" desc-segment)
+desc-segment    = 1*(ALPHA / DIGIT) *("." 1*(ALPHA / DIGIT))
+ALPHA           = %x61-7A   ; letras minúsculas a-z
+DIGIT           = %x30-39   ; dígitos 0-9
+```
+
+> Nota: No se permiten guiones o puntos consecutivos, ni guiones o puntos al inicio o al final de la descripción.
+
+### Ejemplos
+
+| Nombre de rama | Válido | Notas |
+|---|---|---|
+| `main` | ✅ | Rama principal |
+| `master` | ✅ | Rama principal |
+| `develop` | ✅ | Rama principal |
+| `feature/add-login-page` | ✅ | Nueva funcionalidad |
+| `feat/add-login-page` | ✅ | Alias corto para feature |
+| `bugfix/fix-header-bug` | ✅ | Corrección de error |
+| `fix/header-bug` | ✅ | Alias corto para bugfix |
+| `hotfix/security-patch` | ✅ | Corrección urgente |
+| `release/v1.2.0` | ✅ | Release con número de versión |
+| `chore/update-dependencies` | ✅ | Tarea no relacionada con código |
+| `feature/issue-123-new-login` | ✅ | Funcionalidad con número de ticket |
+| `Feature/Add-Login` | ❌ | Mayúsculas no permitidas |
+| `feature/new--login` | ❌ | Guiones consecutivos no permitidos |
+| `feature/-new-login` | ❌ | La descripción no puede comenzar con guion |
+| `feature/new-login-` | ❌ | La descripción no puede terminar con guion |
+| `release/v1.-2.0` | ❌ | Guion adyacente a punto no permitido |
+| `fix/header bug` | ❌ | Espacios no permitidos |
+| `fix/header_bug` | ❌ | Guiones bajos no permitidos |
+| `unknown/some-task` | ❌ | Tipo de prefijo desconocido |
+
 ## Conclusión
 
 - **Comunicación clara**: El nombre de la rama por sí solo proporciona una comprensión clara de su propósito y del cambio de código.
@@ -61,3 +104,16 @@ Las ramas son diferentes de los commits: son temporales y se usan principalmente
 ### ¿Qué herramientas se pueden usar para identificar automáticamente si un miembro del equipo no cumple con esta especificación?
 
 Puede usar [commit-check](https://github.com/commit-check/commit-check) para verificar la especificación de ramas o [commit-check-action](https://github.com/commit-check/commit-check-action) si su código está alojado en GitHub.
+
+### ¿Puedo definir mis propios tipos de ramas más allá de los listados?
+
+Sí. La especificación define un conjunto recomendado de tipos, pero los equipos pueden definir tipos personalizados adicionales para su flujo de trabajo. Sin embargo, es importante documentar claramente los tipos personalizados para que todos los miembros del equipo y las herramientas automatizadas estén al tanto de ellos.
+
+### ¿Cómo se relaciona Conventional Branch con Conventional Commits?
+
+Conventional Branch está inspirado en [Conventional Commits](https://www.conventionalcommits.org) y sigue una filosofía similar: aportar estructura legible por humanos y máquinas a los metadatos de Git. Mientras que Conventional Commits estandariza los mensajes de commit, Conventional Branch estandariza los nombres de ramas. Ambas especificaciones se complementan de forma natural.
+
+### ¿Cómo debo manejar ramas de larga duración como `develop` o `staging`?
+
+Las ramas de integración o de entorno de larga duración (p. ej., `develop`, `staging`, `production`) se tratan como ramas principales y no requieren prefijo. Deben nombrarse de forma coherente en todo el proyecto.
+

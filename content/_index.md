@@ -44,6 +44,48 @@ The branch specification supports the following prefixes and should be structure
 3. **Keep It Clear and Concise**: The branch name should be descriptive yet concise, clearly indicating the purpose of the work.
 4. **Include Ticket Numbers**: If applicable, include the ticket number from your project management tool to make tracking easier. For example, for a ticket `issue-123`, the branch name could be `feature/issue-123-new-login`.
 
+### Formal Grammar
+
+The following Augmented Backus-Naur Form (ABNF) grammar formally defines valid branch names:
+
+```abnf
+branch-name     = trunk-branch / prefixed-branch
+trunk-branch    = "main" / "master" / "develop"
+prefixed-branch = type "/" description
+type            = "feature" / "feat" / "bugfix" / "fix"
+                / "hotfix" / "release" / "chore"
+description     = desc-segment *("-" desc-segment)
+desc-segment    = 1*(ALPHA / DIGIT) *("." 1*(ALPHA / DIGIT))
+ALPHA           = %x61-7A   ; lowercase a-z
+DIGIT           = %x30-39   ; 0-9
+```
+
+> Note: Consecutive hyphens or dots, and hyphens or dots at the start or end of the description, are not permitted.
+
+### Examples
+
+| Branch Name | Valid | Notes |
+|---|---|---|
+| `main` | ✅ | Trunk branch |
+| `master` | ✅ | Trunk branch |
+| `develop` | ✅ | Trunk branch |
+| `feature/add-login-page` | ✅ | New feature |
+| `feat/add-login-page` | ✅ | Short alias for feature |
+| `bugfix/fix-header-bug` | ✅ | Bug fix |
+| `fix/header-bug` | ✅ | Short alias for bugfix |
+| `hotfix/security-patch` | ✅ | Urgent fix |
+| `release/v1.2.0` | ✅ | Release with version |
+| `chore/update-dependencies` | ✅ | Non-code task |
+| `feature/issue-123-new-login` | ✅ | Feature with ticket number |
+| `Feature/Add-Login` | ❌ | Uppercase letters not allowed |
+| `feature/new--login` | ❌ | Consecutive hyphens not allowed |
+| `feature/-new-login` | ❌ | Leading hyphen in description |
+| `feature/new-login-` | ❌ | Trailing hyphen in description |
+| `release/v1.-2.0` | ❌ | Hyphen adjacent to dot |
+| `fix/header bug` | ❌ | Spaces not allowed |
+| `fix/header_bug` | ❌ | Underscores not allowed |
+| `unknown/some-task` | ❌ | Unknown prefix type |
+
 ## Conclusion
 
 - **Clear Communication**: The branch name alone provides a clear understanding of its purpose the code change.
@@ -54,10 +96,22 @@ In summary, conventional branch is designed to improve project organization, com
 
 ## FAQ
 
-### Why aren’t branch types as detailed as Conventional Commits (e.g., `build`, `ci`, `docs`, `style`, `refactor`)?
+### Why aren't branch types as detailed as Conventional Commits (e.g., `build`, `ci`, `docs`, `style`, `refactor`)?
 
 Branches are different from commits—they are temporary and mainly used until merged. Introducing too many types for branches would be unnecessary and would make them harder to manage and remember.
 
 ### What tools can be used to automatically identify if a team member does not meet this specification?
 
 You can use [commit-check](https://github.com/commit-check/commit-check) to check branch specification or [commit-check-action](https://github.com/commit-check/commit-check-action) if your codes are hosted on GitHub.
+
+### Can I define my own branch types beyond the ones listed?
+
+Yes. The specification defines a recommended set of types, but teams can define additional custom types to fit their workflow. It is important, however, to document custom types clearly so that all team members and automated tooling are aware of them.
+
+### How does Conventional Branch relate to Conventional Commits?
+
+Conventional Branch is inspired by [Conventional Commits](https://www.conventionalcommits.org) and follows a similar philosophy: bring human- and machine-readable structure to Git metadata. While Conventional Commits standardizes commit messages, Conventional Branch standardizes branch names. The two specifications complement each other naturally.
+
+### How should I handle long-lived branches like `develop` or `staging`?
+
+Long-lived integration or environment branches (e.g., `develop`, `staging`, `production`) are treated as trunk branches and do not require a prefix. They should be named consistently across your project.

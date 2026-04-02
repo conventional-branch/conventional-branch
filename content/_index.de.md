@@ -44,6 +44,49 @@ Die Branch-Spezifikation unterstützt die folgenden Präfixe und sollte wie folg
 3. **Halten Sie es klar und prägnant**: Der Branch-Name sollte beschreibend aber prägnant sein und den Zweck der Arbeit klar angeben.
 4. **Ticket-Nummern einbeziehen**: Falls zutreffend, beziehen Sie die Ticket-Nummer aus Ihrem Projektmanagement-Tool ein, um die Verfolgung zu erleichtern. Zum Beispiel könnte für ein Ticket `issue-123` der Branch-Name `feature/issue-123-new-login` lauten.
 
+
+### Formale Grammatik
+
+Die folgende ABNF-Grammatik (Augmented Backus-Naur Form) definiert formal gültige Branch-Namen:
+
+```abnf
+branch-name     = trunk-branch / prefixed-branch
+trunk-branch    = "main" / "master" / "develop"
+prefixed-branch = type "/" description
+type            = "feature" / "feat" / "bugfix" / "fix"
+                / "hotfix" / "release" / "chore"
+description     = desc-segment *("-" desc-segment)
+desc-segment    = 1*(ALPHA / DIGIT) *("." 1*(ALPHA / DIGIT))
+ALPHA           = %x61-7A   ; Kleinbuchstaben a-z
+DIGIT           = %x30-39   ; Ziffern 0-9
+```
+
+> Hinweis: Aufeinanderfolgende Bindestriche oder Punkte sowie Bindestriche oder Punkte am Anfang oder Ende der Beschreibung sind nicht erlaubt.
+
+### Beispiele
+
+| Branch-Name | Gültig | Hinweise |
+|---|---|---|
+| `main` | ✅ | Trunk-Branch |
+| `master` | ✅ | Trunk-Branch |
+| `develop` | ✅ | Trunk-Branch |
+| `feature/add-login-page` | ✅ | Neues Feature |
+| `feat/add-login-page` | ✅ | Kurzform für feature |
+| `bugfix/fix-header-bug` | ✅ | Fehlerbehebung |
+| `fix/header-bug` | ✅ | Kurzform für bugfix |
+| `hotfix/security-patch` | ✅ | Dringende Korrektur |
+| `release/v1.2.0` | ✅ | Release mit Versionsnummer |
+| `chore/update-dependencies` | ✅ | Nicht-Code-Aufgabe |
+| `feature/issue-123-new-login` | ✅ | Feature mit Ticket-Nummer |
+| `Feature/Add-Login` | ❌ | Großbuchstaben nicht erlaubt |
+| `feature/new--login` | ❌ | Aufeinanderfolgende Bindestriche nicht erlaubt |
+| `feature/-new-login` | ❌ | Beschreibung darf nicht mit Bindestrich beginnen |
+| `feature/new-login-` | ❌ | Beschreibung darf nicht mit Bindestrich enden |
+| `release/v1.-2.0` | ❌ | Bindestrich neben Punkt nicht erlaubt |
+| `fix/header bug` | ❌ | Leerzeichen nicht erlaubt |
+| `fix/header_bug` | ❌ | Unterstriche nicht erlaubt |
+| `unknown/some-task` | ❌ | Unbekannter Präfixtyp |
+
 ## Fazit
 
 - **Klare Kommunikation**: Der Branch-Name allein bietet ein klares Verständnis seines Zwecks und der Code-Änderung.
@@ -61,3 +104,16 @@ Branches unterscheiden sich von Commits – sie sind temporär und werden haupts
 ### Welche Tools können verwendet werden, um automatisch zu identifizieren, ob ein Teammitglied diese Spezifikation nicht erfüllt?
 
 Sie können [commit-check](https://github.com/commit-check/commit-check) verwenden, um die Branch-Spezifikation zu überprüfen, oder [commit-check-action](https://github.com/commit-check/commit-check-action), wenn Ihr Code auf GitHub gehostet wird.
+
+### Kann ich eigene Branch-Typen über die aufgeführten hinaus definieren?
+
+Ja. Die Spezifikation definiert eine empfohlene Menge von Typen, aber Teams können zusätzliche benutzerdefinierte Typen für ihren Workflow definieren. Es ist jedoch wichtig, benutzerdefinierte Typen klar zu dokumentieren, damit alle Teammitglieder und automatisierte Tools davon wissen.
+
+### Wie verhält sich Conventional Branch zu Conventional Commits?
+
+Conventional Branch wurde von [Conventional Commits](https://www.conventionalcommits.org) inspiriert und verfolgt eine ähnliche Philosophie: menschlich- und maschinenlesbaren Struktur in Git-Metadaten einzubringen. Während Conventional Commits Commit-Nachrichten standardisiert, standardisiert Conventional Branch Branch-Namen. Die beiden Spezifikationen ergänzen sich auf natürliche Weise.
+
+### Wie soll ich mit langlebigen Branches wie `develop` oder `staging` umgehen?
+
+Langlebige Integrations- oder Umgebungs-Branches (z. B. `develop`, `staging`, `production`) werden als Trunk-Branches behandelt und benötigen kein Präfix. Sie sollten im gesamten Projekt einheitlich benannt werden.
+

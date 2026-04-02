@@ -44,6 +44,48 @@ layout: single
 3. **保持清楚且精簡**：branch 名稱應在具描述性的同時保持精簡，清楚表達工作的內容與目的。
 4. **包含工單編號**：若適用，請包含專案管理工具的工單編號，方便追蹤。例如，對於工單 `issue-123`，branch 名稱可以是 `feature/issue-123-new-login`。
 
+### 形式文法
+
+以下 ABNF（Augmented Backus-Naur Form）文法正式定義了有效的 branch 名稱：
+
+```abnf
+branch-name     = trunk-branch / prefixed-branch
+trunk-branch    = "main" / "master" / "develop"
+prefixed-branch = type "/" description
+type            = "feature" / "feat" / "bugfix" / "fix"
+                / "hotfix" / "release" / "chore"
+description     = desc-segment *("-" desc-segment)
+desc-segment    = 1*(ALPHA / DIGIT) *("." 1*(ALPHA / DIGIT))
+ALPHA           = %x61-7A   ; 小寫字母 a-z
+DIGIT           = %x30-39   ; 數字 0-9
+```
+
+> 注意：禁止連續的連字號或點，以及出現在描述開頭或結尾的連字號或點。
+
+### 示例
+
+| Branch 名稱 | 有效 | 說明 |
+|---|---|---|
+| `main` | ✅ | 主幹分支 |
+| `master` | ✅ | 主幹分支 |
+| `develop` | ✅ | 主幹分支 |
+| `feature/add-login-page` | ✅ | 新功能 |
+| `feat/add-login-page` | ✅ | feature 的簡寫形式 |
+| `bugfix/fix-header-bug` | ✅ | Bug 修復 |
+| `fix/header-bug` | ✅ | bugfix 的簡寫形式 |
+| `hotfix/security-patch` | ✅ | 緊急修復 |
+| `release/v1.2.0` | ✅ | 含版本號的發布分支 |
+| `chore/update-dependencies` | ✅ | 非程式碼任務 |
+| `feature/issue-123-new-login` | ✅ | 含工單編號的功能分支 |
+| `Feature/Add-Login` | ❌ | 不允許大寫字母 |
+| `feature/new--login` | ❌ | 不允許連續連字號 |
+| `feature/-new-login` | ❌ | 描述不能以連字號開頭 |
+| `feature/new-login-` | ❌ | 描述不能以連字號結尾 |
+| `release/v1.-2.0` | ❌ | 連字號不能緊鄰點號 |
+| `fix/header bug` | ❌ | 不允許空格 |
+| `fix/header_bug` | ❌ | 不允許底線 |
+| `unknown/some-task` | ❌ | 未知的前綴類型 |
+
 ## 結論
 
 - **清楚溝通**：僅從 branch 名稱即可清楚理解此程式碼變更的目的。
@@ -61,3 +103,15 @@ branch 與 commit 不同——branch 是暫時性的，通常只會使用到 mer
 ### 有哪些工具可以自動識別團隊成員是否符合此規範？
 
 您可以使用 [commit-check](https://github.com/commit-check/commit-check) 檢查 branch 規範；若您的程式碼託管於 GitHub，則可使用 [commit-check-action](https://github.com/commit-check/commit-check-action)。
+
+### 我可以定義規範列表之外的自訂 branch type 嗎？
+
+可以。本規範定義了一套推薦的 type，但團隊可根據工作流程定義額外的自訂 type。重要的是，需要將自訂 type 清楚記錄，讓所有團隊成員及自動化工具皆能知悉。
+
+### 約定式分支與約定式提交（Conventional Commits）有什麼關係？
+
+約定式分支的靈感來源於 [Conventional Commits](https://www.conventionalcommits.org)，遵循相似的理念：為 Git 中繼資料引入人機可讀的結構。約定式提交規範提交訊息，約定式分支規範 branch 名稱，兩者相輔相成、天然互補。
+
+### 如何處理 `develop` 或 `staging` 等長期存在的 branch？
+
+長期存在的整合或環境 branch（例如 `develop`、`staging`、`production`）被視為主幹分支，不需要前綴。應在整個專案中保持一致的命名。
