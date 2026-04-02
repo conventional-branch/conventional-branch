@@ -115,5 +115,5 @@ Conventional Branch wurde von [Conventional Commits](https://www.conventionalcom
 
 ### Wie soll ich mit langlebigen Branches wie `develop` oder `staging` umgehen?
 
-Langlebige Integrations- oder Umgebungs-Branches (z. B. `develop`, `staging`, `production`) werden als Trunk-Branches behandelt und benötigen kein Präfix. Sie sollten im gesamten Projekt einheitlich benannt werden.
+In der formalen Grammatik dieser Spezifikation sind nur `main`, `master` und `develop` explizit als Trunk-Branches definiert und benötigen kein Präfix. Als projektspezifische Erweiterung können Teams jedoch zusätzliche langlebige Integrations- oder Umgebungs-Branches (z. B. `staging`, `production`) ohne Präfix verwenden, sofern diese konsistent benannt und in den eingesetzten Tools entsprechend konfiguriert bzw. dokumentiert sind.
 

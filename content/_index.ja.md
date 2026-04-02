@@ -115,5 +115,5 @@ Conventional Branch は [Conventional Commits](https://www.conventionalcommits.o
 
 ### `develop` や `staging` のような長期存在するブランチはどう扱えばよいですか？
 
-長期存在する統合用または環境用ブランチ（例：`develop`、`staging`、`production`）はトランクブランチとして扱われ、プレフィックスは不要です。プロジェクト全体で一貫した命名を心がけてください。
+仕様の ABNF では `trunk-branch` は `main` / `master` / `develop` のみを指しますが、運用上、それ以外の長期存在する統合用または環境用ブランチ（例：`staging`、`production`）をプロジェクト独自のトランク相当ブランチとして扱っても構いません（この場合もプレフィックスは不要です）。その際は、これらのブランチ名が仕様の拡張であることを明確に文書化し、プロジェクト全体で一貫した命名を心がけてください。
 

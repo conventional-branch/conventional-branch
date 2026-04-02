@@ -115,5 +115,5 @@ Conventional Branch jest zainspirowany przez [Conventional Commits](https://www.
 
 ### Jak radzić sobie z długo żyjącymi gałęziami, takimi jak `develop` lub `staging`?
 
-Długo żyjące gałęzie integracyjne lub środowiskowe (np. `develop`, `staging`, `production`) są traktowane jako gałęzie główne i nie wymagają prefiksu. Powinny być konsekwentnie nazywane w całym projekcie.
+Długo żyjące gałęzie integracyjne lub środowiskowe (np. `develop`, `staging`, `production`) są w praktyce często traktowane jak gałęzie główne i nie wymagają prefiksu, o ile w danym projekcie zostanie to jasno ustalone. Formalna gramatyka ABNF definiuje jednak gałąź główną (`trunk-branch`) jedynie jako `main`, `master` lub `develop`, a dodatkowe nazwy (takie jak `staging` czy `production`) są opcjonalnymi konwencjami specyficznymi dla projektu, które należy odpowiednio udokumentować i skonfigurować w narzędziach.
 

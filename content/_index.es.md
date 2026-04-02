@@ -115,5 +115,5 @@ Conventional Branch está inspirado en [Conventional Commits](https://www.conven
 
 ### ¿Cómo debo manejar ramas de larga duración como `develop` o `staging`?
 
-Las ramas de integración o de entorno de larga duración (p. ej., `develop`, `staging`, `production`) se tratan como ramas principales y no requieren prefijo. Deben nombrarse de forma coherente en todo el proyecto.
+Dentro de la gramática anterior, las ramas de tronco válidas son únicamente las definidas allí (por ejemplo, `main`/`master`/`develop`) y no requieren prefijo. Algunos equipos además utilizan ramas de integración o de entorno de larga duración (como `staging` o `production`); estas son una convención opcional de cada equipo y pueden no estar cubiertas por la gramática básica ni ser reconocidas por todas las herramientas, por lo que deben documentarse y configurarse explícitamente si se desea que las validen.
 

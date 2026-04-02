@@ -114,4 +114,4 @@ DIGIT           = %x30-39   ; 数字 0-9
 
 ### 如何处理 `develop` 或 `staging` 等长期存在的分支？
 
-长期存在的集成或环境分支（如 `develop`、`staging`、`production`）被视为主干分支，不需要前缀。它们应在整个项目中保持一致的命名。
+长期存在的集成或环境分支（如 `develop`，以及某些项目约定使用的 `staging`、`production` 等）通常被视为主干分支，不需要前缀，并应在整个项目中保持一致的命名。需要注意的是，在上文给出的 ABNF 语法中，`trunk-branch` 形式规则只包含 `main` / `master` / `develop`；`staging`、`production` 等仅作为各团队可选的长期分支示例，不属于该形式语法的一部分，语法校验工具可按需要在此基础上扩展支持。

@@ -114,4 +114,4 @@ branch 與 commit 不同——branch 是暫時性的，通常只會使用到 mer
 
 ### 如何處理 `develop` 或 `staging` 等長期存在的 branch？
 
-長期存在的整合或環境 branch（例如 `develop`、`staging`、`production`）被視為主幹分支，不需要前綴。應在整個專案中保持一致的命名。
+長期存在的整合或環境 branch（例如 `develop`、`staging`、`production`）通常在專案層級被視為主幹分支，不需要前綴，且應在整個專案中保持一致的命名。依照本規範前文所述的 ABNF 正式文法，預設的 `trunk-branch` 僅包含標準主幹名稱（例如 `main`、`master`、`develop`）；其他名稱（如 `staging`、`production`）則屬於專案自訂的延伸，建議在團隊文件中明確記錄，以便工具與成員正確辨識。

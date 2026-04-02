@@ -114,4 +114,4 @@ Conventional Branch is inspired by [Conventional Commits](https://www.convention
 
 ### How should I handle long-lived branches like `develop` or `staging`?
 
-Long-lived integration or environment branches (e.g., `develop`, `staging`, `production`) are treated as trunk branches and do not require a prefix. They should be named consistently across your project.
+Long-lived integration or environment branches that are part of the core specification (see the `trunk-branch` rule in the grammar) such as `main`, `master`, or `develop` are treated as trunk branches and do not require a prefix. Teams may additionally choose to treat other long-lived branches (for example, `staging` or `production`) as “trunk-like” branches by convention, but these are team-specific extensions outside the formal grammar. In all cases, such branches should be named consistently across your project.

@@ -84,7 +84,7 @@ DIGIT           = %x30-39   ; dígitos 0-9
 | `feature/new-login-` | ❌ | Descrição não pode terminar com hífen |
 | `release/v1.-2.0` | ❌ | Hífen adjacente a ponto não permitido |
 | `fix/header bug` | ❌ | Espaços não permitidos |
-| `fix/header_bug` | ❌ | Underlines não permitidos |
+| `fix/header_bug` | ❌ | Sublinhados (`_`) não permitidos |
 | `unknown/some-task` | ❌ | Tipo de prefixo desconhecido |
 
 ## Conclusão
@@ -115,5 +115,5 @@ O Conventional Branch foi inspirado pelo [Conventional Commits](https://www.conv
 
 ### Como devo lidar com branches de longa duração como `develop` ou `staging`?
 
-Branches de integração ou de ambiente de longa duração (por ex., `develop`, `staging`, `production`) são tratados como branches principais e não requerem prefixo. Devem ser nomeados de forma consistente em todo o projeto.
+Na gramática formal da especificação, apenas `main`, `master` e `develop` são considerados `trunk-branch`. Outros branches de integração ou de ambiente de longa duração (por exemplo, `staging`, `production`) podem ser adotados por cada projeto como extensões específicas da convenção, também sem prefixo, desde que sejam documentados e usados de forma consistente em todo o projeto.
 
