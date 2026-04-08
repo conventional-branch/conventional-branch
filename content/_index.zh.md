@@ -44,6 +44,48 @@ layout: single
 3. **保持清晰简洁**：分支名称应简明扼要，清楚表达工作的内容和目的。
 4. **包含工单编号**：如果适用，应包含项目管理工具中的工单编号，以便于追踪。例如，对于工单 `issue-123`，分支名称可以是 `feature/issue-123-new-login`。
 
+### 形式文法
+
+以下 ABNF（扩充巴科斯-诺尔范式）文法正式定义了有效的分支名称：
+
+```abnf
+branch-name     = trunk-branch / prefixed-branch
+trunk-branch    = "main" / "master" / "develop"
+prefixed-branch = type "/" description
+type            = "feature" / "feat" / "bugfix" / "fix"
+                / "hotfix" / "release" / "chore"
+description     = desc-segment *("-" desc-segment)
+desc-segment    = 1*(ALPHA / DIGIT) *("." 1*(ALPHA / DIGIT))
+ALPHA           = %x61-7A   ; 小写字母 a-z
+DIGIT           = %x30-39   ; 数字 0-9
+```
+
+> 注意：禁止连续的连字符或点，以及出现在描述开头或结尾的连字符或点。
+
+### 示例
+
+| 分支名称 | 有效 | 说明 |
+|---|---|---|
+| `main` | ✅ | 主干分支 |
+| `master` | ✅ | 主干分支 |
+| `develop` | ✅ | 主干分支 |
+| `feature/add-login-page` | ✅ | 新功能 |
+| `feat/add-login-page` | ✅ | feature 的简写形式 |
+| `bugfix/fix-header-bug` | ✅ | 错误修复 |
+| `fix/header-bug` | ✅ | bugfix 的简写形式 |
+| `hotfix/security-patch` | ✅ | 紧急修复 |
+| `release/v1.2.0` | ✅ | 含版本号的发布分支 |
+| `chore/update-dependencies` | ✅ | 非代码任务 |
+| `feature/issue-123-new-login` | ✅ | 含工单编号的功能分支 |
+| `Feature/Add-Login` | ❌ | 不允许大写字母 |
+| `feature/new--login` | ❌ | 不允许连续连字符 |
+| `feature/-new-login` | ❌ | 描述不能以连字符开头 |
+| `feature/new-login-` | ❌ | 描述不能以连字符结尾 |
+| `release/v1.-2.0` | ❌ | 连字符不能紧邻点号 |
+| `fix/header bug` | ❌ | 不允许空格 |
+| `fix/header_bug` | ❌ | 不允许下划线 |
+| `unknown/some-task` | ❌ | 未知的前缀类型 |
+
 ## 结论
 
 - **清晰的沟通**：仅凭分支名称就能清楚地了解代码更改的目的。
@@ -61,3 +103,15 @@ layout: single
 ### 如果团队成员不符合此规范，可以使用哪些工具来自动识别？
 
 你可以使用 [commit-check](https://github.com/commit-check/commit-check) 来检查分支规范，或者如果你的代码托管在 GitHub 上，则使用 [commit-check-action](https://github.com/commit-check/commit-check-action)。
+
+### 我可以定义规范列表之外的自定义分支类型吗？
+
+可以。本规范定义了一套推荐的类型，但团队可以根据工作流程定义额外的自定义类型。重要的是，需要将自定义类型清楚地记录下来，以便所有团队成员和自动化工具都能了解。
+
+### 约定式分支与约定式提交（Conventional Commits）有什么关系？
+
+约定式分支的灵感来源于 [Conventional Commits](https://www.conventionalcommits.org)，遵循相似的理念：为 Git 元数据引入人机可读的结构。约定式提交规范化了提交信息，约定式分支规范化了分支名称。两者相辅相成，天然互补。
+
+### 如何处理 `develop` 或 `staging` 等长期存在的分支？
+
+长期存在的集成或环境分支（如 `develop`，以及某些项目约定使用的 `staging`、`production` 等）通常被视为主干分支，不需要前缀，并应在整个项目中保持一致的命名。需要注意的是，在上文给出的 ABNF 语法中，`trunk-branch` 形式规则只包含 `main` / `master` / `develop`；`staging`、`production` 等仅作为各团队可选的长期分支示例，不属于该形式语法的一部分，语法校验工具可按需要在此基础上扩展支持。

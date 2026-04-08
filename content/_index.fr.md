@@ -44,6 +44,49 @@ La spécification des branches prend en charge les préfixes suivants et doit ê
 3. **Restez clair et concis** : Le nom de la branche doit être descriptif mais concis, indiquant clairement l'objectif du travail.
 4. **Incluez les numéros de ticket** : Le cas échéant, incluez le numéro de ticket de votre outil de gestion de projet pour faciliter le suivi. Par exemple, pour un ticket `issue-123`, le nom de la branche pourrait être `feature/issue-123-new-login`.
 
+
+### Grammaire formelle
+
+La grammaire ABNF (Augmented Backus-Naur Form) suivante définit formellement les noms de branches valides :
+
+```abnf
+branch-name     = trunk-branch / prefixed-branch
+trunk-branch    = "main" / "master" / "develop"
+prefixed-branch = type "/" description
+type            = "feature" / "feat" / "bugfix" / "fix"
+                / "hotfix" / "release" / "chore"
+description     = desc-segment *("-" desc-segment)
+desc-segment    = 1*(ALPHA / DIGIT) *("." 1*(ALPHA / DIGIT))
+ALPHA           = %x61-7A   ; lettres minuscules a-z
+DIGIT           = %x30-39   ; chiffres 0-9
+```
+
+> Remarque : Les tirets ou points consécutifs, ainsi que les tirets ou points en début ou en fin de description, ne sont pas autorisés.
+
+### Exemples
+
+| Nom de branche | Valide | Notes |
+|---|---|---|
+| `main` | ✅ | Branche principale |
+| `master` | ✅ | Branche principale |
+| `develop` | ✅ | Branche principale |
+| `feature/add-login-page` | ✅ | Nouvelle fonctionnalité |
+| `feat/add-login-page` | ✅ | Alias court pour feature |
+| `bugfix/fix-header-bug` | ✅ | Correction de bug |
+| `fix/header-bug` | ✅ | Alias court pour bugfix |
+| `hotfix/security-patch` | ✅ | Correction urgente |
+| `release/v1.2.0` | ✅ | Release avec numéro de version |
+| `chore/update-dependencies` | ✅ | Tâche non liée au code |
+| `feature/issue-123-new-login` | ✅ | Fonctionnalité avec numéro de ticket |
+| `Feature/Add-Login` | ❌ | Majuscules non autorisées |
+| `feature/new--login` | ❌ | Tirets consécutifs non autorisés |
+| `feature/-new-login` | ❌ | La description ne peut pas commencer par un tiret |
+| `feature/new-login-` | ❌ | La description ne peut pas se terminer par un tiret |
+| `release/v1.-2.0` | ❌ | Tiret adjacent à un point non autorisé |
+| `fix/header bug` | ❌ | Espaces non autorisés |
+| `fix/header_bug` | ❌ | Underscores non autorisés |
+| `unknown/some-task` | ❌ | Type de préfixe inconnu |
+
 ## Conclusion
 
 - **Communication claire** : Le nom de la branche seul fournit une compréhension claire de son objectif et du changement de code.
@@ -61,3 +104,16 @@ Les branches sont différentes des commits : elles sont temporaires et principal
 ### Quels outils peuvent être utilisés pour identifier automatiquement si un membre de l'équipe ne respecte pas cette spécification ?
 
 Vous pouvez utiliser [commit-check](https://github.com/commit-check/commit-check) pour vérifier la spécification des branches ou [commit-check-action](https://github.com/commit-check/commit-check-action) si vos codes sont hébergés sur GitHub.
+
+### Puis-je définir mes propres types de branches au-delà de ceux listés ?
+
+Oui. La spécification définit un ensemble de types recommandés, mais les équipes peuvent définir des types personnalisés supplémentaires pour leur flux de travail. Il est cependant important de documenter clairement les types personnalisés afin que tous les membres de l'équipe et les outils automatisés en soient informés.
+
+### Comment Conventional Branch se rapporte-t-il à Conventional Commits ?
+
+Conventional Branch est inspiré par [Conventional Commits](https://www.conventionalcommits.org) et suit une philosophie similaire : apporter une structure lisible par les humains et les machines aux métadonnées Git. Tandis que Conventional Commits standardise les messages de commit, Conventional Branch standardise les noms de branches. Les deux spécifications se complètent naturellement.
+
+### Comment gérer les branches à longue durée de vie comme `develop` ou `staging` ?
+
+Les branches d'intégration ou d'environnement à longue durée de vie (par ex., `develop` ou, de façon spécifique au projet, `staging`, `production`) sont traitées comme des branches principales et ne nécessitent pas de préfixe. Dans la grammaire formelle ci‑dessus, seules les branches `main`/`master`/`develop` sont normalisées en tant que `trunk-branch` ; d'autres noms comme `staging` ou `production` relèvent d'extensions propres au projet et doivent être documentés et configurés explicitement dans les outils de validation. Elles doivent être nommées de manière cohérente dans tout le projet.
+

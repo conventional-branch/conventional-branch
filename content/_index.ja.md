@@ -44,6 +44,49 @@ layout: single
 3. **明確で簡潔に保つ**: ブランチ名は説明的でありながら簡潔で、作業の目的を明確に示す必要があります。
 4. **チケット番号を含める**: 該当する場合、プロジェクト管理ツールからのチケット番号を含めて追跡を容易にします。例えば、チケット `issue-123` の場合、ブランチ名は `feature/issue-123-new-login` とすることができます。
 
+
+### 形式文法
+
+以下の ABNF（拡張バッカス・ナウア記法）文法は、有効なブランチ名を形式的に定義します：
+
+```abnf
+branch-name     = trunk-branch / prefixed-branch
+trunk-branch    = "main" / "master" / "develop"
+prefixed-branch = type "/" description
+type            = "feature" / "feat" / "bugfix" / "fix"
+                / "hotfix" / "release" / "chore"
+description     = desc-segment *("-" desc-segment)
+desc-segment    = 1*(ALPHA / DIGIT) *("." 1*(ALPHA / DIGIT))
+ALPHA           = %x61-7A   ; 小文字 a-z
+DIGIT           = %x30-39   ; 数字 0-9
+```
+
+> 注意：連続するハイフンやドット、および説明の先頭や末尾のハイフンやドットは使用できません。
+
+### 例
+
+| ブランチ名 | 有効 | 備考 |
+|---|---|---|
+| `main` | ✅ | トランクブランチ |
+| `master` | ✅ | トランクブランチ |
+| `develop` | ✅ | トランクブランチ |
+| `feature/add-login-page` | ✅ | 新機能 |
+| `feat/add-login-page` | ✅ | feature の短縮形 |
+| `bugfix/fix-header-bug` | ✅ | バグ修正 |
+| `fix/header-bug` | ✅ | bugfix の短縮形 |
+| `hotfix/security-patch` | ✅ | 緊急修正 |
+| `release/v1.2.0` | ✅ | バージョン番号付きリリース |
+| `chore/update-dependencies` | ✅ | 非コードタスク |
+| `feature/issue-123-new-login` | ✅ | チケット番号付き機能 |
+| `Feature/Add-Login` | ❌ | 大文字は使用不可 |
+| `feature/new--login` | ❌ | 連続するハイフンは使用不可 |
+| `feature/-new-login` | ❌ | 説明をハイフンで始めることは不可 |
+| `feature/new-login-` | ❌ | 説明をハイフンで終わらせることは不可 |
+| `release/v1.-2.0` | ❌ | ドットに隣接するハイフンは不可 |
+| `fix/header bug` | ❌ | スペースは使用不可 |
+| `fix/header_bug` | ❌ | アンダースコアは使用不可 |
+| `unknown/some-task` | ❌ | 未知のプレフィックスタイプ |
+
 ## 結論
 
 - **明確なコミュニケーション**: ブランチ名だけで、そのコード変更の目的を明確に理解できます。
@@ -61,3 +104,16 @@ layout: single
 ### チームメンバーがこの仕様を満たしていない場合、自動的に識別するために使用できるツールは何ですか？
 
 [commit-check](https://github.com/commit-check/commit-check) を使用してブランチ仕様をチェックするか、コードが GitHub でホストされている場合は [commit-check-action](https://github.com/commit-check/commit-check-action) を使用できます。
+
+### 仕様に記載されているもの以外に独自のブランチタイプを定義できますか？
+
+はい。この仕様は推奨されるタイプのセットを定義しますが、チームはワークフローに合わせて追加のカスタムタイプを定義することができます。ただし、すべてのチームメンバーと自動化ツールが認識できるよう、カスタムタイプを明確に文書化することが重要です。
+
+### Conventional Branch と Conventional Commits の関係は？
+
+Conventional Branch は [Conventional Commits](https://www.conventionalcommits.org) に触発され、同様の哲学に基づいています：人間と機械が読めるような構造を Git メタデータに組み込むこと。Conventional Commits がコミットメッセージを標準化するのに対して、Conventional Branch はブランチ名を標準化します。両者は自然に補完し合います。
+
+### `develop` や `staging` のような長期存在するブランチはどう扱えばよいですか？
+
+仕様の ABNF では `trunk-branch` は `main` / `master` / `develop` のみを指しますが、運用上、それ以外の長期存在する統合用または環境用ブランチ（例：`staging`、`production`）をプロジェクト独自のトランク相当ブランチとして扱っても構いません（この場合もプレフィックスは不要です）。その際は、これらのブランチ名が仕様の拡張であることを明確に文書化し、プロジェクト全体で一貫した命名を心がけてください。
+

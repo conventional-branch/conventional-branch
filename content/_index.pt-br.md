@@ -44,6 +44,49 @@ A especificação de branch suporta os seguintes prefixos e deve ser estruturada
 3. **Seja claro e conciso**: o nome do branch deve ser descritivo, mas conciso, indicando claramente o propósito do trabalho.
 4. **Inclua o número do ticket**: se aplicável, inclua o número do ticket da sua ferramenta de gestão de projetos para facilitar o rastreamento. Por exemplo, para o ticket `issue-123`, o nome do branch pode ser `feature/issue-123-novo-login`.
 
+
+### Gramática formal
+
+A gramática ABNF (Augmented Backus-Naur Form) a seguir define formalmente nomes de branches válidos:
+
+```abnf
+branch-name     = trunk-branch / prefixed-branch
+trunk-branch    = "main" / "master" / "develop"
+prefixed-branch = type "/" description
+type            = "feature" / "feat" / "bugfix" / "fix"
+                / "hotfix" / "release" / "chore"
+description     = desc-segment *("-" desc-segment)
+desc-segment    = 1*(ALPHA / DIGIT) *("." 1*(ALPHA / DIGIT))
+ALPHA           = %x61-7A   ; letras minúsculas a-z
+DIGIT           = %x30-39   ; dígitos 0-9
+```
+
+> Nota: Hífens ou pontos consecutivos e hífens ou pontos no início ou no final da descrição não são permitidos.
+
+### Exemplos
+
+| Nome do branch | Válido | Notas |
+|---|---|---|
+| `main` | ✅ | Branch principal |
+| `master` | ✅ | Branch principal |
+| `develop` | ✅ | Branch principal |
+| `feature/add-login-page` | ✅ | Nova funcionalidade |
+| `feat/add-login-page` | ✅ | Alias curto para feature |
+| `bugfix/fix-header-bug` | ✅ | Correção de bug |
+| `fix/header-bug` | ✅ | Alias curto para bugfix |
+| `hotfix/security-patch` | ✅ | Correção urgente |
+| `release/v1.2.0` | ✅ | Release com número de versão |
+| `chore/update-dependencies` | ✅ | Tarefa não relacionada ao código |
+| `feature/issue-123-new-login` | ✅ | Funcionalidade com número de ticket |
+| `Feature/Add-Login` | ❌ | Maiúsculas não permitidas |
+| `feature/new--login` | ❌ | Hífens consecutivos não permitidos |
+| `feature/-new-login` | ❌ | Descrição não pode começar com hífen |
+| `feature/new-login-` | ❌ | Descrição não pode terminar com hífen |
+| `release/v1.-2.0` | ❌ | Hífen adjacente a ponto não permitido |
+| `fix/header bug` | ❌ | Espaços não permitidos |
+| `fix/header_bug` | ❌ | Sublinhados (`_`) não permitidos |
+| `unknown/some-task` | ❌ | Tipo de prefixo desconhecido |
+
 ## Conclusão
 
 - **Comunicação clara**: o nome do branch por si só já fornece um entendimento claro do propósito da alteração de código.
@@ -61,3 +104,16 @@ Branches são diferentes de commits – são temporários e usados principalment
 ### Quais ferramentas podem ser usadas para identificar automaticamente se um membro da equipe não segue esta especificação?
 
 Você pode usar o [commit-check](https://github.com/commit-check/commit-check) para verificar a especificação de branch ou o [commit-check-action](https://github.com/commit-check/commit-check-action) se seu código estiver hospedado no GitHub.
+
+### Posso definir meus próprios tipos de branch além dos listados?
+
+Sim. A especificação define um conjunto recomendado de tipos, mas equipes podem definir tipos personalizados adicionais para seu fluxo de trabalho. No entanto, é importante documentar claramente os tipos personalizados para que todos os membros da equipe e ferramentas automatizadas estejam cientes deles.
+
+### Como o Conventional Branch se relaciona com o Conventional Commits?
+
+O Conventional Branch foi inspirado pelo [Conventional Commits](https://www.conventionalcommits.org) e segue uma filosofia semelhante: trazer estrutura legível por humanos e máquinas para os metadados do Git. Enquanto o Conventional Commits padroniza mensagens de commit, o Conventional Branch padroniza nomes de branches. As duas especificações se complementam naturalmente.
+
+### Como devo lidar com branches de longa duração como `develop` ou `staging`?
+
+Na gramática formal da especificação, apenas `main`, `master` e `develop` são considerados `trunk-branch`. Outros branches de integração ou de ambiente de longa duração (por exemplo, `staging`, `production`) podem ser adotados por cada projeto como extensões específicas da convenção, também sem prefixo, desde que sejam documentados e usados de forma consistente em todo o projeto.
+
