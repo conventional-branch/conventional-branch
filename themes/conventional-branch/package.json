@@ -23,12 +23,12 @@
     "github-markdown-css": "5.9.0"
   },
   "devDependencies": {
-    "autoprefixer": "10.4.27",
-    "cssnano": "7.1.4",
-    "sass": "1.98.0",
-    "postcss": "8.5.8",
+    "autoprefixer": "10.5.0",
+    "cssnano": "7.1.7",
+    "sass": "1.99.0",
+    "postcss": "8.5.13",
     "postcss-cli": "11.0.1",
-    "webpack": "5.105.4",
+    "webpack": "5.106.2",
     "webpack-cli": "7.0.2"
   }
 }
