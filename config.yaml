@@ -151,3 +151,16 @@ languages:
         url: "#especificación"
       - label: Contribuir
         url: https://github.com/conventional-branch/conventional-branch
+  th:
+    params:
+      weight: 11
+      languageName: ภาษาไทย
+      title: Conventional Branch
+      description: ข้อกำหนดสำหรับการเพิ่มความหมายที่ทั้งมนุษย์และเครื่องจักรสามารถอ่านได้ให้กับชื่อ Branch
+      actions:
+      - label: สรุปโดยย่อ
+        url: "#บทสรป"
+      - label: ข้อกำหนดฉบับเต็ม
+        url: "#ขอกำหนด"
+      - label: มีส่วนร่วม
+        url: https://github.com/conventional-branch/conventional-branch
