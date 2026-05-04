@@ -39,7 +39,8 @@ We currently support documentation in multiple languages:
 [Français](https://conventional-branch.github.io/fr/) ·
 [Polski](https://conventional-branch.github.io/pl/) ·
 [Português (Brasil)](https://conventional-branch.github.io/pt-br/) ·
-[Русский](https://conventional-branch.github.io/ru/)
+[Русский](https://conventional-branch.github.io/ru/) ·
+[ภาษาไทย](https://conventional-branch.github.io/th/)
 
 If your language is not listed, we welcome contributions to add it!
 
