@@ -159,8 +159,8 @@ languages:
       description: ข้อกำหนดสำหรับการเพิ่มความหมายที่ทั้งมนุษย์และเครื่องจักรสามารถอ่านได้ให้กับชื่อ Branch
       actions:
       - label: สรุปโดยย่อ
-        url: "#บทสรป"
+        url: "#บทสรุป"
       - label: ข้อกำหนดฉบับเต็ม
-        url: "#ขอกำหนด"
+        url: "#ข้อกำหนด"
       - label: มีส่วนร่วม
         url: https://github.com/conventional-branch/conventional-branch
