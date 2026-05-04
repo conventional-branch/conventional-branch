@@ -23,6 +23,11 @@ Conventional Branch หมายถึงธรรมเนียมปฏิบ
 ข้อกำหนดของ Branch รองรับคำนำหน้า (Prefixes) ดังต่อไปนี้ และควรจัดวางโครงสร้างเป็น:
 
 ---
+
+```
+<type>/<description>
+```
+
 - **`main`**: Branch ของการพัฒนาหลัก (เช่น `main`, `master` หรือ `develop`)
 - **`feature/`** (หรือ **`feat/`**): สำหรับฟีเจอร์ใหม่ (เช่น `feature/add-login-page`, `feat/add-login-page`)
 - **`bugfix/`** (หรือ **`fix/`**): สำหรับการแก้ไขข้อบกพร่อง หรือ บั๊ก (เช่น `bugfix/fix-header-bug`, `fix/header-bug`)
