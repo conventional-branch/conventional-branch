@@ -18,6 +18,16 @@
         text-decoration: underline;
       }
     }
+    .footer__sep {
+      margin: 0 2px;
+      font-size: .7em;
+    }
+    .footer__credit {
+      font-size: .7em;
+      a {
+        font-size: inherit;
+      }
+    }
   }
 
   &__logos {
