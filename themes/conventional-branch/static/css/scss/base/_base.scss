@@ -31,6 +31,12 @@ body {
   color: black !important;
 }
 
+@media (prefers-color-scheme: dark) {
+  .markdown-body > table {
+    color: index.$color-neutral-light
+  }
+}
+
 main {
   background-color: index.$main-background;
 }
