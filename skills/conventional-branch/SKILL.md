@@ -2,7 +2,7 @@
 name: conventional-branch
 description: Create Git branches following the Conventional Branch specification (feature/, bugfix/, hotfix/, release/, chore/). Use when creating a new branch, naming a branch, or checking whether a branch name complies with the spec. Also use alongside commit-check for automated validation.
 license: CC BY 4.0
-compatibility: Requires git. Optional: commit-check for automated branch name validation.
+compatibility: "Requires git. Optional: commit-check for automated branch name validation."
 metadata:
   version: "1.0.0"
   spec: https://conventional-branch.github.io
