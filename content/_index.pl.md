@@ -95,6 +95,10 @@ DIGIT           = %x30-39   ; cyfry 0-9
 
 Podsumowując, conventional branch został zaprojektowany w celu poprawy organizacji projektu, komunikacji i automatyzacji w przepływach pracy Git.
 
+## Narzędzia
+
+{{< tooling compact >}}
+
 ## FAQ
 
 ### Dlaczego typy gałęzi nie są tak szczegółowe jak w Conventional Commits (np. `build`, `ci`, `docs`, `style`, `refactor`)?
@@ -116,4 +120,3 @@ Conventional Branch jest zainspirowany przez [Conventional Commits](https://www.
 ### Jak radzić sobie z długo żyjącymi gałęziami, takimi jak `develop` lub `staging`?
 
 Długo żyjące gałęzie integracyjne lub środowiskowe (np. `develop`, `staging`, `production`) są w praktyce często traktowane jak gałęzie główne i nie wymagają prefiksu, o ile w danym projekcie zostanie to jasno ustalone. Formalna gramatyka ABNF definiuje jednak gałąź główną (`trunk-branch`) jedynie jako `main`, `master` lub `develop`, a dodatkowe nazwy (takie jak `staging` czy `production`) są opcjonalnymi konwencjami specyficznymi dla projektu, które należy odpowiednio udokumentować i skonfigurować w narzędziach.
-

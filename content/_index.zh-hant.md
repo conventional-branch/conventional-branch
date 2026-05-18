@@ -94,6 +94,10 @@ DIGIT           = %x30-39   ; 數字 0-9
 
 總結來說，Conventional Branch 的設計目標是改善 Git 工作流程中的專案組織、溝通與自動化。
 
+## 工具
+
+{{< tooling compact >}}
+
 ## FAQ
 
 ### 為什麼 branch type 不像 Conventional Commits（例如 `build`、`ci`、`docs`、`style`、`refactor`）那麼詳細？

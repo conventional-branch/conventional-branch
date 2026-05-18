@@ -95,6 +95,10 @@ DIGIT           = %x30-39   ; dígitos 0-9
 
 En resumen, conventional branch está diseñado para mejorar la organización del proyecto, la comunicación y la automatización en los flujos de trabajo con Git.
 
+## Herramientas
+
+{{< tooling compact >}}
+
 ## Preguntas frecuentes
 
 ### ¿Por qué los tipos de ramas no son tan detallados como los Conventional Commits (p. ej., `build`, `ci`, `docs`, `style`, `refactor`)?
@@ -116,4 +120,3 @@ Conventional Branch está inspirado en [Conventional Commits](https://www.conven
 ### ¿Cómo debo manejar ramas de larga duración como `develop` o `staging`?
 
 Dentro de la gramática anterior, las ramas de tronco válidas son únicamente las definidas allí (por ejemplo, `main`/`master`/`develop`) y no requieren prefijo. Algunos equipos además utilizan ramas de integración o de entorno de larga duración (como `staging` o `production`); estas son una convención opcional de cada equipo y pueden no estar cubiertas por la gramática básica ni ser reconocidas por todas las herramientas, por lo que deben documentarse y configurarse explícitamente si se desea que las validen.
-

@@ -94,6 +94,10 @@ DIGIT           = %x30-39   ; 0-9
 
 In summary, conventional branch is designed to improve project organization, communication, and automation within Git workflows.
 
+## Tooling
+
+{{< tooling compact >}}
+
 ## FAQ
 
 ### Why aren't branch types as detailed as Conventional Commits (e.g., `build`, `ci`, `docs`, `style`, `refactor`)?
