@@ -1,0 +1,22 @@
+{{- $mode := default "full" (.Get 0) -}}
+{{- $tooling := .Site.Data.tooling -}}
+{{- $intro := index $tooling.intro $mode | default $tooling.intro.full -}}
+
+<p>{{ $intro }}</p>
+<ul>
+  {{- range $tooling.items }}
+  <li>
+    <a href="{{ .url }}">{{ .name }}</a>:
+    {{- if eq $mode "compact" }}
+      {{ .summary }}
+    {{- else }}
+      {{ .description }}
+    {{- end }}
+  </li>
+  {{- end }}
+</ul>
+
+{{- with $tooling.install }}
+<p>{{ .label }}</p>
+<pre><code class="language-bash">{{ .command }}</code></pre>
+{{- end }}

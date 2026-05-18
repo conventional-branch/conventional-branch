@@ -9,16 +9,7 @@ The Conventional Branch specification was inspired by [Conventional Commits](htt
 
 ## Tooling for Conventional Branch
 
-* [commit-check](https://github.com/commit-check/commit-check): Commit Check supports checking commit messages, branch naming, committer name/email, commit signoff, customizing error messages, suggested commands and more.
-* [commit-check-action](https://github.com/commit-check/commit-check-action): A GitHub Action for checking commit message formatting, branch naming, committer name, email, commit signoff and more.
-* [VSCode Conventional Branch](https://marketplace.visualstudio.com/items?itemName=pshaddel.conventional-branch): Customizable Conventional Branch for VSCode.
-* [Conventional Branch Skill](https://github.com/conventional-branch/conventional-branch/blob/main/skills/conventional-branch/SKILL.md): Agent skill for AI coding assistants.
-
-Install the skill with:
-
-```bash
-npx skills add conventional-branch/conventional-branch --skill conventional-branch
-```
+{{< tooling full >}}
 
 ## Projects Using Conventional Branch
 

@@ -96,18 +96,7 @@ In summary, conventional branch is designed to improve project organization, com
 
 ## Tooling
 
-Use these tools to adopt and enforce Conventional Branch in your project:
-
-- [commit-check](https://github.com/commit-check/commit-check): Check branch names, commit messages, and related Git metadata locally.
-- [commit-check-action](https://github.com/commit-check/commit-check-action): Validate branch names automatically in GitHub Actions.
-- [VSCode Conventional Branch](https://marketplace.visualstudio.com/items?itemName=pshaddel.conventional-branch): Create Conventional Branch names from Visual Studio Code.
-- [Conventional Branch Skill](https://github.com/conventional-branch/conventional-branch/blob/main/skills/conventional-branch/SKILL.md): Teach AI coding assistants how to create valid Conventional Branch names.
-
-Install the skill with:
-
-```bash
-npx skills add conventional-branch/conventional-branch --skill conventional-branch
-```
+{{< tooling compact >}}
 
 ## FAQ
 

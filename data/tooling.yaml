@@ -1,0 +1,23 @@
+intro:
+  compact: "Use these tools to adopt and enforce Conventional Branch in your project:"
+  full: "Conventional Branch can be adopted with local checks, CI validation, editor support, and agent skills:"
+install:
+  label: "Install the skill with:"
+  command: "npx skills add conventional-branch/conventional-branch --skill conventional-branch"
+items:
+  - name: commit-check
+    url: https://github.com/commit-check/commit-check
+    summary: Check branch names, commit messages, and related Git metadata locally.
+    description: Commit Check supports checking commit messages, branch naming, committer name/email, commit signoff, customizing error messages, suggested commands and more.
+  - name: commit-check-action
+    url: https://github.com/commit-check/commit-check-action
+    summary: Validate branch names automatically in GitHub Actions.
+    description: A GitHub Action for checking commit message formatting, branch naming, committer name, email, commit signoff and more.
+  - name: VSCode Conventional Branch
+    url: https://marketplace.visualstudio.com/items?itemName=pshaddel.conventional-branch
+    summary: Create Conventional Branch names from Visual Studio Code.
+    description: Customizable Conventional Branch support for Visual Studio Code.
+  - name: Conventional Branch Skill
+    url: https://github.com/conventional-branch/conventional-branch/blob/main/skills/conventional-branch/SKILL.md
+    summary: Teach AI coding assistants how to create valid Conventional Branch names.
+    description: Agent skill for AI coding assistants.
