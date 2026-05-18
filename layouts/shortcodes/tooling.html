@@ -1,22 +1,26 @@
 {{- $mode := default "full" (.Get 0) -}}
 {{- $tooling := .Site.Data.tooling -}}
-{{- $intro := index $tooling.intro $mode | default $tooling.intro.full -}}
+{{- $lang := .Page.Lang | default "en" -}}
+{{- $introByLang := index $tooling.intro $mode | default $tooling.intro.full -}}
+{{- $intro := index $introByLang $lang | default (index $introByLang "en") -}}
 
 <p>{{ $intro }}</p>
 <ul>
-  {{- range $tooling.items }}
+  {{ range $tooling.items }}
+  {{- $textByLang := .description -}}
+  {{- if eq $mode "compact" }}
+    {{- $textByLang = .summary -}}
+  {{- end }}
+  {{- $text := index $textByLang $lang | default (index $textByLang "en") -}}
   <li>
     <a href="{{ .url }}">{{ .name }}</a>:
-    {{- if eq $mode "compact" }}
-      {{ .summary }}
-    {{- else }}
-      {{ .description }}
-    {{- end }}
+    {{ $text }}
   </li>
-  {{- end }}
+  {{ end }}
 </ul>
 
 {{- with $tooling.install }}
-<p>{{ .label }}</p>
+{{- $label := index .label $lang | default (index .label "en") -}}
+<p>{{ $label }}</p>
 <pre><code class="language-bash">{{ .command }}</code></pre>
 {{- end }}

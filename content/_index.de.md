@@ -95,6 +95,10 @@ DIGIT           = %x30-39   ; Ziffern 0-9
 
 Zusammenfassend ist Conventional Branch darauf ausgelegt, die Projektorganisation, Kommunikation und Automatisierung innerhalb von Git-Workflows zu verbessern.
 
+## Werkzeuge
+
+{{< tooling compact >}}
+
 ## FAQ
 
 ### Warum sind Branch-Typen nicht so detailliert wie Conventional Commits (z. B. `build`, `ci`, `docs`, `style`, `refactor`)?
@@ -116,4 +120,3 @@ Conventional Branch wurde von [Conventional Commits](https://www.conventionalcom
 ### Wie soll ich mit langlebigen Branches wie `develop` oder `staging` umgehen?
 
 In der formalen Grammatik dieser Spezifikation sind nur `main`, `master` und `develop` explizit als Trunk-Branches definiert und benötigen kein Präfix. Als projektspezifische Erweiterung können Teams jedoch zusätzliche langlebige Integrations- oder Umgebungs-Branches (z. B. `staging`, `production`) ohne Präfix verwenden, sofern diese konsistent benannt und in den eingesetzten Tools entsprechend konfiguriert bzw. dokumentiert sind.
-

@@ -94,6 +94,10 @@ DIGIT           = %x30-39   ; 数字 0-9
 
 总之，约定式分支旨在改善 Git 工作流程中的项目组织、沟通和自动化。
 
+## 工具
+
+{{< tooling compact >}}
+
 ## 常见问题
 
 ### 为什么分支类型不像 Conventional Commits（例如 `build`、`ci`、`docs`、`style`、`refactor`）那么详细？

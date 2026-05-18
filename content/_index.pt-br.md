@@ -95,6 +95,10 @@ DIGIT           = %x30-39   ; dígitos 0-9
 
 Em resumo, o Conventional Branch foi projetado para melhorar a organização do projeto, a comunicação e a automação nos fluxos de trabalho com Git.
 
+## Ferramentas
+
+{{< tooling compact >}}
+
 ## Perguntas frequentes
 
 ### Por que os tipos de branch não são tão detalhados quanto os Conventional Commits (por exemplo, `build`, `ci`, `docs`, `style`, `refactor`)?
@@ -116,4 +120,3 @@ O Conventional Branch foi inspirado pelo [Conventional Commits](https://www.conv
 ### Como devo lidar com branches de longa duração como `develop` ou `staging`?
 
 Na gramática formal da especificação, apenas `main`, `master` e `develop` são considerados `trunk-branch`. Outros branches de integração ou de ambiente de longa duração (por exemplo, `staging`, `production`) podem ser adotados por cada projeto como extensões específicas da convenção, também sem prefixo, desde que sejam documentados e usados de forma consistente em todo o projeto.
-
