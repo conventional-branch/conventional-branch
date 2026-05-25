@@ -13,7 +13,7 @@ The Conventional Branch specification was inspired by [Conventional Commits](htt
 
 ## Projects Using Conventional Branch
 
-* [karol-broda/snitch](https://github.com/karol-broda/snitch/blob/master/CONTRIBUTING.md): A prettier way to inspect network connections (3.4k+ stars).
+* [karol-broda/snitch](https://github.com/karol-broda/snitch/blob/master/CONTRIBUTING.md): A prettier way to inspect network connections.
 * [ansible/metrics-utility](https://github.com/ansible/metrics-utility/blob/devel/docs/CONTRIBUTING.md): Standalone utility for github.com/ansible/awx.
 * [sanity-io/sdk](https://github.com/sanity-io/sdk/blob/main/CONTRIBUTING.md): Sanity App SDK.
 * [TexasInstruments/processor-sdk-doc](https://github.com/TexasInstruments/processor-sdk-doc): Texas Instruments Processor SDK documentation.
