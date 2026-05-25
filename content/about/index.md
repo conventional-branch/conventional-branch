@@ -19,6 +19,12 @@ The Conventional Branch specification was inspired by [Conventional Commits](htt
 * [ZeusAutomacao/DFe.NET](https://github.com/ZeusAutomacao/DFe.NET): Biblioteca em C# para emissão e impressão de NFe, NFCe, MDF-e e CT-e.
 * [RLinf/RLinf](https://github.com/RLinf/RLinf): Reinforcement Learning Infrastructure for Agentic AI.
 * [Curiosum](https://github.com/curiosum-dev): Building apps for innovators.
+* [karol-broda/snitch](https://github.com/karol-broda/snitch/blob/main/CONTRIBUTING.md): A prettier way to inspect network connections (3.4k+ stars).
+* [dunossauro/fastapi-do-zero](https://github.com/dunossauro/fastapi-do-zero/blob/main/aulas/contribua/contribua.md): Curso básico de FastAPI em português.
+* [TexasInstruments/processor-sdk-doc](https://github.com/TexasInstruments/processor-sdk-doc): Texas Instruments Processor SDK documentation.
+* [Enedis-OSS/tic4eebus](https://github.com/Enedis-OSS/tic4eebus/blob/main/CONTRIBUTING.md): EEBUS OPEV use case by Enedis, France's largest electricity distributor.
+* [bcgov/nr-pies](https://github.com/bcgov/nr-pies): Natural Resource Permitting Information Exchange by the Government of British Columbia.
+* [jal-co/shieldcn](https://github.com/jal-co/shieldcn): Beautiful README badges inspired by shadcn/ui.
 * _[... and more projects using Conventional Branch](https://github.com/search?q=conventional-branch.github.io&type=code&p=1)._
 
 [![Conventional Branch](https://img.shields.io/badge/Conventional%20Branch-Spec-6192c3)](https://github.com/conventional-branch/conventional-branch)
