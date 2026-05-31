@@ -1,7 +1,7 @@
 # The Conventional Branch Specification
 
 [![Conventional Branch](https://img.shields.io/badge/Conventional%20Branch-Spec-6192c3)](https://github.com/conventional-branch/conventional-branch)
-[![Website](https://img.shields.io/website?url=https%3A%2F%2Fconventional-branch.github.io%2F&up_color=6192c3)](https://conventional-branch.github.io/)
+[![Website](https://img.shields.io/website?url=https%3A%2F%2Fconventionalbranch.org%2F&up_color=6192c3)](https://conventionalbranch.org/)
 [![License: CC BY 4.0](https://img.shields.io/badge/License-CC%20BY%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by/4.0/)
 
 The Conventional Branch specification defines a naming convention that brings order to your development workflow — whether you're working solo or with a team.
@@ -30,17 +30,17 @@ Trunk branches (`main`, `master`, `develop`) do not require a prefix.
 
 We currently support documentation in multiple languages:
 
-[English](https://conventional-branch.github.io/) ·
-[简体中文](https://conventional-branch.github.io/zh/) ·
-[繁體中文](https://conventional-branch.github.io/zh-hant/) ·
-[日本語](https://conventional-branch.github.io/ja/) ·
-[Deutsch](https://conventional-branch.github.io/de/) ·
-[Español](https://conventional-branch.github.io/es/) ·
-[Français](https://conventional-branch.github.io/fr/) ·
-[Polski](https://conventional-branch.github.io/pl/) ·
-[Português (Brasil)](https://conventional-branch.github.io/pt-br/) ·
-[Русский](https://conventional-branch.github.io/ru/) ·
-[ภาษาไทย](https://conventional-branch.github.io/th/)
+[English](https://conventionalbranch.org/) ·
+[简体中文](https://conventionalbranch.org/zh/) ·
+[繁體中文](https://conventionalbranch.org/zh-hant/) ·
+[日本語](https://conventionalbranch.org/ja/) ·
+[Deutsch](https://conventionalbranch.org/de/) ·
+[Español](https://conventionalbranch.org/es/) ·
+[Français](https://conventionalbranch.org/fr/) ·
+[Polski](https://conventionalbranch.org/pl/) ·
+[Português (Brasil)](https://conventionalbranch.org/pt-br/) ·
+[Русский](https://conventionalbranch.org/ru/) ·
+[ภาษาไทย](https://conventionalbranch.org/th/)
 
 If your language is not listed, we welcome contributions to add it!
 

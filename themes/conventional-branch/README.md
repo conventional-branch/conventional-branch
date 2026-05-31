@@ -4,7 +4,7 @@ Copy hugo-conventional-branch-theme inside your my-hugo-site/theme
 ## config.yaml example
 All config params are optionals.
 ```yaml
-baseURL: 'https://conventional-branch.github.io/'
+baseURL: 'https://conventionalbranch.org/'
 languageCode: en-us
 title: Conventional Branch
 theme: conventional-branch
@@ -27,7 +27,7 @@ params:
     image: 'https://path-to-image'
     actions:
     - label: Read the specs
-      url: 'https://conventional-branch.github.io/'
+      url: 'https://conventionalbranch.org/'
     - label: GitHub
       url: 'https://github.com/conventional-branch/conventional-branch'
 
