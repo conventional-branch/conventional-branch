@@ -25,7 +25,7 @@ The Conventional Branch specification was inspired by [Conventional Commits](htt
 * [RLinf/RLinf](https://github.com/RLinf/RLinf): Reinforcement Learning Infrastructure for Agentic AI.
 * [Curiosum](https://github.com/curiosum-dev): Building apps for innovators.
 * [jal-co/shieldcn](https://github.com/jal-co/shieldcn): Beautiful README badges inspired by shadcn/ui.
-* _[... and more projects using Conventional Branch](https://github.com/search?q=conventionalbranch.org&type=code&p=1)._
+* _[... and more projects using Conventional Branch](https://github.com/search?q=conventional-branch.github.io&type=code&p=1)._
 
 [![Conventional Branch](https://img.shields.io/badge/Conventional%20Branch-Spec-6192c3)](https://github.com/conventional-branch/conventional-branch)
 
