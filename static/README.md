@@ -1,6 +1,6 @@
 # Conventional Branch Static Site
 
-[![Website](https://img.shields.io/static/v1?label=Website&message=conventional-branch.github.io&color=6192c3)](https://conventional-branch.github.io/)
+[![Website](https://img.shields.io/static/v1?label=Website&message=conventionalbranch.org&color=6192c3)](https://conventionalbranch.org/)
 
 Welcome to the Conventional Branch static site repository!
 

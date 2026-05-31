@@ -17,19 +17,19 @@ jobs:
         id: check
         run: | # add more URLs as needed
           urls=(
-            "https://conventional-branch.github.io/"
-            "https://conventional-branch.github.io/#summary"
-            "https://conventional-branch.github.io/#specification"
-            "https://conventional-branch.github.io/about/"
-            "https://conventional-branch.github.io/de/"
-            "https://conventional-branch.github.io/es/"
-            "https://conventional-branch.github.io/fr/"
-            "https://conventional-branch.github.io/ja/"
-            "https://conventional-branch.github.io/pl/"
-            "https://conventional-branch.github.io/pt-br/"
-            "https://conventional-branch.github.io/ru/"
-            "https://conventional-branch.github.io/zh/"
-            "https://conventional-branch.github.io/zh-hant/"
+            "https://conventionalbranch.org/"
+            "https://conventionalbranch.org/#summary"
+            "https://conventionalbranch.org/#specification"
+            "https://conventionalbranch.org/about/"
+            "https://conventionalbranch.org/de/"
+            "https://conventionalbranch.org/es/"
+            "https://conventionalbranch.org/fr/"
+            "https://conventionalbranch.org/ja/"
+            "https://conventionalbranch.org/pl/"
+            "https://conventionalbranch.org/pt-br/"
+            "https://conventionalbranch.org/ru/"
+            "https://conventionalbranch.org/zh/"
+            "https://conventionalbranch.org/zh-hant/"
           )
 
           failed_urls=()

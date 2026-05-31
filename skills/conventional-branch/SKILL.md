@@ -5,13 +5,13 @@ license: CC BY 4.0
 compatibility: "Requires git. Optional: commit-check for automated branch name validation."
 metadata:
   version: "1.0.0"
-  spec: https://conventional-branch.github.io
+  spec: https://conventionalbranch.org
   source: https://github.com/conventional-branch/conventional-branch
 ---
 
 # Conventional Branch
 
-Create Git branches that follow the [Conventional Branch 1.0.0](https://conventional-branch.github.io) specification — human-readable, machine-parseable, and automation-friendly.
+Create Git branches that follow the [Conventional Branch 1.0.0](https://conventionalbranch.org) specification — human-readable, machine-parseable, and automation-friendly.
 
 ## Branch Name Format
 
