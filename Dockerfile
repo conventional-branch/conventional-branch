@@ -1,4 +1,4 @@
-FROM node:19.0.0-alpine
+FROM node:22-alpine
 WORKDIR /src/
 COPY ./themes/conventional-branch /src/
 RUN apk add make
