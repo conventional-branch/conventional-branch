@@ -32,13 +32,28 @@ jobs:
             "https://conventionalbranch.org/zh-hant/"
           )
 
+          max_retries=3
+          retry_delay=15  # seconds between retries
           failed_urls=()
 
           for url in "${urls[@]}"; do
             echo "Checking $url"
-            status=$(curl -o /dev/null -s -w "%{http_code}\n" "$url")
-            if [[ "$status" -ne 200 ]]; then
-              echo "$url failed with status $status"
+            success=false
+            for ((i=1; i<=max_retries; i++)); do
+              status=$(curl -o /dev/null -s -w "%{http_code}\n" "$url")
+              if [[ "$status" -eq 200 ]]; then
+                echo "  OK (HTTP $status)"
+                success=true
+                break
+              fi
+              if [[ $i -lt $max_retries ]]; then
+                echo "  Attempt $i/$max_retries: HTTP $status - retrying in ${retry_delay}s..."
+                sleep $retry_delay
+              else
+                echo "  Attempt $i/$max_retries: HTTP $status - giving up"
+              fi
+            done
+            if [[ "$success" == false ]]; then
               failed_urls+=("$url (HTTP $status)")
             fi
           done
