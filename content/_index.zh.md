@@ -144,3 +144,7 @@ AI 编码智能体（GitHub Copilot、Cursor、Claude Code、OpenAI Codex 等）
 ### 如何处理 `develop` 或 `staging` 等长期存在的分支？
 
 长期存在的集成或环境分支（如 `develop`，以及某些项目约定使用的 `staging`、`production` 等）通常被视为主干分支，不需要前缀，并应在整个项目中保持一致的命名。需要注意的是，在上文给出的 ABNF 语法中，`trunk-branch` 形式规则只包含 `main` / `master` / `develop`；`staging`、`production` 等仅作为各团队可选的长期分支示例，不属于该形式语法的一部分，语法校验工具可按需要在此基础上扩展支持。
+
+### v1.1.0 与 v1.0.0 的主要区别是什么？
+
+v1.1.0 的主要新特性是引入了 **AI 智能体源前缀（AI Agent Source Prefixes）**。这使得团队可以识别由 AI 编码智能体创建的分支（例如 `ai/`、`copilot/`、`cursor/`、`claude/`、`codex/`）。所有现有的 v1.0.0 分支名称仍然完全有效。同时，版本化网站增加了版本切换器，用户可以浏览 v1.0.0 和 v1.1.0 两种规范。

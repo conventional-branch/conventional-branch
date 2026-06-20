@@ -144,3 +144,7 @@ AI 編碼智能體（GitHub Copilot、Cursor、Claude Code、OpenAI Codex 等）
 ### 如何處理 `develop` 或 `staging` 等長期存在的 branch？
 
 長期存在的整合或環境 branch（例如 `develop`、`staging`、`production`）通常在專案層級被視為主幹分支，不需要前綴，且應在整個專案中保持一致的命名。依照本規範前文所述的 ABNF 正式文法，預設的 `trunk-branch` 僅包含標準主幹名稱（例如 `main`、`master`、`develop`）；其他名稱（如 `staging`、`production`）則屬於專案自訂的延伸，建議在團隊文件中明確記錄，以便工具與成員正確辨識。
+
+### v1.1.0 與 v1.0.0 的主要差異是什麼？
+
+v1.1.0 的主要新功能是引入了 **AI 智能體來源前綴（AI Agent Source Prefixes）**。這使得團隊可以辨識由 AI 編碼智能體建立的 branch（例如 `ai/`、`copilot/`、`cursor/`、`claude/`、`codex/`）。所有現有的 v1.0.0 branch 名稱仍然完全有效。同時，版本化網站增加了版本切換器，使用者可以瀏覽 v1.0.0 和 v1.1.0 兩種規範。

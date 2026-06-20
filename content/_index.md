@@ -144,3 +144,7 @@ The `ai/` generic prefix is available for any AI agent that does not have a dedi
 ### How should I handle long-lived branches like `develop` or `staging`?
 
 Long-lived integration or environment branches that are part of the core specification (see the `trunk-branch` rule in the grammar) such as `main`, `master`, or `develop` are treated as trunk branches and do not require a prefix. Teams may additionally choose to treat other long-lived branches (for example, `staging` or `production`) as “trunk-like” branches by convention, but these are team-specific extensions outside the formal grammar. In all cases, such branches should be named consistently across your project.
+
+### What are the main differences between v1.1.0 and v1.0.0?
+
+v1.1.0 introduces **AI Agent Source Prefixes** as the primary new feature. This allows teams to identify branches created by AI coding agents (e.g., `ai/`, `copilot/`, `cursor/`, `claude/`, `codex/`). All existing v1.0.0 branch names remain fully valid. The versioned website also adds a version switcher so users can browse both the v1.0.0 and v1.1.0 specifications.
