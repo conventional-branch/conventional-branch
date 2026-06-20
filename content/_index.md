@@ -24,7 +24,7 @@ The branch specification supports the following prefixes and should be structure
 
 ---
 
-```
+```text
 <type>/<description>
 ```
 
@@ -57,17 +57,13 @@ AI coding agents increasingly create branches automatically, and several tools a
 | Devin | `devin/` | `devin/1712345678-fix-login` |
 | Claude (community convention) | `claude/` | `claude/update-readme` |
 
-To capture **who** created a branch (a human or a specific agent) alongside **what** it does, an optional *actor* segment may be prefixed to a branch name:
+To capture **who** created a branch (a human or a specific agent), an optional *actor* segment may be prefixed directly before the description:
 
-```
-<actor>/<type>/<description>
-```
-
-The intermediate `<type>` is **optional**, because most agents today emit `<actor>/<description>` directly:
-
-```
+```text
 <actor>/<description>
 ```
+
+The actor **replaces** the type prefix rather than nesting with it: a branch name carries either a `<type>/` prefix or an `<actor>/` prefix, not both. This mirrors what agents emit in practice (e.g. `copilot/add-theme-switcher`).
 
 Rules for the actor segment:
 
@@ -90,13 +86,11 @@ Other actors a project may choose to recognize include `devin`, `aider`, `codex`
 
 ### Formal Grammar
 
-The following Augmented Backus-Naur Form (ABNF) grammar formally defines valid branch names. The `actor-branch` rule is the optional extension described in [AI Agent Prefixes](#ai-agent-prefixes-optional); when no actors are declared, only `trunk-branch` and `prefixed-branch` apply.
+The following Augmented Backus-Naur Form (ABNF) grammar formally defines valid branch names. The core grammar is `trunk-branch` and `prefixed-branch`. The `actor-branch` rule is the optional extension described in [AI Agent Prefixes](#ai-agent-prefixes-optional) and applies **only when a project declares actors**.
 
 ```abnf
-branch-name     = trunk-branch / prefixed-branch / actor-branch
+branch-name     = trunk-branch / prefixed-branch
 trunk-branch    = "main" / "master" / "develop"
-actor-branch    = actor "/" ( prefixed-branch / description )
-actor           = 1*(ALPHA / DIGIT) *("-" 1*(ALPHA / DIGIT))  ; a declared actor id
 prefixed-branch = type "/" description
 type            = "feature" / "feat" / "bugfix" / "fix"
                 / "hotfix" / "release" / "chore"
@@ -104,9 +98,13 @@ description     = desc-segment *("-" desc-segment)
 desc-segment    = 1*(ALPHA / DIGIT) *("." 1*(ALPHA / DIGIT))
 ALPHA           = %x61-7A   ; lowercase a-z
 DIGIT           = %x30-39   ; 0-9
+
+; Optional extension — only when a project declares actors (see "AI Agent Prefixes"):
+actor-branch    = actor "/" description
+actor           = 1*(ALPHA / DIGIT) *("-" 1*(ALPHA / DIGIT))  ; a declared actor id
 ```
 
-> Note: Consecutive hyphens or dots, and hyphens or dots at the start or end of the description, are not permitted. The `actor` segment is only valid when declared by the project (see [AI Agent Prefixes](#ai-agent-prefixes-optional)); undeclared prefixes remain invalid.
+> Note: Consecutive hyphens or dots, and hyphens or dots at the start or end of the description, are not permitted. The `actor-branch` rule is an opt-in extension: an actor segment is valid only when declared by the project (see [AI Agent Prefixes](#ai-agent-prefixes-optional)); undeclared prefixes remain invalid.
 
 ### Examples
 
@@ -125,13 +123,13 @@ DIGIT           = %x30-39   ; 0-9
 | `feature/issue-123-new-login` | ✅ | Feature with ticket number |
 | `copilot/add-theme-switcher` | ✅ | Optional actor + description (`copilot` declared) |
 | `cursor/refactor-cache-layer` | ✅ | Optional actor + description (`cursor` declared) |
-| `claude/feature/login-page` | ✅ | Optional actor + type + description |
-| `human/fix/header-bug` | ✅ | Explicit human actor (optional) |
+| `human/fix-header-bug` | ✅ | Explicit human actor (optional) |
 | `Feature/Add-Login` | ❌ | Uppercase letters not allowed |
 | `feature/new--login` | ❌ | Consecutive hyphens not allowed |
 | `feature/-new-login` | ❌ | Leading hyphen in description |
 | `feature/new-login-` | ❌ | Trailing hyphen in description |
 | `release/v1.-2.0` | ❌ | Hyphen adjacent to dot |
+| `claude/feature/login-page` | ❌ | Actor and type cannot be combined; use `claude/login-page` |
 | `fix/header bug` | ❌ | Spaces not allowed |
 | `fix/header_bug` | ❌ | Underscores not allowed |
 | `unknown/some-task` | ❌ | Unknown prefix: not a type, and not a declared actor |
