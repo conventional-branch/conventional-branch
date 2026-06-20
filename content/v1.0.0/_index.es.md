@@ -101,22 +101,22 @@ En resumen, conventional branch está diseñado para mejorar la organización de
 
 ## Preguntas frecuentes
 
+### ¿Cómo se relaciona Conventional Branch con Conventional Commits?
+
+Conventional Branch está inspirado en [Conventional Commits](https://www.conventionalcommits.org) y sigue una filosofía similar: aportar estructura legible por humanos y máquinas a los metadatos de Git. Mientras que Conventional Commits estandariza los mensajes de commit, Conventional Branch estandariza los nombres de ramas. Ambas especificaciones se complementan de forma natural.
+
 ### ¿Por qué los tipos de ramas no son tan detallados como los Conventional Commits (p. ej., `build`, `ci`, `docs`, `style`, `refactor`)?
 
 Las ramas son diferentes de los commits: son temporales y se usan principalmente hasta que se fusionan. Introducir demasiados tipos para las ramas sería innecesario y dificultaría su gestión y memorización.
-
-### ¿Qué herramientas se pueden usar para identificar automáticamente si un miembro del equipo no cumple con esta especificación?
-
-Puede usar [commit-check](https://github.com/commit-check/commit-check) para verificar la especificación de ramas o [commit-check-action](https://github.com/commit-check/commit-check-action) si su código está alojado en GitHub.
 
 ### ¿Puedo definir mis propios tipos de ramas más allá de los listados?
 
 Sí. La especificación define un conjunto recomendado de tipos, pero los equipos pueden definir tipos personalizados adicionales para su flujo de trabajo. Sin embargo, es importante documentar claramente los tipos personalizados para que todos los miembros del equipo y las herramientas automatizadas estén al tanto de ellos.
 
-### ¿Cómo se relaciona Conventional Branch con Conventional Commits?
-
-Conventional Branch está inspirado en [Conventional Commits](https://www.conventionalcommits.org) y sigue una filosofía similar: aportar estructura legible por humanos y máquinas a los metadatos de Git. Mientras que Conventional Commits estandariza los mensajes de commit, Conventional Branch estandariza los nombres de ramas. Ambas especificaciones se complementan de forma natural.
-
 ### ¿Cómo debo manejar ramas de larga duración como `develop` o `staging`?
 
 Dentro de la gramática anterior, las ramas de tronco válidas son únicamente las definidas allí (por ejemplo, `main`/`master`/`develop`) y no requieren prefijo. Algunos equipos además utilizan ramas de integración o de entorno de larga duración (como `staging` o `production`); estas son una convención opcional de cada equipo y pueden no estar cubiertas por la gramática básica ni ser reconocidas por todas las herramientas, por lo que deben documentarse y configurarse explícitamente si se desea que las validen.
+
+### ¿Qué herramientas se pueden usar para identificar automáticamente si un miembro del equipo no cumple con esta especificación?
+
+Puede usar [commit-check](https://github.com/commit-check/commit-check) para verificar la especificación de ramas o [commit-check-action](https://github.com/commit-check/commit-check-action) si su código está alojado en GitHub.
