@@ -1,7 +1,7 @@
 ---
 draft: false
+aliases: ["/zh-hant/"]
 layout: single
-version: v1.0.0
 ---
 
 # 約定式分支 1.0.0

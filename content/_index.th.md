@@ -1,7 +1,7 @@
 ---
 draft: false
+aliases: ["/th/"]
 layout: single
-version: v1.0.0
 ---
 
 # Conventional Branch 1.0.0
