@@ -21,7 +21,6 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Basic naming rules: lowercase, hyphens, and dots for version numbers.
 - Formal ABNF grammar definition for branch name validation.
 - Valid/invalid examples table in all supported languages.
-- Optional AI Agent actor prefix support: `<actor>/<type>/<description>` format.
 - Extended FAQ covering custom branch types, relation to Conventional Commits, long-lived branches, and tool integration.
 
 ### Languages
