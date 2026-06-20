@@ -116,21 +116,21 @@ In summary, conventional branch is designed to improve project organization, com
 
 ## FAQ
 
+### How does Conventional Branch relate to Conventional Commits?
+
+Conventional Branch is inspired by [Conventional Commits](https://www.conventionalcommits.org) and follows a similar philosophy: bring human- and machine-readable structure to Git metadata. While Conventional Commits standardizes commit messages, Conventional Branch standardizes branch names. The two specifications complement each other naturally.
+
 ### Why aren't branch types as detailed as Conventional Commits (e.g., `build`, `ci`, `docs`, `style`, `refactor`)?
 
 Branches are different from commits—they are temporary and mainly used until merged. Introducing too many types for branches would be unnecessary and would make them harder to manage and remember.
-
-### What tools can be used to automatically identify if a team member does not meet this specification?
-
-You can use [commit-check](https://github.com/commit-check/commit-check) to check branch specification or [commit-check-action](https://github.com/commit-check/commit-check-action) if your codes are hosted on GitHub.
 
 ### Can I define my own branch types beyond the ones listed?
 
 Yes. The specification defines a recommended set of types, but teams can define additional custom types to fit their workflow. It is important, however, to document custom types clearly so that all team members and automated tooling are aware of them.
 
-### How does Conventional Branch relate to Conventional Commits?
+### What are the main differences between v1.1.0 and v1.0.0?
 
-Conventional Branch is inspired by [Conventional Commits](https://www.conventionalcommits.org) and follows a similar philosophy: bring human- and machine-readable structure to Git metadata. While Conventional Commits standardizes commit messages, Conventional Branch standardizes branch names. The two specifications complement each other naturally.
+v1.1.0 adds **AI Agent Source Prefixes** as the primary new feature (see the next FAQ entry for why these were introduced). It also ships a versioned website with a version switcher so users can browse both the v1.0.0 and v1.1.0 specifications. All existing v1.0.0 branch names remain fully valid — no breaking changes.
 
 ### Why add AI Agent Source Prefixes?
 
@@ -139,12 +139,12 @@ AI coding agents (GitHub Copilot, Cursor, Claude Code, OpenAI Codex, etc.) are i
 2. **Tool validation** — tools like commit-check can validate AI agent branches against the spec
 3. **A registration standard** — new AI agents can adopt a documented prefix instead of inventing ad-hoc patterns
 
-The `ai/` generic prefix is available for any AI agent that does not have a dedicated prefix, or for teams who prefer a vendor-neutral identifier.
+The `ai/` generic prefix is available for any AI agent that does not have a dedicated prefix, or for teams who prefer a vendor-neutral identifier. This is the key new feature released in **v1.1.0** — for a full summary of changes between versions, see the FAQ entry above.
 
 ### How should I handle long-lived branches like `develop` or `staging`?
 
 Long-lived integration or environment branches that are part of the core specification (see the `trunk-branch` rule in the grammar) such as `main`, `master`, or `develop` are treated as trunk branches and do not require a prefix. Teams may additionally choose to treat other long-lived branches (for example, `staging` or `production`) as “trunk-like” branches by convention, but these are team-specific extensions outside the formal grammar. In all cases, such branches should be named consistently across your project.
 
-### What are the main differences between v1.1.0 and v1.0.0?
+### What tools can be used to automatically identify if a team member does not meet this specification?
 
-v1.1.0 introduces **AI Agent Source Prefixes** as the primary new feature. This allows teams to identify branches created by AI coding agents (e.g., `ai/`, `copilot/`, `cursor/`, `claude/`, `codex/`). All existing v1.0.0 branch names remain fully valid. The versioned website also adds a version switcher so users can browse both the v1.0.0 and v1.1.0 specifications.
+You can use [commit-check](https://github.com/commit-check/commit-check) to check branch specification or [commit-check-action](https://github.com/commit-check/commit-check-action) if your codes are hosted on GitHub.

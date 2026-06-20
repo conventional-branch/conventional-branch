@@ -116,21 +116,21 @@ DIGIT           = %x30-39   ; 数字 0-9
 
 ## 常见问题
 
+### 约定式分支与约定式提交（Conventional Commits）有什么关系？
+
+约定式分支的灵感来源于 [Conventional Commits](https://www.conventionalcommits.org)，遵循相似的理念：为 Git 元数据引入人机可读的结构。约定式提交规范化了提交信息，约定式分支规范化了分支名称。两者相辅相成，天然互补。
+
 ### 为什么分支类型不像 Conventional Commits（例如 `build`、`ci`、`docs`、`style`、`refactor`）那么详细？
 
 分支与提交不同 —— 分支是临时的，大部分只出现在合并前。为分支引入过多类型是没有必要的，也会让管理和记忆变得更困难。
-
-### 如果团队成员不符合此规范，可以使用哪些工具来自动识别？
-
-你可以使用 [commit-check](https://github.com/commit-check/commit-check) 来检查分支规范，或者如果你的代码托管在 GitHub 上，则使用 [commit-check-action](https://github.com/commit-check/commit-check-action)。
 
 ### 我可以定义规范列表之外的自定义分支类型吗？
 
 可以。本规范定义了一套推荐的类型，但团队可以根据工作流程定义额外的自定义类型。重要的是，需要将自定义类型清楚地记录下来，以便所有团队成员和自动化工具都能了解。
 
-### 约定式分支与约定式提交（Conventional Commits）有什么关系？
+### v1.1.0 与 v1.0.0 的主要区别是什么？
 
-约定式分支的灵感来源于 [Conventional Commits](https://www.conventionalcommits.org)，遵循相似的理念：为 Git 元数据引入人机可读的结构。约定式提交规范化了提交信息，约定式分支规范化了分支名称。两者相辅相成，天然互补。
+v1.1.0 的主要新特性是引入了 **AI 智能体源前缀（AI Agent Source Prefixes）**（具体原因见下一条常见问题）。同时，版本化网站增加了版本切换器，用户可以浏览 v1.0.0 和 v1.1.0 两种规范。所有现有的 v1.0.0 分支名称仍然完全有效 —— 没有不兼容的变更。
 
 ### 为什么要添加 AI 智能体源前缀（AI Agent Source Prefixes）？
 
@@ -139,12 +139,12 @@ AI 编码智能体（GitHub Copilot、Cursor、Claude Code、OpenAI Codex 等）
 2. **工具验证** — 诸如 commit-check 之类的工具可以验证 AI 智能体分支是否符合规范
 3. **注册标准** — 新的 AI 智能体可以采用已记录的 prefix，而不是自行创建临时的模式
 
-`ai/` 通用前缀适用于没有专用前缀的 AI 智能体，或者适用于倾向于使用供应商无关标识符的团队。
+`ai/` 通用前缀适用于没有专用前缀的 AI 智能体，或者适用于倾向于使用供应商无关标识符的团队。这是 **v1.1.0** 发布的关键新特性 —— 版本间变更的完整摘要请参见上一条常见问题。
 
 ### 如何处理 `develop` 或 `staging` 等长期存在的分支？
 
 长期存在的集成或环境分支（如 `develop`，以及某些项目约定使用的 `staging`、`production` 等）通常被视为主干分支，不需要前缀，并应在整个项目中保持一致的命名。需要注意的是，在上文给出的 ABNF 语法中，`trunk-branch` 形式规则只包含 `main` / `master` / `develop`；`staging`、`production` 等仅作为各团队可选的长期分支示例，不属于该形式语法的一部分，语法校验工具可按需要在此基础上扩展支持。
 
-### v1.1.0 与 v1.0.0 的主要区别是什么？
+### 如果团队成员不符合此规范，可以使用哪些工具来自动识别？
 
-v1.1.0 的主要新特性是引入了 **AI 智能体源前缀（AI Agent Source Prefixes）**。这使得团队可以识别由 AI 编码智能体创建的分支（例如 `ai/`、`copilot/`、`cursor/`、`claude/`、`codex/`）。所有现有的 v1.0.0 分支名称仍然完全有效。同时，版本化网站增加了版本切换器，用户可以浏览 v1.0.0 和 v1.1.0 两种规范。
+你可以使用 [commit-check](https://github.com/commit-check/commit-check) 来检查分支规范，或者如果你的代码托管在 GitHub 上，则使用 [commit-check-action](https://github.com/commit-check/commit-check-action)。
