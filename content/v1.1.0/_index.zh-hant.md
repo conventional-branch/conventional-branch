@@ -116,21 +116,17 @@ DIGIT           = %x30-39   ; 數字 0-9
 
 ## FAQ
 
+### 約定式分支與約定式提交（Conventional Commits）有什麼關係？
+
+約定式分支的靈感來源於 [Conventional Commits](https://www.conventionalcommits.org)，遵循相似的理念：為 Git 中繼資料引入人機可讀的結構。約定式提交規範提交訊息，約定式分支規範 branch 名稱，兩者相輔相成、天然互補。
+
 ### 為什麼 branch type 不像 Conventional Commits（例如 `build`、`ci`、`docs`、`style`、`refactor`）那麼詳細？
 
 branch 與 commit 不同——branch 是暫時性的，通常只會使用到 merge 為止。若為 branch 引入過多 type 並無必要，反而會讓管理與記憶變得更困難。
 
-### 有哪些工具可以自動識別團隊成員是否符合此規範？
-
-您可以使用 [commit-check](https://github.com/commit-check/commit-check) 檢查 branch 規範；若您的程式碼託管於 GitHub，則可使用 [commit-check-action](https://github.com/commit-check/commit-check-action)。
-
 ### 我可以定義規範列表之外的自訂 branch type 嗎？
 
 可以。本規範定義了一套推薦的 type，但團隊可根據工作流程定義額外的自訂 type。重要的是，需要將自訂 type 清楚記錄，讓所有團隊成員及自動化工具皆能知悉。
-
-### 約定式分支與約定式提交（Conventional Commits）有什麼關係？
-
-約定式分支的靈感來源於 [Conventional Commits](https://www.conventionalcommits.org)，遵循相似的理念：為 Git 中繼資料引入人機可讀的結構。約定式提交規範提交訊息，約定式分支規範 branch 名稱，兩者相輔相成、天然互補。
 
 ### 為什麼要添加 AI 智能體來源前綴（AI Agent Source Prefixes）？
 
@@ -144,3 +140,7 @@ AI 編碼智能體（GitHub Copilot、Cursor、Claude Code、OpenAI Codex 等）
 ### 如何處理 `develop` 或 `staging` 等長期存在的 branch？
 
 長期存在的整合或環境 branch（例如 `develop`、`staging`、`production`）通常在專案層級被視為主幹分支，不需要前綴，且應在整個專案中保持一致的命名。依照本規範前文所述的 ABNF 正式文法，預設的 `trunk-branch` 僅包含標準主幹名稱（例如 `main`、`master`、`develop`）；其他名稱（如 `staging`、`production`）則屬於專案自訂的延伸，建議在團隊文件中明確記錄，以便工具與成員正確辨識。
+
+### 有哪些工具可以自動識別團隊成員是否符合此規範？
+
+您可以使用 [commit-check](https://github.com/commit-check/commit-check) 檢查 branch 規範；若您的程式碼託管於 GitHub，則可使用 [commit-check-action](https://github.com/commit-check/commit-check-action)。

@@ -4,7 +4,7 @@ aliases: ["/pl/"]
 layout: single
 ---
 
-# Conventional Branch 1.0.0
+# Conventional Branch 1.1.0
 
 ## Podsumowanie
 
@@ -28,12 +28,21 @@ Specyfikacja gałęzi obsługuje następujące prefiksy i powinna być zorganizo
 <typ>/<opis>
 ```
 
-- **`main`**: Główna gałąź deweloperska (np. `main`, `master`, lub `develop`)
+**Prefiksy celu** — opisują intencję pracy:
 - **`feature/`** (lub **`feat/`**): Dla nowych funkcji (np. `feature/add-login-page`, `feat/add-login-page`)
 - **`bugfix/`** (lub **`fix/`**): Dla poprawek błędów (np. `bugfix/fix-header-bug`, `fix/header-bug`)
 - **`hotfix/`**: Dla pilnych poprawek (np. `hotfix/security-patch`)
 - **`release/`**: Dla gałęzi przygotowujących wydanie (np. `release/v1.2.0`)
 - **`chore/`**: Dla zadań niezwiązanych z kodem, takich jak zależności, aktualizacje dokumentacji (np. `chore/update-dependencies`)
+
+**Prefiksy źródła agenta AI** — identyfikują gałęzie generowane przez agentów kodujących AI:
+- **`ai/`**: Generyczny prefiks dla dowolnego agenta kodującego AI (np. `ai/refactor-auth-flow`)
+- **`copilot/`**: GitHub Copilot (np. `copilot/add-login-page`)
+- **`cursor/`**: Cursor (np. `cursor/fix-header-bug`)
+- **`claude/`**: Claude Code od Anthropic (np. `claude/security-patch`)
+- **`codex/`**: OpenAI Codex (np. `codex/optimize-query`)
+
+Gałęzie główne (`main`, `master`, `develop`) nie używają prefiksu.
 
 ---
 
@@ -55,6 +64,8 @@ trunk-branch    = "main" / "master" / "develop"
 prefixed-branch = type "/" description
 type            = "feature" / "feat" / "bugfix" / "fix"
                 / "hotfix" / "release" / "chore"
+                / "ai" / "copilot" / "cursor"
+                / "claude" / "codex"
 description     = desc-segment *("-" desc-segment)
 desc-segment    = 1*(ALPHA / DIGIT) *("." 1*(ALPHA / DIGIT))
 ALPHA           = %x61-7A   ; małe litery a-z
@@ -85,6 +96,11 @@ DIGIT           = %x30-39   ; cyfry 0-9
 | `release/v1.-2.0` | ❌ | Myślnik obok kropki jest niedozwolony |
 | `fix/header bug` | ❌ | Spacje są niedozwolone |
 | `fix/header_bug` | ❌ | Podkreślenia są niedozwolone |
+| `ai/refactor-auth-flow` | ✅ | Generyczny prefiks agenta AI |
+| `copilot/add-login-page` | ✅ | GitHub Copilot |
+| `cursor/fix-header-bug` | ✅ | Cursor |
+| `claude/security-patch` | ✅ | Claude Code od Anthropic |
+| `codex/optimize-query` | ✅ | OpenAI Codex |
 | `unknown/some-task` | ❌ | Nieznany typ prefiksu |
 
 ## Wnioski
@@ -101,22 +117,35 @@ Podsumowując, conventional branch został zaprojektowany w celu poprawy organiz
 
 ## FAQ
 
+### Jak Conventional Branch ma się do Conventional Commits?
+
+Conventional Branch jest zainspirowany przez [Conventional Commits](https://www.conventionalcommits.org) i podąża za podobną filozofią: wprowadzenie struktury czytelnej dla ludzi i maszyn do metadanych Git. Podczas gdy Conventional Commits standaryzuje wiadomości commitów, Conventional Branch standaryzuje nazwy gałęzi. Obie specyfikacje naturalnie się uzupełniają.
+
 ### Dlaczego typy gałęzi nie są tak szczegółowe jak w Conventional Commits (np. `build`, `ci`, `docs`, `style`, `refactor`)?
 
 Gałęzie różnią się od commitów — są tymczasowe i używane głównie do momentu scalenia. Wprowadzenie zbyt wielu typów dla gałęzi byłoby niepotrzebne i utrudniłoby ich zarządzanie oraz zapamiętywanie.
-
-### Jakich narzędzi można użyć, aby automatycznie sprawdzić, czy członek zespołu nie spełnia tej specyfikacji?
-
-Możesz użyć [commit-check](https://github.com/commit-check/commit-check) do sprawdzania specyfikacji gałęzi lub [commit-check-action](https://github.com/commit-check/commit-check-action), jeśli twój kod jest hostowany na GitHub.
 
 ### Czy mogę zdefiniować własne typy gałęzi poza wymienionymi?
 
 Tak. Specyfikacja definiuje zalecany zestaw typów, ale zespoły mogą definiować dodatkowe niestandardowe typy dla swojego przepływu pracy. Ważne jest jednak, aby jasno dokumentować niestandardowe typy, tak aby wszyscy członkowie zespołu i zautomatyzowane narzędzia były ich świadome.
 
-### Jak Conventional Branch ma się do Conventional Commits?
+### Jakie są główne różnice między v1.1.0 a v1.0.0?
 
-Conventional Branch jest zainspirowany przez [Conventional Commits](https://www.conventionalcommits.org) i podąża za podobną filozofią: wprowadzenie struktury czytelnej dla ludzi i maszyn do metadanych Git. Podczas gdy Conventional Commits standaryzuje wiadomości commitów, Conventional Branch standaryzuje nazwy gałęzi. Obie specyfikacje naturalnie się uzupełniają.
+v1.1.0 dodaje **Prefiksy źródła agenta AI** jako główną nową funkcję (dlaczego je wprowadzono, wyjaśnia następne pytanie w FAQ). Oferuje również witrynę z wersjonowaniem z przełącznikiem wersji, umożliwiającym użytkownikom przeglądanie specyfikacji v1.0.0 i v1.1.0. Wszystkie istniejące nazwy gałęzi v1.0.0 pozostają w pełni ważne — bez zmian łamiących zgodność.
+
+### Dlaczego dodać prefiksy źródła agenta AI?
+
+Agenci kodujący AI (GitHub Copilot, Cursor, Claude Code, OpenAI Codex itp.) są coraz częściej używani do generowania kodu i tworzenia pull requestów. Każdy agent używa własnego prefiksu gałęzi (np. `copilot/`, `cursor/`). Poprzez standaryzację tych prefiksów w specyfikacji Conventional Branch, umożliwiamy:
+1. **Szybką identyfikację** — recenzenci i narzędzia mogą natychmiast rozpoznać PRy generowane przez AI
+2. **Walidację narzędziową** — narzędzia takie jak commit-check mogą walidować gałęzie agentów AI względem specyfikacji
+3. **Standard rejestracji** — nowi agenci AI mogą przyjąć udokumentowany prefiks zamiast wymyślać tymczasowe wzorce
+
+Generyczny prefiks `ai/` jest dostępny dla każdego agenta AI bez dedykowanego prefiksu lub dla zespołów, które preferują neutralnego dostawcę. To kluczowa nowa funkcja wydana w **v1.1.0** — pełne podsumowanie zmian między wersjami znajduje się w powyższym pytaniu FAQ.
 
 ### Jak radzić sobie z długo żyjącymi gałęziami, takimi jak `develop` lub `staging`?
 
 Długo żyjące gałęzie integracyjne lub środowiskowe (np. `develop`, `staging`, `production`) są w praktyce często traktowane jak gałęzie główne i nie wymagają prefiksu, o ile w danym projekcie zostanie to jasno ustalone. Formalna gramatyka ABNF definiuje jednak gałąź główną (`trunk-branch`) jedynie jako `main`, `master` lub `develop`, a dodatkowe nazwy (takie jak `staging` czy `production`) są opcjonalnymi konwencjami specyficznymi dla projektu, które należy odpowiednio udokumentować i skonfigurować w narzędziach.
+
+### Jakich narzędzi można użyć, aby automatycznie sprawdzić, czy członek zespołu nie spełnia tej specyfikacji?
+
+Możesz użyć [commit-check](https://github.com/commit-check/commit-check) do sprawdzania specyfikacji gałęzi lub [commit-check-action](https://github.com/commit-check/commit-check-action), jeśli twój kod jest hostowany na GitHub.

@@ -116,21 +116,17 @@ In summary, conventional branch is designed to improve project organization, com
 
 ## FAQ
 
+### How does Conventional Branch relate to Conventional Commits?
+
+Conventional Branch is inspired by [Conventional Commits](https://www.conventionalcommits.org) and follows a similar philosophy: bring human- and machine-readable structure to Git metadata. While Conventional Commits standardizes commit messages, Conventional Branch standardizes branch names. The two specifications complement each other naturally.
+
 ### Why aren't branch types as detailed as Conventional Commits (e.g., `build`, `ci`, `docs`, `style`, `refactor`)?
 
 Branches are different from commits—they are temporary and mainly used until merged. Introducing too many types for branches would be unnecessary and would make them harder to manage and remember.
 
-### What tools can be used to automatically identify if a team member does not meet this specification?
-
-You can use [commit-check](https://github.com/commit-check/commit-check) to check branch specification or [commit-check-action](https://github.com/commit-check/commit-check-action) if your codes are hosted on GitHub.
-
 ### Can I define my own branch types beyond the ones listed?
 
 Yes. The specification defines a recommended set of types, but teams can define additional custom types to fit their workflow. It is important, however, to document custom types clearly so that all team members and automated tooling are aware of them.
-
-### How does Conventional Branch relate to Conventional Commits?
-
-Conventional Branch is inspired by [Conventional Commits](https://www.conventionalcommits.org) and follows a similar philosophy: bring human- and machine-readable structure to Git metadata. While Conventional Commits standardizes commit messages, Conventional Branch standardizes branch names. The two specifications complement each other naturally.
 
 ### Why add AI Agent Source Prefixes?
 
@@ -144,3 +140,7 @@ The `ai/` generic prefix is available for any AI agent that does not have a dedi
 ### How should I handle long-lived branches like `develop` or `staging`?
 
 Long-lived integration or environment branches that are part of the core specification (see the `trunk-branch` rule in the grammar) such as `main`, `master`, or `develop` are treated as trunk branches and do not require a prefix. Teams may additionally choose to treat other long-lived branches (for example, `staging` or `production`) as “trunk-like” branches by convention, but these are team-specific extensions outside the formal grammar. In all cases, such branches should be named consistently across your project.
+
+### What tools can be used to automatically identify if a team member does not meet this specification?
+
+You can use [commit-check](https://github.com/commit-check/commit-check) to check branch specification or [commit-check-action](https://github.com/commit-check/commit-check-action) if your codes are hosted on GitHub.

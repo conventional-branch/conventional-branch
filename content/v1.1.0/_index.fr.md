@@ -4,7 +4,7 @@ layout: single
 version: v1.1.0
 ---
 
-# Conventional Branch 1.0.0
+# Conventional Branch 1.1.0
 
 ## Résumé
 
@@ -28,12 +28,21 @@ La spécification des branches prend en charge les préfixes suivants et doit ê
 <type>/<description>
 ```
 
-- **`main`** : La branche de développement principale (par exemple, `main`, `master`, ou `develop`)
+**Préfixes d'objectif** — décrivent l'intention du travail :
 - **`feature/`** (ou **`feat/`**) : Pour les nouvelles fonctionnalités (par exemple, `feature/add-login-page`, `feat/add-login-page`)
 - **`bugfix/`** (ou **`fix/`**) : Pour les corrections de bugs (par exemple, `bugfix/fix-header-bug`, `fix/header-bug`)
 - **`hotfix/`** : Pour les corrections urgentes (par exemple, `hotfix/security-patch`)
 - **`release/`** : Pour les branches préparant une release (par exemple, `release/v1.2.0`)
 - **`chore/`** : Pour les tâches non liées au code comme les dépendances, les mises à jour de documentation (par exemple, `chore/update-dependencies`)
+
+**Préfixes de source d'agent IA** — identifient les branches générées par des agents de codage IA :
+- **`ai/`** : Préfixe générique pour tout agent de codage IA (par exemple, `ai/refactor-auth-flow`)
+- **`copilot/`** : GitHub Copilot (par exemple, `copilot/add-login-page`)
+- **`cursor/`** : Cursor (par exemple, `cursor/fix-header-bug`)
+- **`claude/`** : Claude Code par Anthropic (par exemple, `claude/security-patch`)
+- **`codex/`** : OpenAI Codex (par exemple, `codex/optimize-query`)
+
+Les branches principales (`main`, `master`, `develop`) n'utilisent pas de préfixe.
 
 ---
 
@@ -55,6 +64,8 @@ trunk-branch    = "main" / "master" / "develop"
 prefixed-branch = type "/" description
 type            = "feature" / "feat" / "bugfix" / "fix"
                 / "hotfix" / "release" / "chore"
+                / "ai" / "copilot" / "cursor"
+                / "claude" / "codex"
 description     = desc-segment *("-" desc-segment)
 desc-segment    = 1*(ALPHA / DIGIT) *("." 1*(ALPHA / DIGIT))
 ALPHA           = %x61-7A   ; lettres minuscules a-z
@@ -85,6 +96,11 @@ DIGIT           = %x30-39   ; chiffres 0-9
 | `release/v1.-2.0` | ❌ | Tiret adjacent à un point non autorisé |
 | `fix/header bug` | ❌ | Espaces non autorisés |
 | `fix/header_bug` | ❌ | Underscores non autorisés |
+| `ai/refactor-auth-flow` | ✅ | Préfixe générique d'agent IA |
+| `copilot/add-login-page` | ✅ | GitHub Copilot |
+| `cursor/fix-header-bug` | ✅ | Cursor |
+| `claude/security-patch` | ✅ | Claude Code par Anthropic |
+| `codex/optimize-query` | ✅ | OpenAI Codex |
 | `unknown/some-task` | ❌ | Type de préfixe inconnu |
 
 ## Conclusion
@@ -101,22 +117,31 @@ En résumé, conventional branch est conçu pour améliorer l'organisation du pr
 
 ## FAQ
 
+### Comment Conventional Branch se rapporte-t-il à Conventional Commits ?
+
+Conventional Branch est inspiré par [Conventional Commits](https://www.conventionalcommits.org) et suit une philosophie similaire : apporter une structure lisible par les humains et les machines aux métadonnées Git. Tandis que Conventional Commits standardise les messages de commit, Conventional Branch standardise les noms de branches. Les deux spécifications se complètent naturellement.
+
 ### Pourquoi les types de branches ne sont-ils pas aussi détaillés que les Conventional Commits (par ex. `build`, `ci`, `docs`, `style`, `refactor`) ?
 
 Les branches sont différentes des commits : elles sont temporaires et principalement utilisées jusqu’à leur fusion. Introduire trop de types pour les branches serait inutile et rendrait leur gestion et mémorisation plus difficiles.
-
-### Quels outils peuvent être utilisés pour identifier automatiquement si un membre de l'équipe ne respecte pas cette spécification ?
-
-Vous pouvez utiliser [commit-check](https://github.com/commit-check/commit-check) pour vérifier la spécification des branches ou [commit-check-action](https://github.com/commit-check/commit-check-action) si vos codes sont hébergés sur GitHub.
 
 ### Puis-je définir mes propres types de branches au-delà de ceux listés ?
 
 Oui. La spécification définit un ensemble de types recommandés, mais les équipes peuvent définir des types personnalisés supplémentaires pour leur flux de travail. Il est cependant important de documenter clairement les types personnalisés afin que tous les membres de l'équipe et les outils automatisés en soient informés.
 
-### Comment Conventional Branch se rapporte-t-il à Conventional Commits ?
+### Pourquoi ajouter des préfixes de source d'agent IA ?
 
-Conventional Branch est inspiré par [Conventional Commits](https://www.conventionalcommits.org) et suit une philosophie similaire : apporter une structure lisible par les humains et les machines aux métadonnées Git. Tandis que Conventional Commits standardise les messages de commit, Conventional Branch standardise les noms de branches. Les deux spécifications se complètent naturellement.
+Les agents de codage IA (GitHub Copilot, Cursor, Claude Code, OpenAI Codex, etc.) sont de plus en plus utilisés pour générer du code et créer des pull requests. Chaque agent utilise son propre préfixe de branche (par exemple, `copilot/`, `cursor/`). En normalisant ces préfixes dans la spécification Conventional Branch, nous permettons :
+1. **Identification rapide** — les réviseurs et les outils peuvent immédiatement reconnaître les PRs générées par IA
+2. **Validation par les outils** — des outils comme commit-check peuvent valider les branches d'agents IA par rapport à la spécification
+3. **Un standard d'enregistrement** — les nouveaux agents IA peuvent adopter un préfixe documenté au lieu d'inventer des motifs ad-hoc
+
+Le préfixe générique `ai/` est disponible pour tout agent IA sans préfixe dédié, ou pour les équipes qui préfèrent un identifiant neutre vis-à-vis du fournisseur.
 
 ### Comment gérer les branches à longue durée de vie comme `develop` ou `staging` ?
 
 Les branches d'intégration ou d'environnement à longue durée de vie (par ex., `develop` ou, de façon spécifique au projet, `staging`, `production`) sont traitées comme des branches principales et ne nécessitent pas de préfixe. Dans la grammaire formelle ci‑dessus, seules les branches `main`/`master`/`develop` sont normalisées en tant que `trunk-branch` ; d'autres noms comme `staging` ou `production` relèvent d'extensions propres au projet et doivent être documentés et configurés explicitement dans les outils de validation. Elles doivent être nommées de manière cohérente dans tout le projet.
+
+### Quels outils peuvent être utilisés pour identifier automatiquement si un membre de l'équipe ne respecte pas cette spécification ?
+
+Vous pouvez utiliser [commit-check](https://github.com/commit-check/commit-check) pour vérifier la spécification des branches ou [commit-check-action](https://github.com/commit-check/commit-check-action) si vos codes sont hébergés sur GitHub.

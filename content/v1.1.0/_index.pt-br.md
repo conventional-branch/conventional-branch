@@ -4,7 +4,7 @@ layout: single
 version: v1.1.0
 ---
 
-# Conventional Branch 1.0.0
+# Conventional Branch 1.1.0
 
 ## Resumo
 
@@ -28,12 +28,21 @@ A especificação de branch suporta os seguintes prefixos e deve ser estruturada
 <tipo>/<descrição>
 ```
 
-- **`main`**: o branch principal de desenvolvimento (ex.: `main`, `master` ou `develop`);
+**Prefixos de propósito** — descrevem a intenção do trabalho:
 - **`feature/`** (or **`feat/`**): para novas funcionalidades (ex.: `feature/add-login-page`, `feat/add-login-page`);
 - **`bugfix/`** (or **`fix/`**): para correções de bugs (ex.: `bugfix/fix-header-bug`, `fix/header-bug`);
 - **`hotfix/`**: para correções urgentes (ex.: `hotfix/correcao-seguranca`);
 - **`release/`**: para branches de release (ex.: `release/v1.2.0`); e
 - **`chore/`**: para tarefas não relacionadas ao código, como atualização de dependências ou documentação (ex.: `chore/atualizar-dependencias`).
+
+**Prefixos de fonte de agente de IA** — identificam branches gerados por agentes de codificação de IA:
+- **`ai/`**: Prefixo genérico para qualquer agente de codificação de IA (ex.: `ai/refactor-auth-flow`);
+- **`copilot/`**: GitHub Copilot (ex.: `copilot/add-login-page`);
+- **`cursor/`**: Cursor (ex.: `cursor/fix-header-bug`);
+- **`claude/`**: Claude Code da Anthropic (ex.: `claude/security-patch`);
+- **`codex/`**: OpenAI Codex (ex.: `codex/optimize-query`).
+
+Branches tronco (`main`, `master`, `develop`) não usam prefixo.
 
 ---
 
@@ -55,6 +64,8 @@ trunk-branch    = "main" / "master" / "develop"
 prefixed-branch = type "/" description
 type            = "feature" / "feat" / "bugfix" / "fix"
                 / "hotfix" / "release" / "chore"
+                / "ai" / "copilot" / "cursor"
+                / "claude" / "codex"
 description     = desc-segment *("-" desc-segment)
 desc-segment    = 1*(ALPHA / DIGIT) *("." 1*(ALPHA / DIGIT))
 ALPHA           = %x61-7A   ; letras minúsculas a-z
@@ -85,6 +96,11 @@ DIGIT           = %x30-39   ; dígitos 0-9
 | `release/v1.-2.0` | ❌ | Hífen adjacente a ponto não permitido |
 | `fix/header bug` | ❌ | Espaços não permitidos |
 | `fix/header_bug` | ❌ | Sublinhados (`_`) não permitidos |
+| `ai/refactor-auth-flow` | ✅ | Prefixo genérico de agente de IA |
+| `copilot/add-login-page` | ✅ | GitHub Copilot |
+| `cursor/fix-header-bug` | ✅ | Cursor |
+| `claude/security-patch` | ✅ | Claude Code da Anthropic |
+| `codex/optimize-query` | ✅ | OpenAI Codex |
 | `unknown/some-task` | ❌ | Tipo de prefixo desconhecido |
 
 ## Conclusão
@@ -101,22 +117,31 @@ Em resumo, o Conventional Branch foi projetado para melhorar a organização do 
 
 ## Perguntas frequentes
 
+### Como o Conventional Branch se relaciona com o Conventional Commits?
+
+O Conventional Branch foi inspirado pelo [Conventional Commits](https://www.conventionalcommits.org) e segue uma filosofia semelhante: trazer estrutura legível por humanos e máquinas para os metadados do Git. Enquanto o Conventional Commits padroniza mensagens de commit, o Conventional Branch padroniza nomes de branches. As duas especificações se complementam naturalmente.
+
 ### Por que os tipos de branch não são tão detalhados quanto os Conventional Commits (por exemplo, `build`, `ci`, `docs`, `style`, `refactor`)?
 
 Branches são diferentes de commits – são temporários e usados principalmente até serem mesclados. Introduzir muitos tipos de branch seria desnecessário e tornaria mais difícil gerenciá-los e lembrá-los.
-
-### Quais ferramentas podem ser usadas para identificar automaticamente se um membro da equipe não segue esta especificação?
-
-Você pode usar o [commit-check](https://github.com/commit-check/commit-check) para verificar a especificação de branch ou o [commit-check-action](https://github.com/commit-check/commit-check-action) se seu código estiver hospedado no GitHub.
 
 ### Posso definir meus próprios tipos de branch além dos listados?
 
 Sim. A especificação define um conjunto recomendado de tipos, mas equipes podem definir tipos personalizados adicionais para seu fluxo de trabalho. No entanto, é importante documentar claramente os tipos personalizados para que todos os membros da equipe e ferramentas automatizadas estejam cientes deles.
 
-### Como o Conventional Branch se relaciona com o Conventional Commits?
+### Por que adicionar prefixos de fonte de agente de IA?
 
-O Conventional Branch foi inspirado pelo [Conventional Commits](https://www.conventionalcommits.org) e segue uma filosofia semelhante: trazer estrutura legível por humanos e máquinas para os metadados do Git. Enquanto o Conventional Commits padroniza mensagens de commit, o Conventional Branch padroniza nomes de branches. As duas especificações se complementam naturalmente.
+Agentes de codificação de IA (GitHub Copilot, Cursor, Claude Code, OpenAI Codex, etc.) são cada vez mais usados para gerar código e criar pull requests. Cada agente usa seu próprio prefixo de branch (ex.: `copilot/`, `cursor/`). Ao padronizar esses prefixos na especificação Conventional Branch, possibilitamos:
+1. **Identificação rápida** — revisores e ferramentas podem reconhecer imediatamente PRs gerados por IA
+2. **Validação por ferramentas** — ferramentas como commit-check podem validar branches de agentes de IA contra a especificação
+3. **Um padrão de registro** — novos agentes de IA podem adotar um prefixo documentado em vez de inventar padrões ad-hoc
+
+O prefixo genérico `ai/` está disponível para qualquer agente de IA sem um prefixo dedicado, ou para equipes que preferem um identificador neutro em relação ao fornecedor.
 
 ### Como devo lidar com branches de longa duração como `develop` ou `staging`?
 
 Na gramática formal da especificação, apenas `main`, `master` e `develop` são considerados `trunk-branch`. Outros branches de integração ou de ambiente de longa duração (por exemplo, `staging`, `production`) podem ser adotados por cada projeto como extensões específicas da convenção, também sem prefixo, desde que sejam documentados e usados de forma consistente em todo o projeto.
+
+### Quais ferramentas podem ser usadas para identificar automaticamente se um membro da equipe não segue esta especificação?
+
+Você pode usar o [commit-check](https://github.com/commit-check/commit-check) para verificar a especificação de branch ou o [commit-check-action](https://github.com/commit-check/commit-check-action) se seu código estiver hospedado no GitHub.

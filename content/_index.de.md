@@ -4,7 +4,7 @@ aliases: ["/de/"]
 layout: single
 ---
 
-# Conventional Branch 1.0.0
+# Conventional Branch 1.1.0
 
 ## Zusammenfassung
 
@@ -28,12 +28,21 @@ Die Branch-Spezifikation unterstützt die folgenden Präfixe und sollte wie folg
 <typ>/<beschreibung>
 ```
 
-- **`main`**: Der Haupt-Entwicklungsbranch (z.B. `main`, `master`, oder `develop`)
+**Zweck-Präfixe** — beschreiben die Absicht der Arbeit:
 - **`feature/`** (oder **`feat/`**): Für neue Features (z.B. `feature/add-login-page`, `feat/add-login-page`)
 - **`bugfix/`** (oder **`fix/`**): Für Fehlerbehebungen (z.B. `bugfix/fix-header-bug`, `fix/header-bug`)
 - **`hotfix/`**: Für dringende Korrekturen (z.B. `hotfix/security-patch`)
 - **`release/`**: Für Branches, die ein Release vorbereiten (z.B. `release/v1.2.0`)
 - **`chore/`**: Für Nicht-Code-Aufgaben wie Abhängigkeiten, Dokumentation-Updates (z.B. `chore/update-dependencies`)
+
+**AI-Agenten-Quellpräfixe** — identifizieren Branches, die von KI-Codierungsagenten erstellt wurden:
+- **`ai/`**: Generischer Präfix für jeden KI-Codierungsagenten (z.B. `ai/refactor-auth-flow`)
+- **`copilot/`**: GitHub Copilot (z.B. `copilot/add-login-page`)
+- **`cursor/`**: Cursor (z.B. `cursor/fix-header-bug`)
+- **`claude/`**: Claude Code von Anthropic (z.B. `claude/security-patch`)
+- **`codex/`**: OpenAI Codex (z.B. `codex/optimize-query`)
+
+Trunk-Branches (`main`, `master`, `develop`) verwenden kein Präfix.
 
 ---
 
@@ -55,6 +64,8 @@ trunk-branch    = "main" / "master" / "develop"
 prefixed-branch = type "/" description
 type            = "feature" / "feat" / "bugfix" / "fix"
                 / "hotfix" / "release" / "chore"
+                / "ai" / "copilot" / "cursor"
+                / "claude" / "codex"
 description     = desc-segment *("-" desc-segment)
 desc-segment    = 1*(ALPHA / DIGIT) *("." 1*(ALPHA / DIGIT))
 ALPHA           = %x61-7A   ; Kleinbuchstaben a-z
@@ -85,6 +96,11 @@ DIGIT           = %x30-39   ; Ziffern 0-9
 | `release/v1.-2.0` | ❌ | Bindestrich neben Punkt nicht erlaubt |
 | `fix/header bug` | ❌ | Leerzeichen nicht erlaubt |
 | `fix/header_bug` | ❌ | Unterstriche nicht erlaubt |
+| `ai/refactor-auth-flow` | ✅ | Generischer KI-Agenten-Präfix |
+| `copilot/add-login-page` | ✅ | GitHub Copilot |
+| `cursor/fix-header-bug` | ✅ | Cursor |
+| `claude/security-patch` | ✅ | Claude Code von Anthropic |
+| `codex/optimize-query` | ✅ | OpenAI Codex |
 | `unknown/some-task` | ❌ | Unbekannter Präfixtyp |
 
 ## Fazit
@@ -101,22 +117,35 @@ Zusammenfassend ist Conventional Branch darauf ausgelegt, die Projektorganisatio
 
 ## FAQ
 
+### Wie verhält sich Conventional Branch zu Conventional Commits?
+
+Conventional Branch wurde von [Conventional Commits](https://www.conventionalcommits.org) inspiriert und verfolgt eine ähnliche Philosophie: menschlich- und maschinenlesbaren Struktur in Git-Metadaten einzubringen. Während Conventional Commits Commit-Nachrichten standardisiert, standardisiert Conventional Branch Branch-Namen. Die beiden Spezifikationen ergänzen sich auf natürliche Weise.
+
 ### Warum sind Branch-Typen nicht so detailliert wie Conventional Commits (z. B. `build`, `ci`, `docs`, `style`, `refactor`)?
 
 Branches unterscheiden sich von Commits – sie sind temporär und werden hauptsächlich bis zum Merge verwendet. Zu viele Typen für Branches einzuführen, wäre unnötig und würde sie schwerer zu verwalten und zu merken machen.
-
-### Welche Tools können verwendet werden, um automatisch zu identifizieren, ob ein Teammitglied diese Spezifikation nicht erfüllt?
-
-Sie können [commit-check](https://github.com/commit-check/commit-check) verwenden, um die Branch-Spezifikation zu überprüfen, oder [commit-check-action](https://github.com/commit-check/commit-check-action), wenn Ihr Code auf GitHub gehostet wird.
 
 ### Kann ich eigene Branch-Typen über die aufgeführten hinaus definieren?
 
 Ja. Die Spezifikation definiert eine empfohlene Menge von Typen, aber Teams können zusätzliche benutzerdefinierte Typen für ihren Workflow definieren. Es ist jedoch wichtig, benutzerdefinierte Typen klar zu dokumentieren, damit alle Teammitglieder und automatisierte Tools davon wissen.
 
-### Wie verhält sich Conventional Branch zu Conventional Commits?
+### Was sind die Hauptunterschiede zwischen v1.1.0 und v1.0.0?
 
-Conventional Branch wurde von [Conventional Commits](https://www.conventionalcommits.org) inspiriert und verfolgt eine ähnliche Philosophie: menschlich- und maschinenlesbaren Struktur in Git-Metadaten einzubringen. Während Conventional Commits Commit-Nachrichten standardisiert, standardisiert Conventional Branch Branch-Namen. Die beiden Spezifikationen ergänzen sich auf natürliche Weise.
+v1.1.0 führt **AI-Agenten-Quellpräfixe** als wichtigstes neues Feature ein (siehe den nächsten FAQ-Eintrag für die Gründe). Außerdem bietet die versionierte Website einen Versionsumschalter, mit dem Benutzer sowohl die v1.0.0- als auch die v1.1.0-Spezifikation durchsuchen können. Alle vorhandenen v1.0.0-Branch-Namen bleiben vollständig gültig — keine breaking changes.
+
+### Warum AI-Agenten-Quellpräfixe hinzufügen?
+
+KI-Codierungsagenten (GitHub Copilot, Cursor, Claude Code, OpenAI Codex usw.) werden zunehmend zur Codegenerierung und Erstellung von Pull Requests eingesetzt. Jeder Agent verwendet sein eigenes Branch-Präfix (z. B. `copilot/`, `cursor/`). Durch die Standardisierung dieser Präfixe in der Conventional-Branch-Spezifikation ermöglichen wir:
+1. **Schnelle Identifikation** — Prüfer und Tools können KI-generierte PRs sofort erkennen
+2. **Tool-Validierung** — Tools wie commit-check können KI-Agenten-Branches gegen die Spezifikation validieren
+3. **Einen Registrierungsstandard** — neue KI-Agenten können ein dokumentiertes Präfix übernehmen, anstatt Ad-hoc-Muster zu erfinden
+
+Der generische `ai/`-Präfix steht für jeden KI-Agenten ohne dedizierten Präfix zur Verfügung, oder für Teams, die einen anbieterneutralen Identifikator bevorzugen. Dies ist das wichtigste neue Feature, das in **v1.1.0** veröffentlicht wurde — eine vollständige Zusammenfassung der Änderungen zwischen den Versionen finden Sie im FAQ-Eintrag oben.
 
 ### Wie soll ich mit langlebigen Branches wie `develop` oder `staging` umgehen?
 
 In der formalen Grammatik dieser Spezifikation sind nur `main`, `master` und `develop` explizit als Trunk-Branches definiert und benötigen kein Präfix. Als projektspezifische Erweiterung können Teams jedoch zusätzliche langlebige Integrations- oder Umgebungs-Branches (z. B. `staging`, `production`) ohne Präfix verwenden, sofern diese konsistent benannt und in den eingesetzten Tools entsprechend konfiguriert bzw. dokumentiert sind.
+
+### Welche Tools können verwendet werden, um automatisch zu identifizieren, ob ein Teammitglied diese Spezifikation nicht erfüllt?
+
+Sie können [commit-check](https://github.com/commit-check/commit-check) verwenden, um die Branch-Spezifikation zu überprüfen, oder [commit-check-action](https://github.com/commit-check/commit-check-action), wenn Ihr Code auf GitHub gehostet wird.
