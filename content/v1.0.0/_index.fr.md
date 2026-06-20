@@ -101,22 +101,22 @@ En résumé, conventional branch est conçu pour améliorer l'organisation du pr
 
 ## FAQ
 
+### Comment Conventional Branch se rapporte-t-il à Conventional Commits ?
+
+Conventional Branch est inspiré par [Conventional Commits](https://www.conventionalcommits.org) et suit une philosophie similaire : apporter une structure lisible par les humains et les machines aux métadonnées Git. Tandis que Conventional Commits standardise les messages de commit, Conventional Branch standardise les noms de branches. Les deux spécifications se complètent naturellement.
+
 ### Pourquoi les types de branches ne sont-ils pas aussi détaillés que les Conventional Commits (par ex. `build`, `ci`, `docs`, `style`, `refactor`) ?
 
-Les branches sont différentes des commits : elles sont temporaires et principalement utilisées jusqu’à leur fusion. Introduire trop de types pour les branches serait inutile et rendrait leur gestion et mémorisation plus difficiles.
-
-### Quels outils peuvent être utilisés pour identifier automatiquement si un membre de l'équipe ne respecte pas cette spécification ?
-
-Vous pouvez utiliser [commit-check](https://github.com/commit-check/commit-check) pour vérifier la spécification des branches ou [commit-check-action](https://github.com/commit-check/commit-check-action) si vos codes sont hébergés sur GitHub.
+Les branches sont différentes des commits : elles sont temporaires et principalement utilisées jusqu'à leur fusion. Introduire trop de types pour les branches serait inutile et rendrait leur gestion et mémorisation plus difficiles.
 
 ### Puis-je définir mes propres types de branches au-delà de ceux listés ?
 
 Oui. La spécification définit un ensemble de types recommandés, mais les équipes peuvent définir des types personnalisés supplémentaires pour leur flux de travail. Il est cependant important de documenter clairement les types personnalisés afin que tous les membres de l'équipe et les outils automatisés en soient informés.
 
-### Comment Conventional Branch se rapporte-t-il à Conventional Commits ?
-
-Conventional Branch est inspiré par [Conventional Commits](https://www.conventionalcommits.org) et suit une philosophie similaire : apporter une structure lisible par les humains et les machines aux métadonnées Git. Tandis que Conventional Commits standardise les messages de commit, Conventional Branch standardise les noms de branches. Les deux spécifications se complètent naturellement.
-
 ### Comment gérer les branches à longue durée de vie comme `develop` ou `staging` ?
 
 Les branches d'intégration ou d'environnement à longue durée de vie (par ex., `develop` ou, de façon spécifique au projet, `staging`, `production`) sont traitées comme des branches principales et ne nécessitent pas de préfixe. Dans la grammaire formelle ci‑dessus, seules les branches `main`/`master`/`develop` sont normalisées en tant que `trunk-branch` ; d'autres noms comme `staging` ou `production` relèvent d'extensions propres au projet et doivent être documentés et configurés explicitement dans les outils de validation. Elles doivent être nommées de manière cohérente dans tout le projet.
+
+### Quels outils peuvent être utilisés pour identifier automatiquement si un membre de l'équipe ne respecte pas cette spécification ?
+
+Vous pouvez utiliser [commit-check](https://github.com/commit-check/commit-check) pour vérifier la spécification des branches ou [commit-check-action](https://github.com/commit-check/commit-check-action) si vos codes sont hébergés sur GitHub.

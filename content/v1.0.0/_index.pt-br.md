@@ -101,22 +101,22 @@ Em resumo, o Conventional Branch foi projetado para melhorar a organização do 
 
 ## Perguntas frequentes
 
+### Como o Conventional Branch se relaciona com o Conventional Commits?
+
+O Conventional Branch foi inspirado pelo [Conventional Commits](https://www.conventionalcommits.org) e segue uma filosofia semelhante: trazer estrutura legível por humanos e máquinas para os metadados do Git. Enquanto o Conventional Commits padroniza mensagens de commit, o Conventional Branch padroniza nomes de branches. As duas especificações se complementam naturalmente.
+
 ### Por que os tipos de branch não são tão detalhados quanto os Conventional Commits (por exemplo, `build`, `ci`, `docs`, `style`, `refactor`)?
 
 Branches são diferentes de commits – são temporários e usados principalmente até serem mesclados. Introduzir muitos tipos de branch seria desnecessário e tornaria mais difícil gerenciá-los e lembrá-los.
-
-### Quais ferramentas podem ser usadas para identificar automaticamente se um membro da equipe não segue esta especificação?
-
-Você pode usar o [commit-check](https://github.com/commit-check/commit-check) para verificar a especificação de branch ou o [commit-check-action](https://github.com/commit-check/commit-check-action) se seu código estiver hospedado no GitHub.
 
 ### Posso definir meus próprios tipos de branch além dos listados?
 
 Sim. A especificação define um conjunto recomendado de tipos, mas equipes podem definir tipos personalizados adicionais para seu fluxo de trabalho. No entanto, é importante documentar claramente os tipos personalizados para que todos os membros da equipe e ferramentas automatizadas estejam cientes deles.
 
-### Como o Conventional Branch se relaciona com o Conventional Commits?
-
-O Conventional Branch foi inspirado pelo [Conventional Commits](https://www.conventionalcommits.org) e segue uma filosofia semelhante: trazer estrutura legível por humanos e máquinas para os metadados do Git. Enquanto o Conventional Commits padroniza mensagens de commit, o Conventional Branch padroniza nomes de branches. As duas especificações se complementam naturalmente.
-
 ### Como devo lidar com branches de longa duração como `develop` ou `staging`?
 
 Na gramática formal da especificação, apenas `main`, `master` e `develop` são considerados `trunk-branch`. Outros branches de integração ou de ambiente de longa duração (por exemplo, `staging`, `production`) podem ser adotados por cada projeto como extensões específicas da convenção, também sem prefixo, desde que sejam documentados e usados de forma consistente em todo o projeto.
+
+### Quais ferramentas podem ser usadas para identificar automaticamente se um membro da equipe não segue esta especificação?
+
+Você pode usar o [commit-check](https://github.com/commit-check/commit-check) para verificar a especificação de branch ou o [commit-check-action](https://github.com/commit-check/commit-check-action) se seu código estiver hospedado no GitHub.

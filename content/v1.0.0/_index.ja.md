@@ -101,22 +101,22 @@ DIGIT           = %x30-39   ; 数字 0-9
 
 ## よくある質問
 
+### Conventional Branch と Conventional Commits の関係は？
+
+Conventional Branch は [Conventional Commits](https://www.conventionalcommits.org) に触発され、同様の哲学に基づいています：人間と機械が読めるような構造を Git メタデータに組み込むこと。Conventional Commits がコミットメッセージを標準化するのに対して、Conventional Branch はブランチ名を標準化します。両者は自然に補完し合います。
+
 ### なぜブランチの種類はConventional Commits（例：`build`、`ci`、`docs`、`style`、`refactor`）ほど詳細ではないのですか？
 
 ブランチはコミットとは異なり、一時的なもので、主にマージされるまで使用されます。ブランチにあまり多くの種類を導入することは不要で、管理や記憶が難しくなります。
-
-### チームメンバーがこの仕様を満たしていない場合、自動的に識別するために使用できるツールは何ですか？
-
-[commit-check](https://github.com/commit-check/commit-check) を使用してブランチ仕様をチェックするか、コードが GitHub でホストされている場合は [commit-check-action](https://github.com/commit-check/commit-check-action) を使用できます。
 
 ### 仕様に記載されているもの以外に独自のブランチタイプを定義できますか？
 
 はい。この仕様は推奨されるタイプのセットを定義しますが、チームはワークフローに合わせて追加のカスタムタイプを定義することができます。ただし、すべてのチームメンバーと自動化ツールが認識できるよう、カスタムタイプを明確に文書化することが重要です。
 
-### Conventional Branch と Conventional Commits の関係は？
-
-Conventional Branch は [Conventional Commits](https://www.conventionalcommits.org) に触発され、同様の哲学に基づいています：人間と機械が読めるような構造を Git メタデータに組み込むこと。Conventional Commits がコミットメッセージを標準化するのに対して、Conventional Branch はブランチ名を標準化します。両者は自然に補完し合います。
-
 ### `develop` や `staging` のような長期存在するブランチはどう扱えばよいですか？
 
 仕様の ABNF では `trunk-branch` は `main` / `master` / `develop` のみを指しますが、運用上、それ以外の長期存在する統合用または環境用ブランチ（例：`staging`、`production`）をプロジェクト独自のトランク相当ブランチとして扱っても構いません（この場合もプレフィックスは不要です）。その際は、これらのブランチ名が仕様の拡張であることを明確に文書化し、プロジェクト全体で一貫した命名を心がけてください。
+
+### チームメンバーがこの仕様を満たしていない場合、自動的に識別するために使用できるツールは何ですか？
+
+[commit-check](https://github.com/commit-check/commit-check) を使用してブランチ仕様をチェックするか、コードが GitHub でホストされている場合は [commit-check-action](https://github.com/commit-check/commit-check-action) を使用できます。
