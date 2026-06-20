@@ -1,7 +1,7 @@
 ---
 draft: false
-aliases: ["/pl/"]
 layout: single
+version: v1.1.0
 ---
 
 # Conventional Branch 1.1.0
@@ -129,10 +129,6 @@ Gałęzie różnią się od commitów — są tymczasowe i używane głównie do
 
 Tak. Specyfikacja definiuje zalecany zestaw typów, ale zespoły mogą definiować dodatkowe niestandardowe typy dla swojego przepływu pracy. Ważne jest jednak, aby jasno dokumentować niestandardowe typy, tak aby wszyscy członkowie zespołu i zautomatyzowane narzędzia były ich świadome.
 
-### Jakie są główne różnice między v1.1.0 a v1.0.0?
-
-v1.1.0 dodaje **Prefiksy źródła agenta AI** jako główną nową funkcję (dlaczego je wprowadzono, wyjaśnia następne pytanie w FAQ). Oferuje również witrynę z wersjonowaniem z przełącznikiem wersji, umożliwiającym użytkownikom przeglądanie specyfikacji v1.0.0 i v1.1.0. Wszystkie istniejące nazwy gałęzi v1.0.0 pozostają w pełni ważne — bez zmian łamiących zgodność.
-
 ### Dlaczego dodać prefiksy źródła agenta AI?
 
 Agenci kodujący AI (GitHub Copilot, Cursor, Claude Code, OpenAI Codex itp.) są coraz częściej używani do generowania kodu i tworzenia pull requestów. Każdy agent używa własnego prefiksu gałęzi (np. `copilot/`, `cursor/`). Poprzez standaryzację tych prefiksów w specyfikacji Conventional Branch, umożliwiamy:
@@ -140,7 +136,7 @@ Agenci kodujący AI (GitHub Copilot, Cursor, Claude Code, OpenAI Codex itp.) są
 2. **Walidację narzędziową** — narzędzia takie jak commit-check mogą walidować gałęzie agentów AI względem specyfikacji
 3. **Standard rejestracji** — nowi agenci AI mogą przyjąć udokumentowany prefiks zamiast wymyślać tymczasowe wzorce
 
-Generyczny prefiks `ai/` jest dostępny dla każdego agenta AI bez dedykowanego prefiksu lub dla zespołów, które preferują neutralnego dostawcę. To kluczowa nowa funkcja wydana w **v1.1.0** — pełne podsumowanie zmian między wersjami znajduje się w powyższym pytaniu FAQ.
+Generyczny prefiks `ai/` jest dostępny dla każdego agenta AI bez dedykowanego prefiksu lub dla zespołów, które preferują neutralnego dostawcę.
 
 ### Jak radzić sobie z długo żyjącymi gałęziami, takimi jak `develop` lub `staging`?
 

@@ -1,7 +1,7 @@
 ---
 draft: false
-aliases: ["/en/"]
 layout: single
+version: v1.1.0
 ---
 
 # Conventional Branch 1.1.0
@@ -128,10 +128,6 @@ Branches are different from commits—they are temporary and mainly used until m
 
 Yes. The specification defines a recommended set of types, but teams can define additional custom types to fit their workflow. It is important, however, to document custom types clearly so that all team members and automated tooling are aware of them.
 
-### What are the main differences between v1.1.0 and v1.0.0?
-
-v1.1.0 adds **AI Agent Source Prefixes** as the primary new feature (see the next FAQ entry for why these were introduced). It also ships a versioned website with a version switcher so users can browse both the v1.0.0 and v1.1.0 specifications. All existing v1.0.0 branch names remain fully valid — no breaking changes.
-
 ### Why add AI Agent Source Prefixes?
 
 AI coding agents (GitHub Copilot, Cursor, Claude Code, OpenAI Codex, etc.) are increasingly used to generate code and create pull requests. Each agent uses its own branch prefix (e.g., `copilot/`, `cursor/`). By standardizing these prefixes in the Conventional Branch specification, we enable:
@@ -139,7 +135,7 @@ AI coding agents (GitHub Copilot, Cursor, Claude Code, OpenAI Codex, etc.) are i
 2. **Tool validation** — tools like commit-check can validate AI agent branches against the spec
 3. **A registration standard** — new AI agents can adopt a documented prefix instead of inventing ad-hoc patterns
 
-The `ai/` generic prefix is available for any AI agent that does not have a dedicated prefix, or for teams who prefer a vendor-neutral identifier. This is the key new feature released in **v1.1.0** — for a full summary of changes between versions, see the FAQ entry above.
+The `ai/` generic prefix is available for any AI agent that does not have a dedicated prefix, or for teams who prefer a vendor-neutral identifier.
 
 ### How should I handle long-lived branches like `develop` or `staging`?
 

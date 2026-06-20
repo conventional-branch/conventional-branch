@@ -1,7 +1,7 @@
 ---
 draft: false
-aliases: ["/es/"]
 layout: single
+version: v1.1.0
 ---
 
 # Conventional Branch 1.1.0
@@ -129,10 +129,6 @@ Las ramas son diferentes de los commits: son temporales y se usan principalmente
 
 Sí. La especificación define un conjunto recomendado de tipos, pero los equipos pueden definir tipos personalizados adicionales para su flujo de trabajo. Sin embargo, es importante documentar claramente los tipos personalizados para que todos los miembros del equipo y las herramientas automatizadas estén al tanto de ellos.
 
-### ¿Cuáles son las principales diferencias entre v1.1.0 y v1.0.0?
-
-v1.1.0 añade **Prefijos de fuente de agente de IA** como la nueva característica principal (consulte la siguiente entrada de preguntas frecuentes para saber por qué se introdujeron). También incluye un sitio web versionado con un conmutador de versiones para que los usuarios puedan navegar tanto por la especificación v1.0.0 como por la v1.1.0. Todos los nombres de ramas v1.0.0 existentes siguen siendo totalmente válidos — sin cambios que rompan la compatibilidad.
-
 ### ¿Por qué añadir prefijos de fuente de agente de IA?
 
 Los agentes de codificación de IA (GitHub Copilot, Cursor, Claude Code, OpenAI Codex, etc.) se utilizan cada vez más para generar código y crear pull requests. Cada agente usa su propio prefijo de rama (p. ej., `copilot/`, `cursor/`). Al estandarizar estos prefijos en la especificación Conventional Branch, permitimos:
@@ -140,7 +136,7 @@ Los agentes de codificación de IA (GitHub Copilot, Cursor, Claude Code, OpenAI 
 2. **Validación de herramientas** — herramientas como commit-check pueden validar las ramas de agentes de IA según la especificación
 3. **Un estándar de registro** — los nuevos agentes de IA pueden adoptar un prefijo documentado en lugar de inventar patrones ad-hoc
 
-El prefijo genérico `ai/` está disponible para cualquier agente de IA que no tenga un prefijo dedicado, o para equipos que prefieran un identificador neutro respecto al proveedor. Esta es la nueva característica clave lanzada en **v1.1.0** — para un resumen completo de los cambios entre versiones, consulte la entrada de preguntas frecuentes anterior.
+El prefijo genérico `ai/` está disponible para cualquier agente de IA que no tenga un prefijo dedicado, o para equipos que prefieran un identificador neutro respecto al proveedor.
 
 ### ¿Cómo debo manejar ramas de larga duración como `develop` o `staging`?
 

@@ -1,7 +1,7 @@
 ---
 draft: false
-aliases: ["/zh-hant/"]
 layout: single
+version: v1.1.0
 ---
 
 # 約定式分支 1.1.0
@@ -128,10 +128,6 @@ branch 與 commit 不同——branch 是暫時性的，通常只會使用到 mer
 
 可以。本規範定義了一套推薦的 type，但團隊可根據工作流程定義額外的自訂 type。重要的是，需要將自訂 type 清楚記錄，讓所有團隊成員及自動化工具皆能知悉。
 
-### v1.1.0 與 v1.0.0 的主要差異是什麼？
-
-v1.1.0 的主要新功能是引入了 **AI 智能體來源前綴（AI Agent Source Prefixes）**（具體原因見下一條常見問題）。同時，版本化網站增加了版本切換器，使用者可以瀏覽 v1.0.0 和 v1.1.0 兩種規範。所有現有的 v1.0.0 branch 名稱仍然完全有效 —— 沒有不相容的變更。
-
 ### 為什麼要添加 AI 智能體來源前綴（AI Agent Source Prefixes）？
 
 AI 編碼智能體（GitHub Copilot、Cursor、Claude Code、OpenAI Codex 等）越來越多地被用於生成程式碼和建立 Pull Request。每個智能體都使用自己的分支前綴（例如 `copilot/`、`cursor/`）。透過在約定式分支規範中標準化這些前綴，我們可以實現：
@@ -139,7 +135,7 @@ AI 編碼智能體（GitHub Copilot、Cursor、Claude Code、OpenAI Codex 等）
 2. **工具驗證** — 諸如 commit-check 之類的工具可以驗證 AI 智能體分支是否符合規範
 3. **註冊標準** — 新的 AI 智能體可以採用已記錄的前綴，而不是自行建立臨時的模式
 
-`ai/` 通用前綴適用於沒有專用前綴的 AI 智能體，或者適用於傾向於使用供應商中立識別碼的團隊。這是 **v1.1.0** 發佈的關鍵新特性 —— 版本間變更的完整摘要請參見上一條常見問題。
+`ai/` 通用前綴適用於沒有專用前綴的 AI 智能體，或者適用於傾向於使用供應商中立識別碼的團隊。
 
 ### 如何處理 `develop` 或 `staging` 等長期存在的 branch？
 

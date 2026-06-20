@@ -1,7 +1,7 @@
 ---
 draft: false
-aliases: ["/de/"]
 layout: single
+version: v1.1.0
 ---
 
 # Conventional Branch 1.1.0
@@ -129,10 +129,6 @@ Branches unterscheiden sich von Commits – sie sind temporär und werden haupts
 
 Ja. Die Spezifikation definiert eine empfohlene Menge von Typen, aber Teams können zusätzliche benutzerdefinierte Typen für ihren Workflow definieren. Es ist jedoch wichtig, benutzerdefinierte Typen klar zu dokumentieren, damit alle Teammitglieder und automatisierte Tools davon wissen.
 
-### Was sind die Hauptunterschiede zwischen v1.1.0 und v1.0.0?
-
-v1.1.0 führt **AI-Agenten-Quellpräfixe** als wichtigstes neues Feature ein (siehe den nächsten FAQ-Eintrag für die Gründe). Außerdem bietet die versionierte Website einen Versionsumschalter, mit dem Benutzer sowohl die v1.0.0- als auch die v1.1.0-Spezifikation durchsuchen können. Alle vorhandenen v1.0.0-Branch-Namen bleiben vollständig gültig — keine breaking changes.
-
 ### Warum AI-Agenten-Quellpräfixe hinzufügen?
 
 KI-Codierungsagenten (GitHub Copilot, Cursor, Claude Code, OpenAI Codex usw.) werden zunehmend zur Codegenerierung und Erstellung von Pull Requests eingesetzt. Jeder Agent verwendet sein eigenes Branch-Präfix (z. B. `copilot/`, `cursor/`). Durch die Standardisierung dieser Präfixe in der Conventional-Branch-Spezifikation ermöglichen wir:
@@ -140,7 +136,7 @@ KI-Codierungsagenten (GitHub Copilot, Cursor, Claude Code, OpenAI Codex usw.) we
 2. **Tool-Validierung** — Tools wie commit-check können KI-Agenten-Branches gegen die Spezifikation validieren
 3. **Einen Registrierungsstandard** — neue KI-Agenten können ein dokumentiertes Präfix übernehmen, anstatt Ad-hoc-Muster zu erfinden
 
-Der generische `ai/`-Präfix steht für jeden KI-Agenten ohne dedizierten Präfix zur Verfügung, oder für Teams, die einen anbieterneutralen Identifikator bevorzugen. Dies ist das wichtigste neue Feature, das in **v1.1.0** veröffentlicht wurde — eine vollständige Zusammenfassung der Änderungen zwischen den Versionen finden Sie im FAQ-Eintrag oben.
+Der generische `ai/`-Präfix steht für jeden KI-Agenten ohne dedizierten Präfix zur Verfügung, oder für Teams, die einen anbieterneutralen Identifikator bevorzugen.
 
 ### Wie soll ich mit langlebigen Branches wie `develop` oder `staging` umgehen?
 

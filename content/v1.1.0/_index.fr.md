@@ -1,7 +1,7 @@
 ---
 draft: false
-aliases: ["/fr/"]
 layout: single
+version: v1.1.0
 ---
 
 # Conventional Branch 1.1.0
@@ -129,10 +129,6 @@ Les branches sont différentes des commits : elles sont temporaires et principal
 
 Oui. La spécification définit un ensemble de types recommandés, mais les équipes peuvent définir des types personnalisés supplémentaires pour leur flux de travail. Il est cependant important de documenter clairement les types personnalisés afin que tous les membres de l'équipe et les outils automatisés en soient informés.
 
-### Quelles sont les principales différences entre v1.1.0 et v1.0.0 ?
-
-v1.1.0 ajoute les **Préfixes de source d'agent IA** comme nouvelle fonctionnalité principale (voir l'entrée FAQ suivante pour savoir pourquoi ils ont été introduits). Il propose également un site web versionné avec un sélecteur de version permettant aux utilisateurs de consulter les spécifications v1.0.0 et v1.1.0. Tous les noms de branches v1.0.0 existants restent totalement valides — aucun changement cassant.
-
 ### Pourquoi ajouter des préfixes de source d'agent IA ?
 
 Les agents de codage IA (GitHub Copilot, Cursor, Claude Code, OpenAI Codex, etc.) sont de plus en plus utilisés pour générer du code et créer des pull requests. Chaque agent utilise son propre préfixe de branche (par exemple, `copilot/`, `cursor/`). En normalisant ces préfixes dans la spécification Conventional Branch, nous permettons :
@@ -140,7 +136,7 @@ Les agents de codage IA (GitHub Copilot, Cursor, Claude Code, OpenAI Codex, etc.
 2. **Validation par les outils** — des outils comme commit-check peuvent valider les branches d'agents IA par rapport à la spécification
 3. **Un standard d'enregistrement** — les nouveaux agents IA peuvent adopter un préfixe documenté au lieu d'inventer des motifs ad-hoc
 
-Le préfixe générique `ai/` est disponible pour tout agent IA sans préfixe dédié, ou pour les équipes qui préfèrent un identifiant neutre vis-à-vis du fournisseur. C'est la nouvelle fonctionnalité clé publiée dans **v1.1.0** — pour un résumé complet des changements entre versions, voir l'entrée FAQ ci-dessus.
+Le préfixe générique `ai/` est disponible pour tout agent IA sans préfixe dédié, ou pour les équipes qui préfèrent un identifiant neutre vis-à-vis du fournisseur.
 
 ### Comment gérer les branches à longue durée de vie comme `develop` ou `staging` ?
 

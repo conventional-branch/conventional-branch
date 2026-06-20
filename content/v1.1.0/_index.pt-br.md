@@ -1,7 +1,7 @@
 ---
 draft: false
-aliases: ["/pt-br/"]
 layout: single
+version: v1.1.0
 ---
 
 # Conventional Branch 1.1.0
@@ -129,10 +129,6 @@ Branches são diferentes de commits – são temporários e usados principalment
 
 Sim. A especificação define um conjunto recomendado de tipos, mas equipes podem definir tipos personalizados adicionais para seu fluxo de trabalho. No entanto, é importante documentar claramente os tipos personalizados para que todos os membros da equipe e ferramentas automatizadas estejam cientes deles.
 
-### Quais são as principais diferenças entre v1.1.0 e v1.0.0?
-
-v1.1.0 adiciona **Prefixos de fonte de agente de IA** como a principal nova funcionalidade (veja a próxima pergunta frequente para saber por que foram introduzidos). Também inclui um site versionado com um seletor de versão para que os usuários possam navegar pelas especificações v1.0.0 e v1.1.0. Todos os nomes de branch v1.0.0 existentes permanecem totalmente válidos — sem alterações que quebrem a compatibilidade.
-
 ### Por que adicionar prefixos de fonte de agente de IA?
 
 Agentes de codificação de IA (GitHub Copilot, Cursor, Claude Code, OpenAI Codex, etc.) são cada vez mais usados para gerar código e criar pull requests. Cada agente usa seu próprio prefixo de branch (ex.: `copilot/`, `cursor/`). Ao padronizar esses prefixos na especificação Conventional Branch, possibilitamos:
@@ -140,7 +136,7 @@ Agentes de codificação de IA (GitHub Copilot, Cursor, Claude Code, OpenAI Code
 2. **Validação por ferramentas** — ferramentas como commit-check podem validar branches de agentes de IA contra a especificação
 3. **Um padrão de registro** — novos agentes de IA podem adotar um prefixo documentado em vez de inventar padrões ad-hoc
 
-O prefixo genérico `ai/` está disponível para qualquer agente de IA sem um prefixo dedicado, ou para equipes que preferem um identificador neutro em relação ao fornecedor. Esta é a principal novidade lançada na **v1.1.0** — para um resumo completo das mudanças entre versões, veja a pergunta frequente acima.
+O prefixo genérico `ai/` está disponível para qualquer agente de IA sem um prefixo dedicado, ou para equipes que preferem um identificador neutro em relação ao fornecedor.
 
 ### Como devo lidar com branches de longa duração como `develop` ou `staging`?
 

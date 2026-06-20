@@ -4,6 +4,15 @@ All notable changes to the Conventional Branch specification will be documented 
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
+## [1.1.0] - Unreleased
+
+### Added
+- **AI Agent Source Prefixes**: `ai/`, `copilot/`, `cursor/`, `claude/`, `codex/` for identifying AI-generated branches.
+- FAQ entry explaining the rationale for AI agent source prefixes.
+- Updated ABNF grammar to include AI agent source types.
+- Updated examples table with AI agent branch name examples.
+- Version switcher UI on the specification website.
+
 ## [1.0.0] - 2026-06-20
 
 ### Added
@@ -12,7 +21,6 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Basic naming rules: lowercase, hyphens, and dots for version numbers.
 - Formal ABNF grammar definition for branch name validation.
 - Valid/invalid examples table in all supported languages.
-- Optional AI Agent actor prefix support: `<actor>/<type>/<description>` format.
 - Extended FAQ covering custom branch types, relation to Conventional Commits, long-lived branches, and tool integration.
 
 ### Languages
