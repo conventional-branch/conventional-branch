@@ -1,7 +1,7 @@
 ---
 draft: false
-aliases: ["/zh/"]
 layout: single
+version: v1.1.0
 ---
 
 # 约定式分支 1.1.0

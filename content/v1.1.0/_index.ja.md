@@ -1,7 +1,7 @@
 ---
 draft: false
-aliases: ["/ja/"]
 layout: single
+version: v1.1.0
 ---
 
 # 慣例的ブランチ 1.1.0

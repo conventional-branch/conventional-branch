@@ -13,8 +13,8 @@ params:
       url: https://creativecommons.org/licenses/by/4.0/
 
   versions:
-    current: v1.0.0
-    list: ["v1.0.0"]
+    current: v1.1.0
+    list: ["v1.0.0", "v1.1.0"]
 
   footer:
     logos:
