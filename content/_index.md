@@ -44,13 +44,59 @@ The branch specification supports the following prefixes and should be structure
 3. **Keep It Clear and Concise**: The branch name should be descriptive yet concise, clearly indicating the purpose of the work.
 4. **Include Ticket Numbers**: If applicable, include the ticket number from your project management tool to make tracking easier. For example, for a ticket `issue-123`, the branch name could be `feature/issue-123-new-login`.
 
+### AI Agent Prefixes (Optional)
+
+> This is an **optional, opt-in extension**. Projects that do not enable it see no change in behavior, and every existing branch name remains valid.
+
+AI coding agents increasingly create branches automatically, and several tools already namespace those branches with their own prefix:
+
+| Agent | Prefix | Example |
+|---|---|---|
+| GitHub Copilot coding agent | `copilot/` | `copilot/add-theme-switcher` |
+| Cursor (background / cloud agent) | `cursor/` | `cursor/refactor-cache-layer` |
+| Devin | `devin/` | `devin/1712345678-fix-login` |
+| Claude (community convention) | `claude/` | `claude/update-readme` |
+
+To capture **who** created a branch (a human or a specific agent) alongside **what** it does, an optional *actor* segment may be prefixed to a branch name:
+
+```
+<actor>/<type>/<description>
+```
+
+The intermediate `<type>` is **optional**, because most agents today emit `<actor>/<description>` directly:
+
+```
+<actor>/<description>
+```
+
+Rules for the actor segment:
+
+1. **Opt-in and declared**: A project must declare the actors it recognizes. Undeclared first segments remain invalid (so `unknown/some-task` is still rejected), which keeps the convention strict by default. With no actors configured, the specification behaves exactly as before.
+2. **`human` is implicit**: Omitting the actor segment implies a human author; `human/` need not be written explicitly. Existing `<type>/<description>` names are therefore unchanged.
+3. **Open, not hardcoded**: The specification defines the actor *mechanism* and offers a recommended list; it does not bake vendor names into the grammar. Projects declare their own set as new agents emerge.
+4. **Same character rules**: An actor follows the same conventions as other segments — lowercase letters, digits, and internal hyphens.
+
+A project might, for example, declare:
+
+```yaml
+actors:
+  - human
+  - copilot
+  - cursor
+  - claude
+```
+
+Other actors a project may choose to recognize include `devin`, `aider`, `codex`, and `jules`.
+
 ### Formal Grammar
 
-The following Augmented Backus-Naur Form (ABNF) grammar formally defines valid branch names:
+The following Augmented Backus-Naur Form (ABNF) grammar formally defines valid branch names. The `actor-branch` rule is the optional extension described in [AI Agent Prefixes](#ai-agent-prefixes-optional); when no actors are declared, only `trunk-branch` and `prefixed-branch` apply.
 
 ```abnf
-branch-name     = trunk-branch / prefixed-branch
+branch-name     = trunk-branch / prefixed-branch / actor-branch
 trunk-branch    = "main" / "master" / "develop"
+actor-branch    = actor "/" ( prefixed-branch / description )
+actor           = 1*(ALPHA / DIGIT) *("-" 1*(ALPHA / DIGIT))  ; a declared actor id
 prefixed-branch = type "/" description
 type            = "feature" / "feat" / "bugfix" / "fix"
                 / "hotfix" / "release" / "chore"
@@ -60,7 +106,7 @@ ALPHA           = %x61-7A   ; lowercase a-z
 DIGIT           = %x30-39   ; 0-9
 ```
 
-> Note: Consecutive hyphens or dots, and hyphens or dots at the start or end of the description, are not permitted.
+> Note: Consecutive hyphens or dots, and hyphens or dots at the start or end of the description, are not permitted. The `actor` segment is only valid when declared by the project (see [AI Agent Prefixes](#ai-agent-prefixes-optional)); undeclared prefixes remain invalid.
 
 ### Examples
 
@@ -77,6 +123,10 @@ DIGIT           = %x30-39   ; 0-9
 | `release/v1.2.0` | ✅ | Release with version |
 | `chore/update-dependencies` | ✅ | Non-code task |
 | `feature/issue-123-new-login` | ✅ | Feature with ticket number |
+| `copilot/add-theme-switcher` | ✅ | Optional actor + description (`copilot` declared) |
+| `cursor/refactor-cache-layer` | ✅ | Optional actor + description (`cursor` declared) |
+| `claude/feature/login-page` | ✅ | Optional actor + type + description |
+| `human/fix/header-bug` | ✅ | Explicit human actor (optional) |
 | `Feature/Add-Login` | ❌ | Uppercase letters not allowed |
 | `feature/new--login` | ❌ | Consecutive hyphens not allowed |
 | `feature/-new-login` | ❌ | Leading hyphen in description |
@@ -84,7 +134,7 @@ DIGIT           = %x30-39   ; 0-9
 | `release/v1.-2.0` | ❌ | Hyphen adjacent to dot |
 | `fix/header bug` | ❌ | Spaces not allowed |
 | `fix/header_bug` | ❌ | Underscores not allowed |
-| `unknown/some-task` | ❌ | Unknown prefix type |
+| `unknown/some-task` | ❌ | Unknown prefix: not a type, and not a declared actor |
 
 ## Conclusion
 
@@ -111,6 +161,10 @@ You can use [commit-check](https://github.com/commit-check/commit-check) to chec
 ### Can I define my own branch types beyond the ones listed?
 
 Yes. The specification defines a recommended set of types, but teams can define additional custom types to fit their workflow. It is important, however, to document custom types clearly so that all team members and automated tooling are aware of them.
+
+### Should I use the optional AI agent actor prefix?
+
+Only if your team wants to distinguish human-created branches from agent-created ones. The actor prefix is an opt-in extension: it is useful for traceability, auditing, and AI contribution metrics in workflows that mix human and AI-generated branches, but it adds no value—and should be left disabled—for teams that do not need it. When enabled, declare the exact set of actors you recognize so that unexpected prefixes are still flagged.
 
 ### How does Conventional Branch relate to Conventional Commits?
 
