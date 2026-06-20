@@ -57,13 +57,13 @@ AI coding agents increasingly create branches automatically, and several tools a
 | Devin | `devin/` | `devin/1712345678-fix-login` |
 | Claude (community convention) | `claude/` | `claude/update-readme` |
 
-To capture **who** created a branch (a human or a specific agent), an optional *actor* segment may be prefixed directly before the description:
+To capture **who** created a branch (a human or a specific agent), an optional *actor* segment may lead the branch name, directly before the description:
 
 ```text
 <actor>/<description>
 ```
 
-The actor **replaces** the type prefix rather than nesting with it: a branch name carries either a `<type>/` prefix or an `<actor>/` prefix, not both. This mirrors what agents emit in practice (e.g. `copilot/add-theme-switcher`).
+For agent-created branches, the actor takes the place of the type segment: where a conventional branch reads `<type>/<description>`, an agent branch reads `<actor>/<description>`. This mirrors what agents emit in practice (e.g. `copilot/add-theme-switcher`) — the convention simply adapts the familiar `<type>/<description>` shape to record the author instead of the change kind.
 
 Rules for the actor segment:
 
@@ -104,7 +104,7 @@ actor-branch    = actor "/" description
 actor           = 1*(ALPHA / DIGIT) *("-" 1*(ALPHA / DIGIT))  ; a declared actor id
 ```
 
-> Note: Consecutive hyphens or dots, and hyphens or dots at the start or end of the description, are not permitted. The `actor-branch` rule is an opt-in extension: an actor segment is valid only when declared by the project (see [AI Agent Prefixes](#ai-agent-prefixes-optional)); undeclared prefixes remain invalid.
+> Note: Consecutive hyphens or dots, and hyphens or dots at the start or end of the description, are not permitted. The `actor-branch` rule is an opt-in extension: an actor segment is recognized only when declared by the project (see [AI Agent Prefixes](#ai-agent-prefixes-optional)); undeclared prefixes remain invalid.
 
 ### Examples
 
@@ -129,7 +129,6 @@ actor           = 1*(ALPHA / DIGIT) *("-" 1*(ALPHA / DIGIT))  ; a declared actor
 | `feature/-new-login` | ❌ | Leading hyphen in description |
 | `feature/new-login-` | ❌ | Trailing hyphen in description |
 | `release/v1.-2.0` | ❌ | Hyphen adjacent to dot |
-| `claude/feature/login-page` | ❌ | Actor and type cannot be combined; use `claude/login-page` |
 | `fix/header bug` | ❌ | Spaces not allowed |
 | `fix/header_bug` | ❌ | Underscores not allowed |
 | `unknown/some-task` | ❌ | Unknown prefix: not a type, and not a declared actor |
