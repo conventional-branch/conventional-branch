@@ -28,12 +28,21 @@ layout: single
 <type>/<description>
 ```
 
-- **`main`**: メイン開発ブランチ（例：`main`、`master`）
+**目的プレフィックス（Purpose Prefixes）** — 作業の意図を説明します：
 - **`feature/`**（または **`feat/`**）: 新機能用（例：`feature/add-login-page`、`feat/add-login-page`）
 - **`bugfix/`**（または **`fix/`**）: バグ修正用（例：`bugfix/fix-header-bug`、`fix/header-bug`）
 - **`hotfix/`**: 緊急修正用（例：`hotfix/security-patch`）
 - **`release/`**: リリース準備ブランチ用（例：`release/v1.2.0`）
 - **`chore/`**: 依存関係やドキュメント更新などの非コードタスク用（例：`chore/update-dependencies`）
+
+**AI エージェントソースプレフィックス（AI Agent Source Prefixes）** — AI コーディングエージェントによって生成されたブランチを識別します：
+- **`ai/`**: 汎用 AI エージェントプレフィックス（例：`ai/refactor-auth-flow`）
+- **`copilot/`**: GitHub Copilot（例：`copilot/add-login-page`）
+- **`cursor/`**: Cursor（例：`cursor/fix-header-bug`）
+- **`claude/`**: Anthropic Claude Code（例：`claude/security-patch`）
+- **`codex/`**: OpenAI Codex（例：`codex/optimize-query`）
+
+トランクブランチ（`main`、`master`、`develop`）はプレフィックスを使用しません。
 
 ---
 
@@ -55,6 +64,8 @@ trunk-branch    = "main" / "master" / "develop"
 prefixed-branch = type "/" description
 type            = "feature" / "feat" / "bugfix" / "fix"
                 / "hotfix" / "release" / "chore"
+                / "ai" / "copilot" / "cursor"
+                / "claude" / "codex"
 description     = desc-segment *("-" desc-segment)
 desc-segment    = 1*(ALPHA / DIGIT) *("." 1*(ALPHA / DIGIT))
 ALPHA           = %x61-7A   ; 小文字 a-z
@@ -85,6 +96,11 @@ DIGIT           = %x30-39   ; 数字 0-9
 | `release/v1.-2.0` | ❌ | ドットに隣接するハイフンは不可 |
 | `fix/header bug` | ❌ | スペースは使用不可 |
 | `fix/header_bug` | ❌ | アンダースコアは使用不可 |
+| `ai/refactor-auth-flow` | ✅ | 汎用 AI エージェントプレフィックス |
+| `copilot/add-login-page` | ✅ | GitHub Copilot |
+| `cursor/fix-header-bug` | ✅ | Cursor |
+| `claude/security-patch` | ✅ | Anthropic Claude Code |
+| `codex/optimize-query` | ✅ | OpenAI Codex |
 | `unknown/some-task` | ❌ | 未知のプレフィックスタイプ |
 
 ## 結論
@@ -116,6 +132,15 @@ DIGIT           = %x30-39   ; 数字 0-9
 ### Conventional Branch と Conventional Commits の関係は？
 
 Conventional Branch は [Conventional Commits](https://www.conventionalcommits.org) に触発され、同様の哲学に基づいています：人間と機械が読めるような構造を Git メタデータに組み込むこと。Conventional Commits がコミットメッセージを標準化するのに対して、Conventional Branch はブランチ名を標準化します。両者は自然に補完し合います。
+
+### AI エージェントソースプレフィックスを追加する理由は？
+
+AI コーディングエージェント（GitHub Copilot、Cursor、Claude Code、OpenAI Codex など）は、コード生成や Pull Request 作成にますます使用されています。各エージェントは独自のブランチプレフィックス（例：`copilot/`、`cursor/`）を使用しています。Conventional Branch 仕様でこれらのプレフィックスを標準化することで、以下が可能になります：
+1. **迅速な識別** — レビュアーとツールは AI 生成 PR を即座に認識できます
+2. **ツール検証** — commit-check などのツールが AI エージェントブランチを仕様に照らして検証できます
+3. **登録標準** — 新しい AI エージェントはアドホックなパターンを発明する代わりに、文書化されたプレフィックスを採用できます
+
+`ai/` 汎用プレフィックスは、専用プレフィックスを持たない AI エージェント、またはベンダーニュートラルな識別子を好むチームのために利用可能です。
 
 ### `develop` や `staging` のような長期存在するブランチはどう扱えばよいですか？
 

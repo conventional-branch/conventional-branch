@@ -28,12 +28,21 @@ layout: single
 <type>/<description>
 ```
 
-- **`main`**：主要開發 branch（例如 `main`、`master` 或 `develop`）
+**用途前綴（Purpose Prefixes）** — 描述工作的意圖：
 - **`feature/`**（或 **`feat/`**）：用於新功能（例如 `feature/add-login-page`、`feat/add-login-page`）
 - **`bugfix/`**（或 **`fix/`**）：用於 bug 修復（例如 `bugfix/fix-header-bug`、`fix/header-bug`）
 - **`hotfix/`**：用於緊急修復（例如 `hotfix/security-patch`）
 - **`release/`**：用於準備發布的 branch（例如 `release/v1.2.0`）
 - **`chore/`**：用於非程式碼任務，例如相依套件、文件更新（例如 `chore/update-dependencies`）
+
+**AI 智能體來源前綴（AI Agent Source Prefixes）** — 識別由 AI 編碼智能體產生的分支：
+- **`ai/`**：通用 AI 編碼智能體前綴（例如 `ai/refactor-auth-flow`）
+- **`copilot/`**：GitHub Copilot（例如 `copilot/add-login-page`）
+- **`cursor/`**：Cursor（例如 `cursor/fix-header-bug`）
+- **`claude/`**：Anthropic Claude Code（例如 `claude/security-patch`）
+- **`codex/`**：OpenAI Codex（例如 `codex/optimize-query`）
+
+主幹分支（`main`、`master`、`develop`）不使用前綴。
 
 ---
 
@@ -54,6 +63,8 @@ trunk-branch    = "main" / "master" / "develop"
 prefixed-branch = type "/" description
 type            = "feature" / "feat" / "bugfix" / "fix"
                 / "hotfix" / "release" / "chore"
+                / "ai" / "copilot" / "cursor"
+                / "claude" / "codex"
 description     = desc-segment *("-" desc-segment)
 desc-segment    = 1*(ALPHA / DIGIT) *("." 1*(ALPHA / DIGIT))
 ALPHA           = %x61-7A   ; 小寫字母 a-z
@@ -84,6 +95,11 @@ DIGIT           = %x30-39   ; 數字 0-9
 | `release/v1.-2.0` | ❌ | 連字號不能緊鄰點號 |
 | `fix/header bug` | ❌ | 不允許空格 |
 | `fix/header_bug` | ❌ | 不允許底線 |
+| `ai/refactor-auth-flow` | ✅ | 通用 AI 編碼智能體前綴 |
+| `copilot/add-login-page` | ✅ | GitHub Copilot |
+| `cursor/fix-header-bug` | ✅ | Cursor |
+| `claude/security-patch` | ✅ | Anthropic Claude Code |
+| `codex/optimize-query` | ✅ | OpenAI Codex |
 | `unknown/some-task` | ❌ | 未知的前綴類型 |
 
 ## 結論
@@ -115,6 +131,15 @@ branch 與 commit 不同——branch 是暫時性的，通常只會使用到 mer
 ### 約定式分支與約定式提交（Conventional Commits）有什麼關係？
 
 約定式分支的靈感來源於 [Conventional Commits](https://www.conventionalcommits.org)，遵循相似的理念：為 Git 中繼資料引入人機可讀的結構。約定式提交規範提交訊息，約定式分支規範 branch 名稱，兩者相輔相成、天然互補。
+
+### 為什麼要添加 AI 智能體來源前綴（AI Agent Source Prefixes）？
+
+AI 編碼智能體（GitHub Copilot、Cursor、Claude Code、OpenAI Codex 等）越來越多地被用於生成程式碼和建立 Pull Request。每個智能體都使用自己的分支前綴（例如 `copilot/`、`cursor/`）。透過在約定式分支規範中標準化這些前綴，我們可以實現：
+1. **快速識別** — 審查者和工具可以立即識別 AI 生成的 PR
+2. **工具驗證** — 諸如 commit-check 之類的工具可以驗證 AI 智能體分支是否符合規範
+3. **註冊標準** — 新的 AI 智能體可以採用已記錄的前綴，而不是自行建立臨時的模式
+
+`ai/` 通用前綴適用於沒有專用前綴的 AI 智能體，或者適用於傾向於使用供應商中立識別碼的團隊。
 
 ### 如何處理 `develop` 或 `staging` 等長期存在的 branch？
 

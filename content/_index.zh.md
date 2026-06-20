@@ -28,12 +28,21 @@ layout: single
 <type>/<description>
 ```
 
-- **`main`**：主要开发分支（例如 `main`、`master` 或 `develop`）
+**用途前缀（Purpose Prefixes）** — 描述工作的意图：
 - **`feature/`** (或 **`feat/`**)：用于新功能（例如 `feature/add-login-page`, `feat/add-login-page`）
 - **`bugfix/`** (或 **`fix/`**)：用于错误修复（例如 `bugfix/fix-header-bug`, `fix/header-bug`）
 - **`hotfix/`**：用于紧急修复（例如 `hotfix/security-patch`）
 - **`release/`**：用于准备发布的分支（例如 `release/v1.2.0`）
 - **`chore/`**：用于非代码任务，如依赖项、文档更新（例如 `chore/update-dependencies`）
+
+**AI 智能体源前缀（AI Agent Source Prefixes）** — 识别由 AI 编码智能体生成的分支：
+- **`ai/`**：通用 AI 编码智能体前缀（例如 `ai/refactor-auth-flow`）
+- **`copilot/`**：GitHub Copilot（例如 `copilot/add-login-page`）
+- **`cursor/`**：Cursor（例如 `cursor/fix-header-bug`）
+- **`claude/`**：Anthropic Claude Code（例如 `claude/security-patch`）
+- **`codex/`**：OpenAI Codex（例如 `codex/optimize-query`）
+
+主干分支（`main`、`master`、`develop`）不使用前缀。
 
 ---
 
@@ -54,6 +63,8 @@ trunk-branch    = "main" / "master" / "develop"
 prefixed-branch = type "/" description
 type            = "feature" / "feat" / "bugfix" / "fix"
                 / "hotfix" / "release" / "chore"
+                / "ai" / "copilot" / "cursor"
+                / "claude" / "codex"
 description     = desc-segment *("-" desc-segment)
 desc-segment    = 1*(ALPHA / DIGIT) *("." 1*(ALPHA / DIGIT))
 ALPHA           = %x61-7A   ; 小写字母 a-z
@@ -84,6 +95,11 @@ DIGIT           = %x30-39   ; 数字 0-9
 | `release/v1.-2.0` | ❌ | 连字符不能紧邻点号 |
 | `fix/header bug` | ❌ | 不允许空格 |
 | `fix/header_bug` | ❌ | 不允许下划线 |
+| `ai/refactor-auth-flow` | ✅ | 通用 AI 编码智能体前缀 |
+| `copilot/add-login-page` | ✅ | GitHub Copilot |
+| `cursor/fix-header-bug` | ✅ | Cursor |
+| `claude/security-patch` | ✅ | Anthropic Claude Code |
+| `codex/optimize-query` | ✅ | OpenAI Codex |
 | `unknown/some-task` | ❌ | 未知的前缀类型 |
 
 ## 结论
@@ -115,6 +131,15 @@ DIGIT           = %x30-39   ; 数字 0-9
 ### 约定式分支与约定式提交（Conventional Commits）有什么关系？
 
 约定式分支的灵感来源于 [Conventional Commits](https://www.conventionalcommits.org)，遵循相似的理念：为 Git 元数据引入人机可读的结构。约定式提交规范化了提交信息，约定式分支规范化了分支名称。两者相辅相成，天然互补。
+
+### 为什么要添加 AI 智能体源前缀（AI Agent Source Prefixes）？
+
+AI 编码智能体（GitHub Copilot、Cursor、Claude Code、OpenAI Codex 等）越来越多地被用于生成代码和创建 Pull Request。每个智能体都使用自己的分支前缀（例如 `copilot/`、`cursor/`）。通过在约定式分支规范中标准化这些前缀，我们可以实现：
+1. **快速识别** — 审查者和工具可以立即识别 AI 生成的 PR
+2. **工具验证** — 诸如 commit-check 之类的工具可以验证 AI 智能体分支是否符合规范
+3. **注册标准** — 新的 AI 智能体可以采用已记录的 prefix，而不是自行创建临时的模式
+
+`ai/` 通用前缀适用于没有专用前缀的 AI 智能体，或者适用于倾向于使用供应商无关标识符的团队。
 
 ### 如何处理 `develop` 或 `staging` 等长期存在的分支？
 
