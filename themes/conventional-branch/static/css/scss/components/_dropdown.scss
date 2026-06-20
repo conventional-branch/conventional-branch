@@ -102,6 +102,11 @@
     &:last-child a {
       border-bottom: none;
     }
+
+    &--active a {
+      color: index.$color-primary;
+      font-weight: bold;
+    }
   }
 
   &:hover &__label:after, &:hover &__options,

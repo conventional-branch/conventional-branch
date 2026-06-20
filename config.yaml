@@ -12,6 +12,10 @@ params:
       label: Creative Commons - CC BY 4.0
       url: https://creativecommons.org/licenses/by/4.0/
 
+  versions:
+    current: v1.0.0
+    list: ["v1.0.0"]
+
   footer:
     logos:
     - name: github

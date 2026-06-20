@@ -4,14 +4,25 @@
       <div class="logo"></div>
     </a>
     <ul class="header__menu">
-      <!-- <li class="header__menu-item dropdown"> -->
-        <!-- <button class="dropdown__label">Versions</button>
+      <li class="header__menu-item dropdown">
+        {{- $currentVersion := $.Site.Params.versions.current -}}
+        {{- if $.Page.Section -}}
+          {{- range $.Site.Params.versions.list -}}
+            {{- if eq $.Page.Section . -}}
+              {{- $currentVersion = . -}}
+            {{- end -}}
+          {{- end -}}
+        {{- end -}}
+        <button class="dropdown__label">{{ $currentVersion }}</button>
         <ul class="dropdown__options">
-          {{ range .Site.Params.Versions.List }}
-          <li class="dropdown__option"><a href="/{{ $.Site.Language }}/{{ . }}">{{ . }}</a></li>
-          {{ end }}
-        </ul> -->
-      <!-- </li> -->
+          {{- range $.Site.Params.versions.list -}}
+          {{- $url := print $.Site.Home.RelPermalink . "/" -}}
+          <li class="dropdown__option{{ if eq $currentVersion . }} dropdown__option--active{{ end }}">
+            <a href="{{ $url }}">{{ . }}</a>
+          </li>
+          {{- end -}}
+        </ul>
+      </li>
       <li class="header__menu-item dropdown">
         <button class="dropdown__label">Languages</button>
         <ul class="dropdown__options">
