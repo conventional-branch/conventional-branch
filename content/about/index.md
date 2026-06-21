@@ -13,6 +13,7 @@ The Conventional Branch specification was inspired by [Conventional Commits](htt
 
 ## Projects Using Conventional Branch
 
+* [BerriAI/litellm](https://github.com/BerriAI/litellm/blob/main/CONTRIBUTING.md): A high-performance LLM proxy supporting 100+ models with spending tracking and guardrails.
 * [karol-broda/snitch](https://github.com/karol-broda/snitch/blob/master/CONTRIBUTING.md): A prettier way to inspect network connections.
 * [ansible/metrics-utility](https://github.com/ansible/metrics-utility/blob/devel/docs/CONTRIBUTING.md): Standalone utility for github.com/ansible/awx.
 * [sanity-io/sdk](https://github.com/sanity-io/sdk/blob/main/CONTRIBUTING.md): Sanity App SDK.
@@ -25,6 +26,8 @@ The Conventional Branch specification was inspired by [Conventional Commits](htt
 * [RLinf/RLinf](https://github.com/RLinf/RLinf): Reinforcement Learning Infrastructure for Agentic AI.
 * [Curiosum](https://github.com/curiosum-dev): Building apps for innovators.
 * [jal-co/shieldcn](https://github.com/jal-co/shieldcn): Beautiful README badges inspired by shadcn/ui.
+* [LedgerHQ/ledger-live](https://github.com/LedgerHQ/ledger-live/blob/main/CONTRIBUTING.md): Ledger hardware wallet ecosystem monorepo — branch naming with feat/, bugfix/, support/ prefixes.
+* [stellio-hub/stellio-context-broker](https://github.com/stellio-hub/stellio-context-broker/blob/main/docs/contributing/development_guide.md): NGSI-LD context broker for smart cities and IoT — uses feature/, fix/, hotfix/, refactor/, chore/ branch prefixes.
 * _[... and more projects using Conventional Branch](https://github.com/search?q=conventional-branch.github.io&type=code&p=1)._
 
 [![Conventional Branch](https://img.shields.io/badge/Conventional%20Branch-Spec-6192c3)](https://github.com/conventional-branch/conventional-branch)
