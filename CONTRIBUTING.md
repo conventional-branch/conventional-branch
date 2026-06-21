@@ -6,9 +6,10 @@ We use [HUGO](https://gohugo.io/) as static site generator, so we use the [direc
 
 #### Our implementation
 
-* `./content`: contains all the versions of the specification.
-* `./content/next/`: contains the version of the specification (where all the changes SHOULD be made).
-* `./content/../index.[lang].md`: contains the content of the specification, if a language is specified it's a translation.
+* `./content/_index.md`: the **current** version of the specification, served at the site root (`/`). This is where changes to the in-progress version SHOULD be made.
+* `./content/vX.Y.Z/`: archived snapshots of previously released versions (e.g. `./content/v1.0.0/`), browsable via the version switcher. These should not change once released.
+* `./content/_index.[lang].md` and `./content/vX.Y.Z/_index.[lang].md`: translations of a given version. The default (English) file has no language code; every other language adds one (e.g. `_index.fr.md`).
+* The list of versions and the current version are configured under `params.versions` in `./config.yaml`.
 
 ## Contributing
 
@@ -16,9 +17,10 @@ We'd love your help to suggest improvements to the specification, fixing typos, 
 
 ### Adding a translation
 
-1. Create a new file in `./content/version/index.[lang].md` using the hugo command `hugo new [version]/index.[lang].md`.
-1. Ensure all files have the appropriate fields required (see others as an example)..
-1. Add the language to the `config.yaml` file (see others as an example).
+1. Copy `./content/_index.md` to `./content/_index.[lang].md` (e.g. `_index.es.md`) and translate the content. If you also want the translation available for an archived version, repeat under the matching `./content/vX.Y.Z/` directory.
+1. Ensure all files have the appropriate front matter fields required (see other language files as an example).
+1. Add the language to the `languages` section of `./config.yaml` (see the existing entries as an example).
+1. If your strings touch the tooling section, add the corresponding translations in `./data/tooling.yaml`.
 
 ### Running project locally
 
