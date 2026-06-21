@@ -16,7 +16,9 @@
         <button class="dropdown__label">{{ $currentVersion }}</button>
         <ul class="dropdown__options">
           {{- range $.Site.Params.versions.list -}}
-          {{- $url := print $.Site.Home.RelPermalink . "/" -}}
+          {{/* The current version is served at the site root; older versions live under /<version>/. */}}
+          {{- $isCurrent := eq . $.Site.Params.versions.current -}}
+          {{- $url := cond $isCurrent $.Site.Home.RelPermalink (print $.Site.Home.RelPermalink . "/") -}}
           <li class="dropdown__option{{ if eq $currentVersion . }} dropdown__option--active{{ end }}">
             <a href="{{ $url }}">{{ . }}</a>
           </li>

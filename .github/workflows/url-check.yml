@@ -9,6 +9,10 @@ permissions:
   contents: read
   issues: write
 
+env:
+  # GitHub username assigned to the issue opened when a URL is unreachable.
+  ISSUE_ASSIGNEE: shenxianpeng
+
 jobs:
   check-urls:
     runs-on: ubuntu-latest
@@ -28,8 +32,10 @@ jobs:
             "https://conventionalbranch.org/pl/"
             "https://conventionalbranch.org/pt-br/"
             "https://conventionalbranch.org/ru/"
+            "https://conventionalbranch.org/th/"
             "https://conventionalbranch.org/zh/"
             "https://conventionalbranch.org/zh-hant/"
+            "https://conventionalbranch.org/v1.0.0/"
           )
 
           max_retries=3
@@ -79,7 +85,7 @@ jobs:
             const fs = require('fs');
             const body = fs.readFileSync('issue.txt', 'utf8');
             const title = '🚨 Some URLs are not reachable';
-            const assignee = 'shenxianpeng';
+            const assignee = process.env.ISSUE_ASSIGNEE;
 
             const existingIssues = await github.rest.issues.listForRepo({
               owner: context.repo.owner,
