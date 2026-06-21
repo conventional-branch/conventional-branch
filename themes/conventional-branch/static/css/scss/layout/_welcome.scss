@@ -36,15 +36,20 @@
 
   &__title {
     font-size: 2.6em;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
     margin-bottom: index.$gap-sm;
 
     @include index.up-to-mobile {
       word-break: break-all;
+      letter-spacing: -0.01em;
     }
 
     @include index.desktop {
       width: 85%;
       font-size: 3.6em;
+      letter-spacing: -0.03em;
     }
   }
 

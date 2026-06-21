@@ -1,14 +1,50 @@
 @use "./../abstracts/index";
 
 main article.markdown-body {
-  h1{
-    font-size: 2.3em;
+  line-height: 1.75;
+
+  p {
+    margin-bottom: 1.1em;
   }
-  h1, h2, h3, h4, h5, h6, a {
-    font-weight: bold;
+
+  h1 {
+    font-size: 2.3em;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+    color: index.$color-primary-heading;
+    margin-bottom: 0.5em;
+  }
+
+  h2 {
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    line-height: 1.3;
     color: index.$color-primary-heading;
   }
+
+  h3, h4, h5, h6 {
+    font-weight: 600;
+    color: index.$color-primary-heading-sub;
+  }
+
+  a {
+    color: index.$color-primary-heading;
+    &:hover {
+      color: index.$color-primary;
+    }
+  }
+
   a.anchorjs-link:hover {
     text-decoration: none;
+  }
+
+  code, pre, kbd, samp {
+    font-family: index.$font-mono;
+  }
+
+  pre code {
+    font-size: 0.9em;
+    line-height: 1.6;
   }
 }
