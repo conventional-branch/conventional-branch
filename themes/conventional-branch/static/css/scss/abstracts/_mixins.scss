@@ -18,8 +18,8 @@
   }
 }
 
-@mixin gradient-primary($deg: 45deg) {
-  background: linear-gradient($deg, variables.$color-primary 0%, variables.$color-primary-light 100%);
+@mixin gradient-primary($deg: 150deg) {
+  background: linear-gradient($deg, variables.$color-primary-deep 0%, variables.$color-primary 100%);
 }
 
 @mixin dropdown-animation-visible {

@@ -1,5 +1,13 @@
 @use "./../abstracts/index";
 
+html {
+  scroll-behavior: smooth;
+
+  @media (prefers-reduced-motion: reduce) {
+    scroll-behavior: auto;
+  }
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -12,7 +20,10 @@
 body {
   position: relative;
   min-height: 100vh;
-  font: 16px Helvetica, sans-serif;
+  font-family: index.$font-sans;
+  font-size: 16px;
+  line-height: 1.65;
+  color: #1a1a1a;
 }
 
 .container {
@@ -58,8 +69,8 @@ article {
   }
 
   article {
-    padding-top: index.$gap-lg - index.$gap-sm;
-    padding-bottom: index.$gap-lg - index.$gap-sm;
+    padding-top: index.$gap-lg;
+    padding-bottom: index.$gap-lg;
   }
 }
 
