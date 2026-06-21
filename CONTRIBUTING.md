@@ -22,6 +22,17 @@ We'd love your help to suggest improvements to the specification, fixing typos, 
 1. Add the language to the `languages` section of `./config.yaml` (see the existing entries as an example).
 1. If your strings touch the tooling section, add the corresponding translations in `./data/tooling.yaml`.
 
+### Releasing a new version
+
+The current version lives only at the site root (`./content/_index*.md`) — it is **not** duplicated under `./content/`. To cut a new version (e.g. `v1.2.0`):
+
+1. Snapshot the version you are leaving behind: copy the current root files into `./content/<previous-version>/` (e.g. `./content/v1.1.0/`). This becomes an immutable archive browsable via the version switcher.
+1. Edit the root `./content/_index*.md` files to reflect the new version.
+1. In `./config.yaml`, append the new version to `params.versions.list` and set `params.versions.current` to it.
+1. Update `CHANGELOG.md`.
+
+The version switcher links the current version to the site root and every archived version to `/<version>/`, so there is a single source of truth for the live spec.
+
 ### Running project locally
 
 There's a docker-compose.yml file ready that will help you to check if the website looks good!
