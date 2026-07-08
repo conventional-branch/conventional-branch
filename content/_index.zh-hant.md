@@ -36,11 +36,7 @@ layout: single
 - **`chore/`**：用於非程式碼任務，例如相依套件、文件更新（例如 `chore/update-dependencies`）
 
 **AI 智能體來源前綴（AI Agent Source Prefixes）** — 識別由 AI 編碼智能體產生的分支：
-- **`ai/`**：通用 AI 編碼智能體前綴（例如 `ai/refactor-auth-flow`）
-- **`copilot/`**：GitHub Copilot（例如 `copilot/add-login-page`）
-- **`cursor/`**：Cursor（例如 `cursor/fix-header-bug`）
-- **`claude/`**：Anthropic Claude Code（例如 `claude/security-patch`）
-- **`codex/`**：OpenAI Codex（例如 `codex/optimize-query`）
+{{< agents >}}
 
 主幹分支（`main`、`master`、`develop`）不使用前綴。
 

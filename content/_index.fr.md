@@ -36,11 +36,7 @@ La spécification des branches prend en charge les préfixes suivants et doit ê
 - **`chore/`** : Pour les tâches non liées au code comme les dépendances, les mises à jour de documentation (par exemple, `chore/update-dependencies`)
 
 **Préfixes de source d'agent IA** — identifient les branches générées par des agents de codage IA :
-- **`ai/`** : Préfixe générique pour tout agent de codage IA (par exemple, `ai/refactor-auth-flow`)
-- **`copilot/`** : GitHub Copilot (par exemple, `copilot/add-login-page`)
-- **`cursor/`** : Cursor (par exemple, `cursor/fix-header-bug`)
-- **`claude/`** : Claude Code par Anthropic (par exemple, `claude/security-patch`)
-- **`codex/`** : OpenAI Codex (par exemple, `codex/optimize-query`)
+{{< agents >}}
 
 Les branches principales (`main`, `master`, `develop`) n'utilisent pas de préfixe.
 

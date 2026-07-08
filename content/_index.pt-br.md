@@ -36,11 +36,7 @@ A especificação de branch suporta os seguintes prefixos e deve ser estruturada
 - **`chore/`**: para tarefas não relacionadas ao código, como atualização de dependências ou documentação (ex.: `chore/atualizar-dependencias`).
 
 **Prefixos de fonte de agente de IA** — identificam branches gerados por agentes de codificação de IA:
-- **`ai/`**: Prefixo genérico para qualquer agente de codificação de IA (ex.: `ai/refactor-auth-flow`);
-- **`copilot/`**: GitHub Copilot (ex.: `copilot/add-login-page`);
-- **`cursor/`**: Cursor (ex.: `cursor/fix-header-bug`);
-- **`claude/`**: Claude Code da Anthropic (ex.: `claude/security-patch`);
-- **`codex/`**: OpenAI Codex (ex.: `codex/optimize-query`).
+{{< agents >}}
 
 Branches tronco (`main`, `master`, `develop`) não usam prefixo.
 

@@ -36,11 +36,7 @@ Conventional Branch относится к структурированной и 
 - **`chore/`**: Для задач, не связанных с кодом, таких как зависимости, обновления документации (например, `chore/update-dependencies`)
 
 **Префиксы источника ИИ-агента** — идентифицируют ветки, созданные ИИ-агентами кодирования:
-- **`ai/`**: Универсальный префикс для любого ИИ-агента кодирования (например, `ai/refactor-auth-flow`)
-- **`copilot/`**: GitHub Copilot (например, `copilot/add-login-page`)
-- **`cursor/`**: Cursor (например, `cursor/fix-header-bug`)
-- **`claude/`**: Claude Code от Anthropic (например, `claude/security-patch`)
-- **`codex/`**: OpenAI Codex (например, `codex/optimize-query`)
+{{< agents >}}
 
 Основные ветки (`main`, `master`, `develop`) не используют префикс.
 

@@ -36,11 +36,7 @@ La especificación de ramas admite los siguientes prefijos y debe estructurarse 
 - **`chore/`**: Para tareas no relacionadas con código, como actualizaciones de dependencias o documentación (p. ej., `chore/update-dependencies`)
 
 **Prefijos de fuente de agente de IA** — identifican ramas generadas por agentes de codificación de IA:
-- **`ai/`**: Prefijo genérico para cualquier agente de codificación de IA (p. ej., `ai/refactor-auth-flow`)
-- **`copilot/`**: GitHub Copilot (p. ej., `copilot/add-login-page`)
-- **`cursor/`**: Cursor (p. ej., `cursor/fix-header-bug`)
-- **`claude/`**: Claude Code de Anthropic (p. ej., `claude/security-patch`)
-- **`codex/`**: OpenAI Codex (p. ej., `codex/optimize-query`)
+{{< agents >}}
 
 Las ramas troncales (`main`, `master`, `develop`) no usan prefijo.
 

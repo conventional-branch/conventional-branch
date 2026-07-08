@@ -36,11 +36,7 @@ layout: single
 - **`chore/`**: 依存関係やドキュメント更新などの非コードタスク用（例：`chore/update-dependencies`）
 
 **AI エージェントソースプレフィックス（AI Agent Source Prefixes）** — AI コーディングエージェントによって生成されたブランチを識別します：
-- **`ai/`**: 汎用 AI エージェントプレフィックス（例：`ai/refactor-auth-flow`）
-- **`copilot/`**: GitHub Copilot（例：`copilot/add-login-page`）
-- **`cursor/`**: Cursor（例：`cursor/fix-header-bug`）
-- **`claude/`**: Anthropic Claude Code（例：`claude/security-patch`）
-- **`codex/`**: OpenAI Codex（例：`codex/optimize-query`）
+{{< agents >}}
 
 トランクブランチ（`main`、`master`、`develop`）はプレフィックスを使用しません。
 

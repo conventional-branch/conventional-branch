@@ -1,0 +1,106 @@
+# Registry of AI coding agent branch prefixes recognized by the
+# Conventional Branch specification.
+#
+# To register a new AI agent prefix, add an entry to `agents` below and open a
+# pull request (see the "Registering a new AI agent prefix" section in
+# CONTRIBUTING.md). The specification website renders this file as a table, so
+# the registry stays a single source of truth — no need to edit each language's
+# content file.
+#
+# Fields per agent:
+#   prefix    (required) the branch prefix, without the trailing slash
+#   name      display name (omit for the generic entry, which uses labels.generic)
+#   vendor    the company or organization behind the agent ("—" if none)
+#   homepage  canonical product URL (optional; the name links to it when present)
+#   since     the spec version the prefix was added in
+#   generic   set to true for the vendor-neutral `ai/` entry
+
+# Translatable column headers and the generic-agent label. English is the
+# fallback for any language not listed.
+labels:
+  prefix:
+    en: Prefix
+    zh: 前缀
+    zh-hant: 前綴
+    ja: プレフィックス
+    de: Präfix
+    es: Prefijo
+    fr: Préfixe
+    pl: Prefiks
+    pt-br: Prefixo
+    ru: Префикс
+    th: คำนำหน้า
+  agent:
+    en: Agent
+    zh: 智能体
+    zh-hant: 智能體
+    ja: エージェント
+    de: Agent
+    es: Agente
+    fr: Agent
+    pl: Agent
+    pt-br: Agente
+    ru: Агент
+    th: เอเจนต์
+  vendor:
+    en: Vendor
+    zh: 厂商
+    zh-hant: 廠商
+    ja: ベンダー
+    de: Anbieter
+    es: Proveedor
+    fr: Fournisseur
+    pl: Dostawca
+    pt-br: Fornecedor
+    ru: Вендор
+    th: ผู้ให้บริการ
+  since:
+    en: Since
+    zh: 起始版本
+    zh-hant: 起始版本
+    ja: 追加バージョン
+    de: Seit
+    es: Desde
+    fr: Depuis
+    pl: Od wersji
+    pt-br: Desde
+    ru: С версии
+    th: ตั้งแต่
+  generic:
+    en: Any AI agent
+    zh: 任意 AI 智能体
+    zh-hant: 任意 AI 智能體
+    ja: 任意の AI エージェント
+    de: Beliebiger KI-Agent
+    es: Cualquier agente de IA
+    fr: Tout agent IA
+    pl: Dowolny agent AI
+    pt-br: Qualquer agente de IA
+    ru: Любой AI-агент
+    th: เอเจนต์ AI ใดก็ได้
+
+agents:
+  - prefix: ai
+    generic: true
+    vendor: "—"
+    since: "1.1.0"
+  - prefix: claude
+    name: Claude Code
+    vendor: Anthropic
+    homepage: https://claude.com/claude-code
+    since: "1.1.0"
+  - prefix: codex
+    name: OpenAI Codex
+    vendor: OpenAI
+    homepage: https://openai.com/codex
+    since: "1.1.0"
+  - prefix: copilot
+    name: GitHub Copilot
+    vendor: GitHub
+    homepage: https://github.com/features/copilot
+    since: "1.1.0"
+  - prefix: cursor
+    name: Cursor
+    vendor: Anysphere
+    homepage: https://cursor.com
+    since: "1.1.0"

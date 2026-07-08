@@ -7,6 +7,21 @@ draft: false
 
 The Conventional Branch specification was inspired by [Conventional Commits](https://www.conventionalcommits.org).
 
+## AI Agent Source Prefixes
+
+As AI coding agents increasingly open their own pull requests, Conventional Branch maintains a registry of their branch prefixes so tools and teams can recognize them consistently. This registry is the machine-readable source of truth — the table below is generated from [`data/agents.yaml`](https://github.com/conventional-branch/conventional-branch/blob/main/data/agents.yaml).
+
+{{< agents >}}
+
+Giving each agent a documented prefix (or using the vendor-neutral `ai/`) lets teams do more than just eyeball who opened a PR:
+
+- **Apply review policy by source** — require an extra human approval on agent-generated branches, or auto-assign a reviewer to them.
+- **Route CI differently** — run a heavier security, license, or lint suite on `ai/`, `copilot/`, `claude/`, … branches before they reach a human reviewer.
+- **Attribute activity and cost** — measure how much work each agent produces by filtering branches and PRs on their prefix.
+- **Automate housekeeping** — auto-label PRs, apply branch-protection rules, or trigger notifications based on the prefix.
+
+Building an agent that opens PRs? [Register its prefix](https://github.com/conventional-branch/conventional-branch/blob/main/CONTRIBUTING.md#registering-a-new-ai-agent-prefix) so reviewers and tooling recognize it out of the box.
+
 ## Tooling for Conventional Branch
 
 {{< tooling full >}}
