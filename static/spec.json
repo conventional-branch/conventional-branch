@@ -69,10 +69,10 @@
   ],
   "rules": {
     "case": "lowercase",
-    "allowedCharacters": ["a-z", "0-9", "-", "."],
+    "descriptionAllowedCharacters": ["a-z", "0-9", "-", "."],
     "noConsecutiveSeparators": true,
     "noLeadingOrTrailingSeparators": true,
-    "notes": "Hyphens separate words in the description; dots are typically used for version numbers (e.g. release/v1.2.0). Trunk branches do not use a prefix."
+    "notes": "The type is one of the fixed values in `types`, joined to the description by the `separator` (\"/\"). `descriptionAllowedCharacters` applies to the description only and does not include the separator. Hyphens separate words in the description; dots are typically used for version numbers (e.g. release/v1.2.0). Trunk branches do not use a prefix. `grammar.regex` is the authoritative validator."
   },
   "grammar": {
     "abnf": "branch-name = trunk-branch / prefixed-branch\ntrunk-branch = \"main\" / \"master\" / \"develop\"\nprefixed-branch = type \"/\" description\ntype = \"feature\" / \"feat\" / \"bugfix\" / \"fix\" / \"hotfix\" / \"release\" / \"chore\" / \"ai\" / \"copilot\" / \"cursor\" / \"claude\" / \"codex\"\ndescription = desc-segment *(\"-\" desc-segment)\ndesc-segment = 1*(ALPHA / DIGIT) *(\".\" 1*(ALPHA / DIGIT))\nALPHA = %x61-7A\nDIGIT = %x30-39",

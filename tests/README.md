@@ -12,7 +12,7 @@ Machine-readable spec and test fixtures for the Conventional Branch specificatio
 
 ## What the check enforces
 
-```
+```bash
 python3 tests/conformance.py
 ```
 

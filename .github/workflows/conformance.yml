@@ -16,6 +16,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v6
+        with:
+          persist-credentials: false
       - name: Validate spec.json is valid JSON
         run: python3 -c "import json; json.load(open('static/spec.json'))"
       - name: Run conformance tests
