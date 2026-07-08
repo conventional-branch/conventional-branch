@@ -1,0 +1,22 @@
+name: Spec conformance
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  conformance:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+      - name: Validate spec.json is valid JSON
+        run: python3 -c "import json; json.load(open('static/spec.json'))"
+      - name: Run conformance tests
+        run: python3 tests/conformance.py
