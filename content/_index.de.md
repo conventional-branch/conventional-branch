@@ -36,11 +36,7 @@ Die Branch-Spezifikation unterstützt die folgenden Präfixe und sollte wie folg
 - **`chore/`**: Für Nicht-Code-Aufgaben wie Abhängigkeiten, Dokumentation-Updates (z.B. `chore/update-dependencies`)
 
 **AI-Agenten-Quellpräfixe** — identifizieren Branches, die von KI-Codierungsagenten erstellt wurden:
-- **`ai/`**: Generischer Präfix für jeden KI-Codierungsagenten (z.B. `ai/refactor-auth-flow`)
-- **`copilot/`**: GitHub Copilot (z.B. `copilot/add-login-page`)
-- **`cursor/`**: Cursor (z.B. `cursor/fix-header-bug`)
-- **`claude/`**: Claude Code von Anthropic (z.B. `claude/security-patch`)
-- **`codex/`**: OpenAI Codex (z.B. `codex/optimize-query`)
+{{< agents >}}
 
 Trunk-Branches (`main`, `master`, `develop`) verwenden kein Präfix.
 

@@ -22,6 +22,29 @@ We'd love your help to suggest improvements to the specification, fixing typos, 
 1. Add the language to the `languages` section of `./config.yaml` (see the existing entries as an example).
 1. If your strings touch the tooling section, add the corresponding translations in `./data/tooling.yaml`.
 
+### Registering a new AI agent prefix
+
+The AI agent source prefixes (`ai/`, `copilot/`, `cursor/`, …) are stored in a single registry, [`./data/agents.yaml`](./data/agents.yaml). The specification website and the About page render this file as a table, so a new prefix only needs to be added in one place.
+
+To register an agent:
+
+1. Add an entry to the `agents:` list in `./data/agents.yaml`:
+   ```yaml
+   - prefix: youragent        # branch prefix, without the trailing slash
+     name: Your Agent         # display name shown in the table
+     vendor: Your Company     # organization behind the agent ("—" if none)
+     homepage: https://...    # canonical product URL (the name links to it)
+     since: "1.2.0"           # the spec version that adds the prefix
+   ```
+2. Keep the list roughly alphabetical after the generic `ai/` entry, and reuse an existing prefix rather than adding a near-duplicate.
+3. Add the prefix to the `type` rule of the ABNF grammar and to the examples table in `./content/_index*.md` (and mention it in `CHANGELOG.md`), so the normative grammar stays in sync with the registry.
+
+Guidelines for a good prefix:
+
+- Use the agent's short, lowercase, well-known name (e.g. `copilot`, not `github-copilot`).
+- It must satisfy the branch-name grammar: lowercase `a-z`, digits, no separators.
+- Prefer registering a dedicated prefix over overloading `ai/`, which stays reserved as the vendor-neutral fallback.
+
 ### Releasing a new version
 
 The current version lives only at the site root (`./content/_index*.md`) — it is **not** duplicated under `./content/`. To cut a new version (e.g. `v1.2.0`):

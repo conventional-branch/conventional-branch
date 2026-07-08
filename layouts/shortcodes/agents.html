@@ -1,0 +1,33 @@
+{{- /* Renders the AI agent prefix registry (data/agents.yaml) as a table.
+       Column headers and the generic-agent label fall back to English. */ -}}
+{{- $data := .Site.Data.agents -}}
+{{- $lang := .Page.Lang | default "en" -}}
+{{- $labels := $data.labels -}}
+{{- $hPrefix := index $labels.prefix $lang | default $labels.prefix.en -}}
+{{- $hAgent := index $labels.agent $lang | default $labels.agent.en -}}
+{{- $hVendor := index $labels.vendor $lang | default $labels.vendor.en -}}
+{{- $hSince := index $labels.since $lang | default $labels.since.en -}}
+<table>
+  <thead>
+    <tr>
+      <th>{{ $hPrefix }}</th>
+      <th>{{ $hAgent }}</th>
+      <th>{{ $hVendor }}</th>
+      <th>{{ $hSince }}</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{- range $data.agents -}}
+    {{- $name := .name -}}
+    {{- if .generic -}}
+      {{- $name = index $labels.generic $lang | default $labels.generic.en -}}
+    {{- end -}}
+    <tr>
+      <td><code>{{ .prefix }}/</code></td>
+      <td>{{ with .homepage }}<a href="{{ . }}" rel="noopener">{{ $name }}</a>{{ else }}{{ $name }}{{ end }}</td>
+      <td>{{ .vendor }}</td>
+      <td>v{{ .since }}</td>
+    </tr>
+    {{- end -}}
+  </tbody>
+</table>

@@ -36,11 +36,7 @@ Specyfikacja gałęzi obsługuje następujące prefiksy i powinna być zorganizo
 - **`chore/`**: Dla zadań niezwiązanych z kodem, takich jak zależności, aktualizacje dokumentacji (np. `chore/update-dependencies`)
 
 **Prefiksy źródła agenta AI** — identyfikują gałęzie generowane przez agentów kodujących AI:
-- **`ai/`**: Generyczny prefiks dla dowolnego agenta kodującego AI (np. `ai/refactor-auth-flow`)
-- **`copilot/`**: GitHub Copilot (np. `copilot/add-login-page`)
-- **`cursor/`**: Cursor (np. `cursor/fix-header-bug`)
-- **`claude/`**: Claude Code od Anthropic (np. `claude/security-patch`)
-- **`codex/`**: OpenAI Codex (np. `codex/optimize-query`)
+{{< agents >}}
 
 Gałęzie główne (`main`, `master`, `develop`) nie używają prefiksu.
 

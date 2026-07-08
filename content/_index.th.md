@@ -36,11 +36,7 @@ Conventional Branch หมายถึงธรรมเนียมปฏิบ
 - **`chore/`**: สำหรับงานที่ไม่เกี่ยวข้องกับโค้ดโดยตรง เช่น การอัปเดตการพึ่งพา (Dependency) หรือเอกสารอ้างอิง (Docs) (เช่น `chore/update-dependencies`)
 
 **คำนำหน้าแหล่งที่มาของเอเจนต์ AI** — ระบุ Branch ที่สร้างโดยเอเจนต์การเขียนโค้ด AI:
-- **`ai/`**: คำนำหน้าทั่วไปสำหรับเอเจนต์การเขียนโค้ด AI ใดๆ (เช่น `ai/refactor-auth-flow`)
-- **`copilot/`**: GitHub Copilot (เช่น `copilot/add-login-page`)
-- **`cursor/`**: Cursor (เช่น `cursor/fix-header-bug`)
-- **`claude/`**: Claude Code โดย Anthropic (เช่น `claude/security-patch`)
-- **`codex/`**: OpenAI Codex (เช่น `codex/optimize-query`)
+{{< agents >}}
 
 Trunk branches (`main`, `master`, `develop`) ไม่จำเป็นต้องใช้คำนำหน้า
 
