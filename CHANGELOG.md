@@ -4,7 +4,7 @@ All notable changes to the Conventional Branch specification will be documented 
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
-## [1.1.0] - Unreleased
+## [1.1.0] - 2026-07-08
 
 ### Added
 - **AI Agent Source Prefixes**: `ai/`, `copilot/`, `cursor/`, `claude/`, `codex/` for identifying AI-generated branches.
@@ -12,6 +12,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Updated ABNF grammar to include AI agent source types.
 - Updated examples table with AI agent branch name examples.
 - Version switcher UI on the specification website.
+- **AI agent prefix registry**: a machine-readable `data/agents.yaml` rendered as a table across all languages, with a documented process for registering new agent prefixes.
+- **Machine-readable specification**: `spec.json` (types, aliases, rules, ABNF grammar, and a validation regex) served at [conventionalbranch.org/spec.json](https://conventionalbranch.org/spec.json), plus language-agnostic conformance fixtures and a CI check that keeps the spec, docs, and registry in sync.
 
 ## [1.0.0] - 2026-06-20
 
@@ -38,4 +40,5 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Specification established as industry-standard with dedicated website at [conventionalbranch.org](https://conventionalbranch.org) (2026-04).
 - Versioned content structure with version switcher UI for browsing spec versions (2026-06).
 
+[1.1.0]: https://github.com/conventional-branch/conventional-branch/compare/v1.0.0...v1.1.0
 [1.0.0]: https://github.com/conventional-branch/conventional-branch/releases/tag/v1.0.0
