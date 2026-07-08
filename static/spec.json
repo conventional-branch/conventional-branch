@@ -1,0 +1,81 @@
+{
+  "spec": "Conventional Branch",
+  "version": "1.1.0",
+  "url": "https://conventionalbranch.org",
+  "license": "CC-BY-4.0",
+  "separator": "/",
+  "trunkBranches": ["main", "master", "develop"],
+  "types": [
+    {
+      "type": "feature",
+      "aliases": ["feat"],
+      "category": "purpose",
+      "description": "New features"
+    },
+    {
+      "type": "bugfix",
+      "aliases": ["fix"],
+      "category": "purpose",
+      "description": "Bug fixes"
+    },
+    {
+      "type": "hotfix",
+      "aliases": [],
+      "category": "purpose",
+      "description": "Urgent production fixes"
+    },
+    {
+      "type": "release",
+      "aliases": [],
+      "category": "purpose",
+      "description": "Release preparation"
+    },
+    {
+      "type": "chore",
+      "aliases": [],
+      "category": "purpose",
+      "description": "Non-code tasks (dependencies, docs, config)"
+    },
+    {
+      "type": "ai",
+      "aliases": [],
+      "category": "ai-source",
+      "description": "Generic prefix for any AI coding agent"
+    },
+    {
+      "type": "claude",
+      "aliases": [],
+      "category": "ai-source",
+      "description": "Claude Code by Anthropic"
+    },
+    {
+      "type": "codex",
+      "aliases": [],
+      "category": "ai-source",
+      "description": "OpenAI Codex"
+    },
+    {
+      "type": "copilot",
+      "aliases": [],
+      "category": "ai-source",
+      "description": "GitHub Copilot"
+    },
+    {
+      "type": "cursor",
+      "aliases": [],
+      "category": "ai-source",
+      "description": "Cursor"
+    }
+  ],
+  "rules": {
+    "case": "lowercase",
+    "descriptionAllowedCharacters": ["a-z", "0-9", "-", "."],
+    "noConsecutiveSeparators": true,
+    "noLeadingOrTrailingSeparators": true,
+    "notes": "The type is one of the fixed values in `types`, joined to the description by the `separator` (\"/\"). `descriptionAllowedCharacters` applies to the description only and does not include the separator. Hyphens separate words in the description; dots are typically used for version numbers (e.g. release/v1.2.0). Trunk branches do not use a prefix. `grammar.regex` is the authoritative validator."
+  },
+  "grammar": {
+    "abnf": "branch-name = trunk-branch / prefixed-branch\ntrunk-branch = \"main\" / \"master\" / \"develop\"\nprefixed-branch = type \"/\" description\ntype = \"feature\" / \"feat\" / \"bugfix\" / \"fix\" / \"hotfix\" / \"release\" / \"chore\" / \"ai\" / \"copilot\" / \"cursor\" / \"claude\" / \"codex\"\ndescription = desc-segment *(\"-\" desc-segment)\ndesc-segment = 1*(ALPHA / DIGIT) *(\".\" 1*(ALPHA / DIGIT))\nALPHA = %x61-7A\nDIGIT = %x30-39",
+    "regex": "^(?:main|master|develop|(?:feature|feat|bugfix|fix|hotfix|release|chore|ai|copilot|cursor|claude|codex)/[a-z0-9]+(?:\\.[a-z0-9]+)*(?:-[a-z0-9]+(?:\\.[a-z0-9]+)*)*)$"
+  }
+}

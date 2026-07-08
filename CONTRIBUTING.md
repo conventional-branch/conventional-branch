@@ -38,12 +38,23 @@ To register an agent:
    ```
 2. Keep the list roughly alphabetical after the generic `ai/` entry, and reuse an existing prefix rather than adding a near-duplicate.
 3. Add the prefix to the `type` rule of the ABNF grammar and to the examples table in `./content/_index*.md` (and mention it in `CHANGELOG.md`), so the normative grammar stays in sync with the registry.
+4. Add the prefix as a `type` (and update the `grammar.regex`) in [`./static/spec.json`](./static/spec.json), then run `python3 tests/conformance.py` to confirm everything still agrees. CI enforces this.
 
 Guidelines for a good prefix:
 
 - Use the agent's short, lowercase, well-known name (e.g. `copilot`, not `github-copilot`).
 - It must satisfy the branch-name grammar: lowercase `a-z`, digits, no separators.
 - Prefer registering a dedicated prefix over overloading `ai/`, which stays reserved as the vendor-neutral fallback.
+
+### Changing the grammar or types
+
+The specification has a machine-readable form in [`./static/spec.json`](./static/spec.json) (types, rules, ABNF, and a validation regex) with conformance cases in [`./tests/fixtures.json`](./tests/fixtures.json). If you change the grammar, the types, or the examples table, update `spec.json` and the fixtures to match and run:
+
+```bash
+python3 tests/conformance.py
+```
+
+It checks the fixtures, the docs examples table, and the agent registry against `spec.json`. The same check runs in CI. See [`./tests/README.md`](./tests/README.md) for details.
 
 ### Releasing a new version
 

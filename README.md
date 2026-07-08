@@ -66,6 +66,15 @@ Install the skill to teach your AI agent how to create properly named branches:
 npx skills add conventional-branch/conventional-branch --skill conventional-branch
 ```
 
+## 🤖 Machine-Readable Spec
+
+The specification is published in a machine-readable form so tools don't have to parse Markdown:
+
+- **[`spec.json`](static/spec.json)** ([hosted](https://conventionalbranch.org/spec.json)) — types, aliases, trunk branches, rules, the ABNF grammar, and a single anchored **validation regex**.
+- **[`tests/fixtures.json`](tests/fixtures.json)** — language-agnostic valid/invalid conformance cases any implementation can run against.
+
+A [conformance test](tests/README.md) runs in CI and checks the fixtures, the examples table in the docs, and the agent registry all against `spec.json`, so they can't drift apart.
+
 ## 🎉 Show Your Support
 
 If you find this useful, consider giving it a ⭐️ on [GitHub](https://github.com/conventional-branch/conventional-branch)! Your support helps others discover and adopt the spec.
