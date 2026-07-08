@@ -84,16 +84,6 @@ agents:
     generic: true
     vendor: "—"
     since: "1.1.0"
-  - prefix: copilot
-    name: GitHub Copilot
-    vendor: GitHub
-    homepage: https://github.com/features/copilot
-    since: "1.1.0"
-  - prefix: cursor
-    name: Cursor
-    vendor: Anysphere
-    homepage: https://cursor.com
-    since: "1.1.0"
   - prefix: claude
     name: Claude Code
     vendor: Anthropic
@@ -103,4 +93,14 @@ agents:
     name: OpenAI Codex
     vendor: OpenAI
     homepage: https://openai.com/codex
+    since: "1.1.0"
+  - prefix: copilot
+    name: GitHub Copilot
+    vendor: GitHub
+    homepage: https://github.com/features/copilot
+    since: "1.1.0"
+  - prefix: cursor
+    name: Cursor
+    vendor: Anysphere
+    homepage: https://cursor.com
     since: "1.1.0"
