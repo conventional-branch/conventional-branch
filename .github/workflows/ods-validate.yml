@@ -1,0 +1,29 @@
+# This workflow validates delivery artifacts against Open Delivery Spec.
+# Submitted via PR from https://github.com/open-delivery-spec
+
+name: ODS Validate
+
+on:
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+          ref: ${{ github.head_ref }}
+
+      - name: ODS AI code quality gate
+        uses: open-delivery-spec/validate-action@v1
+        with:
+          diff-base: ${{ github.event.pull_request.base.sha || 'origin/main' }}
+          branch: ${{ github.head_ref }}
+          summary: 'true'
+          comment: 'true'
