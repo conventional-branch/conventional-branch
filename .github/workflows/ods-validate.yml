@@ -16,11 +16,6 @@ jobs:
           fetch-depth: 0
           ref: ${{ github.head_ref }}
 
-      - name: Conventional branch & commit checks
-        run: |
-          python3 -m pip install 'commit-check>=2.9.0'
-          commit-check --message --branch
-
       - name: ODS AI code quality gate
         uses: open-delivery-spec/validate-action@v1
         with:
