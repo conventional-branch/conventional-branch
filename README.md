@@ -75,6 +75,10 @@ The specification is published in a machine-readable form so tools don't have to
 
 A [conformance test](tests/README.md) runs in CI and checks the fixtures, the examples table in the docs, and the agent registry all against `spec.json`, so they can't drift apart.
 
+## 🏢 Used By
+
+Projects and organizations adopting Conventional Branch, including [Ledger](https://github.com/LedgerHQ/ledger-live), [Sanity](https://github.com/sanity-io/sdk), [Ansible](https://github.com/ansible/metrics-utility), [Texas Instruments](https://github.com/TexasInstruments/processor-sdk-doc), and the [Government of British Columbia](https://github.com/bcgov/nr-pies). See the [full list](https://conventionalbranch.org/about/#projects-using-conventional-branch) and add your project via pull request.
+
 ## 🎉 Show Your Support
 
 If you find this useful, consider giving it a ⭐️ on [GitHub](https://github.com/conventional-branch/conventional-branch)! Your support helps others discover and adopt the spec.

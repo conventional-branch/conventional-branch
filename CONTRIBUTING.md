@@ -46,6 +46,16 @@ Guidelines for a good prefix:
 - It must satisfy the branch-name grammar: lowercase `a-z`, digits, no separators.
 - Prefer registering a dedicated prefix over overloading `ai/`, which stays reserved as the vendor-neutral fallback.
 
+### Adding your project to the adopters list
+
+The "Projects Using Conventional Branch" list on the [About page](./content/about/index.md) is the canonical record of adopters, and a condensed excerpt is mirrored in the README's "Used By" section.
+
+To add your project:
+
+1. Add a bullet to the list in `./content/about/index.md`, linking to the file where your project documents the convention (e.g. your `CONTRIBUTING.md`) and a short one-line description.
+2. Keep the list roughly in the order projects were added (new entries at the bottom, before the "and more" link).
+3. Open a pull request. If your project is widely recognizable, it may also be added to the shorter curated list in `README.md`, at the maintainers' discretion.
+
 ### Changing the grammar or types
 
 The specification has a machine-readable form in [`./static/spec.json`](./static/spec.json) (types, rules, ABNF, and a validation regex) with conformance cases in [`./tests/fixtures.json`](./tests/fixtures.json). If you change the grammar, the types, or the examples table, update `spec.json` and the fixtures to match and run:
