@@ -115,14 +115,14 @@ jobs:
           script: |
             const title = '🚨 Some URLs are not reachable';
 
-            const existingIssues = await github.rest.issues.listForRepo({
+            const existingIssues = await github.paginate(github.rest.issues.listForRepo, {
               owner: context.repo.owner,
               repo: context.repo.repo,
               state: 'open',
               labels: 'url-check'
             });
 
-            for (const issue of existingIssues.data.filter(issue => issue.title === title)) {
+            for (const issue of existingIssues.filter(issue => issue.title === title && !issue.pull_request)) {
               await github.rest.issues.createComment({
                 owner: context.repo.owner,
                 repo: context.repo.repo,
