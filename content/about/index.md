@@ -48,9 +48,46 @@ Building an agent that opens PRs? [Register its prefix](https://github.com/conve
 
 _Want your project on this list?_ [Send a pull request](https://github.com/conventional-branch/conventional-branch/pulls).
 
+## CI/CD Integration
+
+Because the branch name already encodes its purpose, CI/CD pipelines can key their behavior off the prefix directly, without any extra metadata or configuration lookup. In GitHub Actions, that means an `if: startsWith(...)` condition per job:
+
+```yaml
+jobs:
+  test:
+    if: startsWith(github.head_ref, 'feature/') || startsWith(github.head_ref, 'bugfix/')
+    runs-on: ubuntu-latest
+    steps:
+      - run: npm test
+
+  security-review:
+    if: startsWith(github.head_ref, 'hotfix/')
+    runs-on: ubuntu-latest
+    steps:
+      - run: ./scripts/security-scan.sh
+
+  release-candidate:
+    if: startsWith(github.head_ref, 'release/')
+    runs-on: ubuntu-latest
+    steps:
+      - run: ./scripts/build-release-candidate.sh
+```
+
+A common mapping of prefixes to pipeline behavior:
+
+| Branch prefix | Typical CI/CD behavior |
+|---|---|
+| `feature/*` | Run the full test suite; deploy a preview environment |
+| `bugfix/*` | Run regression tests |
+| `hotfix/*` | Require a security scan or extra approval before merge |
+| `release/*` | Trigger the release-candidate pipeline; deploy to staging |
+| `chore/*` | Skip preview deployment |
+
+Other CI/CD platforms support the same pattern using their own equivalent of a branch-name condition (e.g., GitLab CI's `rules: - if:`, or a shell check against `$CI_COMMIT_REF_NAME`). Conventional Branch only standardizes the branch name — the mapping above is a starting point to adapt to your own pipeline.
+
 ## How to Adopt
 
 1. **Communicate the convention** to your team and add it to your contributing guidelines.
 2. **Enforce it automatically** using one of the tools listed above.
 3. **Add the badge** to your repository README to signal adoption.
-4. **Configure your CI/CD** to trigger different workflows based on branch prefix (e.g., auto-deploy on `release/` branches).
+4. **Configure your CI/CD** to trigger different workflows based on branch prefix (e.g., auto-deploy on `release/` branches) — see [CI/CD Integration](#cicd-integration) above.
