@@ -79,7 +79,7 @@ jobs:
 
       - name: Create Issue if URLs failed
         if: steps.check.outputs.has_failed == 'true'
-        uses: actions/github-script@v9
+        uses: actions/github-script@373c709c69115d41ff229c7e5df9f8788daa9553 # v9.0.0
         with:
           script: |
             const fs = require('fs');
@@ -110,7 +110,7 @@ jobs:
 
       - name: Close resolved issues
         if: steps.check.outputs.has_failed == 'false'
-        uses: actions/github-script@v9
+        uses: actions/github-script@373c709c69115d41ff229c7e5df9f8788daa9553 # v9.0.0
         with:
           script: |
             const title = '🚨 Some URLs are not reachable';
