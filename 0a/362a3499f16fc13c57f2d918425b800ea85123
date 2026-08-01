@@ -1,0 +1,19 @@
+.github/workflows/ods-validate.yml
+  s_680628c6310e80::t_685c11bbab6fb4 20
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.19",
+  "base_commit_sha": "0a362a3499f16fc13c57f2d918425b800ea85123",
+  "prompts": {},
+  "sessions": {
+    "s_680628c6310e80": {
+      "agent_id": {
+        "tool": "pi",
+        "id": "019fbdb6-e20e-734d-97b2-4afb1a49e11f",
+        "model": "deepseek-v4-flash"
+      },
+      "human_author": "shenxianpeng <xianpeng.shen@gmail.com>"
+    }
+  }
+}
