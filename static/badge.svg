@@ -8,6 +8,24 @@
     explicit textLength, which is what keeps the rendering identical on machines
     that have no Verdana.
 
+    The label stays on shields' default #555 on purpose, so this badge sits in a
+    README row next to GitHub Actions and other shields badges without one grey
+    looking off against the rest. Only the version half carries brand color:
+    #6699CC, the site's $color-primary.
+
+    That pairing is chosen for edge definition rather than for text contrast.
+    #6699CC sits 25.5 L* above #555, the widest gap of any blue in the palette,
+    so the two halves read as two blocks. The deeper $color-primary-deep #3B6BB5
+    was tried first and is only 9.2 L* above the label, which makes the badge
+    read as a single dark bar.
+
+    The deliberate cost: white on #6699CC is 3.00:1, under the 4.5:1 WCAG AA
+    wants for text this size. With the label fixed at #555 that is unavoidable —
+    clearing AA needs the version half at luminance <= 0.183, separating from
+    #555 needs >= 0.270, and the interval is empty. Separation won. This is the
+    same trade the Conventional Commits badge makes at 3.07:1. Please don't
+    "fix" it back to a darker blue without revisiting that call.
+
     On a spec release, bump the version in <title>, aria-label and both version
     <text> elements. tests/conformance.py fails the build if it drifts from
     static/spec.json.
@@ -21,7 +39,7 @@
   </clipPath>
   <g clip-path="url(#round)">
     <rect width="140" height="20" fill="#555"/>
-    <rect x="140" width="40" height="20" fill="#3B6BB5"/>
+    <rect x="140" width="40" height="20" fill="#6699CC"/>
     <rect width="180" height="20" fill="url(#gloss)"/>
   </g>
   <!-- Branch mark, from themes/conventional-branch/static/img/git-flow.svg -->
