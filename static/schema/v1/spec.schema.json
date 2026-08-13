@@ -1,0 +1,154 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://conventionalbranch.org/schema/v1/spec.schema.json",
+  "title": "Conventional Branch specification document",
+  "description": "The structure of spec.json, the machine-readable form of the Conventional Branch specification. This schema describes the document itself, not the branch names it defines — for those, use grammar.regex. Version 1 of this schema is stable: it will only ever gain optional properties.",
+  "type": "object",
+  "required": [
+    "spec",
+    "version",
+    "url",
+    "license",
+    "separator",
+    "trunkBranches",
+    "types",
+    "rules",
+    "grammar"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "$schema": {
+      "description": "The URL of this schema.",
+      "type": "string",
+      "const": "https://conventionalbranch.org/schema/v1/spec.schema.json"
+    },
+    "spec": {
+      "description": "The name of the specification this document describes.",
+      "type": "string",
+      "const": "Conventional Branch"
+    },
+    "version": {
+      "description": "The semantic version of the specification. A copy of this document is served permanently at https://conventionalbranch.org/v<version>/spec.json.",
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$"
+    },
+    "url": {
+      "description": "The home of the specification.",
+      "type": "string",
+      "pattern": "^https://[^/]+$"
+    },
+    "license": {
+      "description": "The SPDX identifier of the license the specification is published under.",
+      "type": "string",
+      "pattern": "^[A-Za-z0-9.+-]+$"
+    },
+    "separator": {
+      "description": "The character that joins the type to the description.",
+      "type": "string",
+      "const": "/"
+    },
+    "trunkBranches": {
+      "description": "Long-lived branches that are exempt from the naming convention.",
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "types": {
+      "description": "Every branch type the specification defines.",
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["type", "aliases", "category", "description"],
+        "additionalProperties": false,
+        "properties": {
+          "type": {
+            "description": "The canonical prefix, used before the separator.",
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9]*$"
+          },
+          "aliases": {
+            "description": "Accepted short forms of the type. May be empty.",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "pattern": "^[a-z][a-z0-9]*$"
+            }
+          },
+          "category": {
+            "description": "Why the type exists: what the work is (purpose), or which agent produced it (ai-source).",
+            "type": "string",
+            "enum": ["purpose", "ai-source"]
+          },
+          "description": {
+            "description": "What the type is for, in one line.",
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
+    "rules": {
+      "description": "Constraints on the description part of a branch name, in prose and as data. grammar.regex is the authoritative form.",
+      "type": "object",
+      "required": [
+        "case",
+        "descriptionAllowedCharacters",
+        "noConsecutiveSeparators",
+        "noLeadingOrTrailingSeparators",
+        "notes"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "case": {
+          "type": "string",
+          "enum": ["lowercase"]
+        },
+        "descriptionAllowedCharacters": {
+          "description": "Character classes permitted in the description, as regex fragments.",
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "noConsecutiveSeparators": {
+          "type": "boolean"
+        },
+        "noLeadingOrTrailingSeparators": {
+          "type": "boolean"
+        },
+        "notes": {
+          "description": "Prose that explains the rules and their edge cases.",
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "grammar": {
+      "description": "The branch name grammar, in two equivalent forms.",
+      "type": "object",
+      "required": ["abnf", "regex"],
+      "additionalProperties": false,
+      "properties": {
+        "abnf": {
+          "description": "The grammar as ABNF (RFC 5234), for readers and parser generators.",
+          "type": "string",
+          "minLength": 1
+        },
+        "regex": {
+          "description": "The authoritative validator: an anchored regular expression that accepts exactly the branch names this specification allows. Written in a dialect every major regex engine understands.",
+          "type": "string",
+          "pattern": "^\\^.*\\$$"
+        }
+      }
+    }
+  }
+}

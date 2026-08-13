@@ -4,9 +4,11 @@
 [![Website](https://img.shields.io/website?url=https%3A%2F%2Fconventionalbranch.org%2F&up_color=6699CC)](https://conventionalbranch.org/)
 [![License: CC BY 4.0](https://img.shields.io/badge/License-CC%20BY%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by/4.0/)
 
-The Conventional Branch specification defines a naming convention that brings order to your development workflow — whether you're working solo or with a team.
+**A specification for Git branch names that are human-readable, machine-parseable, and automation-friendly.**
 
-Inspired by [Conventional Commits](https://www.conventionalcommits.org), Conventional Branch standardizes Git branch names so they are human-readable, machine-parseable, and automation-friendly.
+Conventional Branch defines a small branch naming convention, `<type>/<description>`, in which every branch declares its own purpose. That turns a branch name into something your CI/CD pipelines, review policies, and tooling can act on directly, instead of a team habit that has to be explained to each new contributor and enforced by hand in code review.
+
+The convention is published as a [machine-readable spec](#-machine-readable-spec) with conformance fixtures, so validating branch names is a solved problem for any tool that wants to support it. It is used by [Ledger](https://github.com/LedgerHQ/ledger-live), [Sanity](https://github.com/sanity-io/sdk), [Ansible](https://github.com/ansible/metrics-utility), and the [Government of British Columbia](https://github.com/bcgov/nr-pies), among [others](#-used-by).
 
 ## 🚀 Quick Start
 
@@ -69,14 +71,15 @@ npx skills add conventional-branch/conventional-branch --skill conventional-bran
 
 The specification is published in a machine-readable form so tools don't have to parse Markdown:
 
-- **[`spec.json`](static/spec.json)** ([hosted](https://conventionalbranch.org/spec.json)) — types, aliases, trunk branches, rules, the ABNF grammar, and a single anchored **validation regex**.
+- **[`spec.json`](static/spec.json)** — types, aliases, trunk branches, rules, the ABNF grammar, and a single anchored **validation regex**. Served two ways: [`/spec.json`](https://conventionalbranch.org/spec.json) always tracks the latest version, and [`/v1.1.0/spec.json`](https://conventionalbranch.org/v1.1.0/spec.json) is frozen at publication — **pin the versioned URL** so a future release can't change your tool's behavior without you choosing it.
+- **[`schema/v1/spec.schema.json`](static/schema/v1/spec.schema.json)** ([hosted](https://conventionalbranch.org/schema/v1/spec.schema.json)) — a JSON Schema describing `spec.json`'s own structure, so you can verify a document is a well-formed spec before trusting it.
 - **[`tests/fixtures.json`](tests/fixtures.json)** — language-agnostic valid/invalid conformance cases any implementation can run against.
 
-A [conformance test](tests/README.md) runs in CI and checks the fixtures, the examples table in the docs, and the agent registry all against `spec.json`, so they can't drift apart.
+A [conformance test](tests/README.md) runs in CI and checks the fixtures, the examples table in the docs, the agent registry, and every published spec document against `spec.json` and its schema, so they can't drift apart. The [stability guarantees](tests/README.md#endpoints-and-stability) for each endpoint are written down.
 
 ## 🏢 Used By
 
-Projects and organizations adopting Conventional Branch, including [Ledger](https://github.com/LedgerHQ/ledger-live), [Sanity](https://github.com/sanity-io/sdk), [Ansible](https://github.com/ansible/metrics-utility), [Texas Instruments](https://github.com/TexasInstruments/processor-sdk-doc), and the [Government of British Columbia](https://github.com/bcgov/nr-pies). See the [full list](https://conventionalbranch.org/about/#projects-using-conventional-branch) and add your project via pull request.
+Alongside the projects named above, Conventional Branch is adopted by [Texas Instruments](https://github.com/TexasInstruments/processor-sdk-doc) and [LiteLLM](https://github.com/BerriAI/litellm), among others. See the [full list](https://conventionalbranch.org/about/#projects-using-conventional-branch) and add your project via pull request.
 
 ## 🎉 Show Your Support
 
@@ -119,3 +122,9 @@ We welcome contributions from the community!
 Whether it's fixing a typo, improving documentation, or proposing a new branch naming convention — please check out our [contributing guidelines](CONTRIBUTING.md).
 
 No contribution is too small. Thank you for helping us grow! 💙
+
+## 📄 License and Attribution
+
+Conventional Branch is licensed under [CC BY 4.0](LICENSE).
+
+The specification was derived from [Conventional Commits](https://www.conventionalcommits.org), which is licensed under the same terms. It applies the same idea — human- and machine-readable structure in Git metadata — to branch names rather than commit messages, and the two specifications are designed to be used together. See [NOTICE](NOTICE) for the full attribution, and the [FAQ](https://conventionalbranch.org/#how-does-conventional-branch-relate-to-conventional-commits) for how they relate.

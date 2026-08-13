@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Conformance test for the Conventional Branch specification.
 
-Runs four checks, all driven by the canonical machine-readable spec
+Runs six checks, all driven by the canonical machine-readable spec
 (static/spec.json) so the docs, the registry and the grammar cannot drift
 apart silently:
 
@@ -13,6 +13,11 @@ apart silently:
                    declared type (no registry/spec drift).
   4. Badge       — the version rendered in static/badge.svg is the version
                    spec.json declares, so the adoption badge cannot go stale.
+  5. Schema      — spec.json, and every frozen copy of it, satisfies
+                   static/schema/v1/spec.schema.json.
+  6. Versioning  — the version spec.json declares has a frozen, byte-identical
+                   copy under static/v<version>/, so the permanent endpoint
+                   downstream tools pin to cannot be forgotten on a release.
 
 Exits non-zero if anything disagrees. Standard library only — no deps.
 """
@@ -23,11 +28,13 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-SPEC = ROOT / "static" / "spec.json"
+STATIC = ROOT / "static"
+SPEC = STATIC / "spec.json"
+SCHEMA = STATIC / "schema" / "v1" / "spec.schema.json"
 FIXTURES = ROOT / "tests" / "fixtures.json"
 SPEC_PAGE = ROOT / "content" / "_index.md"
 AGENTS = ROOT / "data" / "agents.yaml"
-BADGE = ROOT / "static" / "badge.svg"
+BADGE = STATIC / "badge.svg"
 
 
 def load_spec():
@@ -139,6 +146,166 @@ def check_badge_version(spec):
     return failures
 
 
+# --- Minimal JSON Schema validator -------------------------------------------
+#
+# This file is standard library only, so spec.json is validated against
+# schema/v1/spec.schema.json by a validator that implements exactly the keywords
+# that schema uses — no more. KEYWORDS is what keeps that honest: a keyword the
+# validator does not understand must fail the build, never be silently ignored,
+# because an ignored assertion is a check that quietly stopped checking.
+
+ASSERTIONS = {
+    "type",
+    "const",
+    "enum",
+    "required",
+    "properties",
+    "additionalProperties",
+    "items",
+    "minItems",
+    "uniqueItems",
+    "minLength",
+    "pattern",
+}
+ANNOTATIONS = {"$schema", "$id", "title", "description"}
+KEYWORDS = ASSERTIONS | ANNOTATIONS
+
+JSON_TYPES = {
+    "object": dict,
+    "array": list,
+    "string": str,
+    "boolean": bool,
+    "number": (int, float),
+    "integer": int,
+}
+
+
+def subschemas(schema, path="#"):
+    """Yield (path, subschema) for every schema nested inside `schema`."""
+    yield path, schema
+    for name, sub in schema.get("properties", {}).items():
+        yield from subschemas(sub, f"{path}/properties/{name}")
+    if isinstance(schema.get("items"), dict):
+        yield from subschemas(schema["items"], f"{path}/items")
+
+
+def check_schema_keywords(schema):
+    return [
+        f"{path}: schema uses {kw!r}, which tests/conformance.py cannot evaluate — "
+        f"implement it in validate() or drop it, but do not let it pass unchecked"
+        for path, sub in subschemas(schema)
+        for kw in sub
+        if kw not in KEYWORDS
+    ]
+
+
+def validate(instance, schema, path="$"):
+    """Return a list of validation errors. Empty means the instance conforms."""
+    errors = []
+
+    declared = schema.get("type")
+    if declared:
+        # bool is a subclass of int in Python; JSON Schema keeps them distinct.
+        wrong_kind = isinstance(instance, bool) != (declared == "boolean")
+        if not isinstance(instance, JSON_TYPES[declared]) or wrong_kind:
+            return [f"{path}: expected {declared}, got {type(instance).__name__}"]
+
+    if "const" in schema and instance != schema["const"]:
+        errors.append(f"{path}: expected {schema['const']!r}, got {instance!r}")
+    if "enum" in schema and instance not in schema["enum"]:
+        errors.append(f"{path}: {instance!r} is not one of {schema['enum']}")
+
+    if isinstance(instance, str):
+        # JSON Schema's `pattern` is an unanchored search, not a full match.
+        if "pattern" in schema and not re.search(schema["pattern"], instance):
+            errors.append(f"{path}: {instance!r} does not match /{schema['pattern']}/")
+        if len(instance) < schema.get("minLength", 0):
+            errors.append(f"{path}: shorter than the minimum {schema['minLength']}")
+
+    if isinstance(instance, list):
+        if len(instance) < schema.get("minItems", 0):
+            errors.append(f"{path}: fewer than the minimum {schema['minItems']} item(s)")
+        if schema.get("uniqueItems"):
+            seen = {json.dumps(item, sort_keys=True) for item in instance}
+            if len(seen) != len(instance):
+                errors.append(f"{path}: items are not unique")
+        if isinstance(schema.get("items"), dict):
+            for i, item in enumerate(instance):
+                errors += validate(item, schema["items"], f"{path}[{i}]")
+
+    if isinstance(instance, dict):
+        properties = schema.get("properties", {})
+        for name in schema.get("required", []):
+            if name not in instance:
+                errors.append(f"{path}: missing required property {name!r}")
+        if schema.get("additionalProperties") is False:
+            for name in instance:
+                if name not in properties:
+                    errors.append(f"{path}: unexpected property {name!r}")
+        for name, sub in properties.items():
+            if name in instance:
+                errors += validate(instance[name], sub, f"{path}.{name}")
+
+    return errors
+
+
+def frozen_specs():
+    """Every permanent, version-pinned copy of the spec, in path order."""
+    return sorted(STATIC.glob("v*/spec.json"))
+
+
+def check_schema(spec):
+    schema = json.loads(SCHEMA.read_text(encoding="utf-8"))
+    failures = check_schema_keywords(schema)
+
+    # The schema is served from static/, so its $id has to be the URL it will
+    # actually resolve to — a $schema key pointing at a 404 is worse than none.
+    served_at = f"{spec['url']}/{SCHEMA.relative_to(STATIC).as_posix()}"
+    if schema.get("$id") != served_at:
+        failures.append(
+            f"{SCHEMA.relative_to(ROOT)} declares $id {schema.get('$id')!r} "
+            f"but is served at {served_at!r}"
+        )
+
+    failures += [f"static/spec.json {e}" for e in validate(spec, schema)]
+    for path in frozen_specs():
+        instance = json.loads(path.read_text(encoding="utf-8"))
+        failures += [
+            f"{path.relative_to(ROOT)} {e}" for e in validate(instance, schema)
+        ]
+    return failures
+
+
+def check_versioning(spec):
+    """Downstream tools pin /v<version>/spec.json, so releasing a new version
+    without freezing a copy of it would break the promise that URL makes."""
+    failures = []
+    version = spec["version"]
+    frozen = STATIC / f"v{version}" / "spec.json"
+
+    if not frozen.exists():
+        failures.append(
+            f"static/spec.json declares version {version} but its permanent copy is "
+            f"missing — run: mkdir -p static/v{version} && "
+            f"cp static/spec.json static/v{version}/spec.json"
+        )
+    elif frozen.read_bytes() != SPEC.read_bytes():
+        failures.append(
+            f"static/v{version}/spec.json differs from static/spec.json — the two "
+            f"URLs must serve the same bytes while {version} is the current version"
+        )
+
+    for path in frozen_specs():
+        declared = json.loads(path.read_text(encoding="utf-8"))["version"]
+        expected = path.parent.name[1:]
+        if declared != expected:
+            failures.append(
+                f"{path.relative_to(ROOT)} declares version {declared!r} — a frozen "
+                f"copy must keep the version of the directory it is published under"
+            )
+    return failures
+
+
 def main():
     spec, pattern = load_spec()
     ok = True
@@ -164,6 +331,23 @@ def main():
     failures = check_badge_version(spec)
     ok &= not failures
     print(f"badge:       {'ok' if not failures else str(len(failures)) + ' problem(s)'}")
+    for f in failures:
+        print(f"  ✗ {f}")
+
+    failures = check_schema(spec)
+    ok &= not failures
+    n = 1 + len(frozen_specs())
+    print(
+        f"schema:      {len(failures)} problem(s)"
+        if failures
+        else f"schema:      ok ({n} document(s) satisfy schema/v1)"
+    )
+    for f in failures:
+        print(f"  ✗ {f}")
+
+    failures = check_versioning(spec)
+    ok &= not failures
+    print(f"versioning:  {'ok' if not failures else str(len(failures)) + ' problem(s)'}")
     for f in failures:
         print(f"  ✗ {f}")
 

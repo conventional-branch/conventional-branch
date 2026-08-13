@@ -1,4 +1,5 @@
 public/
+__pycache__/
 .idea/
 .hugo_build.lock
 hugo_extended_*.tar.gz

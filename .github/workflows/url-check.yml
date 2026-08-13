@@ -27,6 +27,11 @@ jobs:
             "https://conventionalbranch.org/about/"
             # Served from every adopter's README — a 404 here breaks their badge.
             "https://conventionalbranch.org/badge.svg"
+            # Documented as permanent endpoints for downstream tooling to pin.
+            # These must never 404: something out there depends on each one.
+            "https://conventionalbranch.org/spec.json"
+            "https://conventionalbranch.org/v1.1.0/spec.json"
+            "https://conventionalbranch.org/schema/v1/spec.schema.json"
             "https://conventionalbranch.org/de/"
             "https://conventionalbranch.org/es/"
             "https://conventionalbranch.org/fr/"
