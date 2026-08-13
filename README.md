@@ -57,7 +57,6 @@ Enforce the specification automatically in your project:
 |---|---|
 | [commit-check](https://github.com/commit-check/commit-check) | CLI tool to check branch names, commit messages, and more |
 | [commit-check-action](https://github.com/commit-check/commit-check-action) | GitHub Action for automated branch name validation |
-| [VSCode Conventional Branch](https://marketplace.visualstudio.com/items?itemName=pshaddel.conventional-branch) | VSCode extension for branch name auto-completion |
 | [Conventional Branch Skill](skills/conventional-branch/SKILL.md) | Agent skill for AI coding assistants (Claude Code, Cursor, Pi, etc.) |
 
 Install the skill to teach your AI agent how to create properly named branches:

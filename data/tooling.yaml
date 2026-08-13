@@ -12,7 +12,7 @@ intro:
     es: "Use estas herramientas para adoptar y aplicar Conventional Branch en su proyecto:"
     th: "ใช้เครื่องมือเหล่านี้เพื่อปรับใช้และบังคับใช้ Conventional Branch ในโปรเจกต์ของคุณ:"
   full:
-    en: "Conventional Branch can be adopted with local checks, CI validation, editor support, and agent skills:"
+    en: "Conventional Branch can be adopted with local checks, CI validation, and agent skills:"
 install:
   label:
     en: "Install the skill with:"
@@ -60,22 +60,6 @@ items:
       th: ตรวจสอบชื่อ branch โดยอัตโนมัติใน GitHub Actions
     description:
       en: A GitHub Action for checking commit message formatting, branch naming, committer name, email, commit signoff and more.
-  - name: VSCode Conventional Branch
-    url: https://marketplace.visualstudio.com/items?itemName=pshaddel.conventional-branch
-    summary:
-      en: Create Conventional Branch names from Visual Studio Code.
-      zh: 在 Visual Studio Code 中创建约定式分支名称。
-      zh-hant: 在 Visual Studio Code 中建立約定式 branch 名稱。
-      pt-br: Crie nomes de branches Conventional Branch no Visual Studio Code.
-      fr: Créez des noms de branches Conventional Branch depuis Visual Studio Code.
-      ja: Visual Studio Code から慣例的ブランチ名を作成します。
-      de: Erstellt Conventional-Branch-Namen aus Visual Studio Code.
-      ru: Создаёт имена веток Conventional Branch из Visual Studio Code.
-      pl: Tworzy nazwy gałęzi Conventional Branch w Visual Studio Code.
-      es: Crea nombres de ramas Conventional Branch desde Visual Studio Code.
-      th: สร้างชื่อ branch แบบ Conventional Branch จาก Visual Studio Code
-    description:
-      en: Customizable Conventional Branch support for Visual Studio Code.
   - name: Conventional Branch Skill
     url: https://github.com/conventional-branch/conventional-branch/blob/main/skills/conventional-branch/SKILL.md
     summary:
