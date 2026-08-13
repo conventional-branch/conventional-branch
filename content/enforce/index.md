@@ -14,11 +14,16 @@ teams want one of each: the server rule is the contract, the local check is the
 courtesy.
 
 Every regular expression below is the one published in
-[`spec.json`](https://conventionalbranch.org/spec.json), copied verbatim. A conformance
-check in CI fails the build if this page and the specification ever disagree, so nothing
-here can go stale. The expression is deliberately written in a portable subset — no
-backreferences, no lookaround — so it compiles under RE2 as well as PCRE, which is what
-lets the same string work in GitHub, GitLab, Python, JavaScript, and Go alike.
+[`spec.json`](https://conventionalbranch.org/spec.json), copied verbatim, and a
+conformance check fails the build if this page and the specification ever disagree. The
+expression is deliberately written in a portable subset — no backreferences, no
+lookaround — so it compiles under RE2 as well as PCRE, which is what lets the same
+string work in GitHub, GitLab, Python, JavaScript, and Go alike.
+
+That check covers the expressions, not the prose. What each platform charges for, and
+which of them can block a push rather than merely report one, is true as written but
+verified by hand — if you find it out of date, please
+[say so](https://github.com/conventional-branch/conventional-branch/issues).
 
 It already permits `main`, `master` and `develop` unprefixed, so you do not need to
 carve out exceptions for your trunk branches.
@@ -27,8 +32,8 @@ carve out exceptions for your trunk branches.
 
 ### Rulesets
 
-Rulesets are the only GitHub feature that rejects a non-conforming branch outright. The
-`branch_name_pattern` rule takes a regular expression directly.
+A ruleset rejects a non-conforming branch outright, and on github.com it is the only
+thing that does. The `branch_name_pattern` rule takes a regular expression directly.
 
 ```json
 {
@@ -179,8 +184,8 @@ pipelines:
 
 ### pre-commit
 
-[commit-check](https://github.com/commit-check/commit-check) ships this specification's
-branch types as its defaults, so enabling the hook is the whole configuration:
+[commit-check](https://github.com/commit-check/commit-check) validates branch names as a
+`pre-commit` hook:
 
 ```yaml
 repos:
@@ -193,6 +198,13 @@ repos:
 ```bash
 pre-commit install
 ```
+
+As of `v2.15.0` its defaults are deliberately broader than this specification — it also
+allows `docs/`, `ci/`, `refactor/` and other commit types as branch prefixes — and it
+does not yet enforce the rules on the description, so `feature/new--login` and
+`fix/header_bug` pass. If you need the specification exactly, use the server-side rule
+above, or the hook below, as the authority. Progress on closing the gap is tracked in
+[commit-check#550](https://github.com/commit-check/commit-check/issues/550).
 
 ### A hook with no dependencies
 
@@ -259,8 +271,9 @@ npx skills add conventional-branch/conventional-branch --skill conventional-bran
 
 ### A snippet for `AGENTS.md` or `CLAUDE.md`
 
-This is how most projects using the specification instruct their agents. Paste it into
-whichever instruction file your tooling reads:
+Several projects on the [adopters list](https://conventionalbranch.org/about/#projects-using-conventional-branch)
+already document the convention this way rather than for people. Paste it into whichever
+instruction file your tooling reads:
 
 ```markdown
 ## Branch naming
