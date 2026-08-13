@@ -1,0 +1,34 @@
+Conventional Branch
+https://conventionalbranch.org
+
+Copyright (c) 2024-2026 Conventional Branch Contributors
+
+This work is licensed under the Creative Commons Attribution 4.0
+International License (CC BY 4.0). The full legal code is in the LICENSE
+file at the root of this repository, and is also available at:
+
+    https://creativecommons.org/licenses/by/4.0/legalcode
+
+SPDX-License-Identifier: CC-BY-4.0
+
+
+Attribution
+-----------
+
+The Conventional Branch specification and this website were derived from
+the Conventional Commits specification and its website:
+
+    Conventional Commits — https://www.conventionalcommits.org
+    Copyright (c) 2018 Conventional Changelog
+    Licensed under CC BY 4.0
+
+Changes were made: the specification was adapted from commit messages to
+Git branch names, and the content, grammar, and site were rewritten
+accordingly.
+
+
+Third-party components
+----------------------
+
+The Hugo theme in themes/conventional-branch/ is distributed under the MIT
+License; see themes/conventional-branch/LICENSE.
