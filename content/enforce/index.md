@@ -182,34 +182,10 @@ pipelines:
 
 ## Local checks
 
-### pre-commit
-
-[commit-check](https://github.com/commit-check/commit-check) validates branch names as a
-`pre-commit` hook:
-
-```yaml
-repos:
-  - repo: https://github.com/commit-check/commit-check
-    rev: v2.15.0
-    hooks:
-      - id: check-branch
-```
-
-```bash
-pre-commit install
-```
-
-As of `v2.15.0` its defaults are deliberately broader than this specification — it also
-allows `docs/`, `ci/`, `refactor/` and other commit types as branch prefixes — and it
-does not yet enforce the rules on the description, so `feature/new--login` and
-`fix/header_bug` pass. If you need the specification exactly, use the server-side rule
-above, or the hook below, as the authority. Progress on closing the gap is tracked in
-[commit-check#550](https://github.com/commit-check/commit-check/issues/550).
-
 ### A hook with no dependencies
 
-If you would rather not add a tool, `pre-push` is the last local moment where a bad
-branch name can still be caught. Save this as `.git/hooks/pre-push` and make it
+`pre-push` is the last local moment where a bad branch name can still be caught,
+and this needs nothing installed. Save this as `.git/hooks/pre-push` and make it
 executable:
 
 ```bash

@@ -80,10 +80,11 @@ A [conformance test](tests/README.md) runs in CI and checks the fixtures, the ex
 ## ⚙️ Enforcing It
 
 Copy-pasteable configuration for GitHub rulesets, GitLab push rules, Bitbucket
-Pipelines, pre-commit, a dependency-free Git hook, branch-creation aliases, and a
+Pipelines, a dependency-free Git hook, branch-creation aliases, and a
 snippet for `AGENTS.md` / `CLAUDE.md`, at
 [conventionalbranch.org/enforce](https://conventionalbranch.org/enforce/). Every regex on
-that page is the one in `spec.json`, checked in CI, so the configuration cannot go stale.
+that page is the one in `spec.json`, enforced by the conformance check, so a config
+copied from it cannot drift from the specification.
 
 ## 🏢 Used By
 
