@@ -1,0 +1,23 @@
+content/enforce/index.md
+  s_3254f153717a32::t_a1181085fb3b0b 35-36
+  s_3254f153717a32::t_c650ea66af790d 274-276
+  s_3254f153717a32::t_15d2639f935766 187-188,202-207
+  s_3254f153717a32::t_eb25ab86bae33b 17-26
+  s_3254f153717a32::t_8602d0e1c8505e 208
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "750fb8aa9d949f474981367ba41653fe489545f4",
+  "prompts": {},
+  "sessions": {
+    "s_3254f153717a32": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "f2c60a07-b0de-44a6-9c29-ff7ae690991f",
+        "model": "claude-opus-5"
+      },
+      "human_author": "shenxianpeng <xianpeng.shen@gmail.com>"
+    }
+  }
+}
