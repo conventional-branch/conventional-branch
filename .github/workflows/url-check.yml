@@ -25,6 +25,8 @@ jobs:
             "https://conventionalbranch.org/#summary"
             "https://conventionalbranch.org/#specification"
             "https://conventionalbranch.org/about/"
+            # Served from every adopter's README — a 404 here breaks their badge.
+            "https://conventionalbranch.org/badge.svg"
             "https://conventionalbranch.org/de/"
             "https://conventionalbranch.org/es/"
             "https://conventionalbranch.org/fr/"

@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Conformance test for the Conventional Branch specification.
 
-Runs three checks, all driven by the canonical machine-readable spec
+Runs four checks, all driven by the canonical machine-readable spec
 (static/spec.json) so the docs, the registry and the grammar cannot drift
 apart silently:
 
@@ -11,6 +11,8 @@ apart silently:
   3. Consistency — the regex accepts every declared type/alias and trunk
                    branch, and every AI agent prefix in data/agents.yaml is a
                    declared type (no registry/spec drift).
+  4. Badge       — the version rendered in static/badge.svg is the version
+                   spec.json declares, so the adoption badge cannot go stale.
 
 Exits non-zero if anything disagrees. Standard library only — no deps.
 """
@@ -25,6 +27,7 @@ SPEC = ROOT / "static" / "spec.json"
 FIXTURES = ROOT / "tests" / "fixtures.json"
 SPEC_PAGE = ROOT / "content" / "_index.md"
 AGENTS = ROOT / "data" / "agents.yaml"
+BADGE = ROOT / "static" / "badge.svg"
 
 
 def load_spec():
@@ -107,6 +110,35 @@ def check_consistency(spec, pattern):
     return failures
 
 
+# The badge spells the version out four times: the accessible name, the <title>,
+# and the two <text> layers that make up the drop shadow and the fill.
+BADGE_VERSION = re.compile(
+    r'aria-label="Conventional Branch ([^"]+)"'
+    r"|<title>Conventional Branch ([^<]+)</title>"
+    r"|<text[^>]*>(\d+\.\d+\.\d+)</text>"
+)
+BADGE_VERSION_COUNT = 4
+
+
+def check_badge_version(spec):
+    expected = spec["version"]
+    rendered = [
+        next(g for g in m.groups() if g)
+        for m in BADGE_VERSION.finditer(BADGE.read_text(encoding="utf-8"))
+    ]
+    failures = [
+        f"static/badge.svg renders version {v!r}, spec.json declares {expected!r}"
+        for v in sorted(set(rendered))
+        if v != expected
+    ]
+    if len(rendered) != BADGE_VERSION_COUNT:
+        failures.append(
+            f"expected {BADGE_VERSION_COUNT} version strings in static/badge.svg, "
+            f"found {len(rendered)} — badge markup out of date?"
+        )
+    return failures
+
+
 def main():
     spec, pattern = load_spec()
     ok = True
@@ -126,6 +158,12 @@ def main():
     failures = check_consistency(spec, pattern)
     ok &= not failures
     print(f"consistency: {'ok' if not failures else str(len(failures)) + ' problem(s)'}")
+    for f in failures:
+        print(f"  ✗ {f}")
+
+    failures = check_badge_version(spec)
+    ok &= not failures
+    print(f"badge:       {'ok' if not failures else str(len(failures)) + ' problem(s)'}")
     for f in failures:
         print(f"  ✗ {f}")
 

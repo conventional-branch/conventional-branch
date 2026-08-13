@@ -44,7 +44,7 @@ Building an agent that opens PRs? [Register its prefix](https://github.com/conve
 * [LedgerHQ/ledger-live](https://github.com/LedgerHQ/ledger-live/blob/main/CONTRIBUTING.md): Mono-repository for packages related to Ledger Live and its JavaScript ecosystem.
 * _[... and more projects using Conventional Branch](https://github.com/search?q=conventional-branch.github.io&type=code&p=1)._
 
-[![Conventional Branch](https://img.shields.io/badge/Conventional%20Branch-Spec-6192c3)](https://github.com/conventional-branch/conventional-branch)
+[![Conventional Branch](https://conventionalbranch.org/badge.svg)](https://conventionalbranch.org/)
 
 _Want your project on this list?_ [Send a pull request](https://github.com/conventional-branch/conventional-branch/pulls).
 
@@ -89,5 +89,20 @@ Other CI/CD platforms support the same pattern using their own equivalent of a b
 
 1. **Communicate the convention** to your team and add it to your contributing guidelines.
 2. **Enforce it automatically** using one of the tools listed above.
-3. **Add the badge** to your repository README to signal adoption.
+3. **Add the badge** to your repository README to signal adoption:
+
+   [![Conventional Branch](https://conventionalbranch.org/badge.svg)](https://conventionalbranch.org/)
+
+   ```markdown
+   [![Conventional Branch](https://conventionalbranch.org/badge.svg)](https://conventionalbranch.org/)
+   ```
+
+   Or in HTML:
+
+   ```html
+   <a href="https://conventionalbranch.org/">
+     <img alt="Conventional Branch 1.1.0" src="https://conventionalbranch.org/badge.svg">
+   </a>
+   ```
+
 4. **Configure your CI/CD** to trigger different workflows based on branch prefix (e.g., auto-deploy on `release/` branches) — see [CI/CD Integration](#cicd-integration) above.
