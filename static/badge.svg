@@ -8,6 +8,13 @@
     explicit textLength, which is what keeps the rendering identical on machines
     that have no Verdana.
 
+    The label is #2F3438 rather than shields' default #555. Against #555 the
+    version half only reaches 1.40:1, so the two halves read as one dark bar;
+    and with the label fixed at #555 there is no fix, since white text needs the
+    version half at luminance <= 0.183 to clear WCAG AA while separating from
+    #555 needs >= 0.270. Darkening the label instead satisfies both: white on
+    #3B6BB5 stays at 5.31:1, and the halves separate at 2.37:1.
+
     On a spec release, bump the version in <title>, aria-label and both version
     <text> elements. tests/conformance.py fails the build if it drifts from
     static/spec.json.
@@ -20,7 +27,7 @@
     <rect width="180" height="20" rx="3" fill="#fff"/>
   </clipPath>
   <g clip-path="url(#round)">
-    <rect width="140" height="20" fill="#555"/>
+    <rect width="140" height="20" fill="#2F3438"/>
     <rect x="140" width="40" height="20" fill="#3B6BB5"/>
     <rect width="180" height="20" fill="url(#gloss)"/>
   </g>
