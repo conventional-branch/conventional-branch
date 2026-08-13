@@ -8,7 +8,7 @@
 
 Conventional Branch defines a small branch naming convention, `<type>/<description>`, in which every branch declares its own purpose. That turns a branch name into something your CI/CD pipelines, review policies, and tooling can act on directly, instead of a team habit that has to be explained to each new contributor and enforced by hand in code review.
 
-The convention is published as a [machine-readable spec](#-machine-readable-spec) with conformance fixtures, so validating branch names is a solved problem for any tool that wants to support it. It is used by [Ledger](https://github.com/LedgerHQ/ledger-live), [Sanity](https://github.com/sanity-io/sdk), [Ansible](https://github.com/ansible/metrics-utility), and the [Government of British Columbia](https://github.com/bcgov/nr-pies), among [others](#-used-by).
+The convention is published as a [machine-readable spec](#-machine-readable-spec) with conformance fixtures, so validating branch names is a solved problem for any tool that wants to support it. It is used by the UK's [GCHQ](https://github.com/gchq/Bailo/blob/main/AGENTS.md), [Oak Ridge National Laboratory](https://github.com/ORNLSlicer/ORNLSlicer/blob/develop/docs/contributing/conventional-branch.md), [ByteDance](https://github.com/ByteDance-Seed/cryofm/blob/main/CONTRIBUTING.md), the [Government of British Columbia](https://github.com/bcgov/nr-pies), [Ledger](https://github.com/LedgerHQ/ledger-live), and [LiteLLM](https://github.com/BerriAI/litellm), among [others](#-used-by).
 
 ## 🚀 Quick Start
 
@@ -79,7 +79,7 @@ A [conformance test](tests/README.md) runs in CI and checks the fixtures, the ex
 
 ## 🏢 Used By
 
-Alongside the projects named above, Conventional Branch is adopted by [Texas Instruments](https://github.com/TexasInstruments/processor-sdk-doc) and [LiteLLM](https://github.com/BerriAI/litellm), among others. See the [full list](https://conventionalbranch.org/about/#projects-using-conventional-branch) and add your project via pull request.
+Alongside the organizations named above, Conventional Branch is adopted by [Texas Instruments](https://github.com/TexasInstruments/processor-sdk-doc), [Ansible](https://github.com/ansible/metrics-utility), [Sanity](https://github.com/sanity-io/sdk), Portugal's state technology agency [ARTE](https://github.com/amagovpt/udata-pt), and [Enedis](https://github.com/Enedis-OSS/tic4eebus), France's largest electricity distributor. See the [full list](https://conventionalbranch.org/about/#projects-using-conventional-branch) and add your project via pull request.
 
 ## 🎉 Show Your Support
 

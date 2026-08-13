@@ -52,8 +52,8 @@ The "Projects Using Conventional Branch" list on the [About page](./content/abou
 
 To add your project:
 
-1. Add a bullet to the list in `./content/about/index.md`, linking to the file where your project documents the convention (e.g. your `CONTRIBUTING.md`) and a short one-line description.
-2. Keep the list roughly in the order projects were added (new entries at the bottom, before the "and more" link).
+1. Add a bullet to the list in `./content/about/index.md`, linking to the file where your project documents the convention (e.g. your `CONTRIBUTING.md`) and a short one-line description. The link must point at a file that actually documents the convention — the list is evidence, not a directory.
+2. The list is roughly ordered by how widely recognized the organization is, so that it stays useful to skim. Add your entry wherever it fits; maintainers may move it.
 3. Open a pull request. If your project is widely recognizable, it may also be added to the shorter curated list in `README.md`, at the maintainers' discretion.
 
 ### Changing the grammar or types
