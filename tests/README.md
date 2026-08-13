@@ -40,7 +40,12 @@ python3 tests/conformance.py
 4. **Badge** — the version rendered in `static/badge.svg` is the version
    `spec.json` declares, so the adoption badge cannot go stale.
 5. **Schema** — `spec.json` and every frozen copy satisfy `schema/v1`.
-6. **Versioning** — the version `spec.json` declares has a byte-identical
+6. **Integrations** — every regex in the copy-pasteable configuration on
+   [`content/enforce/index.md`](../content/enforce/index.md) is the spec's own,
+   character for character. The one snippet that cannot use it verbatim — the
+   POSIX `grep -E` hook, which has no `(?:` — is additionally checked to accept
+   exactly the same branch names.
+7. **Versioning** — the version `spec.json` declares has a byte-identical
    frozen copy under `static/v<version>/`, so a release cannot ship without the
    permanent endpoint that downstream tools pin to.
 
