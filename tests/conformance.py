@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Conformance test for the Conventional Branch specification.
 
-Runs six checks, all driven by the canonical machine-readable spec
+Runs seven checks, all driven by the canonical machine-readable spec
 (static/spec.json) so the docs, the registry and the grammar cannot drift
 apart silently:
 
@@ -15,7 +15,10 @@ apart silently:
                    spec.json declares, so the adoption badge cannot go stale.
   5. Schema      — spec.json, and every frozen copy of it, satisfies
                    static/schema/v1/spec.schema.json.
-  6. Versioning  — the version spec.json declares has a frozen, byte-identical
+  6. Integrations— every regex in the copy-pasteable configuration on
+                   content/enforce/index.md is the spec's own, character for
+                   character, so published configs cannot silently rot.
+  7. Versioning  — the version spec.json declares has a frozen, byte-identical
                    copy under static/v<version>/, so the permanent endpoint
                    downstream tools pin to cannot be forgotten on a release.
 
@@ -33,6 +36,7 @@ SPEC = STATIC / "spec.json"
 SCHEMA = STATIC / "schema" / "v1" / "spec.schema.json"
 FIXTURES = ROOT / "tests" / "fixtures.json"
 SPEC_PAGE = ROOT / "content" / "_index.md"
+ENFORCE_PAGE = ROOT / "content" / "enforce" / "index.md"
 AGENTS = ROOT / "data" / "agents.yaml"
 BADGE = STATIC / "badge.svg"
 
@@ -276,6 +280,61 @@ def check_schema(spec):
     return failures
 
 
+# Every copy of the validator on the enforcement page starts one of these two ways.
+# A line containing either is claiming to be the spec regex and has to be exactly it.
+REGEX_MARKERS = ("^(?:main|master|develop", "^(main|master|develop")
+
+
+def posix_ere(regex):
+    """The spec regex as POSIX ERE, for `grep -E` in the dependency-free hook.
+
+    `(?:` is the only construct in the published expression that POSIX does not
+    have, and turning it into a plain group changes nothing about what matches —
+    the groups are never referenced. `grep -P` would avoid the translation, but it
+    is a GNU extension: on macOS it fails to run, and `! grep -qP` then rejects
+    every branch name there is.
+    """
+    return regex.replace("(?:", "(")
+
+
+def check_integrations(spec, pattern):
+    """The enforcement page hands out copy-pasteable configuration, which is only
+    worth publishing if it cannot rot. Each embedded regex must be the spec's own,
+    character for character, in whichever of the three encodings its snippet needs.
+    The POSIX form is additionally checked to accept exactly the same branch names,
+    so the translation cannot quietly change meaning."""
+    regex = spec["grammar"]["regex"]
+    ere = posix_ere(regex)
+    accepted = (regex, json.dumps(regex)[1:-1], ere)
+    failures = []
+    found = 0
+
+    for number, line in enumerate(ENFORCE_PAGE.read_text(encoding="utf-8").splitlines(), 1):
+        if not any(marker in line for marker in REGEX_MARKERS):
+            continue
+        found += 1
+        if not any(form in line for form in accepted):
+            failures.append(
+                f"content/enforce/index.md:{number}: this regex is not the one in "
+                f"spec.json — a config on that page would accept the wrong branches"
+            )
+    if not found:
+        failures.append(
+            "content/enforce/index.md: no validator regex found — did the page move, "
+            "or did every snippet lose the pattern it is supposed to configure?"
+        )
+
+    compiled = re.compile(ere)
+    for case in json.loads(FIXTURES.read_text(encoding="utf-8"))["cases"]:
+        branch = case["branch"]
+        if (compiled.fullmatch(branch) is not None) != (pattern.fullmatch(branch) is not None):
+            failures.append(
+                f"the POSIX form of the regex disagrees with the spec on {branch!r} — "
+                f"the shell hook would not match the specification"
+            )
+    return found, failures
+
+
 def check_versioning(spec):
     """Downstream tools pin /v<version>/spec.json, so releasing a new version
     without freezing a copy of it would break the promise that URL makes."""
@@ -341,6 +400,16 @@ def main():
         f"schema:      {len(failures)} problem(s)"
         if failures
         else f"schema:      ok ({n} document(s) satisfy schema/v1)"
+    )
+    for f in failures:
+        print(f"  ✗ {f}")
+
+    n, failures = check_integrations(spec, pattern)
+    ok &= not failures
+    print(
+        f"integrations: {len(failures)} problem(s)"
+        if failures
+        else f"integrations: ok ({n} configs embed the spec regex verbatim)"
     )
     for f in failures:
         print(f"  ✗ {f}")

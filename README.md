@@ -77,6 +77,14 @@ The specification is published in a machine-readable form so tools don't have to
 
 A [conformance test](tests/README.md) runs in CI and checks the fixtures, the examples table in the docs, the agent registry, and every published spec document against `spec.json` and its schema, so they can't drift apart. The [stability guarantees](tests/README.md#endpoints-and-stability) for each endpoint are written down.
 
+## ⚙️ Enforcing It
+
+Copy-pasteable configuration for GitHub rulesets, GitLab push rules, Bitbucket
+Pipelines, pre-commit, a dependency-free Git hook, branch-creation aliases, and a
+snippet for `AGENTS.md` / `CLAUDE.md`, at
+[conventionalbranch.org/enforce](https://conventionalbranch.org/enforce/). Every regex on
+that page is the one in `spec.json`, checked in CI, so the configuration cannot go stale.
+
 ## 🏢 Used By
 
 Alongside the organizations named above, Conventional Branch is adopted by [Texas Instruments](https://github.com/TexasInstruments/processor-sdk-doc), [Ansible](https://github.com/ansible/metrics-utility), [Sanity](https://github.com/sanity-io/sdk), Portugal's state technology agency [ARTE](https://github.com/amagovpt/udata-pt), and [Enedis](https://github.com/Enedis-OSS/tic4eebus), France's largest electricity distributor. See the [full list](https://conventionalbranch.org/about/#projects-using-conventional-branch) and add your project via pull request.
