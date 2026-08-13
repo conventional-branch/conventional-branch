@@ -224,15 +224,21 @@ Enforcement tells people they are wrong. An alias makes it easier to be right:
 
 ```ini
 [alias]
-    feature = "!f() { git switch -c \"feature/$1\"; }; f"
-    bugfix  = "!f() { git switch -c \"bugfix/$1\"; }; f"
-    hotfix  = "!f() { git switch -c \"hotfix/$1\"; }; f"
-    chore   = "!f() { git switch -c \"chore/$1\"; }; f"
+    feature = "!f() { git switch -c \"feature/$(printf '%s' \"$*\" | tr 'A-Z _' 'a-z--')\"; }; f"
+    bugfix  = "!f() { git switch -c \"bugfix/$(printf '%s' \"$*\" | tr 'A-Z _' 'a-z--')\"; }; f"
+    hotfix  = "!f() { git switch -c \"hotfix/$(printf '%s' \"$*\" | tr 'A-Z _' 'a-z--')\"; }; f"
+    chore   = "!f() { git switch -c \"chore/$(printf '%s' \"$*\" | tr 'A-Z _' 'a-z--')\"; }; f"
 ```
 
 ```bash
-git feature add-login-page   # creates and switches to feature/add-login-page
+git feature add login page   # creates and switches to feature/add-login-page
+git feature Fix_Header       # creates and switches to feature/fix-header
 ```
+
+The `tr` handles the three ways people usually get it wrong without noticing:
+uppercase, underscores, and words typed with spaces instead of hyphens. It is a
+convenience rather than a check — a description with other punctuation in it still
+gets through, which is what the hook above is for.
 
 ## AI coding agents
 
