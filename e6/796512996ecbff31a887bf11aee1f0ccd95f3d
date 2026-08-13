@@ -1,0 +1,45 @@
+CONTRIBUTING.md
+  s_3254f153717a32::t_ce21e0b8acf3c5 78-83
+  s_3254f153717a32::t_fdd38fe5451e9e 67-69
+static/spec.json
+  s_3254f153717a32::t_2856678406cebd 2
+.github/workflows/url-check.yml
+  s_3254f153717a32::t_5e72e09b1266e2 30-34
+tests/README.md
+  s_3254f153717a32::t_82df6d2865655d 9-11,15-27,40-45,50-54,57-59,64-66,73-74
+  s_3254f153717a32::t_fdde7a83d29103 75
+tests/conformance.py
+  s_3254f153717a32::t_5e48ec5c538f88 253
+  s_3254f153717a32::t_1a944977bdd932 337-340,342,344-353
+  s_3254f153717a32::t_b6f9d20514a93e 341,343
+  s_3254f153717a32::t_ee633ba628ef9e 4,16-20,31-33,37
+  s_3254f153717a32::t_9496028beee360 149-252,254-308
+README.md
+  s_3254f153717a32::t_28757fa1bbfc2b 74-75,78
+static/schema/v1/spec.schema.json
+  s_3254f153717a32::t_8a1c3fd438bfb0 1-154
+.gitignore
+  s_3254f153717a32::t_63144cb3140c79 2
+CHANGELOG.md
+  s_3254f153717a32::t_fa49c1340d5c06 7-13
+static/v1.1.0/spec.json
+  s_3254f153717a32::t_90ffb681b5b5bd 1-82
+.github/workflows/conformance.yml
+  s_3254f153717a32::t_f76a0505146399 21-30
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "e6796512996ecbff31a887bf11aee1f0ccd95f3d",
+  "prompts": {},
+  "sessions": {
+    "s_3254f153717a32": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "f2c60a07-b0de-44a6-9c29-ff7ae690991f",
+        "model": "claude-opus-5"
+      },
+      "human_author": "shenxianpeng <xianpeng.shen@gmail.com>"
+    }
+  }
+}
