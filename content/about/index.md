@@ -38,7 +38,6 @@ to skim.
 * [amagovpt/udata-pt](https://github.com/amagovpt/udata-pt/blob/main/CLAUDE.md): Portugal's open data platform, by ARTE, the state agency for technological reform.
 * [TexasInstruments/processor-sdk-doc](https://github.com/TexasInstruments/processor-sdk-doc): Texas Instruments Processor SDK documentation.
 * [Enedis-OSS/tic4eebus](https://github.com/Enedis-OSS/tic4eebus/blob/main/CONTRIBUTING.md): EEBUS OPEV use case by Enedis, France's largest electricity distributor.
-* [LedgerHQ/ledger-live](https://github.com/LedgerHQ/ledger-live/blob/main/CONTRIBUTING.md): Mono-repository for packages related to Ledger Live and its JavaScript ecosystem.
 * [BerriAI/litellm](https://github.com/BerriAI/litellm/blob/main/CONTRIBUTING.md): A high-performance LLM proxy supporting 100+ models with spending tracking and guardrails.
 * [ansible/metrics-utility](https://github.com/ansible/metrics-utility/blob/devel/docs/CONTRIBUTING.md): Standalone utility for github.com/ansible/awx.
 * [sanity-io/sdk](https://github.com/sanity-io/sdk/blob/main/CONTRIBUTING.md): Sanity App SDK.
