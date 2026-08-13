@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="180" height="20" role="img" aria-label="Conventional Branch 1.1.0">
+  <title>Conventional Branch 1.1.0</title>
+  <!--
+    Adoption badge, served at https://conventionalbranch.org/badge.svg
+
+    Geometry matches the shields.io "flat" style (20px tall, 3px radius) so the
+    badge lines up with the other badges in a README row. Text is drawn with an
+    explicit textLength, which is what keeps the rendering identical on machines
+    that have no Verdana.
+
+    On a spec release, bump the version in <title>, aria-label and both version
+    <text> elements. tests/conformance.py fails the build if it drifts from
+    static/spec.json.
+  -->
+  <linearGradient id="gloss" x2="0" y2="100%">
+    <stop offset="0" stop-color="#bbb" stop-opacity=".1"/>
+    <stop offset="1" stop-opacity=".1"/>
+  </linearGradient>
+  <clipPath id="round">
+    <rect width="180" height="20" rx="3" fill="#fff"/>
+  </clipPath>
+  <g clip-path="url(#round)">
+    <rect width="140" height="20" fill="#555"/>
+    <rect x="140" width="40" height="20" fill="#3B6BB5"/>
+    <rect width="180" height="20" fill="url(#gloss)"/>
+  </g>
+  <!-- Branch mark, from themes/conventional-branch/static/img/git-flow.svg -->
+  <g transform="translate(5,3) scale(0.29167)">
+    <path fill="#fff" d="M44,9a7,7,0,1,0-9,6.7V16a6,6,0,0,1-6,6H21a10.3,10.3,0,0,0-6,2V15.7a7,7,0,1,0-4,0V32.3a7,7,0,1,0,4,0V32a6,6,0,0,1,6-6h8A10,10,0,0,0,39,16v-.3A7,7,0,0,0,44,9ZM10,9a3,3,0,0,1,6,0,3,3,0,0,1-6,0Zm6,30a3,3,0,1,1-3-3A2.9,2.9,0,0,1,16,39ZM37,12a2.9,2.9,0,0,1-3-3,3,3,0,0,1,6,0A2.9,2.9,0,0,1,37,12Z"/>
+  </g>
+  <g fill="#fff" text-anchor="middle" font-family="Verdana,Geneva,DejaVu Sans,sans-serif" font-size="110" text-rendering="geometricPrecision">
+    <text aria-hidden="true" x="782" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="1085">Conventional Branch</text>
+    <text x="782" y="140" transform="scale(.1)" textLength="1085">Conventional Branch</text>
+    <text aria-hidden="true" x="1598" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="255">1.1.0</text>
+    <text x="1598" y="140" transform="scale(.1)" textLength="255">1.1.0</text>
+  </g>
+</svg>
