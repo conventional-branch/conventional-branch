@@ -111,7 +111,7 @@ Other CI/CD platforms support the same pattern using their own equivalent of a b
    `&style=for-the-badge`:
 
    ```markdown
-   [![Conventional Branch](https://img.shields.io/badge/Conventional%20Branch-1.1.0-3B6BB5?labelColor=2F3438)](https://conventionalbranch.org/)
+   [![Conventional Branch](https://img.shields.io/badge/Conventional%20Branch-1.1.0-6699CC)](https://conventionalbranch.org/)
    ```
 
 4. **Configure your CI/CD** to trigger different workflows based on branch prefix (e.g., auto-deploy on `release/` branches) — see [CI/CD Integration](#cicd-integration) above.

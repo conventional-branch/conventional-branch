@@ -1,7 +1,7 @@
 # The Conventional Branch Specification
 
 [![Conventional Branch](https://conventionalbranch.org/badge.svg)](https://conventionalbranch.org/)
-[![Website](https://img.shields.io/website?url=https%3A%2F%2Fconventionalbranch.org%2F&up_color=3B6BB5)](https://conventionalbranch.org/)
+[![Website](https://img.shields.io/website?url=https%3A%2F%2Fconventionalbranch.org%2F&up_color=6699CC)](https://conventionalbranch.org/)
 [![License: CC BY 4.0](https://img.shields.io/badge/License-CC%20BY%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by/4.0/)
 
 The Conventional Branch specification defines a naming convention that brings order to your development workflow — whether you're working solo or with a team.
@@ -104,16 +104,14 @@ In HTML, for READMEs that aren't Markdown:
 **[shields.io](https://shields.io)** — no mark, but you can restyle it:
 
 ```markdown
-[![Conventional Branch](https://img.shields.io/badge/Conventional%20Branch-1.1.0-3B6BB5?labelColor=2F3438)](https://conventionalbranch.org/)
+[![Conventional Branch](https://img.shields.io/badge/Conventional%20Branch-1.1.0-6699CC)](https://conventionalbranch.org/)
 ```
 
-`labelColor=2F3438` is what keeps the two halves of the badge distinct; without
-it shields uses `#555`, which sits too close to the blue to read as two halves.
 Append `&style=` to change the shape — `flat` (the default), `flat-square`,
 `plastic` or `for-the-badge`.
 
-Both colors come from the site's palette: `#3B6BB5` is `$color-primary-deep`, and
-white text on it clears WCAG AA at 5.31:1.
+`#6699CC` is the site's own `$color-primary`. The grey half is left on shields'
+default so the badge sits comfortably next to the other badges in your README.
 
 ## 🤝 Contributing
 
