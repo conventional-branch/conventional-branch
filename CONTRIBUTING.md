@@ -64,7 +64,9 @@ The specification has a machine-readable form in [`./static/spec.json`](./static
 python3 tests/conformance.py
 ```
 
-It checks the fixtures, the docs examples table, and the agent registry against `spec.json`. The same check runs in CI. See [`./tests/README.md`](./tests/README.md) for details.
+It checks the fixtures, the docs examples table, and the agent registry against `spec.json`, and validates `spec.json` against [`./static/schema/v1/spec.schema.json`](./static/schema/v1/spec.schema.json). The same check runs in CI. See [`./tests/README.md`](./tests/README.md) for details.
+
+Adding a property to `spec.json` means adding it to the schema too, otherwise the check rejects it as unexpected. Keep new properties optional: schema `v1` is a stability promise, so a change that would invalidate a document valid under it belongs in a `v2` at a new URL.
 
 ### Releasing a new version
 
@@ -73,6 +75,12 @@ The current version lives only at the site root (`./content/_index*.md`) — it 
 1. Snapshot the version you are leaving behind: copy the current root files into `./content/<previous-version>/` (e.g. `./content/v1.1.0/`). This becomes an immutable archive browsable via the version switcher.
 1. Edit the root `./content/_index*.md` files to reflect the new version.
 1. In `./config.yaml`, append the new version to `params.versions.list` and set `params.versions.current` to it.
+1. Bump `version` in [`./static/spec.json`](./static/spec.json) and freeze a copy of it under the new version:
+   ```bash
+   mkdir -p static/v1.2.0 && cp static/spec.json static/v1.2.0/spec.json
+   ```
+   Unlike the prose, the machine-readable spec is frozen *forward*, not backward: `./static/v<previous>/spec.json` already exists and must never be edited — downstream tools pin those URLs. `python3 tests/conformance.py` fails if the copy is missing or differs.
+1. Add the new endpoint to the `urls` list in [`./.github/workflows/url-check.yml`](./.github/workflows/url-check.yml), so a permanent URL that stops resolving opens an issue.
 1. Update `CHANGELOG.md`.
 
 The version switcher links the current version to the site root and every archived version to `/<version>/`, so there is a single source of truth for the live spec.

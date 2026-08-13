@@ -4,6 +4,13 @@ All notable changes to the Conventional Branch specification will be documented 
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
+## [Unreleased]
+
+### Added
+- **Permanent spec endpoint**: the machine-readable spec is now served both at [`/spec.json`](https://conventionalbranch.org/spec.json) (always the latest version) and at [`/v1.1.0/spec.json`](https://conventionalbranch.org/v1.1.0/spec.json), frozen at publication. Downstream tools can pin the versioned URL so a future release cannot change their behavior unannounced.
+- **JSON Schema for `spec.json`**: [`/schema/v1/spec.schema.json`](https://conventionalbranch.org/schema/v1/spec.schema.json) describes the structure of the spec document itself, with written stability guarantees for each endpoint. `spec.json` now carries a `$schema` key.
+- Two conformance checks covering the above: every published spec document is validated against the schema, and a release cannot ship without a byte-identical frozen copy of the version it declares.
+
 ## [1.1.0] - 2026-07-08
 
 ### Added

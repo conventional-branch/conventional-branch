@@ -71,10 +71,11 @@ npx skills add conventional-branch/conventional-branch --skill conventional-bran
 
 The specification is published in a machine-readable form so tools don't have to parse Markdown:
 
-- **[`spec.json`](static/spec.json)** ([hosted](https://conventionalbranch.org/spec.json)) — types, aliases, trunk branches, rules, the ABNF grammar, and a single anchored **validation regex**.
+- **[`spec.json`](static/spec.json)** — types, aliases, trunk branches, rules, the ABNF grammar, and a single anchored **validation regex**. Served two ways: [`/spec.json`](https://conventionalbranch.org/spec.json) always tracks the latest version, and [`/v1.1.0/spec.json`](https://conventionalbranch.org/v1.1.0/spec.json) is frozen at publication — **pin the versioned URL** so a future release can't change your tool's behavior without you choosing it.
+- **[`schema/v1/spec.schema.json`](static/schema/v1/spec.schema.json)** ([hosted](https://conventionalbranch.org/schema/v1/spec.schema.json)) — a JSON Schema describing `spec.json`'s own structure, so you can verify a document is a well-formed spec before trusting it.
 - **[`tests/fixtures.json`](tests/fixtures.json)** — language-agnostic valid/invalid conformance cases any implementation can run against.
 
-A [conformance test](tests/README.md) runs in CI and checks the fixtures, the examples table in the docs, and the agent registry all against `spec.json`, so they can't drift apart.
+A [conformance test](tests/README.md) runs in CI and checks the fixtures, the examples table in the docs, the agent registry, and every published spec document against `spec.json` and its schema, so they can't drift apart. The [stability guarantees](tests/README.md#endpoints-and-stability) for each endpoint are written down.
 
 ## 🏢 Used By
 
