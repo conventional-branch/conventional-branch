@@ -32,8 +32,11 @@ python3 tests/conformance.py
 ```
 
 1. **Fixtures** — every case in `fixtures.json` matches `spec.json`'s regex.
-2. **Docs table** — the valid/invalid examples table in `content/_index.md`
-   agrees with the regex, so the documentation validates itself.
+2. **Docs table** — the valid/invalid examples table on every language's
+   specification page agrees with the regex, and each translation offers the
+   same examples English does, so the documentation validates itself in all
+   eleven languages. Archived versions under `content/v1.0.0/` are excluded:
+   they preserve a narrower grammar on purpose.
 3. **Consistency** — the regex accepts every declared type/alias and trunk
    branch, and every AI agent prefix in `data/agents.yaml` is a declared type
    (guards against registry/spec drift).
@@ -48,6 +51,10 @@ python3 tests/conformance.py
 7. **Versioning** — the version `spec.json` declares has a byte-identical
    frozen copy under `static/v<version>/`, so a release cannot ship without the
    permanent endpoint that downstream tools pin to.
+8. **Grammar** — the ABNF `type` rule, in `spec.json` and on every language's
+   page, offers exactly the types `spec.json` declares. Nothing generates one
+   from the other, so without this a newly registered prefix can be live in the
+   regex while the grammar a reader is looking at never mentions it.
 
 The check exits non-zero on any disagreement and runs on every pull request via
 [`.github/workflows/conformance.yml`](../.github/workflows/conformance.yml).
