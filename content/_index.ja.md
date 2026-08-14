@@ -54,50 +54,13 @@ layout: single
 
 以下の ABNF（拡張バッカス・ナウア記法）文法は、有効なブランチ名を形式的に定義します：
 
-```abnf
-branch-name     = trunk-branch / prefixed-branch
-trunk-branch    = "main" / "master" / "develop"
-prefixed-branch = type "/" description
-type            = "feature" / "feat" / "bugfix" / "fix"
-                / "hotfix" / "release" / "chore"
-                / "ai" / "copilot" / "cursor"
-                / "claude" / "codex"
-description     = desc-segment *("-" desc-segment)
-desc-segment    = 1*(ALPHA / DIGIT) *("." 1*(ALPHA / DIGIT))
-ALPHA           = %x61-7A   ; 小文字 a-z
-DIGIT           = %x30-39   ; 数字 0-9
-```
+{{< grammar >}}
 
 > 注意：連続するハイフンやドット、および説明の先頭や末尾のハイフンやドットは使用できません。
 
 ### 例
 
-| ブランチ名 | 有効 | 備考 |
-|---|---|---|
-| `main` | ✅ | トランクブランチ |
-| `master` | ✅ | トランクブランチ |
-| `develop` | ✅ | トランクブランチ |
-| `feature/add-login-page` | ✅ | 新機能 |
-| `feat/add-login-page` | ✅ | feature の短縮形 |
-| `bugfix/fix-header-bug` | ✅ | バグ修正 |
-| `fix/header-bug` | ✅ | bugfix の短縮形 |
-| `hotfix/security-patch` | ✅ | 緊急修正 |
-| `release/v1.2.0` | ✅ | バージョン番号付きリリース |
-| `chore/update-dependencies` | ✅ | 非コードタスク |
-| `feature/issue-123-new-login` | ✅ | チケット番号付き機能 |
-| `Feature/Add-Login` | ❌ | 大文字は使用不可 |
-| `feature/new--login` | ❌ | 連続するハイフンは使用不可 |
-| `feature/-new-login` | ❌ | 説明をハイフンで始めることは不可 |
-| `feature/new-login-` | ❌ | 説明をハイフンで終わらせることは不可 |
-| `release/v1.-2.0` | ❌ | ドットに隣接するハイフンは不可 |
-| `fix/header bug` | ❌ | スペースは使用不可 |
-| `fix/header_bug` | ❌ | アンダースコアは使用不可 |
-| `ai/refactor-auth-flow` | ✅ | 汎用 AI エージェントプレフィックス |
-| `copilot/add-login-page` | ✅ | GitHub Copilot |
-| `cursor/fix-header-bug` | ✅ | Cursor |
-| `claude/security-patch` | ✅ | Anthropic Claude Code |
-| `codex/optimize-query` | ✅ | OpenAI Codex |
-| `unknown/some-task` | ❌ | 未知のプレフィックスタイプ |
+{{< examples >}}
 
 ## 結論
 

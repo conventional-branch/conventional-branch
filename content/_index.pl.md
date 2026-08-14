@@ -54,50 +54,13 @@ Gałęzie główne (`main`, `master`, `develop`) nie używają prefiksu.
 
 Poniższa gramatyka ABNF (Augmented Backus-Naur Form) formalnie definiuje prawidłowe nazwy gałęzi:
 
-```abnf
-branch-name     = trunk-branch / prefixed-branch
-trunk-branch    = "main" / "master" / "develop"
-prefixed-branch = type "/" description
-type            = "feature" / "feat" / "bugfix" / "fix"
-                / "hotfix" / "release" / "chore"
-                / "ai" / "copilot" / "cursor"
-                / "claude" / "codex"
-description     = desc-segment *("-" desc-segment)
-desc-segment    = 1*(ALPHA / DIGIT) *("." 1*(ALPHA / DIGIT))
-ALPHA           = %x61-7A   ; małe litery a-z
-DIGIT           = %x30-39   ; cyfry 0-9
-```
+{{< grammar >}}
 
 > Uwaga: Kolejne myślniki lub kropki oraz myślniki lub kropki na początku lub końcu opisu nie są dozwolone.
 
 ### Przykłady
 
-| Nazwa gałęzi | Prawidłowa | Uwagi |
-|---|---|---|
-| `main` | ✅ | Gałąź główna |
-| `master` | ✅ | Gałąź główna |
-| `develop` | ✅ | Gałąź główna |
-| `feature/add-login-page` | ✅ | Nowa funkcja |
-| `feat/add-login-page` | ✅ | Krótki alias dla feature |
-| `bugfix/fix-header-bug` | ✅ | Naprawa błędu |
-| `fix/header-bug` | ✅ | Krótki alias dla bugfix |
-| `hotfix/security-patch` | ✅ | Pilna naprawa |
-| `release/v1.2.0` | ✅ | Wydanie z numerem wersji |
-| `chore/update-dependencies` | ✅ | Zadanie niezwiązane z kodem |
-| `feature/issue-123-new-login` | ✅ | Funkcja z numerem biletu |
-| `Feature/Add-Login` | ❌ | Wielkie litery są niedozwolone |
-| `feature/new--login` | ❌ | Kolejne myślniki są niedozwolone |
-| `feature/-new-login` | ❌ | Opis nie może zaczynać się myślnikiem |
-| `feature/new-login-` | ❌ | Opis nie może kończyć się myślnikiem |
-| `release/v1.-2.0` | ❌ | Myślnik obok kropki jest niedozwolony |
-| `fix/header bug` | ❌ | Spacje są niedozwolone |
-| `fix/header_bug` | ❌ | Podkreślenia są niedozwolone |
-| `ai/refactor-auth-flow` | ✅ | Generyczny prefiks agenta AI |
-| `copilot/add-login-page` | ✅ | GitHub Copilot |
-| `cursor/fix-header-bug` | ✅ | Cursor |
-| `claude/security-patch` | ✅ | Claude Code od Anthropic |
-| `codex/optimize-query` | ✅ | OpenAI Codex |
-| `unknown/some-task` | ❌ | Nieznany typ prefiksu |
+{{< examples >}}
 
 ## Wnioski
 

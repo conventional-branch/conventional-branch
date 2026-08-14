@@ -53,50 +53,13 @@ Trunk branches (`main`, `master`, `develop`) do not use a prefix.
 
 The following Augmented Backus-Naur Form (ABNF) grammar formally defines valid branch names:
 
-```abnf
-branch-name     = trunk-branch / prefixed-branch
-trunk-branch    = "main" / "master" / "develop"
-prefixed-branch = type "/" description
-type            = "feature" / "feat" / "bugfix" / "fix"
-                / "hotfix" / "release" / "chore"
-                / "ai" / "copilot" / "cursor"
-                / "claude" / "codex"
-description     = desc-segment *("-" desc-segment)
-desc-segment    = 1*(ALPHA / DIGIT) *("." 1*(ALPHA / DIGIT))
-ALPHA           = %x61-7A   ; lowercase a-z
-DIGIT           = %x30-39   ; 0-9
-```
+{{< grammar >}}
 
 > Note: Consecutive hyphens or dots, and hyphens or dots at the start or end of the description, are not permitted.
 
 ### Examples
 
-| Branch Name | Valid | Notes |
-|---|---|---|
-| `main` | ✅ | Trunk branch |
-| `master` | ✅ | Trunk branch |
-| `develop` | ✅ | Trunk branch |
-| `feature/add-login-page` | ✅ | New feature |
-| `feat/add-login-page` | ✅ | Short alias for feature |
-| `bugfix/fix-header-bug` | ✅ | Bug fix |
-| `fix/header-bug` | ✅ | Short alias for bugfix |
-| `hotfix/security-patch` | ✅ | Urgent fix |
-| `release/v1.2.0` | ✅ | Release with version |
-| `chore/update-dependencies` | ✅ | Non-code task |
-| `feature/issue-123-new-login` | ✅ | Feature with ticket number |
-| `Feature/Add-Login` | ❌ | Uppercase letters not allowed |
-| `feature/new--login` | ❌ | Consecutive hyphens not allowed |
-| `feature/-new-login` | ❌ | Leading hyphen in description |
-| `feature/new-login-` | ❌ | Trailing hyphen in description |
-| `release/v1.-2.0` | ❌ | Hyphen adjacent to dot |
-| `fix/header bug` | ❌ | Spaces not allowed |
-| `fix/header_bug` | ❌ | Underscores not allowed |
-| `ai/refactor-auth-flow` | ✅ | Generic AI agent prefix |
-| `copilot/add-login-page` | ✅ | GitHub Copilot |
-| `cursor/fix-header-bug` | ✅ | Cursor |
-| `claude/security-patch` | ✅ | Claude Code by Anthropic |
-| `codex/optimize-query` | ✅ | OpenAI Codex |
-| `unknown/some-task` | ❌ | Unknown prefix type |
+{{< examples >}}
 
 ## Conclusion
 

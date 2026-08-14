@@ -6,10 +6,10 @@ Runs eight checks, all driven by the canonical machine-readable spec
 apart silently:
 
   1. Fixtures    — every case in tests/fixtures.json matches the spec regex.
-  2. Docs table  — the valid/invalid examples table on every language's
-                   specification page agrees with the spec regex, and the
-                   translations offer the same examples English does (the docs
-                   validate themselves, in all eleven languages).
+  2. Examples    — every case in data/examples.yaml, which every language's
+                   examples table is rendered from, gets the verdict the spec
+                   regex gives it, and every page still renders the table and
+                   the grammar (the docs validate themselves).
   3. Consistency — the regex accepts every declared type/alias and trunk
                    branch, and every AI agent prefix in data/agents.yaml is a
                    declared type (no registry/spec drift).
@@ -23,9 +23,10 @@ apart silently:
   7. Versioning  — the version spec.json declares has a frozen, byte-identical
                    copy under static/v<version>/, so the permanent endpoint
                    downstream tools pin to cannot be forgotten on a release.
-  8. Grammar     — the ABNF `type` rule, in spec.json and on every language's
-                   page, offers exactly the types spec.json declares, so the
-                   grammar a reader sees cannot fall behind the regex.
+  8. Grammar     — spec.json's own ABNF offers exactly the types and trunk
+                   branches spec.json declares. The grammar on the pages is
+                   generated from those same fields, so only the hand-written
+                   copy published to tools can drift, and this is what stops it.
 
 Exits non-zero if anything disagrees. Standard library only — no deps.
 """
@@ -52,6 +53,7 @@ ENFORCE_PAGE = ROOT / "content" / "enforce" / "index.md"
 # report the archive as broken for correctly preserving what 1.0.0 said.
 SPEC_PAGES = sorted((ROOT / "content").glob("_index*.md"))
 AGENTS = ROOT / "data" / "agents.yaml"
+EXAMPLES = ROOT / "data" / "examples.yaml"
 BADGE = STATIC / "badge.svg"
 
 
@@ -76,92 +78,99 @@ def check_fixtures(pattern):
     return len(data["cases"]), failures
 
 
-# Rows look like: | `branch-name` | ✅ | Notes |
-ROW = re.compile(r"^\|\s*`([^`]+)`\s*\|\s*(✅|❌)\s*\|")
+# Cases look like:
+#   - branch: "feature/add-login-page"
+#     valid: true
+CASE = re.compile(r'^\s*-\s*branch:\s*"([^"]+)"\s*$\n\s*valid:\s*(true|false)\s*$', re.M)
 
 
-def table_rows(path):
-    """The examples table on a page, as {branch name: marked valid?}."""
-    rows = {}
-    for line in path.read_text(encoding="utf-8").splitlines():
-        m = ROW.match(line)
-        if m:
-            rows[m.group(1)] = m.group(2) == "✅"
-    return rows
+def example_cases():
+    """The examples table's cases, as {branch name: declared valid?}."""
+    text = EXAMPLES.read_text(encoding="utf-8")
+    return {m.group(1): m.group(2) == "true" for m in CASE.finditer(text)}
 
 
-def check_docs_table(pattern):
+def check_examples(pattern):
+    """The examples table is rendered from data/examples.yaml onto every language's
+    page, so the eleven tables agree by construction and only the data needs
+    checking. What still has to hold is that each case's declared verdict is the
+    one the spec regex actually gives, and that every page still asks for the
+    table — a page that dropped the shortcode would render no examples at all,
+    silently."""
+    cases = example_cases()
     failures = []
-    count = 0
-    reference = table_rows(SPEC_PAGE)
+
+    for branch, expected in cases.items():
+        actual = pattern.fullmatch(branch) is not None
+        if actual != expected:
+            failures.append(
+                f"data/examples.yaml declares {branch!r} {'valid' if expected else 'invalid'}, "
+                f"spec regex says {'valid' if actual else 'invalid'}"
+            )
+    if not cases:
+        failures.append("data/examples.yaml: no cases found — parser out of date?")
 
     for path in SPEC_PAGES:
-        name = path.relative_to(ROOT)
-        rows = table_rows(path)
-        count += len(rows)
-        if not rows:
-            failures.append(f"{name}: no example rows found — parser out of date?")
-            continue
-
-        for branch, expected in rows.items():
-            actual = pattern.fullmatch(branch) is not None
-            if actual != expected:
+        body = path.read_text(encoding="utf-8")
+        for shortcode in ("examples", "grammar"):
+            if f"{{{{< {shortcode} >}}}}" not in body:
                 failures.append(
-                    f"{name}: marks {branch!r} {'valid' if expected else 'invalid'}, "
-                    f"spec regex says {'valid' if actual else 'invalid'}"
+                    f"{path.relative_to(ROOT)} does not render the {shortcode} shortcode — "
+                    f"that page would publish the specification without it"
                 )
 
-        # Every row being individually valid is a weaker promise than the tables
-        # agreeing: a translation that silently omits an example still passes the
-        # loop above. Parity with English is what catches a newly registered
-        # prefix that was added to one page and forgotten on the other ten.
-        if path == SPEC_PAGE:
-            continue
-        for branch in sorted(set(reference) - set(rows)):
-            failures.append(f"{name}: missing the {branch!r} example content/_index.md has")
-        for branch in sorted(set(rows) - set(reference)):
-            failures.append(f"{name}: has a {branch!r} example content/_index.md does not")
-
-    return count, failures
+    return len(cases), failures
 
 
-# The ABNF `type` rule, wherever it is written out. Alternatives wrap across
-# several indented lines on the documentation pages, so the rule runs until the
-# next one starts in column zero.
-ABNF_TYPE_RULE = re.compile(r"^type\s*=(.*?)(?=^\S)", re.S | re.M)
+def abnf_alternatives(abnf, rule):
+    """The quoted alternatives offered by an ABNF rule, or None if it has no rule.
 
-
-def abnf_types(text):
-    """The alternatives offered by an ABNF `type` rule, or None if there is no rule."""
-    m = ABNF_TYPE_RULE.search(text)
+    Alternatives may wrap across several indented lines, so a rule runs until the
+    next one starts in column zero.
+    """
+    m = re.search(rf"^{re.escape(rule)}\s*=(.*?)(?=^\S|\Z)", abnf, re.S | re.M)
     return set(re.findall(r'"([^"]+)"', m.group(1))) if m else None
 
 
+def abnf_types(abnf):
+    return abnf_alternatives(abnf, "type")
+
+
 def check_grammar_block(spec):
-    """The grammar is spelled out in spec.json's `abnf` and again on every language
-    page. Nothing derives one from the other, so each is checked against the types
-    spec.json declares. Without this, a newly registered prefix can be live in the
-    regex while the grammar a reader is actually looking at never mentions it."""
-    declared = {t["type"] for t in spec["types"]} | {
-        a for t in spec["types"] for a in t.get("aliases", [])
+    """The grammar readers see is generated from spec.json's `types` and
+    `trunkBranches` by the `grammar` shortcode, so it cannot fall behind them.
+    spec.json's own `abnf` field is the copy that can: it is prose, maintained by
+    hand, and published to every tool that reads the spec. Nothing derives it from
+    the type list beside it, so it is checked against it here."""
+    rules = {
+        "type": (
+            abnf_types(spec["grammar"]["abnf"]),
+            {t["type"] for t in spec["types"]}
+            | {a for t in spec["types"] for a in t.get("aliases", [])},
+        ),
+        "trunk-branch": (
+            abnf_alternatives(spec["grammar"]["abnf"], "trunk-branch"),
+            set(spec["trunkBranches"]),
+        ),
     }
-    sources = [("static/spec.json", spec["grammar"]["abnf"])] + [
-        (str(p.relative_to(ROOT)), p.read_text(encoding="utf-8")) for p in SPEC_PAGES
-    ]
 
     failures = []
-    for name, text in sources:
-        types = abnf_types(text)
-        if types is None:
-            failures.append(f"{name}: no ABNF `type` rule found — did the grammar block move?")
-            continue
-        for missing in sorted(declared - types):
-            failures.append(f"{name}: ABNF `type` rule omits {missing!r}, which spec.json declares")
-        for extra in sorted(types - declared):
+    for rule, (offered, declared) in rules.items():
+        if offered is None:
             failures.append(
-                f"{name}: ABNF `type` rule offers {extra!r}, which spec.json does not declare"
+                f"static/spec.json: its ABNF has no `{rule}` rule — did the grammar change shape?"
             )
-    return len(sources), failures
+            continue
+        for missing in sorted(declared - offered):
+            failures.append(
+                f"static/spec.json: ABNF `{rule}` rule omits {missing!r}, which spec.json declares"
+            )
+        for extra in sorted(offered - declared):
+            failures.append(
+                f"static/spec.json: ABNF `{rule}` rule offers {extra!r}, "
+                f"which spec.json does not declare"
+            )
+    return len(rules), failures
 
 
 def agent_prefixes():
@@ -452,12 +461,12 @@ def main():
     for f in failures:
         print(f"  ✗ {f}")
 
-    n, failures = check_docs_table(pattern)
+    n, failures = check_examples(pattern)
     ok &= not failures
     print(
-        f"docs table:  {len(failures)} problem(s)"
+        f"examples:    {len(failures)} problem(s)"
         if failures
-        else f"docs table:  ok ({n} examples across {len(SPEC_PAGES)} languages)"
+        else f"examples:    ok ({n} cases, rendered on {len(SPEC_PAGES)} pages)"
     )
     for f in failures:
         print(f"  ✗ {f}")
@@ -506,7 +515,7 @@ def main():
     print(
         f"grammar:     {len(failures)} problem(s)"
         if failures
-        else f"grammar:     ok ({n} ABNF type rules match the declared types)"
+        else f"grammar:     ok ({n} ABNF rules match what spec.json declares)"
     )
     for f in failures:
         print(f"  ✗ {f}")

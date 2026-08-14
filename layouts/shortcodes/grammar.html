@@ -1,0 +1,56 @@
+{{- /* Renders the ABNF grammar block from static/spec.json — the canonical
+       machine-readable specification — so the grammar a reader is looking at is
+       generated from the same document tools validate against, and cannot fall
+       behind it.
+
+       The rule names, the trunk branches and the type alternatives all come from
+       spec.json. Only the two trailing comments are prose, and those are
+       translated in data/examples.yaml.
+
+       This block used to be written out by hand in all eleven content files,
+       which meant registering one branch type took eleven edits. */ -}}
+{{- $spec := os.ReadFile "static/spec.json" | transform.Unmarshal -}}
+{{- $lang := .Page.Lang | default "en" -}}
+{{- $comments := .Site.Data.examples.grammar -}}
+
+{{- $trunk := slice -}}
+{{- range $spec.trunkBranches -}}
+  {{- $trunk = $trunk | append (printf "%q" .) -}}
+{{- end -}}
+
+{{- /* Each type, followed immediately by its own aliases. */ -}}
+{{- $types := slice -}}
+{{- range $spec.types -}}
+  {{- $types = $types | append (printf "%q" .type) -}}
+  {{- range .aliases -}}
+    {{- $types = $types | append (printf "%q" .) -}}
+  {{- end -}}
+{{- end -}}
+
+{{- /* Four alternatives per line, so the rule keeps its shape as types are
+       added instead of growing into one unreadable line. */ -}}
+{{- $perLine := 4 -}}
+{{- $rows := slice -}}
+{{- $chunk := slice -}}
+{{- range $i, $type := $types -}}
+  {{- $chunk = $chunk | append $type -}}
+  {{- $n := add $i 1 -}}
+  {{- if or (eq (math.Mod $n $perLine) 0) (eq $n (len $types)) -}}
+    {{- $rows = $rows | append (delimit $chunk " / ") -}}
+    {{- $chunk = slice -}}
+  {{- end -}}
+{{- end -}}
+
+{{- $abnf := printf `branch-name     = trunk-branch / prefixed-branch
+trunk-branch    = %s
+prefixed-branch = type "/" description
+type            = %s
+` (delimit $trunk " / ") (index $rows 0) -}}
+{{- range after 1 $rows -}}
+  {{- $abnf = printf "%s                / %s\n" $abnf . -}}
+{{- end -}}
+{{- $abnf = printf `%sdescription     = desc-segment *("-" desc-segment)
+desc-segment    = 1*(ALPHA / DIGIT) *("." 1*(ALPHA / DIGIT))
+ALPHA           = %%x61-7A   ; %s
+DIGIT           = %%x30-39   ; %s` $abnf (index $comments.alpha $lang | default $comments.alpha.en) (index $comments.digit $lang | default $comments.digit.en) -}}
+{{ highlight $abnf "abnf" }}

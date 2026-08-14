@@ -54,50 +54,13 @@ Las ramas troncales (`main`, `master`, `develop`) no usan prefijo.
 
 La siguiente gramática ABNF (Augmented Backus-Naur Form) define formalmente los nombres de ramas válidos:
 
-```abnf
-branch-name     = trunk-branch / prefixed-branch
-trunk-branch    = "main" / "master" / "develop"
-prefixed-branch = type "/" description
-type            = "feature" / "feat" / "bugfix" / "fix"
-                / "hotfix" / "release" / "chore"
-                / "ai" / "copilot" / "cursor"
-                / "claude" / "codex"
-description     = desc-segment *("-" desc-segment)
-desc-segment    = 1*(ALPHA / DIGIT) *("." 1*(ALPHA / DIGIT))
-ALPHA           = %x61-7A   ; letras minúsculas a-z
-DIGIT           = %x30-39   ; dígitos 0-9
-```
+{{< grammar >}}
 
 > Nota: No se permiten guiones o puntos consecutivos, ni guiones o puntos al inicio o al final de la descripción.
 
 ### Ejemplos
 
-| Nombre de rama | Válido | Notas |
-|---|---|---|
-| `main` | ✅ | Rama principal |
-| `master` | ✅ | Rama principal |
-| `develop` | ✅ | Rama principal |
-| `feature/add-login-page` | ✅ | Nueva funcionalidad |
-| `feat/add-login-page` | ✅ | Alias corto para feature |
-| `bugfix/fix-header-bug` | ✅ | Corrección de error |
-| `fix/header-bug` | ✅ | Alias corto para bugfix |
-| `hotfix/security-patch` | ✅ | Corrección urgente |
-| `release/v1.2.0` | ✅ | Release con número de versión |
-| `chore/update-dependencies` | ✅ | Tarea no relacionada con código |
-| `feature/issue-123-new-login` | ✅ | Funcionalidad con número de ticket |
-| `Feature/Add-Login` | ❌ | Mayúsculas no permitidas |
-| `feature/new--login` | ❌ | Guiones consecutivos no permitidos |
-| `feature/-new-login` | ❌ | La descripción no puede comenzar con guion |
-| `feature/new-login-` | ❌ | La descripción no puede terminar con guion |
-| `release/v1.-2.0` | ❌ | Guion adyacente a punto no permitido |
-| `fix/header bug` | ❌ | Espacios no permitidos |
-| `fix/header_bug` | ❌ | Guiones bajos no permitidos |
-| `ai/refactor-auth-flow` | ✅ | Prefijo genérico de agente de IA |
-| `copilot/add-login-page` | ✅ | GitHub Copilot |
-| `cursor/fix-header-bug` | ✅ | Cursor |
-| `claude/security-patch` | ✅ | Claude Code de Anthropic |
-| `codex/optimize-query` | ✅ | OpenAI Codex |
-| `unknown/some-task` | ❌ | Tipo de prefijo desconocido |
+{{< examples >}}
 
 ## Conclusión
 

@@ -53,50 +53,13 @@ layout: single
 
 以下 ABNF（Augmented Backus-Naur Form）文法正式定義了有效的 branch 名稱：
 
-```abnf
-branch-name     = trunk-branch / prefixed-branch
-trunk-branch    = "main" / "master" / "develop"
-prefixed-branch = type "/" description
-type            = "feature" / "feat" / "bugfix" / "fix"
-                / "hotfix" / "release" / "chore"
-                / "ai" / "copilot" / "cursor"
-                / "claude" / "codex"
-description     = desc-segment *("-" desc-segment)
-desc-segment    = 1*(ALPHA / DIGIT) *("." 1*(ALPHA / DIGIT))
-ALPHA           = %x61-7A   ; 小寫字母 a-z
-DIGIT           = %x30-39   ; 數字 0-9
-```
+{{< grammar >}}
 
 > 注意：禁止連續的連字號或點，以及出現在描述開頭或結尾的連字號或點。
 
 ### 示例
 
-| Branch 名稱 | 有效 | 說明 |
-|---|---|---|
-| `main` | ✅ | 主幹分支 |
-| `master` | ✅ | 主幹分支 |
-| `develop` | ✅ | 主幹分支 |
-| `feature/add-login-page` | ✅ | 新功能 |
-| `feat/add-login-page` | ✅ | feature 的簡寫形式 |
-| `bugfix/fix-header-bug` | ✅ | Bug 修復 |
-| `fix/header-bug` | ✅ | bugfix 的簡寫形式 |
-| `hotfix/security-patch` | ✅ | 緊急修復 |
-| `release/v1.2.0` | ✅ | 含版本號的發布分支 |
-| `chore/update-dependencies` | ✅ | 非程式碼任務 |
-| `feature/issue-123-new-login` | ✅ | 含工單編號的功能分支 |
-| `Feature/Add-Login` | ❌ | 不允許大寫字母 |
-| `feature/new--login` | ❌ | 不允許連續連字號 |
-| `feature/-new-login` | ❌ | 描述不能以連字號開頭 |
-| `feature/new-login-` | ❌ | 描述不能以連字號結尾 |
-| `release/v1.-2.0` | ❌ | 連字號不能緊鄰點號 |
-| `fix/header bug` | ❌ | 不允許空格 |
-| `fix/header_bug` | ❌ | 不允許底線 |
-| `ai/refactor-auth-flow` | ✅ | 通用 AI 編碼智能體前綴 |
-| `copilot/add-login-page` | ✅ | GitHub Copilot |
-| `cursor/fix-header-bug` | ✅ | Cursor |
-| `claude/security-patch` | ✅ | Anthropic Claude Code |
-| `codex/optimize-query` | ✅ | OpenAI Codex |
-| `unknown/some-task` | ❌ | 未知的前綴類型 |
+{{< examples >}}
 
 ## 結論
 

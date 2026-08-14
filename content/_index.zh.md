@@ -53,50 +53,13 @@ layout: single
 
 以下 ABNF（扩充巴科斯-诺尔范式）文法正式定义了有效的分支名称：
 
-```abnf
-branch-name     = trunk-branch / prefixed-branch
-trunk-branch    = "main" / "master" / "develop"
-prefixed-branch = type "/" description
-type            = "feature" / "feat" / "bugfix" / "fix"
-                / "hotfix" / "release" / "chore"
-                / "ai" / "copilot" / "cursor"
-                / "claude" / "codex"
-description     = desc-segment *("-" desc-segment)
-desc-segment    = 1*(ALPHA / DIGIT) *("." 1*(ALPHA / DIGIT))
-ALPHA           = %x61-7A   ; 小写字母 a-z
-DIGIT           = %x30-39   ; 数字 0-9
-```
+{{< grammar >}}
 
 > 注意：禁止连续的连字符或点，以及出现在描述开头或结尾的连字符或点。
 
 ### 示例
 
-| 分支名称 | 有效 | 说明 |
-|---|---|---|
-| `main` | ✅ | 主干分支 |
-| `master` | ✅ | 主干分支 |
-| `develop` | ✅ | 主干分支 |
-| `feature/add-login-page` | ✅ | 新功能 |
-| `feat/add-login-page` | ✅ | feature 的简写形式 |
-| `bugfix/fix-header-bug` | ✅ | 错误修复 |
-| `fix/header-bug` | ✅ | bugfix 的简写形式 |
-| `hotfix/security-patch` | ✅ | 紧急修复 |
-| `release/v1.2.0` | ✅ | 含版本号的发布分支 |
-| `chore/update-dependencies` | ✅ | 非代码任务 |
-| `feature/issue-123-new-login` | ✅ | 含工单编号的功能分支 |
-| `Feature/Add-Login` | ❌ | 不允许大写字母 |
-| `feature/new--login` | ❌ | 不允许连续连字符 |
-| `feature/-new-login` | ❌ | 描述不能以连字符开头 |
-| `feature/new-login-` | ❌ | 描述不能以连字符结尾 |
-| `release/v1.-2.0` | ❌ | 连字符不能紧邻点号 |
-| `fix/header bug` | ❌ | 不允许空格 |
-| `fix/header_bug` | ❌ | 不允许下划线 |
-| `ai/refactor-auth-flow` | ✅ | 通用 AI 编码智能体前缀 |
-| `copilot/add-login-page` | ✅ | GitHub Copilot |
-| `cursor/fix-header-bug` | ✅ | Cursor |
-| `claude/security-patch` | ✅ | Anthropic Claude Code |
-| `codex/optimize-query` | ✅ | OpenAI Codex |
-| `unknown/some-task` | ❌ | 未知的前缀类型 |
+{{< examples >}}
 
 ## 结论
 

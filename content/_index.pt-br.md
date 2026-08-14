@@ -54,50 +54,13 @@ Branches tronco (`main`, `master`, `develop`) não usam prefixo.
 
 A gramática ABNF (Augmented Backus-Naur Form) a seguir define formalmente nomes de branches válidos:
 
-```abnf
-branch-name     = trunk-branch / prefixed-branch
-trunk-branch    = "main" / "master" / "develop"
-prefixed-branch = type "/" description
-type            = "feature" / "feat" / "bugfix" / "fix"
-                / "hotfix" / "release" / "chore"
-                / "ai" / "copilot" / "cursor"
-                / "claude" / "codex"
-description     = desc-segment *("-" desc-segment)
-desc-segment    = 1*(ALPHA / DIGIT) *("." 1*(ALPHA / DIGIT))
-ALPHA           = %x61-7A   ; letras minúsculas a-z
-DIGIT           = %x30-39   ; dígitos 0-9
-```
+{{< grammar >}}
 
 > Nota: Hífens ou pontos consecutivos e hífens ou pontos no início ou no final da descrição não são permitidos.
 
 ### Exemplos
 
-| Nome do branch | Válido | Notas |
-|---|---|---|
-| `main` | ✅ | Branch principal |
-| `master` | ✅ | Branch principal |
-| `develop` | ✅ | Branch principal |
-| `feature/add-login-page` | ✅ | Nova funcionalidade |
-| `feat/add-login-page` | ✅ | Alias curto para feature |
-| `bugfix/fix-header-bug` | ✅ | Correção de bug |
-| `fix/header-bug` | ✅ | Alias curto para bugfix |
-| `hotfix/security-patch` | ✅ | Correção urgente |
-| `release/v1.2.0` | ✅ | Release com número de versão |
-| `chore/update-dependencies` | ✅ | Tarefa não relacionada ao código |
-| `feature/issue-123-new-login` | ✅ | Funcionalidade com número de ticket |
-| `Feature/Add-Login` | ❌ | Maiúsculas não permitidas |
-| `feature/new--login` | ❌ | Hífens consecutivos não permitidos |
-| `feature/-new-login` | ❌ | Descrição não pode começar com hífen |
-| `feature/new-login-` | ❌ | Descrição não pode terminar com hífen |
-| `release/v1.-2.0` | ❌ | Hífen adjacente a ponto não permitido |
-| `fix/header bug` | ❌ | Espaços não permitidos |
-| `fix/header_bug` | ❌ | Sublinhados (`_`) não permitidos |
-| `ai/refactor-auth-flow` | ✅ | Prefixo genérico de agente de IA |
-| `copilot/add-login-page` | ✅ | GitHub Copilot |
-| `cursor/fix-header-bug` | ✅ | Cursor |
-| `claude/security-patch` | ✅ | Claude Code da Anthropic |
-| `codex/optimize-query` | ✅ | OpenAI Codex |
-| `unknown/some-task` | ❌ | Tipo de prefixo desconhecido |
+{{< examples >}}
 
 ## Conclusão
 

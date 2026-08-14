@@ -1,0 +1,28 @@
+{{- /* Renders the valid/invalid branch-name examples (data/examples.yaml) as a
+       table. Column headers and each note fall back to English.
+
+       This table used to be written out by hand in all eleven content files.
+       Rendering it from one file is what makes the eleven pages agree by
+       construction rather than by review: a case added here appears in every
+       language, and none of them can quietly lose a row. */ -}}
+{{- $data := .Site.Data.examples -}}
+{{- $lang := .Page.Lang | default "en" -}}
+{{- $labels := $data.labels -}}
+<table>
+  <thead>
+    <tr>
+      <th>{{ index $labels.branch $lang | default $labels.branch.en }}</th>
+      <th>{{ index $labels.valid $lang | default $labels.valid.en }}</th>
+      <th>{{ index $labels.notes $lang | default $labels.notes.en }}</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{- range $data.cases -}}
+    <tr>
+      <td><code>{{ .branch }}</code></td>
+      <td>{{ if .valid }}✅{{ else }}❌{{ end }}</td>
+      <td>{{ index .note $lang | default .note.en }}</td>
+    </tr>
+    {{- end -}}
+  </tbody>
+</table>

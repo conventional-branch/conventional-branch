@@ -37,8 +37,16 @@ To register an agent:
      since: "1.2.0"           # the spec version that adds the prefix
    ```
 2. Keep the list roughly alphabetical after the generic `ai/` entry, and reuse an existing prefix rather than adding a near-duplicate.
-3. Add the prefix to the `type` rule of the ABNF grammar and to the examples table in `./content/_index*.md` (and mention it in `CHANGELOG.md`), so the normative grammar stays in sync with the registry. This means **all eleven language files, not just the English one** — the conformance check holds every translation to the same examples and the same grammar, so missing one fails CI rather than shipping a page that contradicts the spec.
-4. Add the prefix as a `type` (and update the `grammar.regex`) in [`./static/spec.json`](./static/spec.json), then run `python3 tests/conformance.py` to confirm everything still agrees. CI enforces this.
+3. Add the prefix as a `type` (and update the `grammar.regex` and the `grammar.abnf` `type` rule) in [`./static/spec.json`](./static/spec.json). The ABNF grammar block on all eleven language pages is **generated from this file**, so there is nothing to edit in `./content/` — the grammar cannot fall behind the registry.
+4. Add one example to the `cases:` list in [`./data/examples.yaml`](./data/examples.yaml), which every language's examples table is rendered from:
+   ```yaml
+   - branch: "youragent/add-login-page"
+     valid: true
+     note:
+       en: "Your Agent"       # other languages fall back to English
+   ```
+   Translations are welcome but not required: a language with no `note` shows the English one rather than dropping the row, so the eleven tables always list the same examples.
+5. Mention the prefix in `CHANGELOG.md`, then run `python3 tests/conformance.py` to confirm everything still agrees. CI enforces this.
 
 Guidelines for a good prefix:
 

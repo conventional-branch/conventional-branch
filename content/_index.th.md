@@ -52,49 +52,12 @@ Trunk branches (`main`, `master`, `develop`) ไม่จำเป็นต้�
 ### รูปแบบไวยากรณ์
 
 รูปแบบไวยากรณ์ Augmented Backus-Naur Form หรือ ABNF ต่อไปนี้ได้กําหนดโครงสร้างเชิงรูปแบบของชื่อ Branch ที่ถูกต้อง:
-```abnf
-branch-name     = trunk-branch / prefixed-branch
-trunk-branch    = "main" / "master" / "develop"
-prefixed-branch = type "/" description
-type            = "feature" / "feat" / "bugfix" / "fix"
-                / "hotfix" / "release" / "chore"
-                / "ai" / "copilot" / "cursor"
-                / "claude" / "codex"
-description     = desc-segment *("-" desc-segment)
-desc-segment    = 1*(ALPHA / DIGIT) *("." 1*(ALPHA / DIGIT))
-ALPHA           = %x61-7A   ; lowercase a-z
-DIGIT           = %x30-39   ; 0-9
-```
+{{< grammar >}}
 > หมายเหตุ: ไม่อนุญาตให้ใช้เครื่องหมายขีดกลางหรือจุดติดกัน และไม่อนุญาตให้ใช้เครื่องหมายขีดกลางหรือจุดในตําแหน่งเริ่มต้นหรือตําแหน่งสิ้นสุดของคําอธิบาย
 
 ### ตัวอย่าง
 
-| ชื่อ Branch | สถานะ | หมายเหตุ |
-|---|---|---|
-| `main` | ✅ | Trunk branch |
-| `master` | ✅ | Trunk branch |
-| `develop` | ✅ | Trunk branch |
-| `feature/add-login-page` | ✅ | ฟีเจอร์ใหม่ |
-| `feat/add-login-page` | ✅ | ชื่อเรียกย่อสําหรับฟีเจอร์ |
-| `bugfix/fix-header-bug` | ✅ | การแก้ไขบั๊ก |
-| `fix/header-bug` | ✅ | ชื่อเรียกย่อของการแก้ไขบั๊ก |
-| `hotfix/security-patch` | ✅ | การแก้ไขเร่งด่วน |
-| `release/v1.2.0` | ✅ | รีลีสพร้อมระบุเวอร์ชัน |
-| `chore/update-dependencies` | ✅ | งานที่ไม่เกี่ยวกับโค้ด |
-| `feature/issue-123-new-login` | ✅ | ฟีเจอร์พร้อมหมายเลขทิกเก็ต |
-| `Feature/Add-Login` | ❌ | ไม่อนุญาตให้ใช้ตัวอักษรพิมพ์ใหญ่ |
-| `feature/new--login` | ❌ | ไม่อนุญาตให้ใช้เครื่องหมายขีดกลางติดกัน |
-| `feature/-new-login` | ❌ | มีเครื่องหมายขีดกลางนําหน้าคําอธิบาย |
-| `feature/new-login-` | ❌ | มีเครื่องหมายขีดกลางต่อท้ายคําอธิบาย |
-| `release/v1.-2.0` | ❌ | มีเครื่องหมายขีดกลางอยู่ติดกับจุด |
-| `fix/header bug` | ❌ | ไม่อนุญาตให้เว้นวรรค (มีช่องว่าง) |
-| `fix/header_bug` | ❌ | ไม่อนุญาตให้ใช้เครื่องหมายขีดล่าง (Underscores) |
-| `ai/refactor-auth-flow` | ✅ | คำนำหน้าทั่วไปสำหรับเอเจนต์ AI |
-| `copilot/add-login-page` | ✅ | GitHub Copilot |
-| `cursor/fix-header-bug` | ✅ | Cursor |
-| `claude/security-patch` | ✅ | Claude Code โดย Anthropic |
-| `codex/optimize-query` | ✅ | OpenAI Codex |
-| `unknown/some-task` | ❌ | ไม่รู้จักประเภทของคำนำหน้า |
+{{< examples >}}
 
 ## สรุปท้าย
 
