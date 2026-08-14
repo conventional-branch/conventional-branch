@@ -1,13 +1,15 @@
 #!/usr/bin/env python3
 """Conformance test for the Conventional Branch specification.
 
-Runs seven checks, all driven by the canonical machine-readable spec
+Runs eight checks, all driven by the canonical machine-readable spec
 (static/spec.json) so the docs, the registry and the grammar cannot drift
 apart silently:
 
   1. Fixtures    — every case in tests/fixtures.json matches the spec regex.
-  2. Docs table  — the valid/invalid examples table in content/_index.md
-                   agrees with the spec regex (the docs validate themselves).
+  2. Docs table  — the valid/invalid examples table on every language's
+                   specification page agrees with the spec regex, and the
+                   translations offer the same examples English does (the docs
+                   validate themselves, in all eleven languages).
   3. Consistency — the regex accepts every declared type/alias and trunk
                    branch, and every AI agent prefix in data/agents.yaml is a
                    declared type (no registry/spec drift).
@@ -21,6 +23,9 @@ apart silently:
   7. Versioning  — the version spec.json declares has a frozen, byte-identical
                    copy under static/v<version>/, so the permanent endpoint
                    downstream tools pin to cannot be forgotten on a release.
+  8. Grammar     — the ABNF `type` rule, in spec.json and on every language's
+                   page, offers exactly the types spec.json declares, so the
+                   grammar a reader sees cannot fall behind the regex.
 
 Exits non-zero if anything disagrees. Standard library only — no deps.
 """
@@ -37,6 +42,15 @@ SCHEMA = STATIC / "schema" / "v1" / "spec.schema.json"
 FIXTURES = ROOT / "tests" / "fixtures.json"
 SPEC_PAGE = ROOT / "content" / "_index.md"
 ENFORCE_PAGE = ROOT / "content" / "enforce" / "index.md"
+
+# The current specification is rendered once per language, and every one of those
+# pages carries its own copy of the examples table and of the ABNF grammar. Each
+# copy can drift from spec.json on its own, so each one is checked.
+#
+# The glob is deliberately not recursive: content/v1.0.0/ is a frozen older
+# specification with a narrower grammar, and holding it to today's regex would
+# report the archive as broken for correctly preserving what 1.0.0 said.
+SPEC_PAGES = sorted((ROOT / "content").glob("_index*.md"))
 AGENTS = ROOT / "data" / "agents.yaml"
 BADGE = STATIC / "badge.svg"
 
@@ -66,25 +80,88 @@ def check_fixtures(pattern):
 ROW = re.compile(r"^\|\s*`([^`]+)`\s*\|\s*(✅|❌)\s*\|")
 
 
+def table_rows(path):
+    """The examples table on a page, as {branch name: marked valid?}."""
+    rows = {}
+    for line in path.read_text(encoding="utf-8").splitlines():
+        m = ROW.match(line)
+        if m:
+            rows[m.group(1)] = m.group(2) == "✅"
+    return rows
+
+
 def check_docs_table(pattern):
     failures = []
     count = 0
-    for line in SPEC_PAGE.read_text(encoding="utf-8").splitlines():
-        m = ROW.match(line)
-        if not m:
+    reference = table_rows(SPEC_PAGE)
+
+    for path in SPEC_PAGES:
+        name = path.relative_to(ROOT)
+        rows = table_rows(path)
+        count += len(rows)
+        if not rows:
+            failures.append(f"{name}: no example rows found — parser out of date?")
             continue
-        branch, mark = m.group(1), m.group(2)
-        count += 1
-        expected = mark == "✅"
-        actual = pattern.fullmatch(branch) is not None
-        if actual != expected:
-            failures.append(
-                f"{branch!r}: docs table marks it {'valid' if expected else 'invalid'}, "
-                f"spec regex says {'valid' if actual else 'invalid'}"
-            )
-    if count == 0:
-        failures.append("no example rows found in content/_index.md — parser out of date?")
+
+        for branch, expected in rows.items():
+            actual = pattern.fullmatch(branch) is not None
+            if actual != expected:
+                failures.append(
+                    f"{name}: marks {branch!r} {'valid' if expected else 'invalid'}, "
+                    f"spec regex says {'valid' if actual else 'invalid'}"
+                )
+
+        # Every row being individually valid is a weaker promise than the tables
+        # agreeing: a translation that silently omits an example still passes the
+        # loop above. Parity with English is what catches a newly registered
+        # prefix that was added to one page and forgotten on the other ten.
+        if path == SPEC_PAGE:
+            continue
+        for branch in sorted(set(reference) - set(rows)):
+            failures.append(f"{name}: missing the {branch!r} example content/_index.md has")
+        for branch in sorted(set(rows) - set(reference)):
+            failures.append(f"{name}: has a {branch!r} example content/_index.md does not")
+
     return count, failures
+
+
+# The ABNF `type` rule, wherever it is written out. Alternatives wrap across
+# several indented lines on the documentation pages, so the rule runs until the
+# next one starts in column zero.
+ABNF_TYPE_RULE = re.compile(r"^type\s*=(.*?)(?=^\S)", re.S | re.M)
+
+
+def abnf_types(text):
+    """The alternatives offered by an ABNF `type` rule, or None if there is no rule."""
+    m = ABNF_TYPE_RULE.search(text)
+    return set(re.findall(r'"([^"]+)"', m.group(1))) if m else None
+
+
+def check_grammar_block(spec):
+    """The grammar is spelled out in spec.json's `abnf` and again on every language
+    page. Nothing derives one from the other, so each is checked against the types
+    spec.json declares. Without this, a newly registered prefix can be live in the
+    regex while the grammar a reader is actually looking at never mentions it."""
+    declared = {t["type"] for t in spec["types"]} | {
+        a for t in spec["types"] for a in t.get("aliases", [])
+    }
+    sources = [("static/spec.json", spec["grammar"]["abnf"])] + [
+        (str(p.relative_to(ROOT)), p.read_text(encoding="utf-8")) for p in SPEC_PAGES
+    ]
+
+    failures = []
+    for name, text in sources:
+        types = abnf_types(text)
+        if types is None:
+            failures.append(f"{name}: no ABNF `type` rule found — did the grammar block move?")
+            continue
+        for missing in sorted(declared - types):
+            failures.append(f"{name}: ABNF `type` rule omits {missing!r}, which spec.json declares")
+        for extra in sorted(types - declared):
+            failures.append(
+                f"{name}: ABNF `type` rule offers {extra!r}, which spec.json does not declare"
+            )
+    return len(sources), failures
 
 
 def agent_prefixes():
@@ -377,7 +454,11 @@ def main():
 
     n, failures = check_docs_table(pattern)
     ok &= not failures
-    print(f"docs table:  {n - len(failures)}/{n} examples agree with the spec")
+    print(
+        f"docs table:  {len(failures)} problem(s)"
+        if failures
+        else f"docs table:  ok ({n} examples across {len(SPEC_PAGES)} languages)"
+    )
     for f in failures:
         print(f"  ✗ {f}")
 
@@ -417,6 +498,16 @@ def main():
     failures = check_versioning(spec)
     ok &= not failures
     print(f"versioning:  {'ok' if not failures else str(len(failures)) + ' problem(s)'}")
+    for f in failures:
+        print(f"  ✗ {f}")
+
+    n, failures = check_grammar_block(spec)
+    ok &= not failures
+    print(
+        f"grammar:     {len(failures)} problem(s)"
+        if failures
+        else f"grammar:     ok ({n} ABNF type rules match the declared types)"
+    )
     for f in failures:
         print(f"  ✗ {f}")
 

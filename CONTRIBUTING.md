@@ -37,7 +37,7 @@ To register an agent:
      since: "1.2.0"           # the spec version that adds the prefix
    ```
 2. Keep the list roughly alphabetical after the generic `ai/` entry, and reuse an existing prefix rather than adding a near-duplicate.
-3. Add the prefix to the `type` rule of the ABNF grammar and to the examples table in `./content/_index*.md` (and mention it in `CHANGELOG.md`), so the normative grammar stays in sync with the registry.
+3. Add the prefix to the `type` rule of the ABNF grammar and to the examples table in `./content/_index*.md` (and mention it in `CHANGELOG.md`), so the normative grammar stays in sync with the registry. This means **all eleven language files, not just the English one** — the conformance check holds every translation to the same examples and the same grammar, so missing one fails CI rather than shipping a page that contradicts the spec.
 4. Add the prefix as a `type` (and update the `grammar.regex`) in [`./static/spec.json`](./static/spec.json), then run `python3 tests/conformance.py` to confirm everything still agrees. CI enforces this.
 
 Guidelines for a good prefix:
