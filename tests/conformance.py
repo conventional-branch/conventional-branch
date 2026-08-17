@@ -416,17 +416,23 @@ def check_integrations(spec, pattern):
     return found, failures
 
 
-# llms.txt states the current version three times: the title of the link to the
-# specification, the sentence introducing it, and the permanent endpoint it tells
-# tools to pin. Deliberately narrow — the file also names `release/v1.2.0` as an
+# llms.txt states the current version in three places, and each is checked on its
+# own: a total would let one of them be deleted as long as another was duplicated,
+# which passes while the file has quietly stopped saying something it must say.
+# Each pattern is deliberately narrow — the file also names `release/v1.2.0` as an
 # example description and links the 1.0.0 archive, and neither is a claim about
 # what the current version is.
-LLMS_VERSION = re.compile(
-    r"Conventional Branch (\d+\.\d+\.\d+)"
-    r"|current version is (\d+\.\d+\.\d+)"
-    r"|/v(\d+\.\d+\.\d+)/spec\.json"
-)
-LLMS_VERSION_COUNT = 3
+LLMS_VERSIONS = {
+    "the title of the link to the specification": re.compile(
+        r"Conventional Branch (\d+\.\d+\.\d+)"
+    ),
+    "the sentence introducing the version": re.compile(
+        r"current version is (\d+\.\d+\.\d+)"
+    ),
+    "the frozen endpoint it tells tools to pin": re.compile(
+        r"/v(\d+\.\d+\.\d+)/spec\.json"
+    ),
+}
 
 
 def check_llms_txt(spec):
@@ -455,17 +461,19 @@ def check_llms_txt(spec):
             "tells a model how to decide whether a branch name conforms"
         )
 
-    rendered = [next(g for g in m.groups() if g) for m in LLMS_VERSION.finditer(text)]
-    failures += [
-        f"static/llms.txt states version {v!r}, spec.json declares {expected!r}"
-        for v in sorted(set(rendered))
-        if v != expected
-    ]
-    if len(rendered) != LLMS_VERSION_COUNT:
-        failures.append(
-            f"expected {LLMS_VERSION_COUNT} current-version references in "
-            f"static/llms.txt, found {len(rendered)} — file restructured?"
-        )
+    for where, version in LLMS_VERSIONS.items():
+        rendered = version.findall(text)
+        if len(rendered) != 1:
+            failures.append(
+                f"static/llms.txt: expected exactly one current-version reference in "
+                f"{where}, found {len(rendered)} — file restructured?"
+            )
+        failures += [
+            f"static/llms.txt states version {v!r} in {where}, spec.json declares "
+            f"{expected!r}"
+            for v in sorted(set(rendered))
+            if v != expected
+        ]
     return failures
 
 
