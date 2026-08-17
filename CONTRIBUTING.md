@@ -81,6 +81,7 @@ The current version lives only at the site root (`./content/_index*.md`) — it 
    mkdir -p static/v1.2.0 && cp static/spec.json static/v1.2.0/spec.json
    ```
    Unlike the prose, the machine-readable spec is frozen *forward*, not backward: `./static/v<previous>/spec.json` already exists and must never be edited — downstream tools pin those URLs. `python3 tests/conformance.py` fails if the copy is missing or differs.
+1. Update the three current-version references in [`./static/llms.txt`](./static/llms.txt) — the link title, the sentence introducing the version, and the frozen `spec.json` endpoint it tells tools to pin — along with the regex if the grammar changed. `python3 tests/conformance.py` fails if any of them still names the old version, since a language model reads that file and reports what it finds as fact.
 1. Add the new endpoint to the `urls` list in [`./.github/workflows/url-check.yml`](./.github/workflows/url-check.yml), so a permanent URL that stops resolving opens an issue.
 1. Update `CHANGELOG.md`.
 

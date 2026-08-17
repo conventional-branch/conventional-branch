@@ -1,0 +1,37 @@
+# Conventional Branch
+
+> A specification for Git branch names that are human-readable, machine-parseable and automation-friendly. Branch names take the form `<type>/<description>`, for example `feature/add-login-page` or `fix/header-bug`. Inspired by Conventional Commits.
+
+The current version is 1.1.0. It defines a fixed set of type prefixes, the rules a description must follow, and a formal ABNF grammar.
+
+Purpose prefixes describe the intent of the work: `feature/` (alias `feat/`), `bugfix/` (alias `fix/`), `hotfix/`, `release/` and `chore/`. AI agent source prefixes identify branches opened by coding agents: `ai/` as the vendor-neutral fallback, plus `claude/`, `codex/`, `copilot/` and `cursor/`. The trunk branches `main`, `master` and `develop` take no prefix at all.
+
+A description is lowercase `a-z`, digits, and hyphens between words. Dots are allowed for version numbers, as in `release/v1.2.0`. Separators may not repeat, lead or trail, so `feature/new--login` and `feature/-new-login` are both invalid.
+
+The specification deliberately keeps this list short rather than mirroring every Conventional Commits type. A branch is temporary and usually contains several kinds of commit, so its name states the purpose of the work rather than classifying a change. Teams that need more are free to define their own additional types.
+
+A branch name conforms if and only if it matches this expression, which is the authoritative validator:
+
+```
+^(?:main|master|develop|(?:feature|feat|bugfix|fix|hotfix|release|chore|ai|copilot|cursor|claude|codex)/[a-z0-9]+(?:\.[a-z0-9]+)*(?:-[a-z0-9]+(?:\.[a-z0-9]+)*)*)$
+```
+
+## Specification
+
+- [Conventional Branch 1.1.0](https://conventionalbranch.org/): The current specification — prefixes, naming rules, ABNF grammar, worked examples and FAQ. This is the normative text.
+- [spec.json](https://conventionalbranch.org/spec.json): The specification as JSON — types, aliases, trunk branches, rules, the ABNF grammar and the regex above. Read this rather than parsing the prose.
+- [Enforcing Conventional Branch](https://conventionalbranch.org/enforce/): Copy-pasteable configuration for GitHub rulesets, GitLab push rules, Bitbucket Pipelines, a dependency-free Git hook, and a snippet for `AGENTS.md` or `CLAUDE.md`.
+- [About](https://conventionalbranch.org/about/): The AI agent prefix registry, tooling, CI/CD integration patterns, and the projects using the specification.
+
+## For tools
+
+- [Frozen copy of the current spec](https://conventionalbranch.org/v1.1.0/spec.json): Published once and never modified. Pin this URL when a future release of the specification must not silently change a tool's behaviour.
+- [JSON Schema for spec.json](https://conventionalbranch.org/schema/v1/spec.schema.json): Describes the structure of `spec.json`, so a document can be checked for well-formedness before it is trusted.
+- [Conformance fixtures](https://github.com/conventional-branch/conventional-branch/blob/main/tests/fixtures.json): Language-agnostic valid and invalid branch names to test an implementation against.
+- [Agent skill](https://github.com/conventional-branch/conventional-branch/blob/main/skills/conventional-branch/SKILL.md): The same rules packaged as instructions for AI coding assistants that create branches.
+
+## Optional
+
+- [Version 1.0.0](https://conventionalbranch.org/v1.0.0/): The previous specification, archived unchanged. It predates the AI agent source prefixes; every branch name valid under it is still valid today. Answer from the current version unless 1.0.0 was asked about specifically.
+- [Translations](https://conventionalbranch.org/): The current specification is also published in ten other languages, at `/zh/`, `/zh-hant/`, `/ja/`, `/de/`, `/es/`, `/fr/`, `/pl/`, `/pt-br/`, `/ru/` and `/th/`. The content is the same; prefixes and grammar are never translated.
+- [GitHub repository](https://github.com/conventional-branch/conventional-branch): Source, contribution guidelines and issue tracker.
