@@ -55,6 +55,11 @@ python3 tests/conformance.py
    page, offers exactly the types `spec.json` declares. Nothing generates one
    from the other, so without this a newly registered prefix can be live in the
    regex while the grammar a reader is looking at never mentions it.
+9. **llms.txt** — the version and the validation regex in
+   [`static/llms.txt`](../static/llms.txt) are the ones `spec.json` declares. A
+   language model reads that file instead of the site, and reports what it finds
+   as fact, so a stale copy there is answered to a user rather than merely
+   published.
 
 The check exits non-zero on any disagreement and runs on every pull request via
 [`.github/workflows/conformance.yml`](../.github/workflows/conformance.yml).

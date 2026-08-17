@@ -27,6 +27,9 @@ jobs:
             "https://conventionalbranch.org/about/"
             # Served from every adopter's README — a 404 here breaks their badge.
             "https://conventionalbranch.org/badge.svg"
+            # Fetched at a fixed path by convention, so a 404 is silent: nothing
+            # reports it and the model simply answers without the specification.
+            "https://conventionalbranch.org/llms.txt"
             # Documented as permanent endpoints for downstream tooling to pin.
             # These must never 404: something out there depends on each one.
             "https://conventionalbranch.org/spec.json"

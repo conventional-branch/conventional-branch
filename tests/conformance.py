@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Conformance test for the Conventional Branch specification.
 
-Runs eight checks, all driven by the canonical machine-readable spec
+Runs nine checks, all driven by the canonical machine-readable spec
 (static/spec.json) so the docs, the registry and the grammar cannot drift
 apart silently:
 
@@ -26,6 +26,9 @@ apart silently:
   8. Grammar     — the ABNF `type` rule, in spec.json and on every language's
                    page, offers exactly the types spec.json declares, so the
                    grammar a reader sees cannot fall behind the regex.
+  9. llms.txt    — the version and the validation regex in static/llms.txt are
+                   the ones spec.json declares, so a language model reading it
+                   cannot answer from a stale copy of the specification.
 
 Exits non-zero if anything disagrees. Standard library only — no deps.
 """
@@ -53,6 +56,7 @@ ENFORCE_PAGE = ROOT / "content" / "enforce" / "index.md"
 SPEC_PAGES = sorted((ROOT / "content").glob("_index*.md"))
 AGENTS = ROOT / "data" / "agents.yaml"
 BADGE = STATIC / "badge.svg"
+LLMS = STATIC / "llms.txt"
 
 
 def load_spec():
@@ -412,6 +416,59 @@ def check_integrations(spec, pattern):
     return found, failures
 
 
+# llms.txt states the current version three times: the title of the link to the
+# specification, the sentence introducing it, and the permanent endpoint it tells
+# tools to pin. Deliberately narrow — the file also names `release/v1.2.0` as an
+# example description and links the 1.0.0 archive, and neither is a claim about
+# what the current version is.
+LLMS_VERSION = re.compile(
+    r"Conventional Branch (\d+\.\d+\.\d+)"
+    r"|current version is (\d+\.\d+\.\d+)"
+    r"|/v(\d+\.\d+\.\d+)/spec\.json"
+)
+LLMS_VERSION_COUNT = 3
+
+
+def check_llms_txt(spec):
+    """static/llms.txt restates the specification for language models, which read
+    it instead of reading the site. That makes it the one file whose mistakes get
+    answered back to a user as fact, so the two things it can get wrong — which
+    version is current, and which branch names are valid — are held to spec.json."""
+    text = LLMS.read_text(encoding="utf-8")
+    expected = spec["version"]
+    regex = spec["grammar"]["regex"]
+    failures = []
+
+    found = 0
+    for number, line in enumerate(text.splitlines(), 1):
+        if not any(marker in line for marker in REGEX_MARKERS):
+            continue
+        found += 1
+        if line.strip() != regex:
+            failures.append(
+                f"static/llms.txt:{number}: this regex is not the one in spec.json — "
+                f"a model reading it would validate the wrong branch names"
+            )
+    if not found:
+        failures.append(
+            "static/llms.txt: the validation regex is missing — the file no longer "
+            "tells a model how to decide whether a branch name conforms"
+        )
+
+    rendered = [next(g for g in m.groups() if g) for m in LLMS_VERSION.finditer(text)]
+    failures += [
+        f"static/llms.txt states version {v!r}, spec.json declares {expected!r}"
+        for v in sorted(set(rendered))
+        if v != expected
+    ]
+    if len(rendered) != LLMS_VERSION_COUNT:
+        failures.append(
+            f"expected {LLMS_VERSION_COUNT} current-version references in "
+            f"static/llms.txt, found {len(rendered)} — file restructured?"
+        )
+    return failures
+
+
 def check_versioning(spec):
     """Downstream tools pin /v<version>/spec.json, so releasing a new version
     without freezing a copy of it would break the promise that URL makes."""
@@ -508,6 +565,12 @@ def main():
         if failures
         else f"grammar:     ok ({n} ABNF type rules match the declared types)"
     )
+    for f in failures:
+        print(f"  ✗ {f}")
+
+    failures = check_llms_txt(spec)
+    ok &= not failures
+    print(f"llms.txt:    {'ok' if not failures else str(len(failures)) + ' problem(s)'}")
     for f in failures:
         print(f"  ✗ {f}")
 
