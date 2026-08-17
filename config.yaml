@@ -1,11 +1,21 @@
 baseURL: /
 languageCode: en-us
 theme: conventional-branch
+
+# Nothing in content/ is tagged or categorised, so Hugo was generating /categories/ and
+# /tags/ with no template to render them: an index.xml and no index.html, which is a 404
+# that the sitemap was nonetheless advertising to search engines.
+disableKinds: ["taxonomy", "term"]
 # defaultContentLanguageInSubdir: true
 defaultContentLanguage: en
 
 # Global parameters
 params:
+  # baseURL stays "/" so a Netlify deploy preview serves its own assets. canonical,
+  # og:url and og:image still have to be absolute, and always name production: a
+  # preview that made itself canonical would compete with the real site in the index.
+  canonicalBaseURL: https://conventionalbranch.org/
+
   license:
     title: License
     action:
@@ -27,6 +37,7 @@ languages:
     params:
       weight: 1
       languageName: English
+      ogLocale: en_US
       title: Conventional Branch
       description: A specification for adding human and machine readable meaning to branch
       actions:
@@ -42,6 +53,7 @@ languages:
     params:
       weight: 2
       languageName: 中文
+      ogLocale: zh_CN
       title: 约定式分支
       description: 一种用于给分支增加人机可读含义的规范
       actions:
@@ -55,6 +67,7 @@ languages:
     params:
       weight: 3
       languageName: Português brasileiro
+      ogLocale: pt_BR
       title: Conventional Branch
       description: Uma especificação para dar aos nomes dos branches um significado legível para humanos e máquinas
       actions:
@@ -68,6 +81,7 @@ languages:
     params:
       weight: 4
       languageName: Français
+      ogLocale: fr_FR
       title: Conventional Branch
       description: Une spécification pour ajouter un sens lisible par l'humain et la machine aux branches
       actions:
@@ -81,6 +95,7 @@ languages:
     params:
       weight: 5
       languageName: 日本語
+      ogLocale: ja_JP
       title: 慣例的ブランチ
       description: ブランチに人間と機械が読める意味を追加する仕様
       actions:
@@ -94,6 +109,7 @@ languages:
     params:
       weight: 6
       languageName: Deutsch
+      ogLocale: de_DE
       title: Conventional Branch
       description: Eine Spezifikation zur Ergänzung von menschen- und maschinenlesbarer Bedeutung für Branches
       actions:
@@ -107,6 +123,7 @@ languages:
     params:
       weight: 7
       languageName: Русский
+      ogLocale: ru_RU
       title: Conventional Branch
       description: Спецификация для добавления человеко- и машиночитаемого смысла к веткам
       actions:
@@ -120,6 +137,7 @@ languages:
     params:
       weight: 8
       languageName: Polski
+      ogLocale: pl_PL
       title: Conventional Branch
       description: Specyfikacja dodawania znaczenia czytelnego dla ludzi i maszyn do gałęzi
       actions:
@@ -133,6 +151,7 @@ languages:
     params:
       weight: 9
       languageName: 繁體中文
+      ogLocale: zh_TW
       title: 約定式分支
       description: 一種為 Git branch 增添人機可讀含義的規範
       actions:
@@ -146,6 +165,7 @@ languages:
     params:
       weight: 10
       languageName: Español
+      ogLocale: es_ES
       title: Conventional Branch
       description: Una especificación para añadir significado legible por humanos y máquinas a las ramas
       actions:
@@ -159,6 +179,7 @@ languages:
     params:
       weight: 11
       languageName: ภาษาไทย
+      ogLocale: th_TH
       title: Conventional Branch
       description: ข้อกำหนดสำหรับการเพิ่มความหมายที่ทั้งมนุษย์และเครื่องจักรสามารถอ่านได้ให้กับชื่อ Branch
       actions:

@@ -1,0 +1,11 @@
+{{ printf "<?xml version=\"1.0\" encoding=\"utf-8\" standalone=\"yes\"?>" | safeHTML }}
+{{/* The sitemap protocol requires an absolute <loc>, and baseURL is "/" so that a deploy
+     preview serves its own assets. Hugo's built-in template would emit "/en/sitemap.xml",
+     which Search Console rejects outright, so the host is prefixed explicitly here. */}}
+<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  {{- range . }}
+  <sitemap>
+    <loc>{{ printf "%s%s" .Params.canonicalBaseURL (strings.TrimPrefix "/" .SitemapAbsURL) }}</loc>
+  </sitemap>
+  {{- end }}
+</sitemapindex>

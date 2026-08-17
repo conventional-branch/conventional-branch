@@ -1,6 +1,8 @@
 ---
 type: about
 draft: false
+seoTitle: "AI Agent Branch Prefixes — Conventional Branch"
+seoDescription: "The registry of AI coding agent branch prefixes — ai/, claude/, codex/, copilot/, cursor/ — with tooling, CI/CD patterns and the projects using the specification."
 ---
 
 # About

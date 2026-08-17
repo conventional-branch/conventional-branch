@@ -1,6 +1,8 @@
 ---
 type: about
 draft: false
+seoTitle: "Enforce Git Branch Naming — Conventional Branch"
+seoDescription: "Copy-pasteable branch name validation for GitHub rulesets, GitLab push rules, Bitbucket Pipelines and a dependency-free Git hook, using the published regex."
 ---
 
 # Enforcing Conventional Branch
