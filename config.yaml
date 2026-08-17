@@ -1,11 +1,21 @@
 baseURL: /
 languageCode: en-us
 theme: conventional-branch
+
+# Nothing in content/ is tagged or categorised, so Hugo was generating /categories/ and
+# /tags/ with no template to render them: an index.xml and no index.html, which is a 404
+# that the sitemap was nonetheless advertising to search engines.
+disableKinds: ["taxonomy", "term"]
 # defaultContentLanguageInSubdir: true
 defaultContentLanguage: en
 
 # Global parameters
 params:
+  # baseURL stays "/" so a Netlify deploy preview serves its own assets. canonical,
+  # og:url and og:image still have to be absolute, and always name production: a
+  # preview that made itself canonical would compete with the real site in the index.
+  canonicalBaseURL: https://conventionalbranch.org/
+
   license:
     title: License
     action:

@@ -1,0 +1,13 @@
+{{ printf "<?xml version=\"1.0\" encoding=\"utf-8\" standalone=\"yes\"?>" | safeHTML }}
+{{/* As with sitemapindex.xml: <loc> has to be absolute, and baseURL is "/", so the host
+     comes from canonicalBaseURL rather than from Hugo's own permalinks. */}}
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  {{- range .Pages }}
+  <url>
+    <loc>{{ printf "%s%s" $.Site.Params.canonicalBaseURL (strings.TrimPrefix "/" .RelPermalink) }}</loc>
+    {{- if not .Lastmod.IsZero }}
+    <lastmod>{{ safeHTML ( .Lastmod.Format "2006-01-02T15:04:05-07:00" ) }}</lastmod>
+    {{- end }}
+  </url>
+  {{- end }}
+</urlset>

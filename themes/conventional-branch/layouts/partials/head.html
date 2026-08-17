@@ -1,4 +1,7 @@
 <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1,maximum-scale=1,user-scalable=no">
+
   <!-- Global site tag (gtag.js) - Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-RH9YBHW509"></script>
   <script>
@@ -8,26 +11,61 @@
 
     gtag('config', 'G-RH9YBHW509');
   </script>
-  
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="{{ .Site.BaseURL }}css/style.css">
 
-  <title>{{ .Param "Title" }}</title>
-  <meta name="description" content="{{ .Param "Description" }}"/>
-  <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1,maximum-scale=1,user-scalable=no">
+  {{/* The hero renders .Param "Title" and "Description" — the site's name and tagline,
+       identical on every page. A search result has to tell one page from another, so the
+       document title and description come from the page's own seoTitle/seoDescription
+       where it sets them, leaving the visible heading alone.
+
+       Archived specifications carry a `version` param and fold it into their title, so
+       every language's copy of an old version is distinguishable from the current one it
+       would otherwise share a title with. One rule covers all eleven translations, and
+       covers whatever version is archived next without needing to be touched. */}}
+  {{- $title := .Param "seoTitle" | default (.Param "Title") -}}
+  {{- with .Param "version" -}}
+    {{- $title = printf "%s %s" $title (strings.TrimPrefix "v" .) -}}
+  {{- end -}}
+  {{- $description := .Param "seoDescription" | default (.Param "Description") -}}
+
+  {{/* baseURL is "/" so that a Netlify deploy preview serves its own assets rather than
+       production's. Absolute URLs are built from an explicit host instead: canonical, og:url
+       and og:image have to be absolute to mean anything, and pointing them at production
+       from a preview is what keeps preview URLs from competing in the index. */}}
+  {{- $base := .Site.Params.canonicalBaseURL -}}
+  {{- $canonical := printf "%s%s" $base (strings.TrimPrefix "/" .RelPermalink) -}}
+  {{- $image := printf "%simg/git-flow-welcome.png" $base -}}
+
+  <title>{{ $title }}</title>
+  <meta name="description" content="{{ $description }}"/>
+  <link rel="canonical" href="{{ $canonical }}"/>
+
+  {{/* Eleven translations of one specification. Without these the only thing telling them
+       apart is the prose, and the wrong language can be served — or they can be read as
+       duplicates of each other. Each set is self-referential, as hreflang requires. */}}
+  {{- if .IsTranslated }}
+  {{- range .AllTranslations }}
+  <link rel="alternate" hreflang="{{ .Language.Lang }}" href="{{ printf "%s%s" $base (strings.TrimPrefix "/" .RelPermalink) }}"/>
+  {{- end }}
+  {{- end }}
 
   <!-- Twitter Card data -->
-  <meta name="twitter:card" content="{{ .Param "Description" }}">
-  <meta name="twitter:title" content="{{ .Param "Title" }}">
-  <meta name="twitter:description" content="{{ .Param "Description" }}">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{{ $title }}">
+  <meta name="twitter:description" content="{{ $description }}">
+  <meta name="twitter:image" content="{{ $image }}">
 
   <!-- Open Graph data -->
-  <meta property="og:title" content="{{ .Param "Title" }}"/>
-  <meta property="og:type" content="article"/>
-  <meta property="og:url" content="{{ .Permalink }}"/>
-  <meta property="og:description" content="{{ .Param "Description" }}"/>
+  <meta property="og:title" content="{{ $title }}"/>
+  <meta property="og:type" content="{{ cond .IsHome "website" "article" }}"/>
+  <meta property="og:url" content="{{ $canonical }}"/>
+  <meta property="og:description" content="{{ $description }}"/>
   <meta property="og:site_name" content="{{ .Param "Title" }}"/>
+  <meta property="og:image" content="{{ $image }}"/>
+  <meta property="og:locale" content="{{ .Site.Language.Lang }}"/>
 </head>
