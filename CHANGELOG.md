@@ -4,24 +4,23 @@ All notable changes to the Conventional Branch specification will be documented 
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
-## [Unreleased]
-
-### Added
-- **Permanent spec endpoint**: the machine-readable spec is now served both at [`/spec.json`](https://conventionalbranch.org/spec.json) (always the latest version) and at [`/v1.1.0/spec.json`](https://conventionalbranch.org/v1.1.0/spec.json), frozen at publication. Downstream tools can pin the versioned URL so a future release cannot change their behavior unannounced.
-- **JSON Schema for `spec.json`**: [`/schema/v1/spec.schema.json`](https://conventionalbranch.org/schema/v1/spec.schema.json) describes the structure of the spec document itself, with written stability guarantees for each endpoint. `spec.json` now carries a `$schema` key.
-- **Enforcement page** at [conventionalbranch.org/enforce](https://conventionalbranch.org/enforce/): copy-pasteable configuration for GitHub rulesets, GitHub Actions, GitLab push rules and CI, Bitbucket Pipelines, a dependency-free Git hook, branch-creation aliases, and a snippet for `AGENTS.md` / `CLAUDE.md`. A conformance check keeps every regex on it identical to `spec.json`.
-- Two conformance checks covering the above: every published spec document is validated against the schema, and a release cannot ship without a byte-identical frozen copy of the version it declares.
+The version number tracks the specification itself; site and tooling changes are listed under the version they serve.
 
 ## [1.1.0] - 2026-07-08
 
 ### Added
-- **AI Agent Source Prefixes**: `ai/`, `copilot/`, `cursor/`, `claude/`, `codex/` for identifying AI-generated branches.
-- FAQ entry explaining the rationale for AI agent source prefixes.
-- Updated ABNF grammar to include AI agent source types.
-- Updated examples table with AI agent branch name examples.
-- Version switcher UI on the specification website.
-- **AI agent prefix registry**: a machine-readable `data/agents.yaml` rendered as a table across all languages, with a documented process for registering new agent prefixes.
-- **Machine-readable specification**: `spec.json` (types, aliases, rules, ABNF grammar, and a validation regex) served at [conventionalbranch.org/spec.json](https://conventionalbranch.org/spec.json), plus language-agnostic conformance fixtures and a CI check that keeps the spec, docs, and registry in sync.
+- **AI Agent Source Prefixes**: `ai/`, `copilot/`, `cursor/`, `claude/`, `codex/` — grammar, examples, and FAQ updated to match.
+- **Agent prefix registry** ([`data/agents.yaml`](https://github.com/conventional-branch/conventional-branch/blob/main/data/agents.yaml)), with a documented process for registering new prefixes.
+- **Machine-readable spec**: [`/spec.json`](https://conventionalbranch.org/spec.json) — types, rules, grammar, and a validation regex, with conformance fixtures for implementers.
+- Version switcher on the website.
+- **Frozen spec endpoint** (2026-08): [`/v1.1.0/spec.json`](https://conventionalbranch.org/v1.1.0/spec.json) never changes after publication — pin it in tooling.
+- **JSON Schema for the spec** (2026-08): [`/schema/v1/spec.schema.json`](https://conventionalbranch.org/schema/v1/spec.schema.json).
+- **Enforcement page** (2026-08): [/enforce](https://conventionalbranch.org/enforce/) — copy-pasteable configs for GitHub, GitLab, Bitbucket, Git hooks, and AI coding agents.
+- **`llms.txt`** (2026-08): [/llms.txt](https://conventionalbranch.org/llms.txt), the spec summarized for AI assistants.
+- **Adoption badge** (2026-08): [`/badge.svg`](https://conventionalbranch.org/badge.svg), self-hosted, always showing the current version.
+
+### Removed
+- VSCode Conventional Branch extension delisted from tooling (2026-08).
 
 ## [1.0.0] - 2026-06-20
 
