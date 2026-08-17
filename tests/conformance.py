@@ -417,20 +417,26 @@ def check_integrations(spec, pattern):
 
 
 # llms.txt states the current version in three places, and each is checked on its
-# own: a total would let one of them be deleted as long as another was duplicated,
-# which passes while the file has quietly stopped saying something it must say.
-# Each pattern is deliberately narrow — the file also names `release/v1.2.0` as an
-# example description and links the 1.0.0 archive, and neither is a claim about
-# what the current version is.
+# own rather than as a total: a total lets one be deleted as long as another is
+# duplicated, which passes while the file has quietly stopped saying something it
+# must say.
+#
+# Each pattern matches the version in the *form* it has to take — as the link to
+# the specification, as the sentence introducing it, as the endpoint to pin — and
+# not merely somewhere in the file. Matching loosely would accept the link being
+# dropped so long as the number still appeared in a passing mention of it, which
+# is a file that has lost the thing a reader needed and kept only a fact about it.
+# Being narrow is also what keeps `release/v1.2.0`, an example description, and the
+# links to the 1.0.0 archive from being read as claims about the current version.
 LLMS_VERSIONS = {
-    "the title of the link to the specification": re.compile(
-        r"Conventional Branch (\d+\.\d+\.\d+)"
+    "the link to the specification": re.compile(
+        r"\[Conventional Branch (\d+\.\d+\.\d+)\]\(https://conventionalbranch\.org/\)"
     ),
     "the sentence introducing the version": re.compile(
-        r"current version is (\d+\.\d+\.\d+)"
+        r"The current version is (\d+\.\d+\.\d+)\."
     ),
     "the frozen endpoint it tells tools to pin": re.compile(
-        r"/v(\d+\.\d+\.\d+)/spec\.json"
+        r"\(https://conventionalbranch\.org/v(\d+\.\d+\.\d+)/spec\.json\)"
     ),
 }
 
