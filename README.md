@@ -95,6 +95,10 @@ Alongside the organizations named above, Conventional Branch is adopted by [Texa
 
 If you find this useful, consider giving it a ⭐️ on [GitHub](https://github.com/conventional-branch/conventional-branch)! Your support helps others discover and adopt the spec.
 
+## 💖 Sponsor
+
+Conventional Branch is maintained as free infrastructure. If your team depends on the spec, [sponsoring](https://github.com/sponsors/conventional-branch) funds hosting, translations, and keeping the spec current as tooling evolves — see [SPONSORS.md](SPONSORS.md) for current sponsors and tiers.
+
 ## 🛡 Badges!
 
 Let others know your project follows the Conventional Branch spec. Pick whichever
