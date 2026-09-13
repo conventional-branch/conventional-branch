@@ -1,0 +1,23 @@
+.github/FUNDING.yml
+  s_3fec77f0dd3a08::t_b138ff43aa56a7 1
+README.md
+  s_3fec77f0dd3a08::t_c9cc00fe6b9b9a 98-101
+SPONSORS.md
+  s_3fec77f0dd3a08::t_84dbf8c91264f6 1-13
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "2e8c178988b4022e4d1d9eb19c023a41b7cf72c3",
+  "prompts": {},
+  "sessions": {
+    "s_3fec77f0dd3a08": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "93ca8d45-4617-45ac-8e0f-719079568a44",
+        "model": "claude-sonnet-5"
+      },
+      "human_author": "shenxianpeng <xianpeng.shen@gmail.com>"
+    }
+  }
+}
