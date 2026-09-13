@@ -1,6 +1,6 @@
 # Sponsors
 
-Conventional Branch is maintained as free, open infrastructure. If your team relies on it, [sponsoring](https://github.com/sponsors/conventional-branch) funds the time that keeps the spec maintained, the conformance fixtures passing, and the translations in sync.
+Conventional Branch is maintained as free, open infrastructure. If your team relies on it, [sponsoring](https://github.com/sponsors/conventional-branch) funds site hosting, translations, and the work of keeping the spec current as tooling evolves — like adding the `ai/`, `claude/`, and `codex/` prefixes when AI coding agents started opening their own branches.
 
 ## Organizations
 

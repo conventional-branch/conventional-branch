@@ -97,7 +97,7 @@ If you find this useful, consider giving it a ⭐️ on [GitHub](https://github.
 
 ## 💖 Sponsor
 
-Conventional Branch is maintained as free infrastructure. If your team depends on the spec, [sponsoring](https://github.com/sponsors/conventional-branch) funds the maintenance, translations, and conformance testing that keep it stable — see [SPONSORS.md](SPONSORS.md) for current sponsors and tiers.
+Conventional Branch is maintained as free infrastructure. If your team depends on the spec, [sponsoring](https://github.com/sponsors/conventional-branch) funds hosting, translations, and keeping the spec current as tooling evolves — see [SPONSORS.md](SPONSORS.md) for current sponsors and tiers.
 
 ## 🛡 Badges!
 
