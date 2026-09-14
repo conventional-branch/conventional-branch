@@ -1,0 +1,27 @@
+name: Commit Check
+
+on:
+  pull_request:
+    branches: ["main"]
+
+permissions:
+  contents: read
+
+jobs:
+  commit-check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+          fetch-depth: 0 # the message check reads every commit on the pull request
+      - name: Check the branch name and commit messages
+        uses: commit-check/commit-check-action@fd3d923eab0876650f261d2a75572e8161a9a58e # v2.16.0
+        with:
+          branch: true
+          message: true
+          # Report, don't gate: a contributor's fork branch is named however it is
+          # named, and the check is still worth seeing in the job summary.
+          dry-run: true
+          job-summary: true

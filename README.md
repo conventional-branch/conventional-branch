@@ -3,6 +3,7 @@
 [![Conventional Branch](https://conventionalbranch.org/badge.svg)](https://conventionalbranch.org/)
 [![Website](https://img.shields.io/website?url=https%3A%2F%2Fconventionalbranch.org%2F&up_color=6699CC)](https://conventionalbranch.org/)
 [![License: CC BY 4.0](https://img.shields.io/badge/License-CC%20BY%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by/4.0/)
+[![commit-check](https://img.shields.io/badge/commit--check-enabled-brightgreen?logo=Git&logoColor=white&color=%232c9ccd)](https://github.com/commit-check/commit-check)
 
 **A specification for Git branch names that are human-readable, machine-parseable, and automation-friendly.**
 
