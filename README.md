@@ -59,7 +59,7 @@ Enforce the specification automatically in your project:
 | Tool | Description |
 |---|---|
 | [commit-check](https://github.com/commit-check/commit-check) | CLI and pre-commit hook; checks branch names against the spec's type prefixes by default, and commit messages against Conventional Commits |
-| [commit-check-action](https://github.com/commit-check/commit-check-action) | The same check as a GitHub Action, with the failure reported as a job summary and PR comment |
+| [commit-check-action](https://github.com/commit-check/commit-check-action) | The same check as a GitHub Action, with the failure reported as a job summary and, optionally, as a PR comment |
 | [Conventional Branch Skill](skills/conventional-branch/SKILL.md) | Agent skill for AI coding assistants (Claude Code, Cursor, Pi, etc.) |
 
 Install the skill to teach your AI agent how to create properly named branches:

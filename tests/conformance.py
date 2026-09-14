@@ -562,6 +562,7 @@ def check_versioning(spec):
 
 
 def main():
+    """Run every check, print one line per check, and exit non-zero if any fails."""
     spec, pattern = load_spec()
     ok = True
 
