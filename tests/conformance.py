@@ -497,10 +497,15 @@ REPO_CONFIG = ROOT / "commit-check.toml"
 
 
 def toml_lists(path):
-    """The `allow_branch_*` lists in a file, as {key: set of quoted strings}."""
+    """Every `allow_branch_*` list in a file, as {key: [set of quoted strings, …]}.
+
+    A file may declare a key more than once — the page could show two
+    configurations — and each declaration is kept apart so that each is checked
+    on its own. Merged into one set, two incomplete lists would pass by covering
+    for each other while a reader copies either one."""
     found = {}
     for key, body in TOML_LIST.findall(path.read_text(encoding="utf-8")):
-        found.setdefault(key, set()).update(re.findall(r'"([^"]+)"', body))
+        found.setdefault(key, []).append(set(re.findall(r'"([^"]+)"', body)))
     return found
 
 
@@ -537,17 +542,21 @@ def check_commit_check_config(spec):
                     f"configuration move, or lose the list it carries?"
                 )
                 continue
-            for missing in sorted(want - found[key]):
-                failures.append(
-                    f"{name}: `{key}` omits {missing!r}, which spec.json declares — "
-                    f"commit-check configured from it would reject a valid branch name"
-                )
-            if not exact:
-                continue
-            for extra in sorted(found[key] - want):
-                failures.append(
-                    f"{name}: `{key}` lists {extra!r}, which spec.json does not declare"
-                )
+            for number, have in enumerate(found[key], 1):
+                where = f"{name}: `{key}`"
+                if len(found[key]) > 1:
+                    where += f" (declaration {number})"
+                for missing in sorted(want - have):
+                    failures.append(
+                        f"{where} omits {missing!r}, which spec.json declares — "
+                        f"commit-check configured from it would reject a valid branch name"
+                    )
+                if not exact:
+                    continue
+                for extra in sorted(have - want):
+                    failures.append(
+                        f"{where} lists {extra!r}, which spec.json does not declare"
+                    )
     return failures
 
 
