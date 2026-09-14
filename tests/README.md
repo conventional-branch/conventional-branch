@@ -62,8 +62,10 @@ python3 tests/conformance.py
    published.
 10. **commit-check** — the `commit-check.toml` on
     [`content/enforce/index.md`](../content/enforce/index.md) lists exactly the
-    types, aliases and trunk branches `spec.json` declares, so a newly registered
-    prefix cannot leave the published configuration rejecting a valid branch name.
+    types, aliases and trunk branches `spec.json` declares, and the repository's
+    own [`commit-check.toml`](../commit-check.toml) at least those, so a newly
+    registered prefix cannot leave either configuration rejecting a valid branch
+    name.
 
 The check exits non-zero on any disagreement and runs on every pull request via
 [`.github/workflows/conformance.yml`](../.github/workflows/conformance.yml).

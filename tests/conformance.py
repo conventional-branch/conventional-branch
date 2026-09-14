@@ -31,8 +31,9 @@ apart silently:
                    cannot answer from a stale copy of the specification.
  10. commit-check— the commit-check.toml on content/enforce/index.md lists
                    exactly the types, aliases and trunk branches spec.json
-                   declares, so a newly registered prefix cannot leave the
-                   published configuration rejecting a valid branch name.
+                   declares, and the repository's own commit-check.toml at
+                   least those, so a newly registered prefix cannot leave
+                   either configuration rejecting a valid branch name.
 
 Exits non-zero if anything disagrees. Standard library only — no deps.
 """
@@ -487,10 +488,20 @@ def check_llms_txt(spec):
     return failures
 
 
-# The commit-check configuration on the enforcement page names what it accepts as
-# TOML lists rather than as the regex, so it is checked by content: the quoted
-# strings inside each `key = [ ... ]` block.
+# A commit-check configuration names what it accepts as TOML lists rather than
+# as the regex, so it is checked by content: the quoted strings inside each
+# `key = [ ... ]` block. This reads the block whether it sits in a fenced code
+# sample on the enforcement page or in a real configuration file.
 TOML_LIST = re.compile(r"^(allow_branch_types|allow_branch_names)\s*=\s*\[(.*?)\]", re.S | re.M)
+REPO_CONFIG = ROOT / "commit-check.toml"
+
+
+def toml_lists(path):
+    """The `allow_branch_*` lists in a file, as {key: set of quoted strings}."""
+    found = {}
+    for key, body in TOML_LIST.findall(path.read_text(encoding="utf-8")):
+        found.setdefault(key, set()).update(re.findall(r'"([^"]+)"', body))
+    return found
 
 
 def check_commit_check_config(spec):
@@ -499,35 +510,44 @@ def check_commit_check_config(spec):
     prefix registered in a later release simply never appears in it, and a
     configuration copied from the page then rejects a valid branch name — so each
     list is held to spec.json: the types with their aliases, and the trunk
-    branches, no more and no less."""
+    branches, no more and no less.
+
+    The repository's own commit-check.toml, which the pull request workflow
+    reads, is held to the same lists, except that it may carry more: the
+    specification allows documented custom types, and this repository's
+    automation names its branches dependabot/…, which the specification does
+    not and should not register."""
     expected = {
         "allow_branch_types": {t["type"] for t in spec["types"]}
         | {a for t in spec["types"] for a in t.get("aliases", [])},
         "allow_branch_names": set(spec["trunkBranches"]),
     }
-    text = ENFORCE_PAGE.read_text(encoding="utf-8")
-    found = {}
-    for key, body in TOML_LIST.findall(text):
-        found.setdefault(key, set()).update(re.findall(r'"([^"]+)"', body))
+    sources = (
+        ("content/enforce/index.md", ENFORCE_PAGE, True),
+        ("commit-check.toml", REPO_CONFIG, False),
+    )
 
     failures = []
-    for key, want in expected.items():
-        if key not in found:
-            failures.append(
-                f"content/enforce/index.md: no `{key}` list found — did the "
-                f"commit-check configuration move, or lose the list it publishes?"
-            )
-            continue
-        for missing in sorted(want - found[key]):
-            failures.append(
-                f"content/enforce/index.md: `{key}` omits {missing!r}, which spec.json "
-                f"declares — commit-check configured from the page would reject it"
-            )
-        for extra in sorted(found[key] - want):
-            failures.append(
-                f"content/enforce/index.md: `{key}` lists {extra!r}, which spec.json "
-                f"does not declare"
-            )
+    for name, path, exact in sources:
+        found = toml_lists(path)
+        for key, want in expected.items():
+            if key not in found:
+                failures.append(
+                    f"{name}: no `{key}` list found — did the commit-check "
+                    f"configuration move, or lose the list it carries?"
+                )
+                continue
+            for missing in sorted(want - found[key]):
+                failures.append(
+                    f"{name}: `{key}` omits {missing!r}, which spec.json declares — "
+                    f"commit-check configured from it would reject a valid branch name"
+                )
+            if not exact:
+                continue
+            for extra in sorted(found[key] - want):
+                failures.append(
+                    f"{name}: `{key}` lists {extra!r}, which spec.json does not declare"
+                )
     return failures
 
 
