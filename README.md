@@ -57,8 +57,8 @@ Enforce the specification automatically in your project:
 
 | Tool | Description |
 |---|---|
-| [commit-check](https://github.com/commit-check/commit-check) | CLI tool to check branch names, commit messages, and more |
-| [commit-check-action](https://github.com/commit-check/commit-check-action) | GitHub Action for automated branch name validation |
+| [commit-check](https://github.com/commit-check/commit-check) | CLI and pre-commit hook; checks branch names against the spec's type prefixes by default, and commit messages against Conventional Commits |
+| [commit-check-action](https://github.com/commit-check/commit-check-action) | The same check as a GitHub Action, with the failure reported as a job summary and PR comment |
 | [Conventional Branch Skill](skills/conventional-branch/SKILL.md) | Agent skill for AI coding assistants (Claude Code, Cursor, Pi, etc.) |
 
 Install the skill to teach your AI agent how to create properly named branches:
@@ -81,8 +81,9 @@ A [conformance test](tests/README.md) runs in CI and checks the fixtures, the ex
 ## ⚙️ Enforcing It
 
 Copy-pasteable configuration for GitHub rulesets, GitLab push rules, Bitbucket
-Pipelines, a dependency-free Git hook, branch-creation aliases, and a
-snippet for `AGENTS.md` / `CLAUDE.md`, at
+Pipelines, commit-check as a pre-commit hook and as a GitHub Action, a
+dependency-free Git hook, branch-creation aliases, and a snippet for
+`AGENTS.md` / `CLAUDE.md`, at
 [conventionalbranch.org/enforce](https://conventionalbranch.org/enforce/). Every regex on
 that page is the one in `spec.json`, enforced by the conformance check, so a config
 copied from it cannot drift from the specification.

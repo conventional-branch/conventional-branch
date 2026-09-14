@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Conformance test for the Conventional Branch specification.
 
-Runs nine checks, all driven by the canonical machine-readable spec
+Runs ten checks, all driven by the canonical machine-readable spec
 (static/spec.json) so the docs, the registry and the grammar cannot drift
 apart silently:
 
@@ -29,6 +29,10 @@ apart silently:
   9. llms.txt    — the version and the validation regex in static/llms.txt are
                    the ones spec.json declares, so a language model reading it
                    cannot answer from a stale copy of the specification.
+ 10. commit-check— the commit-check.toml on content/enforce/index.md lists
+                   exactly the types, aliases and trunk branches spec.json
+                   declares, so a newly registered prefix cannot leave the
+                   published configuration rejecting a valid branch name.
 
 Exits non-zero if anything disagrees. Standard library only — no deps.
 """
@@ -483,6 +487,50 @@ def check_llms_txt(spec):
     return failures
 
 
+# The commit-check configuration on the enforcement page names what it accepts as
+# TOML lists rather than as the regex, so it is checked by content: the quoted
+# strings inside each `key = [ ... ]` block.
+TOML_LIST = re.compile(r"^(allow_branch_types|allow_branch_names)\s*=\s*\[(.*?)\]", re.S | re.M)
+
+
+def check_commit_check_config(spec):
+    """The enforcement page also configures commit-check, which takes its types
+    as a list rather than as the regex. A list rots the same way a regex does — a
+    prefix registered in a later release simply never appears in it, and a
+    configuration copied from the page then rejects a valid branch name — so each
+    list is held to spec.json: the types with their aliases, and the trunk
+    branches, no more and no less."""
+    expected = {
+        "allow_branch_types": {t["type"] for t in spec["types"]}
+        | {a for t in spec["types"] for a in t.get("aliases", [])},
+        "allow_branch_names": set(spec["trunkBranches"]),
+    }
+    text = ENFORCE_PAGE.read_text(encoding="utf-8")
+    found = {}
+    for key, body in TOML_LIST.findall(text):
+        found.setdefault(key, set()).update(re.findall(r'"([^"]+)"', body))
+
+    failures = []
+    for key, want in expected.items():
+        if key not in found:
+            failures.append(
+                f"content/enforce/index.md: no `{key}` list found — did the "
+                f"commit-check configuration move, or lose the list it publishes?"
+            )
+            continue
+        for missing in sorted(want - found[key]):
+            failures.append(
+                f"content/enforce/index.md: `{key}` omits {missing!r}, which spec.json "
+                f"declares — commit-check configured from the page would reject it"
+            )
+        for extra in sorted(found[key] - want):
+            failures.append(
+                f"content/enforce/index.md: `{key}` lists {extra!r}, which spec.json "
+                f"does not declare"
+            )
+    return failures
+
+
 def check_versioning(spec):
     """Downstream tools pin /v<version>/spec.json, so releasing a new version
     without freezing a copy of it would break the promise that URL makes."""
@@ -585,6 +633,12 @@ def main():
     failures = check_llms_txt(spec)
     ok &= not failures
     print(f"llms.txt:    {'ok' if not failures else str(len(failures)) + ' problem(s)'}")
+    for f in failures:
+        print(f"  ✗ {f}")
+
+    failures = check_commit_check_config(spec)
+    ok &= not failures
+    print(f"commit-check: {'ok' if not failures else str(len(failures)) + ' problem(s)'}")
     for f in failures:
         print(f"  ✗ {f}")
 
