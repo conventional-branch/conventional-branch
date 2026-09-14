@@ -18,6 +18,7 @@ The version number tracks the specification itself; site and tooling changes are
 - **Enforcement page** (2026-08): [/enforce](https://conventionalbranch.org/enforce/) — copy-pasteable configs for GitHub, GitLab, Bitbucket, Git hooks, and AI coding agents.
 - **`llms.txt`** (2026-08): [/llms.txt](https://conventionalbranch.org/llms.txt), the spec summarized for AI assistants.
 - **Adoption badge** (2026-08): [`/badge.svg`](https://conventionalbranch.org/badge.svg), self-hosted, always showing the current version.
+- **commit-check on the enforcement page** (2026-09): pre-commit, GitHub Action and `commit-check.toml` configuration, with the type and trunk lists held to `spec.json` by the conformance check. The repository now runs commit-check on its own pull requests.
 
 ### Removed
 - VSCode Conventional Branch extension delisted from tooling (2026-08).

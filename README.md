@@ -3,6 +3,7 @@
 [![Conventional Branch](https://conventionalbranch.org/badge.svg)](https://conventionalbranch.org/)
 [![Website](https://img.shields.io/website?url=https%3A%2F%2Fconventionalbranch.org%2F&up_color=6699CC)](https://conventionalbranch.org/)
 [![License: CC BY 4.0](https://img.shields.io/badge/License-CC%20BY%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by/4.0/)
+[![commit-check](https://img.shields.io/badge/commit--check-enabled-brightgreen?logo=Git&logoColor=white&color=%232c9ccd)](https://github.com/commit-check/commit-check)
 
 **A specification for Git branch names that are human-readable, machine-parseable, and automation-friendly.**
 
@@ -57,8 +58,8 @@ Enforce the specification automatically in your project:
 
 | Tool | Description |
 |---|---|
-| [commit-check](https://github.com/commit-check/commit-check) | CLI tool to check branch names, commit messages, and more |
-| [commit-check-action](https://github.com/commit-check/commit-check-action) | GitHub Action for automated branch name validation |
+| [commit-check](https://github.com/commit-check/commit-check) | CLI and pre-commit hook; checks branch names against the spec's type prefixes by default, and commit messages against Conventional Commits |
+| [commit-check-action](https://github.com/commit-check/commit-check-action) | The same check as a GitHub Action, with the failure reported as a job summary and, optionally, as a PR comment |
 | [Conventional Branch Skill](skills/conventional-branch/SKILL.md) | Agent skill for AI coding assistants (Claude Code, Cursor, Pi, etc.) |
 
 Install the skill to teach your AI agent how to create properly named branches:
@@ -81,8 +82,9 @@ A [conformance test](tests/README.md) runs in CI and checks the fixtures, the ex
 ## ⚙️ Enforcing It
 
 Copy-pasteable configuration for GitHub rulesets, GitLab push rules, Bitbucket
-Pipelines, a dependency-free Git hook, branch-creation aliases, and a
-snippet for `AGENTS.md` / `CLAUDE.md`, at
+Pipelines, commit-check as a pre-commit hook and as a GitHub Action, a
+dependency-free Git hook, branch-creation aliases, and a snippet for
+`AGENTS.md` / `CLAUDE.md`, at
 [conventionalbranch.org/enforce](https://conventionalbranch.org/enforce/). Every regex on
 that page is the one in `spec.json`, enforced by the conformance check, so a config
 copied from it cannot drift from the specification.

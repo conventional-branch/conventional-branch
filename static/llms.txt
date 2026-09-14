@@ -23,6 +23,11 @@ A branch name conforms if and only if it matches this expression, which is the a
 - [Enforcing Conventional Branch](https://conventionalbranch.org/enforce/): Copy-pasteable configuration for GitHub rulesets, GitLab push rules, Bitbucket Pipelines, a dependency-free Git hook, and a snippet for `AGENTS.md` or `CLAUDE.md`.
 - [About](https://conventionalbranch.org/about/): The AI agent prefix registry, tooling, CI/CD integration patterns, and the projects using the specification.
 
+## Enforcement
+
+- [commit-check](https://github.com/commit-check/commit-check): Checks the branch name against the specification's type prefixes by default, as a pre-commit hook (`check-branch`) or as `commit-check --branch` in any CI. Also checks commit messages against Conventional Commits. Configuration for both is on the enforcement page.
+- [commit-check-action](https://github.com/commit-check/commit-check-action): The same check as a GitHub Action, reporting a failure as a job summary and, optionally, as a pull request comment.
+
 ## For tools
 
 - [Frozen copy of the current spec](https://conventionalbranch.org/v1.1.0/spec.json): Published once and never modified. Pin this URL when a future release of the specification must not silently change a tool's behaviour.

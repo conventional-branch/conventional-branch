@@ -78,7 +78,38 @@ repositories with GitHub Pro, Team, and Enterprise Cloud.
 ### GitHub Actions
 
 A pull request check, for when a ruleset is not an option or you want the failure
-explained in the PR:
+explained in the PR. [commit-check-action](https://github.com/commit-check/commit-check-action)
+checks the branch name by default and reports the result as a job summary, and as a
+comment on the pull request if you let it:
+
+```yaml
+name: Branch name
+
+on: pull_request
+
+jobs:
+  conventional-branch:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write  # only for pr-comments
+    steps:
+      - uses: actions/checkout@v7
+      - uses: commit-check/commit-check-action@v2
+        with:
+          branch: true
+          message: false  # true also checks commit messages against Conventional Commits
+          pr-comments: true
+```
+
+It reads the [`commit-check.toml`](#commit-check) described under local checks, so CI
+and every contributor's machine apply the same configuration. As of commit-check 2.18
+it validates the type prefix and the trunk names; the rules for the description —
+lowercase, hyphens, no doubled separators — are enforced by the ruleset above or the
+script below, not by the action.
+
+A script that applies the regex from the specification in full, if you would rather
+not depend on an action:
 
 ```yaml
 name: Branch name
@@ -183,6 +214,47 @@ pipelines:
 ```
 
 ## Local checks
+
+### commit-check
+
+[commit-check](https://github.com/commit-check/commit-check) checks the branch name
+against the specification's type prefixes out of the box — `conventional_branch = true`
+is its default — and as a [pre-commit](https://pre-commit.com) hook it runs at every
+commit, so a wrong name is caught before it is anywhere but your machine:
+
+```yaml
+repos:
+  - repo: https://github.com/commit-check/commit-check
+    rev: v2.18.0
+    hooks:
+      - id: check-branch
+```
+
+Its default type list is a superset of the specification's: it also accepts the
+Conventional Commits types (`docs/`, `refactor/`, …) and the `dependabot/` and
+`renovate/` prefixes. To accept exactly the types the specification defines, add a
+`commit-check.toml` at the repository root:
+
+```toml
+[branch]
+conventional_branch = true
+allow_branch_types = [
+  "feature", "feat",
+  "bugfix", "fix",
+  "hotfix",
+  "release",
+  "chore",
+  "ai", "claude", "codex", "copilot", "cursor",
+]
+allow_branch_names = ["main", "master", "develop"]
+```
+
+Both lists are the specification's own — the types with their aliases, and the trunk
+branches — and the conformance check holds them to `spec.json` as it holds the regexes
+on this page, so a prefix registered in a future release cannot leave this file behind.
+The same file configures the GitHub Action above and `commit-check --branch` anywhere
+else. Like the action, it checks the type prefix; the description grammar is the hook
+below's to enforce, or the server rule's.
 
 ### A hook with no dependencies
 
@@ -294,3 +366,7 @@ print(bool(valid.fullmatch("feature/add-login-page")))  # True
 If you are implementing validation in a tool, run it against
 [`fixtures.json`](https://github.com/conventional-branch/conventional-branch/blob/main/tests/fixtures.json)
 as well, so your behavior matches every other implementation.
+
+If you would rather not implement anything, `pip install commit-check` puts the
+pre-commit check above on any CI that can run Python — GitLab's Free tier, Bitbucket
+Pipelines, Jenkins — as `commit-check --branch`, reading the same `commit-check.toml`.

@@ -60,6 +60,12 @@ python3 tests/conformance.py
    language model reads that file instead of the site, and reports what it finds
    as fact, so a stale copy there is answered to a user rather than merely
    published.
+10. **commit-check** — the `commit-check.toml` on
+    [`content/enforce/index.md`](../content/enforce/index.md) lists exactly the
+    types, aliases and trunk branches `spec.json` declares, and the repository's
+    own [`commit-check.toml`](../commit-check.toml) at least those, so a newly
+    registered prefix cannot leave either configuration rejecting a valid branch
+    name.
 
 The check exits non-zero on any disagreement and runs on every pull request via
 [`.github/workflows/conformance.yml`](../.github/workflows/conformance.yml).

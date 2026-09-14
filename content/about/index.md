@@ -51,7 +51,7 @@ to skim.
 * [stellio-hub/stellio-context-broker](https://github.com/stellio-hub/stellio-context-broker/blob/develop/docs/contributing/development_guide.md): Stellio, an NGSI-LD compatible context broker.
 * [Curiosum](https://github.com/curiosum-dev): Building apps for innovators.
 * [ZeusAutomacao/DFe.NET](https://github.com/ZeusAutomacao/DFe.NET): Biblioteca em C# para emissão e impressão de NFe, NFCe, MDF-e e CT-e.
-* [commit-check](https://github.com/commit-check): A free, powerful tool that enforces commit metadata, branch naming, and more.
+* [commit-check](https://github.com/commit-check/commit-check/blob/main/README.md): Policy engine for Git commit metadata, with Conventional Branch validation on by default.
 * [fau-advanced-separations/CADET-Process](https://github.com/fau-advanced-separations/CADET-Process/blob/dev/CONTRIBUTING.md): A framework for modelling and optimizing advanced chromatographic processes, by Advanced Separations @ FAU.
 * [devsoc-unsw/structs.sh](https://github.com/devsoc-unsw/structs.sh/blob/dev/docs/docs/contributing.md): An educational data structures and algorithms platform, by the UNSW Software Development Society.
 * [CSES-Open-Source/TritonScript](https://github.com/CSES-Open-Source/TritonScript/blob/main/CONTRIBUTING.md): Open source project by the Computer Science and Engineering Society at UC San Diego.

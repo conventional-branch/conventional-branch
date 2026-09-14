@@ -1,0 +1,20 @@
+# commit-check configuration for this repository, read by
+# .github/workflows/commit-check.yml. The lists are the ones published at
+# https://conventionalbranch.org/enforce/#commit-check — the specification's
+# types with their aliases, and its trunk branches — held to spec.json by
+# tests/conformance.py. The one addition is dependabot/: the specification
+# allows documented custom types, and Dependabot names the branches it opens
+# here dependabot/<ecosystem>/<group>.
+
+[branch]
+conventional_branch = true
+allow_branch_types = [
+  "feature", "feat",
+  "bugfix", "fix",
+  "hotfix",
+  "release",
+  "chore",
+  "ai", "claude", "codex", "copilot", "cursor",
+  "dependabot",
+]
+allow_branch_names = ["main", "master", "develop"]

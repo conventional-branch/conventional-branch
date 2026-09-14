@@ -178,15 +178,24 @@ Tell the user:
 
 ## Validation with commit-check
 
-For automated enforcement, point users to [commit-check](https://github.com/commit-check/commit-check):
+For automated enforcement, point users to [commit-check](https://github.com/commit-check/commit-check). It checks branch names against the specification's type prefixes by default, with no configuration:
 
 ```bash
 # Check the current branch name
 commit-check --branch
-
-# Or integrate with a pre-commit hook / GitHub Action
-# https://github.com/commit-check/commit-check-action
 ```
+
+As a pre-commit hook, so a wrong name is caught at the first commit:
+
+```yaml
+repos:
+  - repo: https://github.com/commit-check/commit-check
+    rev: v2.18.0
+    hooks:
+      - id: check-branch
+```
+
+In GitHub Actions, [commit-check-action](https://github.com/commit-check/commit-check-action) runs the same check on every pull request (`branch: true` is its default). Copy-pasteable configuration for every platform, including a `commit-check.toml` that narrows the types to exactly the specification's, is at https://conventionalbranch.org/enforce/.
 
 ## Relationship with Conventional Commits
 
