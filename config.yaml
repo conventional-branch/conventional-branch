@@ -190,6 +190,6 @@ languages:
       - label: สรุปโดยย่อ
         url: "#บทสรุป"
       - label: ข้อกำหนดฉบับเต็ม
-        url: "#ข้อกำหนด"
+        url: "#ข้อกําหนด"
       - label: มีส่วนร่วม
         url: https://github.com/conventional-branch/conventional-branch
