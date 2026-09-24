@@ -1,0 +1,23 @@
+themes/conventional-branch/README.md
+  s_240b8d40d061ae::t_4a9e7f4421efd0 1-22,27-29,32,35-38,40-50,53,55-60,64-65
+CONTRIBUTING.md
+  s_240b8d40d061ae::t_833a04aa946da7 24,52,59
+CHANGELOG.md
+  s_240b8d40d061ae::t_833a04aa946da7 22
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "d4f3a27a3a41e13d57df0574707aa00b0b9a2746",
+  "prompts": {},
+  "sessions": {
+    "s_240b8d40d061ae": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "d4747621-aab3-47e2-b1b5-64d1c75978db",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "Xianpeng Shen <xianpeng.shen@gmail.com>"
+    }
+  }
+}
