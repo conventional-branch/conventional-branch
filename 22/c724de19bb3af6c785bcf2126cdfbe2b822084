@@ -1,0 +1,163 @@
+themes/conventional-branch/layouts/partials/home/for-tools.html
+  s_240b8d40d061ae::t_e201c0341f2dcf 1-58,60-65
+  s_240b8d40d061ae::t_5853fa9cdf862d 59
+themes/conventional-branch/layouts/404.html
+  s_240b8d40d061ae::t_893282425f18c4 2-17,19-20
+themes/conventional-branch/static/css/scss/components/_button.scss
+  s_240b8d40d061ae::t_141c12cd7fba32 1-96
+themes/conventional-branch/static/js/modules/menus.js
+  s_240b8d40d061ae::t_50528f4b48a3ee 1-31
+themes/conventional-branch/layouts/partials/home/checker.html
+  s_240b8d40d061ae::t_939cee750b95db 130
+  s_240b8d40d061ae::t_8e75a492bf572a 1-129,131-134
+themes/conventional-branch/static/css/scss/components/_checker.scss
+  s_240b8d40d061ae::t_79ffc1ee8b5b19 1-354
+content/enforce/index.md
+  s_240b8d40d061ae::t_6f1cb3d8c6f2c1 6-14
+themes/conventional-branch/layouts/partials/home/convention.html
+  s_240b8d40d061ae::t_7cc79c6ac604e8 1-24
+themes/conventional-branch/static/css/scss/components/_pages.scss
+  s_240b8d40d061ae::t_034ab2b8084c8d 1-646
+i18n/en.yaml
+  s_240b8d40d061ae::t_5853fa9cdf862d 154,158,196
+  s_240b8d40d061ae::t_41beca9a8138d4 1-153,155-157,159-195,197-277
+themes/conventional-branch/layouts/about/single.html
+  s_240b8d40d061ae::t_6135dd5edcadbe 4-29,31-32
+themes/conventional-branch/package.json
+  s_240b8d40d061ae::t_6f65d946b0a39a 22
+themes/conventional-branch/layouts/partials/home/principles.html
+  s_240b8d40d061ae::t_35e9edec796dbd 1,9-19,21-25
+  s_240b8d40d061ae::t_5853fa9cdf862d 2-8,20
+themes/conventional-branch/layouts/partials/spec/hero.html
+  s_240b8d40d061ae::t_b4045444adb216 1-46
+themes/conventional-branch/static/js/index.js
+  s_240b8d40d061ae::t_c22d6b084a1860 2-7,9-16,18-20,22,25-29
+themes/conventional-branch/layouts/partials/about/history.html
+  s_240b8d40d061ae::t_474e4e2ed0ff69 1-23
+themes/conventional-branch/layouts/partials/header.html
+  s_240b8d40d061ae::t_3c30ef6671f0ff 1-7,9-36
+themes/conventional-branch/layouts/partials/home/how-its-read.html
+  s_240b8d40d061ae::t_57237bf74a1afc 1-42
+themes/conventional-branch/static/css/scss/layout/_section.scss
+  s_240b8d40d061ae::t_8cc803319b7d42 38-41
+  s_240b8d40d061ae::t_2345da27eb8468 1-30,33-37,42-105
+  s_240b8d40d061ae::t_18a2aac0ccecac 31-32
+themes/conventional-branch/static/css/scss/abstracts/_mixins.scss
+  s_240b8d40d061ae::t_b35613b6233197 1,3-5,10-11,16-28,31-34,37-40,43-52
+themes/conventional-branch/static/css/scss/components/_home.scss
+  s_240b8d40d061ae::t_5848a3f7edbace 1-849
+themes/conventional-branch/static/css/scss/abstracts/_variables.scss
+  s_240b8d40d061ae::t_2781f57b99e8e3 1-10,12-13,15,17-29,31-35,37-44,46-48,50-55,57,59-61,63,65-68,70-72,74
+themes/conventional-branch/static/js/modules/copy.js
+  s_240b8d40d061ae::t_ae6df62a51b754 1-69
+config.yaml
+  s_240b8d40d061ae::t_d8746c99c71223 44-48,50-53
+  s_240b8d40d061ae::t_7d839762559ee0 43
+  s_240b8d40d061ae::t_fa7e1cb1fb9bcc 12-17
+themes/conventional-branch/static/css/scss/components/_menu.scss
+  s_240b8d40d061ae::t_74d455d567ae8f 1-111,116-148
+  s_240b8d40d061ae::t_af1666d4af750b 112-115
+themes/conventional-branch/layouts/partials/spec.html
+  s_240b8d40d061ae::t_764884dbbfb209 1-6
+themes/conventional-branch/static/css/scss/components/_banner-image.scss
+  s_240b8d40d061ae::t_537a22d9f6a8db 1,3,6-9,15,17
+themes/conventional-branch/static/css/scss/base/_base.scss
+  s_240b8d40d061ae::t_da484f644dd351 1-12,15-16,24,26-31,34,37-45,48-51,53-55,58-59,62-63,66-67,70-72,75-85,87-126,130-143,145-168
+themes/conventional-branch/layouts/partials/home/adopters.html
+  s_240b8d40d061ae::t_6890dadc7e556c 1-11
+themes/conventional-branch/layouts/partials/svg-branch.html
+  s_240b8d40d061ae::t_67712d73a35460 1-2
+themes/conventional-branch/static/js/modules/examples.js
+  s_240b8d40d061ae::t_70b449fc4a6acb 1-89
+themes/conventional-branch/layouts/partials/eyebrow.html
+  s_240b8d40d061ae::t_bb39ac09b828fe 1-5
+themes/conventional-branch/layouts/partials/home/adopt.html
+  s_240b8d40d061ae::t_2eab779141a3da 1-49
+themes/conventional-branch/layouts/_default/single.html
+  s_240b8d40d061ae::t_7cde5a0d8ac28c 4-24,26-27
+themes/conventional-branch/layouts/partials/nav-links.html
+  s_240b8d40d061ae::t_0ba4c721a025d2 1-10
+themes/conventional-branch/layouts/partials/about/people.html
+  s_240b8d40d061ae::t_604923d19fa5b9 1-33
+themes/conventional-branch/layouts/partials/toc.html
+  s_240b8d40d061ae::t_e238827f54f5c6 23,27
+  s_240b8d40d061ae::t_4da45c0daac9a0 7-8,10,12-13
+  s_240b8d40d061ae::t_d73abb8c33e36a 1-6,9,11,14-22,24-26,28-35
+themes/conventional-branch/static/js/modules/checker.js
+  s_240b8d40d061ae::t_715be657663dc8 1-242
+data/history.yaml
+  s_240b8d40d061ae::t_6efe88aa826995 1-30
+themes/conventional-branch/layouts/partials/home/why.html
+  s_240b8d40d061ae::t_9319a6ea428bf0 1-4,8-22
+  s_240b8d40d061ae::t_8337c4007f79c8 5-7
+themes/conventional-branch/static/css/scss/layout/_footer.scss
+  s_240b8d40d061ae::t_0cbc6c7f1ee568 5-6
+  s_240b8d40d061ae::t_4ba6d661733668 1,3-4,7-8,10-11,13-14,17-124,126-127,130-131,134-135
+themes/conventional-branch/static/css/scss/style.scss
+  s_240b8d40d061ae::t_a014fb85580130 4-14
+themes/conventional-branch/static/css/scss/themes/_markdown.scss
+  s_240b8d40d061ae::t_8cc803319b7d42 194-216,220-224
+  s_240b8d40d061ae::t_75adde100048f0 1,3-7,9-10,13-18,22-43,46-51,56-59,61,65-193,225-372,374
+  s_240b8d40d061ae::t_0746a5ed9fd6bf 373,375-409,412-413
+themes/conventional-branch/layouts/partials/icon.html
+  s_240b8d40d061ae::t_202c5e7f017c1c 1-23
+themes/conventional-branch/layouts/partials/enforce/layers.html
+  s_240b8d40d061ae::t_077b7812756843 1-69
+themes/conventional-branch/static/css/scss/layout/_header.scss
+  s_240b8d40d061ae::t_359d1e53e02bb6 1-27,29,31-63,66-72,74-89,91-100,102-104,108-126
+themes/conventional-branch/layouts/partials/page/hero.html
+  s_240b8d40d061ae::t_3dbc1729a093c5 1-25
+themes/conventional-branch/layouts/partials/head.html
+  s_240b8d40d061ae::t_fd406dc51eca5b 17-19
+  s_240b8d40d061ae::t_c0e0441dff4716 15-16,20-22,25
+themes/conventional-branch/static/css/scss/layout/_doc.scss
+  s_240b8d40d061ae::t_11ae6edfa6a3cb 1-221
+themes/conventional-branch/static/js/modules/faq.js
+  s_240b8d40d061ae::t_109b99438f9b8f 1-49
+themes/conventional-branch/layouts/partials/version-current.html
+  s_240b8d40d061ae::t_3f42a0920ad48b 1-10
+themes/conventional-branch/layouts/partials/menu-languages.html
+  s_240b8d40d061ae::t_f8a2e06b4379ce 1-9
+themes/conventional-branch/layouts/partials/footer.html
+  s_240b8d40d061ae::t_87f7ac29ec2d5c 1-3,5-47,49-51
+data/home.yaml
+  s_240b8d40d061ae::t_8ff414f144ebdf 1-121
+themes/conventional-branch/layouts/partials/scripts.html
+  s_240b8d40d061ae::t_7cfe9b9ced7106 1
+content/about/index.md
+  s_240b8d40d061ae::t_6f1cb3d8c6f2c1 6-7,9-10
+  s_240b8d40d061ae::t_8cc803319b7d42 8
+themes/conventional-branch/layouts/partials/home/community.html
+  s_240b8d40d061ae::t_fa7e1cb1fb9bcc 13
+  s_240b8d40d061ae::t_82c88c1930065d 1-12,14-38
+themes/conventional-branch/static/css/scss/components/_code.scss
+  s_240b8d40d061ae::t_04c0242eb6b8c3 1-57
+themes/conventional-branch/layouts/partials/spec/body.html
+  s_240b8d40d061ae::t_0e0fc218632512 1-48
+themes/conventional-branch/static/js/modules/toc.js
+  s_240b8d40d061ae::t_e1afb35419282a 1-42
+themes/conventional-branch/static/css/scss/abstracts/index.scss
+  s_240b8d40d061ae::t_4b315f146aeeac 1-2
+themes/conventional-branch/layouts/partials/menu-versions.html
+  s_240b8d40d061ae::t_a3dfdc2a525b37 1-10
+themes/conventional-branch/static/css/scss/layout/_hero.scss
+  s_240b8d40d061ae::t_dcf2a235fdef9e 1-192
+themes/conventional-branch/package-lock.json
+  s_240b8d40d061ae::t_63095fec74b359 12
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "22c724de19bb3af6c785bcf2126cdfbe2b822084",
+  "prompts": {},
+  "sessions": {
+    "s_240b8d40d061ae": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "d4747621-aab3-47e2-b1b5-64d1c75978db",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "Xianpeng Shen <xianpeng.shen@gmail.com>"
+    }
+  }
+}
