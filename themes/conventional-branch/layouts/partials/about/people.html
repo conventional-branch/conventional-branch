@@ -1,0 +1,33 @@
+{{- $repo := "https://github.com/conventional-branch/conventional-branch" -}}
+<section class="section section--ink people" id="people" aria-labelledby="people-title">
+  <div class="container">
+    <div class="people__head">
+      <p class="eyebrow eyebrow--counted"><span>{{ i18n "people_eyebrow" }}</span></p>
+      <h2 id="people-title" class="section__title">{{ i18n "people_title" }} <em>{{ i18n "people_title_em" }}</em></h2>
+    </div>
+    <div class="people__grid">
+      <div class="people__col">
+        <p class="people__label">{{ i18n "people_maintainer" }}</p>
+        <a class="people__maintainer" href="https://github.com/shenxianpeng">
+          <span class="people__name">Xianpeng Shen</span>
+          <span class="people__handle mono">{{ partial "svg-github.html" . }}shenxianpeng</span>
+        </a>
+      </div>
+      <div class="people__col">
+        <p class="people__label">{{ i18n "contribute_title" }}</p>
+        <p>{{ i18n "people_contribute_body" }}</p>
+        <ul class="people__links">
+          <li><a href="{{ $repo }}/blob/main/CONTRIBUTING.md#contributing">{{ i18n "contribute_typo" }}{{ partial "icon.html" (dict "name" "arrow" "size" 15) }}</a></li>
+          <li><a href="{{ $repo }}/blob/main/CONTRIBUTING.md#adding-a-translation">{{ i18n "people_translate" }}{{ partial "icon.html" (dict "name" "arrow" "size" 15) }}</a></li>
+          <li><a href="{{ $repo }}/blob/main/CONTRIBUTING.md#registering-a-new-ai-agent-prefix">{{ i18n "contribute_register" }}{{ partial "icon.html" (dict "name" "arrow" "size" 15) }}</a></li>
+          <li><a href="{{ $repo }}/blob/main/CONTRIBUTING.md#adding-your-project-to-the-adopters-list">{{ i18n "contribute_adopter" }}{{ partial "icon.html" (dict "name" "arrow" "size" 15) }}</a></li>
+        </ul>
+      </div>
+      <div class="people__col">
+        <p class="people__label">{{ i18n "nav_sponsor" }}</p>
+        <p>{{ i18n "sponsor_body" | safeHTML }}</p>
+        <a class="button button--on-ink" href="https://github.com/sponsors/conventional-branch">{{ i18n "sponsor_button" }}{{ partial "icon.html" (dict "name" "heart" "size" 16) }}</a>
+      </div>
+    </div>
+  </div>
+</section>

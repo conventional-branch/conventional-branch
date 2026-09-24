@@ -1,0 +1,221 @@
+@use "./../abstracts/index" as *;
+
+// A document beside its outline: the specification, and the Enforce and About pages.
+.doc-page {
+  counter-reset: section;
+}
+
+.doc-grid {
+  @include twelve-columns;
+  align-items: start;
+  padding-top: clamp(48px, 7vw, 88px);
+  padding-bottom: clamp(72px, 9vw, 120px);
+}
+
+.doc-aside {
+  grid-column: 1 / span 3;
+  position: sticky;
+  top: 24px;
+  max-height: calc(100vh - 48px);
+  overflow-y: auto;
+  // Room for focus outlines, which the scroll container would otherwise clip.
+  margin: -4px;
+  padding: 4px;
+}
+
+.doc-aside__inner {
+  display: flex;
+  flex-direction: column;
+  gap: 36px;
+}
+
+.doc-body {
+  grid-column: 5 / span 8;
+  min-width: 0;
+}
+
+.aside-heading {
+  @include eyebrow;
+  margin: 0 0 10px;
+  color: $ink-3;
+}
+
+.versions {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: -20px;
+}
+
+.version {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 44px;
+  padding: 0 14px;
+  border: 1px solid $rule;
+  border-radius: $radius-sm;
+  color: $ink-2;
+  font-size: 14px;
+
+  &:hover {
+    border-color: $ink;
+    color: $ink;
+    text-decoration: none;
+  }
+
+  &.is-current {
+    border-color: $ink;
+    background: $ink;
+    color: $on-ink;
+  }
+}
+
+.version__tag {
+  @include eyebrow;
+  font-size: 11px;
+  color: $ink-3;
+
+  .is-current & {
+    color: $blue-on-ink;
+  }
+}
+
+.toc__list,
+.toc__list ol {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.toc__list ol {
+  padding-left: 18px;
+}
+
+.toc a {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 34px;
+  padding: 4px 0;
+  color: $ink-3;
+  font-size: 15px;
+  line-height: 1.35;
+
+  &::before {
+    content: "";
+    flex-shrink: 0;
+    width: 6px;
+    height: 6px;
+    border-radius: 3px;
+  }
+
+  &:hover {
+    color: $ink;
+    text-decoration: none;
+  }
+
+  &.is-active {
+    color: $ink;
+    font-weight: 600;
+
+    &::before {
+      background: $color-primary;
+    }
+  }
+
+  code {
+    font-size: 0.9em;
+  }
+}
+
+.toc ol ol a {
+  min-height: 30px;
+  font-size: 14px;
+}
+
+.aside-links {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  a {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 5px 0;
+    font-size: 13px;
+  }
+
+  span:last-child {
+    color: $ink-3;
+    font-size: 12px;
+  }
+}
+
+.aside-block--rule {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding-top: 24px;
+  border-top: 1px solid $rule;
+}
+
+.aside-note {
+  margin: 0;
+  color: $ink-3;
+  font-size: 14px;
+  line-height: 1.55;
+}
+
+.aside-edit {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+@include below($bp-lg) {
+  .doc-aside {
+    grid-column: 1 / span 4;
+  }
+
+  .doc-body {
+    grid-column: 5 / span 8;
+  }
+}
+
+@include below($bp-md) {
+  .doc-grid {
+    display: block;
+  }
+
+  .doc-aside {
+    position: static;
+    max-height: none;
+    margin: 0 0 48px;
+    padding: 0;
+    overflow: visible;
+  }
+
+  .doc-aside__inner {
+    gap: 28px;
+  }
+
+  // On a phone the outline is the useful part; the rest is repeated elsewhere.
+  .aside-block--tools,
+  .aside-block--rule {
+    display: none;
+  }
+
+  .versions {
+    flex-direction: row;
+    margin-top: -12px;
+
+    .version {
+      flex: 1;
+    }
+  }
+}

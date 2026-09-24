@@ -12,9 +12,17 @@
     gtag('config', 'G-RH9YBHW509');
   </script>
 
+  <meta name="color-scheme" content="light">
+  <meta name="theme-color" content="#F7F6F1">
+  {{/* Lets the stylesheet hide controls that only work with the script, like the
+       checker's example buttons, when it has not run. */}}
+  <script>document.documentElement.classList.add('js')</script>
+
+  {{/* Three voices: Newsreader for what people read, JetBrains Mono for what machines
+       read, Hanken Grotesk for the interface in between. */}}
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,300..600;1,6..72,300..600&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="{{ .Site.BaseURL }}css/style.css">
 

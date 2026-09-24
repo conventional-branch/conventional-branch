@@ -1,0 +1,69 @@
+{{- /* The two layers enforcement happens at, each item linking to its configuration on
+       the page below. */ -}}
+<section class="layers" aria-labelledby="layers-title">
+  <div class="container">
+    <div class="section__head">
+      <p class="eyebrow eyebrow--counted"><span>{{ i18n "layers_eyebrow" }}</span></p>
+      <h2 id="layers-title" class="section__title">{{ i18n "layers_title" }}</h2>
+    </div>
+    <div class="layers__grid">
+      <div class="layer layer--local">
+        <div class="layer__top">
+          <span class="layer__tag">{{ i18n "layers_courtesy" }}</span>
+          {{- partial "icon.html" (dict "name" "laptop" "size" 22 "stroke" 1.75) -}}
+        </div>
+        <div class="layer__intro">
+          <h3 class="layer__title">{{ i18n "layers_local_title" }}</h3>
+          <p>{{ i18n "layers_local_body" }}</p>
+        </div>
+        <ul class="layer__items">
+          <li><a href="#commit-check"><span><span class="layer__item-title mono">commit-check</span><span class="layer__item-note">{{ i18n "layers_local_commitcheck" }}</span></span>{{ partial "icon.html" (dict "name" "arrow-down" "size" 16) }}</a></li>
+          <li><a href="#a-hook-with-no-dependencies"><span><span class="layer__item-title"><span class="mono">pre-push</span> hook</span><span class="layer__item-note">{{ i18n "layers_local_hook" }}</span></span>{{ partial "icon.html" (dict "name" "arrow-down" "size" 16) }}</a></li>
+          <li><a href="#a-branching-alias"><span><span class="layer__item-title">Git aliases</span><span class="layer__item-note">{{ i18n "layers_local_alias" }}</span></span>{{ partial "icon.html" (dict "name" "arrow-down" "size" 16) }}</a></li>
+          <li><a href="#ai-coding-agents"><span><span class="layer__item-title">Agent skill + <span class="mono">AGENTS.md</span></span><span class="layer__item-note">{{ i18n "layers_local_agents" }}</span></span>{{ partial "icon.html" (dict "name" "arrow-down" "size" 16) }}</a></li>
+        </ul>
+      </div>
+
+      <div class="layer__arrow layer__arrow--push" aria-hidden="true">
+        <span class="mono">git push</span>
+        <span class="arrow-line"></span>
+        <span class="layer__arrow-note">{{ i18n "layers_push" }}</span>
+      </div>
+
+      <div class="layer layer--server">
+        <div class="layer__top">
+          <span class="layer__tag layer__tag--solid">{{ i18n "layers_contract" }}</span>
+          {{- partial "icon.html" (dict "name" "server" "size" 22 "stroke" 1.75) -}}
+        </div>
+        <div class="layer__intro">
+          <h3 class="layer__title">{{ i18n "layers_server_title" }}</h3>
+          <p>{{ i18n "layers_server_body" }}</p>
+        </div>
+        <ul class="layer__items">
+          <li><a href="#rulesets"><span><span class="layer__item-title">GitHub rulesets</span><span class="layer__item-note">{{ i18n "layers_server_github" }}</span></span>{{ partial "icon.html" (dict "name" "arrow-down" "size" 16) }}</a></li>
+          <li><a href="#gitlab"><span><span class="layer__item-title">GitLab push rules</span><span class="layer__item-note">{{ i18n "layers_server_gitlab" }}</span></span>{{ partial "icon.html" (dict "name" "arrow-down" "size" 16) }}</a></li>
+          <li><a href="#bitbucket"><span><span class="layer__item-title">Bitbucket Data Center</span><span class="layer__item-note">{{ i18n "layers_server_bitbucket" }}</span></span>{{ partial "icon.html" (dict "name" "arrow-down" "size" 16) }}</a></li>
+        </ul>
+      </div>
+
+      <div class="layer__arrow layer__arrow--pr" aria-hidden="true">
+        <span class="mono">pull request</span>
+        <span class="arrow-line arrow-line--dashed"></span>
+        <span class="layer__arrow-note">{{ i18n "layers_pr" }}</span>
+      </div>
+
+      <div class="layer layer--ci">
+        <div class="layer__ci-head">
+          <h3 class="layer__title layer__title--small">{{ i18n "layers_ci_title" }}</h3>
+          <span class="layer__ci-tag">{{ i18n "layers_ci_tag" }}</span>
+        </div>
+        <p>{{ i18n "layers_ci_body" }}</p>
+        <ul class="layer__ci-items">
+          <li><a href="#github-actions"><span class="layer__item-title">GitHub Actions</span><span class="mono">commit-check-action</span></a></li>
+          <li><a href="#gitlab"><span class="layer__item-title">GitLab CI</span><span class="mono">Free tier</span></a></li>
+          <li><a href="#bitbucket"><span class="layer__item-title">Bitbucket Pipelines</span><span class="mono">Cloud</span></a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>

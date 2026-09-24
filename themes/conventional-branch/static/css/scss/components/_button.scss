@@ -1,0 +1,96 @@
+@use "./../abstracts/index" as *;
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 52px;
+  padding: 0 22px;
+  border: 1px solid transparent;
+  border-radius: $radius-sm;
+  font-family: $font-sans;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.2;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+
+  &:hover {
+    text-decoration: none;
+  }
+}
+
+.button--primary {
+  background: $color-primary-heading;
+  color: #FFFFFF;
+
+  &:hover {
+    background: $color-button-hover;
+    color: #FFFFFF;
+  }
+}
+
+.button--secondary {
+  border-color: $ink;
+  color: $ink;
+
+  &:hover {
+    background: $ink;
+    color: $on-ink;
+  }
+}
+
+// On ink the brand blue carries ink-coloured text (5.8:1).
+.button--on-ink {
+  background: $color-primary;
+  color: $ink;
+
+  &:hover {
+    background: $blue-on-ink;
+    color: $ink;
+  }
+}
+
+.copy-button {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  gap: 6px;
+  height: 30px;
+  padding: 0 10px;
+  border: 1px solid $ink-line-2;
+  border-radius: $radius-sm;
+  background: transparent;
+  color: $on-ink-2;
+  font-family: $font-sans;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+
+  &:hover {
+    border-color: $color-primary;
+    color: $on-ink;
+  }
+
+  &.is-copied {
+    border-color: $color-primary;
+    color: $blue-on-ink;
+  }
+}
+
+.copy-button--paper {
+  border-color: $rule;
+  color: $ink-2;
+
+  &:hover {
+    border-color: $ink;
+    color: $ink;
+  }
+
+  &.is-copied {
+    border-color: $color-primary-heading;
+    color: $color-primary-heading;
+  }
+}

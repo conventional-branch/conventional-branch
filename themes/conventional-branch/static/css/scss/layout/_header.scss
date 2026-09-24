@@ -1,64 +1,128 @@
-@use "./../abstracts/index";
+@use "./../abstracts/index" as *;
 
-.header {
-  position: absolute;
-  z-index: 10;
-  top: 12px;
-  left: 0;
-  width: 100%;
+.site-header {
+  position: relative;
+  z-index: 20;
+  border-bottom: 1px solid $rule;
+  background: $paper;
+}
 
-  .container {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    height: index.$header-height;
-    font-size: .8em;
-    font-weight: bold;
-    text-transform: uppercase;
-  }
+.site-header__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  height: $header-height;
+}
 
-  .logo {
-    width: 30px;
-    height: 30px;
-    background-color: transparent;
-    border: 2px solid #FFF;
-    border-radius: 50%;
-  }
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: $ink;
+  text-decoration: none;
 
-  &__menu {
-    display: flex;
-    color: index.$color-neutral-light;
-    list-style: none;
-    margin-left: index.$gap-sm * 2;
-  }
-
-  &__menu-item {
-    margin-right: index.$gap-sm;
-
-    &:last-child {
-      margin-right: 0;
-    }
+  &:hover {
+    color: $ink;
+    text-decoration: none;
   }
 }
 
-@include index.up-to-mobile {
-  .header {
-    .container {
-      align-items: flex-start;
-      height: auto;
-      margin-top: index.$gap-sm;
-    }
+.brand__mark {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: $radius-md;
+  background: $ink;
+  color: $color-primary;
+}
 
+.brand__name {
+  font-size: 17px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+}
 
-    &__menu {
-      flex-direction: column;
-      justify-content: flex-end;
-      align-items: flex-end;
-      margin-top: index.$gap-sm * -1;
-    }
+.site-nav {
+  display: flex;
+  align-items: center;
+  gap: 36px;
+  font-size: 15px;
+  font-weight: 500;
+}
 
-    &__menu-item {
-      margin-right: 0;
-    }
+.nav-link {
+  color: $ink-2;
+
+  &:hover {
+    color: $ink;
+    text-decoration: none;
+  }
+
+  &.is-current {
+    color: $ink;
+    font-weight: 600;
+    text-decoration: underline;
+    text-decoration-color: $color-primary;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 8px;
+  }
+}
+
+.site-header__tools {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.icon-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: $radius-sm;
+  color: $ink;
+
+  &:hover {
+    color: $color-primary-heading;
+  }
+}
+
+svg.github {
+  width: 20px;
+  height: 20px;
+  fill: currentColor;
+}
+
+@include below($bp-lg) {
+  .site-nav {
+    gap: 24px;
+  }
+}
+
+@include below($bp-md) {
+  .site-header__inner {
+    height: 60px;
+  }
+
+  .site-nav,
+  .menu--version,
+  .menu--language {
+    display: none;
+  }
+
+  .brand__mark {
+    width: 30px;
+    height: 30px;
+    border-radius: 7px;
+  }
+
+  .brand__name {
+    font-size: 16px;
   }
 }

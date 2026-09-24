@@ -1,8 +1,22 @@
 <!DOCTYPE html>
-<html>
-<body>
-<main>
-  404
+<html lang="{{ .Site.Language.Lang }}">
+{{- partial "head.html" . }}
+<body class="page-404" data-copy-label="{{ i18n "copy" }}" data-copied-label="{{ i18n "copied" }}">
+<a class="skip-link" href="#main">{{ i18n "skip_to_content" }}</a>
+{{- partial "header.html" . }}
+<main id="main" class="notfound">
+  <div class="container">
+    <p class="eyebrow"><span class="eyebrow__num">404</span></p>
+    <h1 class="notfound__title">{{ i18n "notfound_title" }}</h1>
+    <p class="notfound__lead">{{ i18n "notfound_lead" }}</p>
+    <div class="notfound__actions">
+      <a class="button button--primary" href="{{ .Site.Home.RelPermalink }}">{{ i18n "nav_specification" }}</a>
+      <a class="button button--secondary" href="/enforce/">{{ i18n "nav_enforce" }}</a>
+      <a class="button button--secondary" href="/about/">{{ i18n "nav_about" }}</a>
+    </div>
+  </div>
 </main>
+{{- partial "footer.html" . }}
+{{- partial "scripts.html" . }}
 </body>
 </html>

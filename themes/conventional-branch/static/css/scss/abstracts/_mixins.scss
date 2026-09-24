@@ -1,35 +1,53 @@
-@use "variables";
+@use "variables" as *;
 
-@mixin up-to-mobile {
-  @media (max-width: #{variables.$mobile-width - 1px}) {
+// Below a breakpoint: mobile-first overrides are written as "up to" this width.
+@mixin below($width) {
+  @media (max-width: #{$width - 1px}) {
     @content;
   }
 }
 
-@mixin tablet {
-  @media (min-width: #{variables.$tablet-width}) and (max-width: #{variables.$desktop-width - 1px}) {
+@mixin from($width) {
+  @media (min-width: $width) {
     @content;
   }
 }
 
-@mixin desktop {
-  @media (min-width: #{variables.$desktop-width}) {
-    @content;
-  }
+// The small mono label that names a section, a column or a field.
+@mixin eyebrow {
+  font-family: $font-mono;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  line-height: 1.5;
+  text-transform: uppercase;
 }
 
-@mixin gradient-primary($deg: 150deg) {
-  background: linear-gradient($deg, variables.$color-primary-deep 0%, variables.$color-primary 100%);
+@mixin mono {
+  font-family: $font-mono;
+  font-variant-ligatures: none;
 }
 
-@mixin dropdown-animation-visible {
-  visibility: visible;
-  opacity: 1;
-  transform: translate(-50%, variables.$dropdown-options-space-from-label);
+@mixin serif-display {
+  font-family: $font-serif;
+  font-weight: 400;
+  letter-spacing: -0.02em;
 }
 
-@mixin dropdown-animation-hidden {
-  visibility: hidden;
-  opacity: 0;
-  transform: translate(-50%, 0);
+@mixin twelve-columns {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  column-gap: $gutter;
+}
+
+@mixin visually-hidden {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }

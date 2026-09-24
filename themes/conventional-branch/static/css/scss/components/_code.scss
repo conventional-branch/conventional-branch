@@ -1,0 +1,57 @@
+@use "./../abstracts/index" as *;
+
+// A code sample with a title bar, set on ink.
+.code-window {
+  margin: 0;
+  overflow: hidden;
+  border-radius: $radius-md;
+  background: $ink;
+  color: $on-ink-code;
+
+  pre {
+    margin: 0;
+    padding: 18px 20px 20px;
+    overflow-x: auto;
+    font-size: 13px;
+    line-height: 22px;
+  }
+}
+
+.code-window--panel {
+  border: 1px solid $ink-line;
+  background: $ink-panel;
+}
+
+.code-window__bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  height: 42px;
+  padding: 0 18px;
+  border-bottom: 1px solid $ink-line;
+}
+
+.code-window__name {
+  @include mono;
+  color: $on-ink-2;
+  font-size: 12px;
+}
+
+.code-window__meta {
+  @include eyebrow;
+  color: $on-ink-3;
+  font-size: 11px;
+}
+
+.tok-k {
+  color: $blue-on-ink;
+}
+
+.tok-s {
+  color: $sand-on-ink;
+}
+
+.tok-c {
+  color: $on-ink-3;
+}

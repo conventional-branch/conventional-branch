@@ -19,8 +19,7 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "anchor-js": "5.0.0",
-    "github-markdown-css": "5.9.0"
+    "anchor-js": "5.0.0"
   },
   "devDependencies": {
     "autoprefixer": "10.5.4",

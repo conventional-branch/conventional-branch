@@ -1,50 +1,415 @@
-@use "./../abstracts/index";
+@use "./../abstracts/index" as *;
 
-main article.markdown-body {
-  line-height: 1.75;
+// The rendered Markdown of the specification, Enforce and About pages.
+.markdown-body {
+  color: $ink-2;
+  font-size: 17px;
+  line-height: 1.7;
 
-  p {
-    margin-bottom: 1.1em;
+  > :first-child {
+    margin-top: 0;
   }
 
-  h1 {
-    font-size: 2.3em;
-    font-weight: 700;
-    letter-spacing: -0.02em;
-    line-height: 1.2;
-    color: index.$color-primary-heading;
-    margin-bottom: 0.5em;
+  h2,
+  h3,
+  h4 {
+    position: relative;
+    color: $ink;
+    scroll-margin-top: 24px;
   }
 
   h2 {
-    font-weight: 700;
-    letter-spacing: -0.01em;
-    line-height: 1.3;
-    color: index.$color-primary-heading;
+    @include serif-display;
+    margin: 96px 0 24px;
+    font-size: clamp(32px, 3.2vw, 44px);
+    line-height: 1.08;
   }
 
-  h3, h4, h5, h6 {
+  h3 {
+    @include serif-display;
+    margin: 56px 0 18px;
+    font-size: clamp(25px, 2.4vw, 32px);
+    line-height: 1.12;
+    letter-spacing: -0.015em;
+  }
+
+  h4 {
+    margin: 36px 0 12px;
+    font-size: 18px;
     font-weight: 600;
-    color: index.$color-primary-heading-sub;
+  }
+
+  h2 + h3 {
+    margin-top: 32px;
+  }
+
+  p {
+    margin: 0 0 1.1em;
+  }
+
+  strong {
+    color: $ink;
+    font-weight: 600;
   }
 
   a {
-    color: index.$color-primary-heading;
+    text-decoration: underline;
+    text-decoration-color: rgba($color-primary-heading, 0.35);
+    text-underline-offset: 3px;
+
     &:hover {
-      color: index.$color-primary;
+      text-decoration-color: currentColor;
     }
   }
 
-  a.anchorjs-link:hover {
+  ul,
+  ol {
+    margin: 0 0 1.3em;
+    padding-left: 1.3em;
+  }
+
+  li {
+    margin: 0.4em 0;
+
+    &::marker {
+      color: $ink-3;
+    }
+
+    > p {
+      margin-bottom: 0.6em;
+    }
+  }
+
+  hr {
+    margin: 40px 0;
+    border: 0;
+    border-top: 1px solid $rule;
+  }
+
+  blockquote {
+    margin: 24px 0;
+    padding: 16px 20px;
+    border-radius: $radius-md;
+    background: $paper-2;
+    color: $ink-2;
+
+    p:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  img {
+    display: inline-block;
+    vertical-align: middle;
+  }
+
+  // Inline code: the machine's voice inside a sentence.
+  code {
+    padding: 0.12em 0.38em;
+    border-radius: $radius-sm;
+    background: $paper-2;
+    color: $ink;
+    font-size: 0.86em;
+  }
+
+  pre {
+    margin: 24px 0;
+    padding: 20px 22px;
+    overflow-x: auto;
+    border-radius: $radius-md;
+    background: $ink;
+    color: $on-ink-code;
+    font-size: 13.5px;
+    line-height: 1.65;
+    tab-size: 2;
+
+    code {
+      padding: 0;
+      border-radius: 0;
+      background: none;
+      color: inherit;
+      font-size: inherit;
+    }
+  }
+
+  table {
+    width: 100%;
+    margin: 24px 0 32px;
+    border: 1px solid $rule;
+    border-collapse: collapse;
+    background: $card;
+    font-size: 15px;
+    line-height: 1.5;
+  }
+
+  th {
+    @include eyebrow;
+    padding: 12px 16px;
+    background: $paper-2;
+    color: $ink-3;
+    font-size: 11px;
+    text-align: left;
+  }
+
+  td {
+    padding: 12px 16px;
+    border-top: 1px solid $rule-soft;
+    vertical-align: top;
+    color: $ink-2;
+
+    code {
+      padding: 0;
+      background: none;
+      font-size: 14px;
+    }
+  }
+
+  // AnchorJS's link beside a heading, for citing a section.
+  .anchorjs-link {
+    margin-left: 0.3em;
+    color: $ink-faint;
+    font-family: $font-mono;
+    font-size: 0.6em;
+    font-weight: 400;
+    text-decoration: none;
+
+    &:hover {
+      color: $color-primary-heading;
+    }
+  }
+}
+
+// Section numbers for Markdown pages, counted with the sections their templates add.
+.doc-page .doc-body > h2::before {
+  @include eyebrow;
+  counter-increment: section;
+  content: counter(section, decimal-leading-zero) "  /";
+  display: block;
+  margin-bottom: 14px;
+  color: $color-primary-heading;
+  letter-spacing: 0.08em;
+  white-space: pre;
+}
+
+// The adopters list on the About page (content/about/index.md), which CONTRIBUTING.md
+// names as the canonical record — so it stays a plain Markdown list, set here as a
+// two-column directory.
+.doc-body #projects-using-conventional-branch + p + ul {
+  columns: 2;
+  column-gap: 40px;
+  margin-top: 28px;
+  padding: 0;
+  list-style: none;
+
+  li {
+    margin: 0 0 16px;
+    padding-top: 12px;
+    border-top: 1px solid $rule;
+    font-size: 15px;
+    line-height: 1.55;
+    break-inside: avoid;
+  }
+
+  li > a:first-child {
+    font-family: $font-mono;
+    font-size: 14px;
+    font-weight: 500;
     text-decoration: none;
   }
 
-  code, pre, kbd, samp {
-    font-family: index.$font-mono;
+  @include below($bp-sm) {
+    columns: 1;
+  }
+}
+
+// The specification's own title, heading its section.
+.spec__title {
+  @include serif-display;
+  margin: 0 0 40px;
+  font-size: clamp(38px, 4.4vw, 60px);
+  line-height: 1.02;
+  letter-spacing: -0.025em;
+  color: $ink;
+}
+
+// A code block, wrapped by the script so its copy button stays put while the code
+// scrolls sideways.
+.code-block {
+  position: relative;
+  margin: 24px 0;
+
+  pre {
+    margin: 0;
+    padding-right: 96px;
   }
 
-  pre code {
-    font-size: 0.9em;
-    line-height: 1.6;
+  .copy-button {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: $ink;
+    opacity: 0;
+    transition: opacity 0.15s ease;
+  }
+
+  &:hover .copy-button,
+  .copy-button:focus-visible,
+  .copy-button.is-copied {
+    opacity: 1;
+  }
+
+  @media (hover: none) {
+    .copy-button {
+      opacity: 1;
+    }
+  }
+}
+
+// The examples table, once the script has turned its marks into verdicts.
+.verdict {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.verdict--valid {
+  color: $color-primary-heading;
+}
+
+.verdict--invalid {
+  color: $invalid;
+}
+
+.markdown-body td mark {
+  padding: 0;
+  border-bottom: 2px solid $invalid;
+  background: $invalid-bg;
+  color: $invalid-fg;
+}
+
+// The FAQ, folded into disclosures by the script.
+.faq-item {
+  border-top: 1px solid $rule;
+
+  &:last-child {
+    border-bottom: 1px solid $rule;
+  }
+
+  > summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    padding: 18px 0;
+    list-style: none;
+    cursor: pointer;
+
+    &::-webkit-details-marker {
+      display: none;
+    }
+
+    &::after {
+      content: "+";
+      flex-shrink: 0;
+      width: 20px;
+      color: $ink-3;
+      font-family: $font-mono;
+      font-size: 22px;
+      line-height: 1;
+      text-align: center;
+    }
+
+    &:hover .faq-item__question {
+      color: $color-primary-heading;
+    }
+  }
+
+  &[open] > summary::after {
+    content: "\2212";
+  }
+}
+
+.markdown-body .faq-item__question {
+  margin: 0;
+  font-family: $font-sans;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.4;
+  letter-spacing: 0;
+}
+
+.faq-item__answer {
+  padding: 0 44px 12px 0;
+}
+
+@include below($bp-sm) {
+  .markdown-body {
+    font-size: 16px;
+
+    h2 {
+      margin-top: 72px;
+    }
+
+    // A wide table scrolls on its own rather than widening the page.
+    table {
+      display: block;
+      overflow-x: auto;
+    }
+
+    pre {
+      margin-inline: calc(-1 * var(--pad));
+      border-radius: 0;
+    }
+  }
+
+  .code-block pre {
+    margin-inline: calc(-1 * var(--pad));
+  }
+
+  .faq-item__answer {
+    padding-right: 0;
+  }
+}
+
+// Highlighted code (Hugo's Chroma, as classes): names and keywords in blue, literals in
+// sand, comments dimmed — the same two colours every other code sample on the site uses.
+.chroma {
+  .k, .kc, .kd, .kn, .kp, .kr, .kt,
+  .n, .na, .nb, .nc, .nd, .nf, .nl, .nn, .no, .nt, .nv, .nx, .py {
+    color: $blue-on-ink;
+  }
+
+  .s, .sa, .sb, .sc, .dl, .sd, .s1, .s2, .se, .sh, .si, .sr, .ss, .sx,
+  .m, .mb, .mf, .mh, .mi, .il, .mo, .l, .ld {
+    color: $sand-on-ink;
+  }
+
+  .c, .ch, .cm, .c1, .cs, .cp, .cpf {
+    color: $on-ink-3;
+    font-style: normal;
+  }
+
+  .o, .ow, .p {
+    color: $on-ink-code;
+  }
+
+  .err {
+    background: none;
+    color: $orange-on-ink;
+  }
+
+  .gh, .gu {
+    color: $on-ink;
+    font-weight: 600;
+  }
+
+  .gi {
+    color: $blue-on-ink;
+  }
+
+  .gd {
+    color: $orange-on-ink;
   }
 }

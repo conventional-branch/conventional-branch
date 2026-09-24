@@ -1,0 +1,354 @@
+@use "./../abstracts/index" as *;
+
+// The branch-name checker: a name typed in large mono, bracketed into its parts, and
+// read three ways.
+.checker {
+  padding: 60px 0 52px;
+  background: $ink;
+  color: $on-ink;
+}
+
+.checker__top {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px 24px;
+}
+
+.checker__label {
+  @include eyebrow;
+  color: $on-ink-2;
+}
+
+.checker__examples {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+
+  // The example buttons need the script.
+  html:not(.js) & {
+    display: none;
+  }
+}
+
+.checker__examples-label {
+  margin-right: 6px;
+  color: $on-ink-3;
+  font-size: 13px;
+}
+
+.chip {
+  @include mono;
+  height: 32px;
+  padding: 0 10px;
+  border: 1px solid $ink-line-2;
+  border-radius: $radius-sm;
+  background: transparent;
+  color: $on-ink-chip;
+  font-size: 13px;
+  cursor: pointer;
+
+  &:hover {
+    border-color: $color-primary;
+    color: $on-ink;
+  }
+}
+
+// Everything in the stage shares one font size, so the brackets under the name can be
+// measured in `ch` — in a monospace face, one character each.
+.checker__stage {
+  --fs: clamp(26px, 5.2vw, 72px);
+  margin-top: 26px;
+  font-family: $font-mono;
+  font-size: var(--fs);
+  font-variant-ligatures: none;
+  font-weight: 500;
+}
+
+.checker__input {
+  display: block;
+  width: 100%;
+  height: calc(var(--fs) * 1.45);
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-bottom: 1px solid $ink-line-2;
+  border-radius: 0;
+  background: transparent;
+  color: $on-ink;
+  font: inherit;
+  letter-spacing: 0;
+  caret-color: $color-primary;
+
+  &:focus,
+  &:focus-visible {
+    outline: none;
+    border-bottom-color: $color-primary;
+    box-shadow: 0 1px 0 $color-primary;
+  }
+}
+
+.checker__brackets {
+  display: flex;
+  min-height: 36px;
+  margin-top: 12px;
+}
+
+.bracket {
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  align-items: center;
+  gap: 8px;
+  width: calc(var(--len, 1) * 1ch);
+  color: $blue-on-ink;
+
+  &::before {
+    content: "";
+    align-self: stretch;
+    height: 10px;
+    margin: 0 5px;
+    border: 2px solid currentColor;
+    border-top: 0;
+    border-radius: 0 0 3px 3px;
+  }
+
+  &.is-bad {
+    color: $orange-on-ink;
+  }
+}
+
+.bracket--sep {
+  width: 1ch;
+
+  &::before {
+    content: none;
+  }
+}
+
+.bracket__label {
+  @include eyebrow;
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.checker__result {
+  min-height: 150px;
+  margin-top: 30px;
+}
+
+.checker__readings {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  column-gap: 32px;
+}
+
+.reading {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding-top: 18px;
+  border-top: 1px solid $ink-line;
+}
+
+.reading__label {
+  @include eyebrow;
+  color: $on-ink-3;
+}
+
+.reading__person {
+  margin: 0;
+  font-family: $font-serif;
+  font-size: 27px;
+  line-height: 1.25;
+  color: $on-ink;
+
+  em {
+    color: $blue-on-ink;
+  }
+}
+
+.reading__json {
+  margin: 0;
+  overflow-x: auto;
+  color: $on-ink-2;
+  font-size: 14px;
+  line-height: 22px;
+}
+
+.reading__pipeline {
+  margin: 0;
+  color: $on-ink-code;
+  font-size: 17px;
+  line-height: 1.5;
+}
+
+.reading__note {
+  color: $on-ink-3;
+  font-size: 13px;
+}
+
+.checker__error {
+  display: flex;
+  align-items: flex-start;
+  gap: 18px;
+  padding-top: 22px;
+  border-top: 1px solid $ink-line;
+}
+
+.checker__error-icon {
+  color: $orange-on-ink;
+}
+
+.checker__error-body {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.checker__message {
+  margin: 0;
+  font-family: $font-serif;
+  font-size: 30px;
+  line-height: 1.2;
+  color: $on-ink;
+}
+
+.checker__fix {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 8px 16px;
+  border: 0;
+  border-radius: $radius-sm;
+  background: $color-primary;
+  color: $ink;
+  font-family: $font-sans;
+  font-size: 15px;
+  font-weight: 600;
+  text-align: left;
+  cursor: pointer;
+
+  .mono {
+    font-weight: 500;
+    overflow-wrap: anywhere;
+  }
+
+  &:hover {
+    background: $blue-on-ink;
+  }
+}
+
+.checker__empty {
+  padding-top: 22px;
+  border-top: 1px solid $ink-line;
+
+  p {
+    margin: 0;
+    font-family: $font-serif;
+    font-size: 28px;
+    line-height: 1.25;
+    color: $on-ink-2;
+  }
+
+  .mono {
+    font-size: 0.8em;
+    color: $on-ink;
+  }
+}
+
+.checker__foot {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px 24px;
+  margin-top: 26px;
+}
+
+.checker__status {
+  @include mono;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0;
+  color: $blue-on-ink;
+  font-size: 13px;
+
+  .checker__status-icon {
+    display: flex;
+  }
+
+  .checker__status-icon--bad {
+    display: none;
+  }
+
+  &.is-bad {
+    color: $orange-on-ink;
+
+    .checker__status-icon--ok {
+      display: none;
+    }
+
+    .checker__status-icon--bad {
+      display: flex;
+    }
+  }
+
+  &.is-waiting {
+    color: $on-ink-3;
+
+    .checker__status-icon {
+      display: none;
+    }
+  }
+}
+
+.checker__note {
+  margin: 0;
+  color: $on-ink-3;
+  font-size: 13px;
+
+  a {
+    color: $blue-on-ink;
+
+    &:hover {
+      color: #FFFFFF;
+    }
+  }
+}
+
+@include below($bp-md) {
+  .checker {
+    padding: 40px 0 36px;
+  }
+
+  .checker__top {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .checker__readings {
+    grid-template-columns: 1fr;
+    row-gap: 18px;
+  }
+
+  .reading__person {
+    font-size: 22px;
+  }
+
+  .checker__message {
+    font-size: 24px;
+  }
+
+  .chip {
+    height: 36px;
+  }
+}

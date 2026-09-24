@@ -1,6 +1,19 @@
-@use "./../abstracts/index";
+@use "./../abstracts/index" as *;
+
+:root {
+  // The page's side padding. Content is at most $container wide inside it.
+  --pad: clamp(20px, 5vw, 48px);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
 
 html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
   scroll-behavior: smooth;
 
   @media (prefers-reduced-motion: reduce) {
@@ -8,74 +21,149 @@ html {
   }
 }
 
-* {
+body {
   margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+  min-height: 100vh;
+  background: $paper;
+  color: $ink;
+  font-family: $font-sans;
+  font-size: 16px;
+  line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  -webkit-tap-highlight-color: rgba(index.$color-neutral-dark, 0);
+  text-rendering: optimizeLegibility;
 }
 
-body {
-  position: relative;
-  min-height: 100vh;
-  font-family: index.$font-sans;
-  font-size: 16px;
-  line-height: 1.65;
-  color: #1a1a1a;
+a {
+  color: $color-primary-heading;
+  text-decoration: none;
+
+  &:hover {
+    color: $color-link-hover;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+}
+
+:focus-visible {
+  outline: 2px solid $color-primary;
+  outline-offset: 3px;
+}
+
+::selection {
+  background: $color-primary;
+  color: $ink;
+}
+
+h1, h2, h3, h4 {
+  text-wrap: balance;
+}
+
+p {
+  text-wrap: pretty;
+}
+
+code, kbd, pre, samp {
+  @include mono;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+.icon {
+  flex-shrink: 0;
+}
+
+.mono {
+  @include mono;
+}
+
+.small {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.6;
+  color: $ink-3;
+}
+
+.lead {
+  margin: 0;
+  font-size: clamp(17px, 1.4vw, 19px);
+  line-height: 1.6;
+  color: $ink-2;
+}
+
+.visually-hidden {
+  @include visually-hidden;
 }
 
 .container {
   width: 100%;
-  max-width: index.$desktop-width;
-  margin-left: auto;
-  margin-right: auto;
-  padding-left: index.$gap-md;
-  padding-right: index.$gap-md;
-
+  max-width: calc(#{$container} + 2 * var(--pad));
+  margin-inline: auto;
+  padding-inline: var(--pad);
 }
 
-.container.markdown-body {
-  margin: 0 auto;
-  background-color: index.$color-neutral-light !important;
-  color: black !important;
-}
+.skip-link {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  z-index: 100;
+  padding: 10px 14px;
+  border-radius: $radius-sm;
+  background: $ink;
+  color: $on-ink;
+  font-weight: 600;
+  transform: translateY(-200%);
 
-@media (prefers-color-scheme: dark) {
-  .markdown-body > table {
-    color: index.$color-neutral-light
+  &:focus {
+    transform: none;
+    color: $on-ink;
   }
 }
 
-main {
-  background-color: index.$main-background;
+// A section's label: "03 / How it’s read".
+.eyebrow {
+  @include eyebrow;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 10px;
+  margin: 0;
+  color: $ink-3;
 }
 
-article {
-  background-color: index.$article-background;
-  transform: translateY(index.$article-offset-top);
-  padding-top: index.$gap-md;
-  padding-bottom: index.$gap-md;
-  border-radius: index.$radius-lg;
-  min-height: 50vh;
-  box-shadow: index.$shadow-soft;
+.eyebrow__num {
+  color: $color-primary-heading;
 }
 
-@include index.desktop {
-  .container {
-    padding-left: index.$gap-lg;
-    padding-right: index.$gap-lg;
-  }
-
-  article {
-    padding-top: index.$gap-lg;
-    padding-bottom: index.$gap-lg;
-  }
+.eyebrow__slash {
+  color: $color-primary;
 }
 
+// On a page made of Markdown the section numbers are counted, so the sections a
+// template adds number themselves in sequence with the headings around them.
+.eyebrow--counted::before {
+  counter-increment: section;
+  content: counter(section, decimal-leading-zero);
+  color: $color-primary-heading;
+}
 
-.no-style-a {
-  text-decoration: none;
-  color: white;
+.eyebrow--counted > span::before {
+  content: "/";
+  margin-right: 10px;
+  color: $color-primary;
+}
+
+.link-arrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 15px;
+  font-weight: 600;
 }

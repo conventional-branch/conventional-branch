@@ -1,47 +1,74 @@
+// Conventional Branch — design tokens.
+//
+// The site is set like a printed standard. People's words are in a serif, machines'
+// words in a monospace, and the interface in a grotesk between them; sections written
+// for people sit on paper, sections written for machines on ink.
+
+// --- Brand ------------------------------------------------------------------------
+
+// The badge's version half (static/badge.svg). Used for graphics, for fills under ink
+// text and for text on ink — never for text on paper, where it reaches only 2.75:1.
 $color-primary: #6699CC;
-$color-primary-light: #6699CC;
+// The deeper blue the badge tried first; kept because static/badge.svg explains why
+// it lost. Not used on the site.
 $color-primary-deep: #3B6BB5;
-$color-neutral-light: #FFF;
-$color-neutral-dark: #000;
-
+// Blue text, links and primary buttons on paper (5.9:1 on $paper).
 $color-primary-heading: #2B5EA7;
-$color-primary-heading-sub: #3D6FB8;
+$color-link-hover: #1D4580;
+$color-button-hover: #1F4C8F;
 
-$font-sans: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
-$font-mono: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'Consolas', 'Monaco', monospace;
+// --- Paper: the human-facing ground --------------------------------------------------
 
-$gap-sm: 8px;
-$gap-md: 24px;
-$gap-lg: 48px;
+$paper: #F7F6F1;
+$paper-2: #EFEDE6;
+$card: #FDFCF9;
+$rule: #DCD9CF;
+$rule-strong: #CFCBC0;
+$rule-soft: #E6E3DA;
 
-$radius-md: 4px;
-$radius-lg: 8px;
+// --- Ink: text on paper, and the machine-facing ground -------------------------------
 
-$shadow-soft: 0 1px 3px rgba(0, 0, 0, 0.06), 0 4px 16px rgba(0, 0, 0, 0.08), 0 8px 32px rgba(0, 0, 0, 0.04);
+$ink: #111A27;
+$ink-2: #3A4555;     // body copy, 9.0:1 on paper
+$ink-3: #5B6472;     // captions, 5.5:1 on paper
+$ink-muted: #7D8591; // large text only (24px and up), 3.4:1 on paper
+$ink-faint: #9AA1AB; // separators, never text that has to be read
 
-$mobile-width: 350px;
-$tablet-width: 768px;
-$desktop-width: 1024px;
+$on-ink: #F7F6F1;
+$on-ink-2: #A9B4C4;
+$on-ink-3: #7F8A9B;
+$on-ink-code: #D8DEE8;
+$on-ink-chip: #C9D3E0;
+$ink-line: #263244;
+$ink-line-2: #2F3B4E;
+$ink-panel: #172131;
 
-$header-height: 56px;
-$footer-logo-size: 24px;
+$blue-on-ink: #8FB8E3;
+$sand-on-ink: #E3B98A;
+$orange-on-ink: #F0955A;
 
-$welcome-min-height: 450px;
-$welcome-height: 100vh;
-$welcome-action-color: $color-neutral-light;
+// Valid and invalid differ in lightness as well as hue, and always carry an icon.
+$valid-bg: #E4ECF6;
+$valid-fg: #214F93;
+$invalid: #B4491B;
+$invalid-bg: #F6E6DC;
+$invalid-fg: #9A3B12;
 
-$main-background: $color-neutral-light;
-$article-background: $color-neutral-light;
-$article-offset-top: -$header-height + -$gap-sm;
+// --- Type ---------------------------------------------------------------------------
 
-$dropdown-border-radius: $radius-md;
-$dropdown-animation-timing: .4s;
-$dropdown-label-padding: 12px 8px;
-$dropdown-label-background-color: transparent;
-$dropdown-arrow-size: 10px;
-$dropdown-options-background-color: $color-neutral-light;
-$dropdown-options-space-from-label: $gap-sm;
-$dropdown-option-padding: 12px 16px;
-$dropdown-option-border-bottom-color: rgba($color-neutral-dark, .04);
+$font-serif: 'Newsreader', 'Iowan Old Style', 'Palatino Linotype', Georgia, serif;
+$font-sans: 'Hanken Grotesk', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', 'PingFang SC', 'Hiragino Sans', 'Noto Sans', sans-serif;
+$font-mono: 'JetBrains Mono', ui-monospace, 'SFMono-Regular', Menlo, Consolas, monospace;
 
-$banner-image-height: 300px;
+// --- Layout -------------------------------------------------------------------------
+
+$container: 1200px;
+$gutter: 24px;
+$radius-sm: 4px;
+$radius-md: 8px;
+
+$bp-sm: 640px;
+$bp-md: 900px;
+$bp-lg: 1100px;
+
+$header-height: 76px;

@@ -1,0 +1,25 @@
+{{- $spec := partialCached "spec.html" . -}}
+{{- /* Counts the copy quotes, taken from the specification so they cannot go stale. */ -}}
+{{- $facts := dict
+  "Version" $spec.version
+  "Purposes" (len (where $spec.types "category" "purpose"))
+  "Agents" (len (where $spec.types "category" "ai-source"))
+  "Trunks" (len $spec.trunkBranches)
+  "Languages" (len .Site.Home.AllTranslations) -}}
+<section class="section section--paper2" id="principles" aria-labelledby="principles-title">
+  <div class="container">
+    <div class="section__head">
+      {{- partial "eyebrow.html" (dict "num" "02" "text" (i18n "principles_eyebrow")) -}}
+      <h2 id="principles-title" class="section__title">{{ i18n "principles_title" }} <em>{{ i18n "principles_title_em" }}</em></h2>
+    </div>
+    <ol class="principles">
+      {{- range $i, $key := site.Data.home.principles }}
+      <li class="principle">
+        <span class="principle__num">2.{{ add $i 1 }}</span>
+        <h3 class="principle__title">{{ i18n (printf "principle_%s_title" $key) }}</h3>
+        <p class="principle__body">{{ i18n (printf "principle_%s_body" $key) $facts | safeHTML }}</p>
+      </li>
+      {{- end }}
+    </ol>
+  </div>
+</section>

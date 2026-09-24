@@ -1,0 +1,23 @@
+<section class="section history" id="history" aria-labelledby="history-title">
+  <div class="container">
+    <div class="history__head">
+      <div>
+        <p class="eyebrow eyebrow--counted"><span>{{ i18n "history_eyebrow" }}</span></p>
+        <h2 id="history-title" class="section__title">{{ i18n "history_title" }}</h2>
+      </div>
+      <div class="history__aside">
+        <p>{{ i18n "history_note" }}</p>
+        <a class="link-arrow" href="https://github.com/conventional-branch/conventional-branch/blob/main/CHANGELOG.md">{{ i18n "history_link" }}{{ partial "icon.html" (dict "name" "arrow" "size" 15) }}</a>
+      </div>
+    </div>
+    <ol class="timeline">
+      {{- range site.Data.history }}
+      <li class="milestone{{ if .release }} milestone--release{{ end }}">
+        <time class="milestone__date" datetime="{{ .date }}">{{ .date }}</time>
+        <span class="milestone__track" aria-hidden="true"></span>
+        <p class="milestone__text">{{ .text }}</p>
+      </li>
+      {{- end }}
+    </ol>
+  </div>
+</section>

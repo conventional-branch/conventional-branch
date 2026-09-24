@@ -1,0 +1,10 @@
+{{- /* The primary navigation, shared by the header and the mobile menu.
+       The Enforce and About pages are published in English only. */ -}}
+{{- $page := .page -}}
+{{- $isEnforce := hasPrefix $page.RelPermalink "/enforce/" -}}
+{{- $isAbout := hasPrefix $page.RelPermalink "/about/" -}}
+{{- $isSpec := and (or $page.IsHome (eq $page.Kind "section")) (not $isEnforce) (not $isAbout) -}}
+<a class="nav-link{{ if $isSpec }} is-current{{ end }}" href="{{ $page.Site.Home.RelPermalink }}#spec"{{ if $isSpec }} aria-current="page"{{ end }}>{{ i18n "nav_specification" }}</a>
+<a class="nav-link{{ if $isEnforce }} is-current{{ end }}" href="/enforce/"{{ if $isEnforce }} aria-current="page"{{ end }}>{{ i18n "nav_enforce" }}</a>
+<a class="nav-link{{ if $isAbout }} is-current{{ end }}" href="/about/"{{ if $isAbout }} aria-current="page"{{ end }}>{{ i18n "nav_about" }}</a>
+<a class="nav-link" href="https://github.com/sponsors/conventional-branch">{{ i18n "nav_sponsor" }}</a>

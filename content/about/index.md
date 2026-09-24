@@ -3,11 +3,12 @@ type: about
 draft: false
 seoTitle: "AI Agent Branch Prefixes — Conventional Branch"
 seoDescription: "The registry of AI coding agent branch prefixes — ai/, claude/, codex/, copilot/, cursor/ — with tooling, CI/CD patterns and the projects using the specification."
+# The page hero. heroTitleEm is set in italics after heroTitle; heroLead takes Markdown.
+eyebrow: ["About", "Registry, adopters, history"]
+heroTitle: "A shared vocabulary for branches —"
+heroTitleEm: "and for the agents that open them."
+heroLead: "Conventional Branch was inspired by [Conventional Commits](https://www.conventionalcommits.org) and is maintained as free, open infrastructure: a specification, a registry of AI agent prefixes, and a growing list of projects that name their branches this way."
 ---
-
-# About
-
-The Conventional Branch specification was inspired by [Conventional Commits](https://www.conventionalcommits.org).
 
 ## AI Agent Source Prefixes
 

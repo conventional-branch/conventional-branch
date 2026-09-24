@@ -1,0 +1,10 @@
+{{- /* The specification version a page belongs to, like "v1.1.0". The current version
+       is served at the site root; archived versions live in a section named after
+       themselves, /<version>/. */ -}}
+{{- $version := site.Params.versions.current -}}
+{{- with .Section -}}
+  {{- if in site.Params.versions.list . -}}
+    {{- $version = . -}}
+  {{- end -}}
+{{- end -}}
+{{- return $version -}}

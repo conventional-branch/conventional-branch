@@ -9,6 +9,12 @@ disableKinds: ["taxonomy", "term"]
 # defaultContentLanguageInSubdir: true
 defaultContentLanguage: en
 
+# Highlighted code carries classes rather than inline colours, so the theme can set it
+# in the site's own two code colours (themes/conventional-branch, _markdown.scss).
+markup:
+  highlight:
+    noClasses: false
+
 # Global parameters
 params:
   # baseURL stays "/" so a Netlify deploy preview serves its own assets. canonical,
@@ -26,11 +32,6 @@ params:
     current: v1.1.0
     list: ["v1.0.0", "v1.1.0"]
 
-  footer:
-    logos:
-    - name: github
-      url: https://github.com/conventional-branch/conventional-branch
-
 # Languages parameters
 languages:
   en:
@@ -39,14 +40,17 @@ languages:
       languageName: English
       ogLocale: en_US
       title: Conventional Branch
-      description: A specification for adding human and machine readable meaning to branch
+      description: A specification for adding human and machine readable meaning to branch names
+      # Shows the homepage's mission, principles and adoption sections. Their copy is in
+      # i18n/en.yaml: translate it into i18n/<lang>.yaml before turning this on for
+      # another language, so that no page mixes two languages.
+      landing: true
+      # The hero's buttons. The first is the primary action.
       actions:
-      - label: Quick Summary
-        url: "#summary"
-      - label: Full Specification
-        url: "#specification"
-      - label: Contribute
-        url: https://github.com/conventional-branch/conventional-branch
+      - label: Read the specification
+        url: "#spec"
+      - label: Enforce it in your repo
+        url: /enforce/
       # versions:
       #   current: v1.0.0
   zh:

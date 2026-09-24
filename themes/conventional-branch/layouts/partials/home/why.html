@@ -1,0 +1,22 @@
+{{- $spec := partialCached "spec.html" . -}}
+<section class="section" id="why" aria-labelledby="why-title">
+  <div class="container">
+    <div class="section__head">
+      {{- /* The statement is the section's content; its label is its heading. */}}
+      <h2 id="why-title" class="eyebrow"><span class="eyebrow__num">01</span><span class="eyebrow__slash" aria-hidden="true">/</span><span>{{ i18n "why_eyebrow" }}</span></h2>
+      <p class="statement"><span class="statement__muted">{{ i18n "why_statement_muted" }}</span> {{ i18n "why_statement" }}</p>
+    </div>
+    <ul class="pillars">
+      {{- range site.Data.home.pillars }}
+      <li class="pillar">
+        <h3 class="pillar__title">{{ i18n (printf "pillar_%s_title" .key) }}</h3>
+        <p class="pillar__body">{{ i18n (printf "pillar_%s_body" .key) }}</p>
+        <div class="pillar__example">
+          <code class="pillar__code"><b>{{ .type }}</b>{{ replace .rest "{version}" $spec.version }}</code>
+          <span class="pillar__note">→ {{ i18n (printf "pillar_%s_note" .key) }}</span>
+        </div>
+      </li>
+      {{- end }}
+    </ul>
+  </div>
+</section>

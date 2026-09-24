@@ -1,0 +1,11 @@
+<section class="adopters" aria-labelledby="adopters-label">
+  <div class="container adopters__inner">
+    <h2 id="adopters-label" class="adopters__label">{{ i18n "adopters_label" }}</h2>
+    <ul class="adopters__list">
+      {{- range site.Data.home.adopters }}
+      <li><a href="{{ .url }}">{{ .name }}</a></li>
+      {{- end }}
+      <li class="adopters__all"><a href="/about/#projects-using-conventional-branch">{{ i18n "adopters_all" }}{{ partial "icon.html" (dict "name" "arrow" "size" 15) }}</a></li>
+    </ul>
+  </div>
+</section>

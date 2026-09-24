@@ -1,0 +1,48 @@
+{{- /* The normative text, beside a sidebar that keeps the version, the outline and the
+       machine-readable endpoints in reach while reading. */ -}}
+{{- $spec := partialCached "spec.html" . -}}
+{{- $landing := and .IsHome .Site.Params.landing -}}
+{{- $current := partial "version-current.html" . -}}
+{{- $latest := site.Params.versions.current -}}
+{{- $home := .Site.Home -}}
+{{- $typeNames := slice -}}
+{{- range $spec.types }}{{ $typeNames = $typeNames | append .type }}{{ range .aliases }}{{ $typeNames = $typeNames | append . }}{{ end }}{{ end -}}
+{{- /* The page has one h1, the hero's, so the specification's own title is demoted to
+       head its section. Its id is kept, so links to it still land. */ -}}
+{{- $content := replaceRE `(?s)<h1([^>]*)>(.*?)</h1>` `<h2 class="spec__title"$1>$2</h2>` .Content 1 -}}
+<section id="spec" class="spec" aria-labelledby="spec-label">
+  <div class="container doc-grid">
+    <aside class="doc-aside">
+      <div class="doc-aside__inner">
+        <h2 id="spec-label" class="eyebrow">{{ if $landing }}<span class="eyebrow__num">04</span><span class="eyebrow__slash" aria-hidden="true">/</span>{{ end }}<span>{{ i18n "spec_eyebrow" }}</span></h2>
+        <div class="versions" role="group" aria-label="{{ i18n "versions_heading" }}">
+          {{- range sort site.Params.versions.list "value" "desc" }}
+          {{- $isLatest := eq . $latest }}
+          {{- $isCurrent := eq . $current }}
+          <a class="version{{ if $isCurrent }} is-current{{ end }}" href="{{ cond $isLatest $home.RelPermalink (print $home.RelPermalink . "/") }}"{{ if $isCurrent }} aria-current="page"{{ end }}><span class="mono">{{ strings.TrimPrefix "v" . }}</span><span class="version__tag">{{ if $isLatest }}{{ i18n "version_latest" }}{{ else }}{{ i18n "version_archived" }}{{ end }}</span></a>
+          {{- end }}
+        </div>
+        {{- partial "toc.html" (dict "page" . "collapseLast" true) }}
+        <div class="aside-block aside-block--tools">
+          <p class="aside-heading">{{ i18n "for_tools" }}</p>
+          <ul class="aside-links">
+            <li><a href="/v{{ $spec.version }}/spec.json"><span class="mono">/v{{ $spec.version }}/spec.json</span><span>{{ i18n "endpoint_pinned" }}</span></a></li>
+            <li><a href="/spec.json"><span class="mono">/spec.json</span><span>{{ i18n "endpoint_latest" }}</span></a></li>
+            <li><a href="/schema/v1/spec.schema.json"><span class="mono">spec.schema.json</span><span>{{ i18n "endpoint_schema" }}</span></a></li>
+            <li><a href="/llms.txt"><span class="mono">/llms.txt</span><span>{{ i18n "endpoint_llms" }}</span></a></li>
+          </ul>
+        </div>
+        <div class="aside-block aside-block--rule">
+          {{- $others := sub (len .AllTranslations) 1 }}
+          {{- if gt $others 0 }}
+          <p class="aside-note">{{ i18n "translations_note" (dict "Count" $others) }}</p>
+          {{- end }}
+          <a class="aside-edit" href="https://github.com/conventional-branch/conventional-branch/blob/main/content/{{ replace .File.Path "\\" "/" }}">{{ partial "icon.html" (dict "name" "edit" "size" 15) }}{{ i18n "edit_page" }}</a>
+        </div>
+      </div>
+    </aside>
+    <article class="markdown-body doc-body spec__body" data-spec-types="{{ delimit $typeNames " " }}">
+      {{ $content | safeHTML }}
+    </article>
+  </div>
+</section>

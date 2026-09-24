@@ -1,0 +1,46 @@
+{{- /* The top of a specification page. On a homepage whose language has the landing
+       copy it states the mission; everywhere else — translations, archived versions —
+       it carries that language's own title and description. */ -}}
+{{- $spec := partialCached "spec.html" . -}}
+{{- $landing := and .IsHome .Site.Params.landing -}}
+{{- $current := partial "version-current.html" . -}}
+{{- $latest := site.Params.versions.current -}}
+{{- $isArchived := ne $current $latest -}}
+<section class="hero{{ if $landing }} hero--landing{{ else }} hero--plain{{ end }}" aria-labelledby="hero-title">
+  <div class="container">
+    <p class="eyebrow hero__eyebrow">
+      {{- if $landing }}
+      <span>{{ i18n "hero_eyebrow_spec" }}</span><span class="eyebrow__slash" aria-hidden="true">/</span>
+      <span>{{ i18n "hero_eyebrow_version" (dict "Version" $spec.version) }}</span><span class="eyebrow__slash" aria-hidden="true">/</span>
+      <span>{{ i18n "license_short" }}</span><span class="eyebrow__slash" aria-hidden="true">/</span>
+      <span>{{ i18n "hero_eyebrow_languages" (dict "Count" (len .AllTranslations)) }}</span>
+      {{- else }}
+      <span class="mono">{{ strings.TrimPrefix "v" $current }}</span><span class="eyebrow__slash" aria-hidden="true">/</span>
+      <span>{{ i18n "license_short" }}</span>
+      {{- end }}
+    </p>
+    <h1 id="hero-title" class="hero__title">
+      {{- if $landing }}{{ i18n "hero_title" }}<br><em>{{ i18n "hero_title_em" }}</em>{{ else }}{{ .Param "Title" }}{{ end -}}
+    </h1>
+    <div class="hero__row">
+      <div class="hero__copy">
+        <p class="hero__lead">{{ if $landing }}{{ i18n "hero_lead" }}{{ else }}{{ .Param "Description" }}{{ end }}</p>
+        {{- if $isArchived }}
+        <p class="notice">
+          {{- partial "icon.html" (dict "name" "info" "size" 18) -}}
+          <span>{{ i18n "archived_notice" (dict "Version" (strings.TrimPrefix "v" $current)) }} <a href="{{ .Site.Home.RelPermalink }}">{{ i18n "archived_link" (dict "Version" (strings.TrimPrefix "v" $latest)) }}</a></span>
+        </p>
+        {{- else }}
+        {{- with .Param "Actions" }}
+        <div class="hero__actions">
+          {{- range $i, $action := . }}
+          <a class="button {{ if eq $i 0 }}button--primary{{ else }}button--secondary{{ end }}" href="{{ $action.url }}">{{ $action.label }}{{ if ne $i 0 }}{{ partial "icon.html" (dict "name" "arrow") }}{{ end }}</a>
+          {{- end }}
+        </div>
+        {{- end }}
+        {{- end }}
+      </div>
+      {{- if $landing }}{{ partial "home/convention.html" $spec }}{{ end }}
+    </div>
+  </div>
+</section>

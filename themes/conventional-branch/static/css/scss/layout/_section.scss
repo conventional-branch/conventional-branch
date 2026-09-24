@@ -1,0 +1,105 @@
+@use "./../abstracts/index" as *;
+
+.section {
+  padding: clamp(72px, 9vw, 128px) 0;
+}
+
+.section--paper2 {
+  background: $paper-2;
+}
+
+.section--ink {
+  background: $ink;
+  color: $on-ink;
+
+  .eyebrow {
+    color: $on-ink-2;
+  }
+
+  .eyebrow__num {
+    color: $blue-on-ink;
+  }
+
+  .section__title em {
+    color: $blue-on-ink;
+  }
+
+  .lead {
+    color: $on-ink-2;
+  }
+
+  // Low specificity, so components on ink (endpoints, buttons) keep their colours.
+  :where(a:not(.button)) {
+    color: $blue-on-ink;
+
+    &:hover {
+      color: #FFFFFF;
+    }
+  }
+
+  .eyebrow--counted::before {
+    color: $blue-on-ink;
+  }
+}
+
+// Label in the first three columns, headline across the other nine.
+.section__head {
+  @include twelve-columns;
+  margin-bottom: clamp(40px, 5vw, 64px);
+
+  > .eyebrow {
+    grid-column: span 3;
+    align-self: start;
+    padding-top: 18px;
+  }
+
+  > .section__title,
+  > .statement {
+    grid-column: span 9;
+  }
+}
+
+.section__intro {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  max-width: 800px;
+  margin-bottom: clamp(40px, 5vw, 64px);
+}
+
+.section__title {
+  @include serif-display;
+  margin: 0;
+  font-size: clamp(34px, 3.9vw, 56px);
+  line-height: 1.04;
+  color: inherit;
+
+  em {
+    color: $color-primary-heading;
+  }
+}
+
+.statement {
+  margin: 0;
+  font-family: $font-serif;
+  font-size: clamp(26px, 2.9vw, 42px);
+  line-height: 1.22;
+  letter-spacing: -0.015em;
+  color: $ink;
+}
+
+.statement__muted {
+  color: $ink-muted;
+}
+
+@include below($bp-md) {
+  .section__head {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+
+    > .eyebrow {
+      padding-top: 0;
+    }
+  }
+}

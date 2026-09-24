@@ -1,0 +1,30 @@
+# Milestones on the About page's timeline, taken from CHANGELOG.md. Releases of the
+# specification are marked `release: true` and drawn more strongly than the rest.
+- date: "2024-09"
+  text: Simplified Chinese translation
+- date: "2025-03"
+  text: Naming rules combined and revised for clarity
+- date: "2025-07"
+  text: Brazilian Portuguese translation
+- date: "2025-09"
+  text: French, Japanese, German, Russian and Polish translations; the specification further refined
+- date: "2025-12"
+  text: License changed from MIT to CC BY 4.0
+- date: "2026-02"
+  text: Traditional Chinese translation
+- date: "2026-03"
+  text: Spanish translation
+- date: "2026-04"
+  text: A dedicated website at conventionalbranch.org
+- date: "2026-05"
+  text: Thai translation
+- date: "2026-06-20"
+  text: 1.0.0 released, with a versioned site
+  release: true
+- date: "2026-07-08"
+  text: "1.1.0 released: AI agent source prefixes, the agent registry and spec.json"
+  release: true
+- date: "2026-08"
+  text: A frozen /v1.1.0/spec.json, the JSON Schema, the Enforce page, llms.txt and the adoption badge
+- date: "2026-09"
+  text: commit-check configuration on the Enforce page, and commit-check on the repository’s own pull requests
