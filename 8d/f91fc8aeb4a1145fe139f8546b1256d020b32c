@@ -1,0 +1,70 @@
+themes/conventional-branch/layouts/about/single.html
+  s_240b8d40d061ae::t_f84cdc40b4f558 10
+  s_240b8d40d061ae::t_6bf65e35d4bcd5 14-20,22-26
+  s_240b8d40d061ae::t_cb62a27ea88537 13
+themes/conventional-branch/layouts/partials/enforce/layers.html
+  s_240b8d40d061ae::t_6bf65e35d4bcd5 6
+themes/conventional-branch/static/js/modules/toc.js
+  s_240b8d40d061ae::t_f84cdc40b4f558 1-4,9-18,25
+  s_240b8d40d061ae::t_3047a554669874 7,24
+  s_240b8d40d061ae::t_d8ed0c73874526 8,26
+themes/conventional-branch/static/css/scss/layout/_hero.scss
+  s_240b8d40d061ae::t_2f533d9731eb12 24-34
+themes/conventional-branch/static/js/index.js
+  s_240b8d40d061ae::t_3047a554669874 11,16
+themes/conventional-branch/layouts/partials/home/why.html
+  s_240b8d40d061ae::t_6bf65e35d4bcd5 8
+themes/conventional-branch/static/css/scss/base/_base.scss
+  s_240b8d40d061ae::t_6bf65e35d4bcd5 116
+themes/conventional-branch/layouts/partials/home/adopt.html
+  s_240b8d40d061ae::t_6bf65e35d4bcd5 7
+themes/conventional-branch/static/css/scss/abstracts/_variables.scss
+  s_240b8d40d061ae::t_29b7214bd2b5da 3-6,49-53,62-64
+themes/conventional-branch/static/css/scss/components/_button.scss
+  s_240b8d40d061ae::t_29b7214bd2b5da 63,65-66,73-74,78-79
+themes/conventional-branch/layouts/partials/about/people.html
+  s_240b8d40d061ae::t_6bf65e35d4bcd5 5
+themes/conventional-branch/layouts/partials/toc.html
+  s_240b8d40d061ae::t_503640f61ed1f1 20-30,32,34
+  s_240b8d40d061ae::t_f84cdc40b4f558 36-38
+  s_240b8d40d061ae::t_6bf65e35d4bcd5 19,35
+themes/conventional-branch/static/css/scss/layout/_doc.scss
+  s_240b8d40d061ae::t_2f8851ee43bac0 4-5,7-9,11,50,52-59,167,173-186,188-189,191-198,200-204
+  s_240b8d40d061ae::t_f84cdc40b4f558 51,187,190,199
+  s_240b8d40d061ae::t_75fcdf3a4fb3f8 38,40
+  s_240b8d40d061ae::t_cb62a27ea88537 6,10
+themes/conventional-branch/layouts/partials/head.html
+  s_240b8d40d061ae::t_3047a554669874 21-22,25
+themes/conventional-branch/static/css/scss/themes/_markdown.scss
+  s_240b8d40d061ae::t_f84cdc40b4f558 149-153,161,237,239-243
+  s_240b8d40d061ae::t_22205f6b8afd83 3-5,7-9,19,24-29,33-36,40-41,46,65-66,70,73,78,84-87,100,103,107-108,111,113,124-125,127-131,137-140,142,145-147,154-155,163,173-178,187,216,225-226,277,292,296,301,305,310,315,319,324,328
+themes/conventional-branch/static/css/scss/components/_checker.scss
+  s_240b8d40d061ae::t_f84cdc40b4f558 21
+themes/conventional-branch/README.md
+  s_240b8d40d061ae::t_ae847a415c6c67 4-9,15-16
+themes/conventional-branch/layouts/partials/spec/body.html
+  s_240b8d40d061ae::t_6bf65e35d4bcd5 14
+  s_240b8d40d061ae::t_cb62a27ea88537 10
+themes/conventional-branch/layouts/_default/single.html
+  s_240b8d40d061ae::t_6bf65e35d4bcd5 5-6,13
+themes/conventional-branch/layouts/partials/home/checker.html
+  s_240b8d40d061ae::t_f84cdc40b4f558 72
+themes/conventional-branch/layouts/partials/about/history.html
+  s_240b8d40d061ae::t_6bf65e35d4bcd5 5
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "8df91fc8aeb4a1145fe139f8546b1256d020b32c",
+  "prompts": {},
+  "sessions": {
+    "s_240b8d40d061ae": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "d4747621-aab3-47e2-b1b5-64d1c75978db",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "Xianpeng Shen <xianpeng.shen@gmail.com>"
+    }
+  }
+}
