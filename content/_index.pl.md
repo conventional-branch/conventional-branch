@@ -2,6 +2,8 @@
 draft: false
 aliases: ["/pl/"]
 layout: single
+seoTitle: "Konwencja nazewnictwa gałęzi Git — Conventional Branch"
+seoDescription: "Specyfikacja nazw gałęzi Git: prefiksy feature/, bugfix/, hotfix/, release/ i chore/, formalna gramatyka oraz sposób jej egzekwowania w GitHub i GitLab."
 ---
 
 # Conventional Branch 1.1.0

@@ -2,6 +2,8 @@
 draft: false
 aliases: ["/fr/"]
 layout: single
+seoTitle: "Convention de nommage des branches Git — Conventional Branch"
+seoDescription: "Une spécification pour nommer les branches Git : préfixes feature/, bugfix/, hotfix/, release/ et chore/, une grammaire formelle et comment l'appliquer dans GitHub et GitLab."
 ---
 
 # Conventional Branch 1.1.0

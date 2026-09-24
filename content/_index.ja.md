@@ -2,6 +2,8 @@
 draft: false
 aliases: ["/ja/"]
 layout: single
+seoTitle: "Git ブランチ命名規則 — Conventional Branch"
+seoDescription: "Git のブランチ名の命名規則：feature/・bugfix/・hotfix/・release/・chore/ などのプレフィックスと正式な文法、GitHub や GitLab で強制する方法。"
 ---
 
 # 慣例的ブランチ 1.1.0

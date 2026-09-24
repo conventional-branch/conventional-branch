@@ -2,6 +2,8 @@
 draft: false
 aliases: ["/zh-hant/"]
 layout: single
+seoTitle: "Git 分支命名規範 — 約定式分支 Conventional Branch"
+seoDescription: "Git 分支命名規範：feature/、bugfix/、hotfix/、release/、chore/ 等分支前綴，附正式語法，以及在 GitHub、GitLab 中強制檢查的方法。"
 ---
 
 # 約定式分支 1.1.0

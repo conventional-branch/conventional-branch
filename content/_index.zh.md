@@ -2,6 +2,8 @@
 draft: false
 aliases: ["/zh/"]
 layout: single
+seoTitle: "Git 分支命名规范 — 约定式分支 Conventional Branch"
+seoDescription: "Git 分支命名规范：feature/、bugfix/、hotfix/、release/、chore/ 等分支前缀，附正式语法，以及在 GitHub、GitLab 中强制校验的方法。"
 ---
 
 # 约定式分支 1.1.0

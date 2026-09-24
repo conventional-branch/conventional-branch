@@ -3,7 +3,7 @@ draft: false
 aliases: ["/en/"]
 layout: single
 seoTitle: "Conventional Branch — A Git Branch Naming Convention"
-seoDescription: "A specification for Git branch names: feature/, bugfix/, hotfix/, release/ and chore/ prefixes, with a formal grammar and tooling to enforce them."
+seoDescription: "A Git branch naming convention: feature/, bugfix/, hotfix/, release/ and chore/ prefixes, a formal grammar, and a regex to enforce it on GitHub, GitLab and Bitbucket."
 ---
 
 # Conventional Branch 1.1.0
