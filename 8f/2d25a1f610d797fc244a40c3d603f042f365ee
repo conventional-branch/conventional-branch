@@ -1,0 +1,41 @@
+content/_index.de.md
+  s_0da9b18608c2a0::t_2d390d49b00703 5-6
+content/_index.es.md
+  s_0da9b18608c2a0::t_842344194e07f3 5-6
+content/_index.fr.md
+  s_0da9b18608c2a0::t_897c7bc428c226 5-6
+content/_index.ja.md
+  s_0da9b18608c2a0::t_c90bc5fe65ad77 5-6
+content/_index.md
+  s_0da9b18608c2a0::t_866469e618ce7d 6
+content/_index.pl.md
+  s_0da9b18608c2a0::t_f055020f1f474c 5-6
+content/_index.pt-br.md
+  s_0da9b18608c2a0::t_fccaafb0960c69 5-6
+content/_index.ru.md
+  s_0da9b18608c2a0::t_1b94b58fda1748 5-6
+content/_index.th.md
+  s_0da9b18608c2a0::t_c52c343a05fac4 5-6
+content/_index.zh-hant.md
+  s_0da9b18608c2a0::t_48ea9a6fd36f2a 5-6
+content/_index.zh.md
+  s_0da9b18608c2a0::t_2f0e11829877ce 5-6
+static/robots.txt
+  s_0da9b18608c2a0::t_e95925498f4ea1 1-4
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "8f2d25a1f610d797fc244a40c3d603f042f365ee",
+  "prompts": {},
+  "sessions": {
+    "s_0da9b18608c2a0": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "c1ae0c79-9ddb-4e6b-a8e1-2213cfd3c2b6",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "Xianpeng Shen <xianpeng.shen@gmail.com>"
+    }
+  }
+}
