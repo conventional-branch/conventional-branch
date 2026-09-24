@@ -1,10 +1,12 @@
 @use "./../abstracts/index" as *;
 
-// The rendered Markdown of the specification, Enforce and About pages.
+// The rendered Markdown of the specification, Enforce and About pages, set for reading:
+// near-black on white, bold blue headings and tight spacing — how the specification read
+// before the redesign, and how a README reads on GitHub.
 .markdown-body {
-  color: $ink-2;
-  font-size: 17px;
-  line-height: 1.7;
+  color: $ink;
+  font-size: 16px;
+  line-height: 1.75;
 
   > :first-child {
     margin-top: 0;
@@ -14,41 +16,37 @@
   h3,
   h4 {
     position: relative;
-    color: $ink;
+    line-height: 1.3;
     scroll-margin-top: 24px;
   }
 
   h2 {
-    @include serif-display;
-    margin: 96px 0 24px;
-    font-size: clamp(32px, 3.2vw, 44px);
-    line-height: 1.08;
+    margin: 48px 0 16px;
+    padding-bottom: 0.3em;
+    border-bottom: 1px solid $rule;
+    color: $color-primary-heading;
+    font-size: 24px;
+    font-weight: 700;
   }
 
   h3 {
-    @include serif-display;
-    margin: 56px 0 18px;
-    font-size: clamp(25px, 2.4vw, 32px);
-    line-height: 1.12;
-    letter-spacing: -0.015em;
-  }
-
-  h4 {
-    margin: 36px 0 12px;
-    font-size: 18px;
+    margin: 32px 0 12px;
+    color: $color-primary-heading;
+    font-size: 20px;
     font-weight: 600;
   }
 
-  h2 + h3 {
-    margin-top: 32px;
+  h4 {
+    margin: 24px 0 8px;
+    font-size: 17px;
+    font-weight: 600;
   }
 
   p {
-    margin: 0 0 1.1em;
+    margin: 0 0 1em;
   }
 
   strong {
-    color: $ink;
     font-weight: 600;
   }
 
@@ -64,34 +62,29 @@
 
   ul,
   ol {
-    margin: 0 0 1.3em;
-    padding-left: 1.3em;
+    margin: 0 0 1em;
+    padding-left: 2em;
   }
 
   li {
-    margin: 0.4em 0;
-
-    &::marker {
-      color: $ink-3;
-    }
+    margin: 0.25em 0;
 
     > p {
-      margin-bottom: 0.6em;
+      margin-bottom: 0.5em;
     }
   }
 
   hr {
-    margin: 40px 0;
+    margin: 32px 0;
     border: 0;
     border-top: 1px solid $rule;
   }
 
   blockquote {
-    margin: 24px 0;
-    padding: 16px 20px;
-    border-radius: $radius-md;
-    background: $paper-2;
-    color: $ink-2;
+    margin: 0 0 1em;
+    padding: 0 1em;
+    border-left: 4px solid $rule-strong;
+    color: $ink-3;
 
     p:last-child {
       margin-bottom: 0;
@@ -103,73 +96,71 @@
     vertical-align: middle;
   }
 
-  // Inline code: the machine's voice inside a sentence.
   code {
-    padding: 0.12em 0.38em;
+    padding: 0.15em 0.4em;
     border-radius: $radius-sm;
     background: $paper-2;
-    color: $ink;
-    font-size: 0.86em;
+    font-size: 0.85em;
   }
 
   pre {
-    margin: 24px 0;
-    padding: 20px 22px;
+    margin: 0 0 16px;
+    padding: 16px 20px;
     overflow-x: auto;
     border-radius: $radius-md;
-    background: $ink;
-    color: $on-ink-code;
+    background: $paper;
     font-size: 13.5px;
-    line-height: 1.65;
+    line-height: 1.6;
     tab-size: 2;
 
     code {
       padding: 0;
       border-radius: 0;
       background: none;
-      color: inherit;
       font-size: inherit;
     }
   }
 
+  // A table as wide as its content, scrolling sideways on its own when that is wider
+  // than the column.
   table {
-    width: 100%;
-    margin: 24px 0 32px;
-    border: 1px solid $rule;
+    display: block;
+    width: max-content;
+    max-width: 100%;
+    margin: 0 0 16px;
+    overflow-x: auto;
     border-collapse: collapse;
-    background: $card;
     font-size: 15px;
     line-height: 1.5;
   }
 
-  th {
-    @include eyebrow;
-    padding: 12px 16px;
-    background: $paper-2;
-    color: $ink-3;
-    font-size: 11px;
+  th,
+  td {
+    padding: 8px 14px;
+    border: 1px solid $rule;
     text-align: left;
+    vertical-align: top;
   }
 
-  td {
-    padding: 12px 16px;
-    border-top: 1px solid $rule-soft;
-    vertical-align: top;
-    color: $ink-2;
+  th {
+    font-weight: 600;
+  }
 
-    code {
-      padding: 0;
-      background: none;
-      font-size: 14px;
-    }
+  // A branch name broken at a hyphen would look like one that ends in a hyphen.
+  td code {
+    white-space: nowrap;
+  }
+
+  tbody tr:nth-child(2n) {
+    background: $paper;
   }
 
   // AnchorJS's link beside a heading, for citing a section.
   .anchorjs-link {
     margin-left: 0.3em;
-    color: $ink-faint;
+    color: $ink-3;
     font-family: $font-mono;
-    font-size: 0.6em;
+    font-size: 0.7em;
     font-weight: 400;
     text-decoration: none;
 
@@ -179,16 +170,12 @@
   }
 }
 
-// Section numbers for Markdown pages, counted with the sections their templates add.
-.doc-page .doc-body > h2::before {
-  @include eyebrow;
-  counter-increment: section;
-  content: counter(section, decimal-leading-zero) "  /";
-  display: block;
-  margin-bottom: 14px;
-  color: $color-primary-heading;
-  letter-spacing: 0.08em;
-  white-space: pre;
+// The specification's own title, heading its section.
+.markdown-body .spec__title {
+  margin: 0 0 16px;
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 1.25;
 }
 
 // The adopters list on the About page (content/about/index.md), which CONTRIBUTING.md
@@ -197,7 +184,7 @@
 .doc-body #projects-using-conventional-branch + p + ul {
   columns: 2;
   column-gap: 40px;
-  margin-top: 28px;
+  margin-top: 24px;
   padding: 0;
   list-style: none;
 
@@ -222,21 +209,11 @@
   }
 }
 
-// The specification's own title, heading its section.
-.spec__title {
-  @include serif-display;
-  margin: 0 0 40px;
-  font-size: clamp(38px, 4.4vw, 60px);
-  line-height: 1.02;
-  letter-spacing: -0.025em;
-  color: $ink;
-}
-
 // A code block, wrapped by the script so its copy button stays put while the code
 // scrolls sideways.
 .code-block {
   position: relative;
-  margin: 24px 0;
+  margin: 0 0 16px;
 
   pre {
     margin: 0;
@@ -245,9 +222,8 @@
 
   .copy-button {
     position: absolute;
-    top: 12px;
-    right: 12px;
-    background: $ink;
+    top: 10px;
+    right: 10px;
     opacity: 0;
     transition: opacity 0.15s ease;
   }
@@ -258,7 +234,13 @@
     opacity: 1;
   }
 
+  // Without hover the button always shows, so the code starts below it.
   @media (hover: none) {
+    pre {
+      padding-top: 48px;
+      padding-right: 20px;
+    }
+
     .copy-button {
       opacity: 1;
     }
@@ -289,73 +271,10 @@
   color: $invalid-fg;
 }
 
-// The FAQ, folded into disclosures by the script.
-.faq-item {
-  border-top: 1px solid $rule;
-
-  &:last-child {
-    border-bottom: 1px solid $rule;
-  }
-
-  > summary {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 24px;
-    padding: 18px 0;
-    list-style: none;
-    cursor: pointer;
-
-    &::-webkit-details-marker {
-      display: none;
-    }
-
-    &::after {
-      content: "+";
-      flex-shrink: 0;
-      width: 20px;
-      color: $ink-3;
-      font-family: $font-mono;
-      font-size: 22px;
-      line-height: 1;
-      text-align: center;
-    }
-
-    &:hover .faq-item__question {
-      color: $color-primary-heading;
-    }
-  }
-
-  &[open] > summary::after {
-    content: "\2212";
-  }
-}
-
-.markdown-body .faq-item__question {
-  margin: 0;
-  font-family: $font-sans;
-  font-size: 18px;
-  font-weight: 600;
-  line-height: 1.4;
-  letter-spacing: 0;
-}
-
-.faq-item__answer {
-  padding: 0 44px 12px 0;
-}
-
 @include below($bp-sm) {
   .markdown-body {
-    font-size: 16px;
-
     h2 {
-      margin-top: 72px;
-    }
-
-    // A wide table scrolls on its own rather than widening the page.
-    table {
-      display: block;
-      overflow-x: auto;
+      margin-top: 40px;
     }
 
     pre {
@@ -367,49 +286,45 @@
   .code-block pre {
     margin-inline: calc(-1 * var(--pad));
   }
-
-  .faq-item__answer {
-    padding-right: 0;
-  }
 }
 
 // Highlighted code (Hugo's Chroma, as classes): names and keywords in blue, literals in
-// sand, comments dimmed — the same two colours every other code sample on the site uses.
+// brown, comments dimmed.
 .chroma {
   .k, .kc, .kd, .kn, .kp, .kr, .kt,
   .n, .na, .nb, .nc, .nd, .nf, .nl, .nn, .no, .nt, .nv, .nx, .py {
-    color: $blue-on-ink;
+    color: $color-primary-heading;
   }
 
   .s, .sa, .sb, .sc, .dl, .sd, .s1, .s2, .se, .sh, .si, .sr, .ss, .sx,
   .m, .mb, .mf, .mh, .mi, .il, .mo, .l, .ld {
-    color: $sand-on-ink;
+    color: $code-literal;
   }
 
   .c, .ch, .cm, .c1, .cs, .cp, .cpf {
-    color: $on-ink-3;
+    color: $ink-3;
     font-style: normal;
   }
 
   .o, .ow, .p {
-    color: $on-ink-code;
+    color: $ink-2;
   }
 
   .err {
     background: none;
-    color: $orange-on-ink;
+    color: $invalid-fg;
   }
 
   .gh, .gu {
-    color: $on-ink;
+    color: $ink;
     font-weight: 600;
   }
 
   .gi {
-    color: $blue-on-ink;
+    color: $color-primary-heading;
   }
 
   .gd {
-    color: $orange-on-ink;
+    color: $invalid-fg;
   }
 }

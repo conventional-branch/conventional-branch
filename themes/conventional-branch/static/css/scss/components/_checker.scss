@@ -18,6 +18,7 @@
 
 .checker__label {
   @include eyebrow;
+  margin: 0;
   color: $on-ink-2;
 }
 

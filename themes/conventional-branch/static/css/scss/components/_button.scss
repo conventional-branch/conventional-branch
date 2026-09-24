@@ -60,22 +60,22 @@
   gap: 6px;
   height: 30px;
   padding: 0 10px;
-  border: 1px solid $ink-line-2;
+  border: 1px solid $rule-strong;
   border-radius: $radius-sm;
-  background: transparent;
-  color: $on-ink-2;
+  background: $reading-bg;
+  color: $ink-3;
   font-family: $font-sans;
   font-size: 12px;
   font-weight: 600;
   cursor: pointer;
 
   &:hover {
-    border-color: $color-primary;
-    color: $on-ink;
+    border-color: $color-primary-heading;
+    color: $ink;
   }
 
   &.is-copied {
-    border-color: $color-primary;
-    color: $blue-on-ink;
+    border-color: $color-primary-heading;
+    color: $color-primary-heading;
   }
 }

@@ -21,6 +21,17 @@
   font-size: clamp(42px, 5.6vw, 80px);
 }
 
+// Newsreader has no Chinese or Japanese glyphs, and the serifs those fall back to
+// (Songti, Mincho) are too thin for a headline, so those titles are set in the system
+// sans, like the text below them.
+.hero__title:lang(zh),
+.hero__title:lang(ja) {
+  font-family: $font-sans;
+  font-weight: 600;
+  line-height: 1.15;
+  letter-spacing: 0;
+}
+
 .hero__copy {
   display: flex;
   flex-direction: column;

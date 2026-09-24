@@ -1,17 +1,19 @@
 # Conventional Branch theme
 
 The Hugo theme for [conventionalbranch.org](https://conventionalbranch.org/). The site is
-set like a printed standard: a serif (Newsreader) for what people read, a monospace
-(JetBrains Mono) for what machines read, and a grotesk (Hanken Grotesk) for the interface.
-Sections written for people sit on paper, sections written for machines on ink, and the
-brand blue is `$color-primary`, `#6699CC` — the version half of the adoption badge.
+set like a printed standard: a serif (Newsreader) for display headlines, a monospace
+(JetBrains Mono) for what machines read, and the reader's system font for everything
+else. The Markdown pages are read on white, in near-black with bold blue headings, the way
+a README reads on GitHub; the sections around them sit on paper or, when written for
+machines, on ink. The brand blue is `$color-primary`, `#6699CC` — the version half of the
+adoption badge.
 
 ## Pages
 
 - `_default/single.html` renders every language's specification page, current and
   archived: a hero, then the specification beside its outline. On a homepage whose
-  language has `landing: true`, the mission, principles and adoption sections
-  (`partials/home/`) frame it.
+  language has `landing: true`, the checker, mission and adoption sections
+  (`partials/home/`) follow it.
 - `about/single.html` renders the About and Enforce pages: a hero from the page's front
   matter (`eyebrow`, `heroTitle`, `heroTitleEm`, `heroLead`), then the
   Markdown beside its outline.

@@ -2,17 +2,16 @@
        machine-readable endpoints in reach while reading. The version and language
        switches are in the header. */ -}}
 {{- $spec := partialCached "spec.html" . -}}
-{{- $landing := and .IsHome .Site.Params.landing -}}
 {{- $typeNames := slice -}}
 {{- range $spec.types }}{{ $typeNames = $typeNames | append .type }}{{ range .aliases }}{{ $typeNames = $typeNames | append . }}{{ end }}{{ end -}}
 {{- /* The page has one h1, the hero's, so the specification's own title is demoted to
        head its section. Its id is kept, so links to it still land. */ -}}
 {{- $content := replaceRE `(?s)<h1([^>]*)>(.*?)</h1>` `<h2 class="spec__title"$1>$2</h2>` .Content 1 -}}
-<section id="spec" class="spec" aria-labelledby="spec-label">
+<section id="spec" class="spec doc-surface" aria-labelledby="spec-label">
   <div class="container doc-grid">
     <aside class="doc-aside">
       <div class="doc-aside__inner">
-        <h2 id="spec-label" class="eyebrow">{{ if $landing }}<span class="eyebrow__num">02</span><span class="eyebrow__slash" aria-hidden="true">/</span>{{ end }}<span>{{ i18n "spec_eyebrow" }}</span></h2>
+        <h2 id="spec-label" class="eyebrow">{{ i18n "spec_eyebrow" }}</h2>
         {{- partial "toc.html" (dict "page" . "collapseLast" true) }}
         <div class="aside-block aside-block--tools">
           <p class="aside-heading">{{ i18n "for_tools" }}</p>

@@ -1,10 +1,28 @@
-// Marks the "On this page" entry for the section being read.
+// Marks the "On this page" entry for the section being read. On a phone the outline is
+// a disclosure that starts closed, so the text comes first; on a wider screen it is always
+// open and its label is only a label. Crossing the breakpoint, by rotating a tablet or
+// resizing a window, switches between the two.
 
 const THRESHOLD = 140;
+const PHONE = '(max-width: 899px)';
+
+function initDisclosure(details) {
+  const summary = details.querySelector('summary');
+  const phone = window.matchMedia(PHONE);
+  const sync = () => {
+    details.open = !phone.matches;
+    summary.inert = !phone.matches;
+  };
+  sync();
+  phone.addEventListener('change', sync);
+}
 
 export function initToc() {
   const toc = document.querySelector('.toc');
   if (!toc) return;
+
+  const details = toc.querySelector('.toc__details');
+  if (details) initDisclosure(details);
 
   const entries = [];
   toc.querySelectorAll('a[href^="#"]').forEach((link) => {

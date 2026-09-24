@@ -1,8 +1,14 @@
 @use "./../abstracts/index" as *;
 
 // A document beside its outline: the specification, and the Enforce and About pages.
-.doc-page {
-  counter-reset: section;
+
+// The white the Markdown is read on, set off by a rule from a hero on paper.
+.doc-surface {
+  background: $reading-bg;
+}
+
+.hero + .doc-surface {
+  border-top: 1px solid $rule;
 }
 
 .doc-grid {
@@ -29,8 +35,9 @@
   gap: 36px;
 }
 
+// Seven columns keep a line of text near 85 characters.
 .doc-body {
-  grid-column: 5 / span 8;
+  grid-column: 5 / span 7;
   min-width: 0;
 }
 
@@ -38,6 +45,16 @@
   @include eyebrow;
   margin: 0 0 10px;
   color: $ink-3;
+}
+
+// The outline's label opens and closes it on a phone, where it starts closed so the
+// text comes first; on a wider screen the script keeps it open and makes the label inert.
+.toc__summary {
+  list-style: none;
+
+  &::-webkit-details-marker {
+    display: none;
+  }
 }
 
 .toc__list,
@@ -147,13 +164,44 @@
   .doc-aside {
     position: static;
     max-height: none;
-    margin: 0 0 48px;
+    margin: 0 0 32px;
     padding: 0;
     overflow: visible;
   }
 
   .doc-aside__inner {
-    gap: 28px;
+    gap: 16px;
+  }
+
+  .toc__summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 44px;
+    margin: 0;
+    padding: 0 14px;
+    border: 1px solid $rule-strong;
+    border-radius: $radius-sm;
+    cursor: pointer;
+
+    // The sign is decoration: the disclosure's state is announced already.
+    &::after {
+      content: "+";
+      content: "+" / "";
+      font-size: 18px;
+      line-height: 1;
+    }
+  }
+
+  .toc__details[open] {
+    > .toc__summary::after {
+      content: "\2212";
+      content: "\2212" / "";
+    }
+
+    > .toc__list {
+      margin-top: 8px;
+    }
   }
 
   // On a phone the outline is the useful part; the rest is repeated elsewhere.

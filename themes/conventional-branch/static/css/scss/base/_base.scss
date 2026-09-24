@@ -113,7 +113,7 @@ img {
   }
 }
 
-// A section's label: "03 / Adopt it".
+// A section's label, like "Adopt it", or a page's: "Enforce / Copy-paste configuration".
 .eyebrow {
   @include eyebrow;
   display: flex;
@@ -129,20 +129,6 @@ img {
 }
 
 .eyebrow__slash {
-  color: $color-primary;
-}
-
-// On a page made of Markdown the section numbers are counted, so the sections a
-// template adds number themselves in sequence with the headings around them.
-.eyebrow--counted::before {
-  counter-increment: section;
-  content: counter(section, decimal-leading-zero);
-  color: $color-primary-heading;
-}
-
-.eyebrow--counted > span::before {
-  content: "/";
-  margin-right: 10px;
   color: $color-primary;
 }
 

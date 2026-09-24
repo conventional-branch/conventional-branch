@@ -1,8 +1,9 @@
 // Conventional Branch — design tokens.
 //
-// The site is set like a printed standard. People's words are in a serif, machines'
-// words in a monospace, and the interface in a grotesk between them; sections written
-// for people sit on paper, sections written for machines on ink.
+// The site is set like a printed standard: display headlines in a serif, machines'
+// words in a monospace, and everything else in the reader's own system font. Sections
+// written for people sit on paper, sections written for machines on ink, and the
+// Markdown pages on white, to be read.
 
 // --- Brand ------------------------------------------------------------------------
 
@@ -24,7 +25,6 @@ $paper-2: #EFEDE6;
 $card: #FDFCF9;
 $rule: #DCD9CF;
 $rule-strong: #CFCBC0;
-$rule-soft: #E6E3DA;
 
 // --- Ink: text on paper, and the machine-facing ground -------------------------------
 
@@ -46,6 +46,11 @@ $blue-on-ink: #8FB8E3;
 $sand-on-ink: #E3B98A;
 $orange-on-ink: #F0955A;
 
+// --- Reading: the Markdown pages ---------------------------------------------------
+
+$reading-bg: #FFFFFF;
+$code-literal: #8A4B0F; // strings and numbers in code, 6.3:1 on $paper
+
 // An invalid mark differs from the text in lightness as well as hue, and always carries an icon.
 $invalid: #B4491B;
 $invalid-bg: #F6E6DC;
@@ -54,7 +59,9 @@ $invalid-fg: #9A3B12;
 // --- Type ---------------------------------------------------------------------------
 
 $font-serif: 'Newsreader', 'Iowan Old Style', 'Palatino Linotype', Georgia, serif;
-$font-sans: 'Hanken Grotesk', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', 'PingFang SC', 'Hiragino Sans', 'Noto Sans', sans-serif;
+// The stack GitHub uses: each platform's own UI face, which also picks the right CJK font
+// for the page's language.
+$font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji';
 $font-mono: 'JetBrains Mono', ui-monospace, 'SFMono-Regular', Menlo, Consolas, monospace;
 
 // --- Layout -------------------------------------------------------------------------
