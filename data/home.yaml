@@ -1,5 +1,5 @@
 # Structure of the homepage sections: what is listed, in which order, and where each
-# item links. The words themselves are in i18n/en.yaml, keyed by the `key` fields.
+# item links. The words themselves are in i18n/en.yaml, keyed by the entries here.
 
 # Organizations named on the homepage, each linked to the file where a project of
 # theirs documents the convention. An excerpt of the canonical adopters list on the
@@ -39,83 +39,6 @@ checker:
     - Feature/Add-Login
     - feature/new--login
 
-# The three properties a Conventional Branch name has, each with a worked example.
-pillars:
-  - key: people
-    type: fix
-    rest: /header-bug
-  - key: machines
-    type: GET
-    rest: " /v{version}/spec.json"
-  - key: pipelines
-    type: release
-    rest: /*
-
-principles: [small, stable, checked, open, agents, commits]
-
-# The prefix-to-pipeline diagram. `key` selects the pipeline_<key> string.
-pipelines:
-  - prefix: feature/*
-    example: feature/add-login-page
-    key: feature
-  - prefix: bugfix/*
-    example: fix/header-bug
-    key: bugfix
-  - prefix: hotfix/*
-    example: hotfix/security-patch
-    key: hotfix
-  - prefix: release/*
-    example: release/v1.2.0
-    key: release
-  - prefix: chore/*
-    example: chore/update-dependencies
-    key: chore
-  - prefix: claude/* · ai/*
-    example: claude/refactor-auth-flow
-    key: agent
-
-# Everything the specification publishes for tools, with its stability tag.
-# `{version}` is replaced with the current version from static/spec.json.
-endpoints:
-  - path: /spec.json
-    url: https://conventionalbranch.org/spec.json
-    tag: latest
-    key: spec
-  - path: /v{version}/spec.json
-    url: https://conventionalbranch.org/v{version}/spec.json
-    tag: pin
-    key: frozen
-  - path: /schema/v1/spec.schema.json
-    url: https://conventionalbranch.org/schema/v1/spec.schema.json
-    tag: permanent
-    key: schema
-  - path: tests/fixtures.json
-    url: https://github.com/conventional-branch/conventional-branch/blob/main/tests/fixtures.json
-    tag: conformance
-    key: fixtures
-  - path: /llms.txt
-    url: https://conventionalbranch.org/llms.txt
-    tag: llms
-    key: llms
-  - path: /badge.svg
-    url: https://conventionalbranch.org/badge.svg
-    tag: adoption
-    key: badge
-
-# The checks tests/conformance.py runs on every pull request, in its order.
-checks: [fixtures, docs, consistency, badge, schema, integrations, versioning, grammar, llms, commitcheck]
-
-# Configurations linked from the "Enforce it" step, by their anchor on /enforce/.
-enforce_links:
-  - label: GitHub ruleset
-    anchor: rulesets
-    format: JSON
-  - label: GitLab push rule
-    anchor: gitlab
-    format: regex
-  - label: commit-check
-    anchor: commit-check
-    format: TOML
-  - label: Git pre-push hook
-    anchor: a-hook-with-no-dependencies
-    format: sh
+# What the project holds to, under "Why it exists" — only what the specification and
+# the rest of the page don't already say.
+principles: [stable, checked]

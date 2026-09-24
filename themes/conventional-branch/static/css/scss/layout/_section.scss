@@ -16,19 +16,11 @@
     color: $on-ink-2;
   }
 
-  .eyebrow__num {
-    color: $blue-on-ink;
-  }
-
   .section__title em {
     color: $blue-on-ink;
   }
 
-  .lead {
-    color: $on-ink-2;
-  }
-
-  // Low specificity, so components on ink (endpoints, buttons) keep their colours.
+  // Low specificity, so components on ink (buttons) keep their colours.
   :where(a:not(.button)) {
     color: $blue-on-ink;
 
@@ -57,14 +49,6 @@
   > .statement {
     grid-column: span 9;
   }
-}
-
-.section__intro {
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
-  max-width: 800px;
-  margin-bottom: clamp(40px, 5vw, 64px);
 }
 
 .section__title {

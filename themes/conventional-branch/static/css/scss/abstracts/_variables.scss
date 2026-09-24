@@ -41,15 +41,12 @@ $on-ink-code: #D8DEE8;
 $on-ink-chip: #C9D3E0;
 $ink-line: #263244;
 $ink-line-2: #2F3B4E;
-$ink-panel: #172131;
 
 $blue-on-ink: #8FB8E3;
 $sand-on-ink: #E3B98A;
 $orange-on-ink: #F0955A;
 
-// Valid and invalid differ in lightness as well as hue, and always carry an icon.
-$valid-bg: #E4ECF6;
-$valid-fg: #214F93;
+// An invalid mark differs from the text in lightness as well as hue, and always carries an icon.
 $invalid: #B4491B;
 $invalid-bg: #F6E6DC;
 $invalid-fg: #9A3B12;

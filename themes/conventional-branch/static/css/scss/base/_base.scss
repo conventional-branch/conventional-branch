@@ -84,20 +84,6 @@ img {
   @include mono;
 }
 
-.small {
-  margin: 0;
-  font-size: 15px;
-  line-height: 1.6;
-  color: $ink-3;
-}
-
-.lead {
-  margin: 0;
-  font-size: clamp(17px, 1.4vw, 19px);
-  line-height: 1.6;
-  color: $ink-2;
-}
-
 .visually-hidden {
   @include visually-hidden;
 }
@@ -127,7 +113,7 @@ img {
   }
 }
 
-// A section's label: "03 / How it’s read".
+// A section's label: "03 / Adopt it".
 .eyebrow {
   @include eyebrow;
   display: flex;

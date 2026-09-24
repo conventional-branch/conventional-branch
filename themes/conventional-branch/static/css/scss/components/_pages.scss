@@ -29,28 +29,6 @@
   line-height: 1.55;
 }
 
-.page-hero__meta {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px 28px;
-  margin: 28px 0 0;
-  padding: 0;
-  color: $ink-3;
-  font-family: $font-mono;
-  font-size: 13px;
-  list-style: none;
-
-  li {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-
-  .icon {
-    color: $color-primary-heading;
-  }
-}
-
 // --- Enforce: the two layers ---------------------------------------------------------------
 
 .layers {
@@ -73,11 +51,6 @@
   gap: 24px;
   padding: 28px;
   border-radius: $radius-md;
-
-  p {
-    margin: 0;
-    line-height: 1.6;
-  }
 }
 
 .layer--local {
@@ -85,10 +58,6 @@
   grid-row: 1 / span 2;
   border: 1px solid $rule-strong;
   background: $card;
-
-  .layer__intro p {
-    color: $ink-2;
-  }
 }
 
 .layer--server {
@@ -97,7 +66,6 @@
   background: $ink;
   color: $on-ink;
 
-  .layer__intro p,
   .layer__item-note {
     color: $on-ink-2;
   }
@@ -125,11 +93,6 @@
   gap: 14px;
   padding: 24px 28px;
   border: 1px solid $rule-strong;
-
-  p {
-    color: $ink-2;
-    font-size: 15px;
-  }
 }
 
 .layer__top {
@@ -160,12 +123,6 @@
   background: $color-primary;
   color: $ink;
   font-weight: 600;
-}
-
-.layer__intro {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
 }
 
 .layer__title {
@@ -583,16 +540,8 @@
 }
 
 .people__handle {
-  display: flex;
-  align-items: center;
-  gap: 8px;
   color: $blue-on-ink;
   font-size: 13px;
-
-  svg.github {
-    width: 16px;
-    height: 16px;
-  }
 }
 
 .people__links {

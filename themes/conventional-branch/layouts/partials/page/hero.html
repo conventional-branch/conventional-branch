@@ -1,8 +1,7 @@
 {{- /* A page's hero, from its front matter:
          eyebrow      list of labels, joined with slashes
          heroTitle    the headline, and heroTitleEm its emphasised second half
-         heroLead     the standfirst, Markdown allowed
-         heroMeta     short facts, each shown with a check mark */ -}}
+         heroLead     the standfirst, Markdown allowed */ -}}
 <section class="page-hero" aria-labelledby="page-title">
   <div class="container">
     {{- with .Params.eyebrow }}
@@ -13,13 +12,6 @@
     <h1 id="page-title" class="page-hero__title">{{ .Params.heroTitle | default .Title }}{{ with .Params.heroTitleEm }} <em>{{ . }}</em>{{ end }}</h1>
     {{- with .Params.heroLead }}
     <p class="page-hero__lead">{{ . | markdownify }}</p>
-    {{- end }}
-    {{- with .Params.heroMeta }}
-    <ul class="page-hero__meta">
-      {{- range . }}
-      <li>{{ partial "icon.html" (dict "name" "check" "size" 14) }}{{ . }}</li>
-      {{- end }}
-    </ul>
     {{- end }}
   </div>
 </section>

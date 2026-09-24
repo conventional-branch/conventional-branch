@@ -7,12 +7,6 @@
   }
 }
 
-@mixin from($width) {
-  @media (min-width: $width) {
-    @content;
-  }
-}
-
 // The small mono label that names a section, a column or a field.
 @mixin eyebrow {
   font-family: $font-mono;

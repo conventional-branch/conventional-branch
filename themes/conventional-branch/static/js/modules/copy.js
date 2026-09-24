@@ -1,5 +1,4 @@
-// Copy buttons: one on every code block in the rendered Markdown, and on any button
-// that names what it copies with data-copy="<element id>".
+// A copy button on every code block in the rendered Markdown.
 
 const COPY_ICON = '<svg class="icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V6a2 2 0 0 1 2-2h8"/></svg>';
 
@@ -58,12 +57,5 @@ export function initCopy(root) {
     button.append(label);
     wrap.append(button);
     button.addEventListener('click', () => copy(pre.textContent.replace(/\n$/, ''), button));
-  });
-
-  root.querySelectorAll('[data-copy]').forEach((button) => {
-    button.addEventListener('click', () => {
-      const source = document.getElementById(button.dataset.copy);
-      if (source) copy(source.textContent.trim(), button);
-    });
   });
 }

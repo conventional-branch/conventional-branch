@@ -79,18 +79,3 @@
     color: $blue-on-ink;
   }
 }
-
-.copy-button--paper {
-  border-color: $rule;
-  color: $ink-2;
-
-  &:hover {
-    border-color: $ink;
-    color: $ink;
-  }
-
-  &.is-copied {
-    border-color: $color-primary-heading;
-    color: $color-primary-heading;
-  }
-}

@@ -7,7 +7,7 @@ seoDescription: "The registry of AI coding agent branch prefixes — ai/, claude
 eyebrow: ["About", "Registry, adopters, history"]
 heroTitle: "A shared vocabulary for branches —"
 heroTitleEm: "and for the agents that open them."
-heroLead: "Conventional Branch was inspired by [Conventional Commits](https://www.conventionalcommits.org) and is maintained as free, open infrastructure: a specification, a registry of AI agent prefixes, and a growing list of projects that name their branches this way."
+heroLead: "Conventional Branch was inspired by [Conventional Commits](https://www.conventionalcommits.org): a specification, a registry of AI agent prefixes, and a growing list of projects that name their branches this way."
 ---
 
 ## AI Agent Source Prefixes
@@ -63,8 +63,6 @@ to skim.
 * [jal-co/shieldcn](https://github.com/jal-co/shieldcn): Beautiful README badges inspired by shadcn/ui.
 * [dunossauro/fastapi-do-zero](https://github.com/dunossauro/fastapi-do-zero/blob/main/aulas/contribua/contribua.md): Curso básico de FastAPI em português.
 * _[... and more projects using Conventional Branch](https://github.com/search?q=conventional-branch.github.io&type=code&p=1)._
-
-[![Conventional Branch](https://conventionalbranch.org/badge.svg)](https://conventionalbranch.org/)
 
 _Want your project on this list?_ [Send a pull request](https://github.com/conventional-branch/conventional-branch/pulls).
 

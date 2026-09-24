@@ -8,13 +8,6 @@
           <span class="brand__mark">{{ partial "svg-branch.html" (dict "size" 20) }}</span>
           <span class="brand__name">Conventional Branch</span>
         </a>
-        {{- if .Site.Params.landing }}
-        <p class="site-footer__tagline">{{ i18n "hero_title" }} <em>{{ i18n "hero_title_em" }}</em></p>
-        <p class="site-footer__desc">{{ i18n "footer_description" }}</p>
-        {{- else }}
-        <p class="site-footer__tagline">{{ .Site.Params.title }}</p>
-        <p class="site-footer__desc">{{ .Site.Params.description }}</p>
-        {{- end }}
       </div>
       <nav class="site-footer__nav" aria-label="{{ i18n "footer_label" }}">
         <div class="footer-col">
@@ -47,7 +40,7 @@
       </nav>
     </div>
     <div class="site-footer__bottom">
-      <p>{{ i18n "footer_licensed" }} <a href="{{ .Site.Params.license.action.url }}">{{ i18n "license_short" }}</a> · {{ i18n "footer_derived" }} <a href="https://www.conventionalcommits.org">Conventional Commits</a> · {{ i18n "footer_created" }} <a href="https://github.com/shenxianpeng">Xianpeng Shen</a></p>
+      <p>{{ i18n "footer_licensed" }} <a href="{{ .Site.Params.license.action.url }}">{{ i18n "license_short" }}</a> · {{ i18n "footer_derived" }} <a href="https://www.conventionalcommits.org">Conventional Commits</a> · {{ i18n "footer_created" }} <a href="https://shenxianpeng.dev">Xianpeng Shen</a></p>
       <a class="site-footer__github" href="{{ $repo }}" aria-label="{{ i18n "github_label" }}">{{ partial "svg-github.html" . }}<span class="mono">conventional-branch</span></a>
     </div>
   </div>

@@ -3,8 +3,7 @@
 <section class="layers" aria-labelledby="layers-title">
   <div class="container">
     <div class="section__head">
-      <p class="eyebrow eyebrow--counted"><span>{{ i18n "layers_eyebrow" }}</span></p>
-      <h2 id="layers-title" class="section__title">{{ i18n "layers_title" }}</h2>
+      <h2 id="layers-title" class="eyebrow eyebrow--counted"><span>{{ i18n "layers_eyebrow" }}</span></h2>
     </div>
     <div class="layers__grid">
       <div class="layer layer--local">
@@ -12,10 +11,7 @@
           <span class="layer__tag">{{ i18n "layers_courtesy" }}</span>
           {{- partial "icon.html" (dict "name" "laptop" "size" 22 "stroke" 1.75) -}}
         </div>
-        <div class="layer__intro">
-          <h3 class="layer__title">{{ i18n "layers_local_title" }}</h3>
-          <p>{{ i18n "layers_local_body" }}</p>
-        </div>
+        <h3 class="layer__title">{{ i18n "layers_local_title" }}</h3>
         <ul class="layer__items">
           <li><a href="#commit-check"><span><span class="layer__item-title mono">commit-check</span><span class="layer__item-note">{{ i18n "layers_local_commitcheck" }}</span></span>{{ partial "icon.html" (dict "name" "arrow-down" "size" 16) }}</a></li>
           <li><a href="#a-hook-with-no-dependencies"><span><span class="layer__item-title"><span class="mono">pre-push</span> hook</span><span class="layer__item-note">{{ i18n "layers_local_hook" }}</span></span>{{ partial "icon.html" (dict "name" "arrow-down" "size" 16) }}</a></li>
@@ -35,10 +31,7 @@
           <span class="layer__tag layer__tag--solid">{{ i18n "layers_contract" }}</span>
           {{- partial "icon.html" (dict "name" "server" "size" 22 "stroke" 1.75) -}}
         </div>
-        <div class="layer__intro">
-          <h3 class="layer__title">{{ i18n "layers_server_title" }}</h3>
-          <p>{{ i18n "layers_server_body" }}</p>
-        </div>
+        <h3 class="layer__title">{{ i18n "layers_server_title" }}</h3>
         <ul class="layer__items">
           <li><a href="#rulesets"><span><span class="layer__item-title">GitHub rulesets</span><span class="layer__item-note">{{ i18n "layers_server_github" }}</span></span>{{ partial "icon.html" (dict "name" "arrow-down" "size" 16) }}</a></li>
           <li><a href="#gitlab"><span><span class="layer__item-title">GitLab push rules</span><span class="layer__item-note">{{ i18n "layers_server_gitlab" }}</span></span>{{ partial "icon.html" (dict "name" "arrow-down" "size" 16) }}</a></li>
@@ -57,7 +50,6 @@
           <h3 class="layer__title layer__title--small">{{ i18n "layers_ci_title" }}</h3>
           <span class="layer__ci-tag">{{ i18n "layers_ci_tag" }}</span>
         </div>
-        <p>{{ i18n "layers_ci_body" }}</p>
         <ul class="layer__ci-items">
           <li><a href="#github-actions"><span class="layer__item-title">GitHub Actions</span><span class="mono">commit-check-action</span></a></li>
           <li><a href="#gitlab"><span class="layer__item-title">GitLab CI</span><span class="mono">Free tier</span></a></li>

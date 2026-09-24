@@ -41,26 +41,6 @@
   }
 }
 
-.site-footer__tagline {
-  margin: 0;
-  font-family: $font-serif;
-  font-size: 32px;
-  line-height: 1.15;
-  letter-spacing: -0.01em;
-
-  em {
-    color: $blue-on-ink;
-  }
-}
-
-.site-footer__desc {
-  max-width: 400px;
-  margin: 0;
-  color: $on-ink-2;
-  font-size: 15px;
-  line-height: 1.6;
-}
-
 .site-footer__nav {
   grid-column: 7 / span 6;
   display: grid;
@@ -125,10 +105,6 @@
 
   .site-footer__nav {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  .site-footer__tagline {
-    font-size: 26px;
   }
 
   .site-footer__bottom {

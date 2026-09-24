@@ -40,47 +40,6 @@
   color: $ink-3;
 }
 
-.versions {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  margin-top: -20px;
-}
-
-.version {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  height: 44px;
-  padding: 0 14px;
-  border: 1px solid $rule;
-  border-radius: $radius-sm;
-  color: $ink-2;
-  font-size: 14px;
-
-  &:hover {
-    border-color: $ink;
-    color: $ink;
-    text-decoration: none;
-  }
-
-  &.is-current {
-    border-color: $ink;
-    background: $ink;
-    color: $on-ink;
-  }
-}
-
-.version__tag {
-  @include eyebrow;
-  font-size: 11px;
-  color: $ink-3;
-
-  .is-current & {
-    color: $blue-on-ink;
-  }
-}
-
 .toc__list,
 .toc__list ol {
   margin: 0;
@@ -162,13 +121,6 @@
   border-top: 1px solid $rule;
 }
 
-.aside-note {
-  margin: 0;
-  color: $ink-3;
-  font-size: 14px;
-  line-height: 1.55;
-}
-
 .aside-edit {
   display: inline-flex;
   align-items: center;
@@ -208,14 +160,5 @@
   .aside-block--tools,
   .aside-block--rule {
     display: none;
-  }
-
-  .versions {
-    flex-direction: row;
-    margin-top: -12px;
-
-    .version {
-      flex: 1;
-    }
   }
 }

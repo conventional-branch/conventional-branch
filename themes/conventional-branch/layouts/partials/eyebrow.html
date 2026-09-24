@@ -1,5 +1,0 @@
-{{- /* A section's mono label, like "03 / How it's read". `num` is optional. */ -}}
-<p class="eyebrow{{ with .class }} {{ . }}{{ end }}">
-  {{- with .num }}<span class="eyebrow__num">{{ . }}</span><span class="eyebrow__slash" aria-hidden="true">/</span>{{ end -}}
-  <span>{{ .text }}</span>
-</p>

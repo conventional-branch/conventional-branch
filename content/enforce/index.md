@@ -8,17 +8,11 @@ eyebrow: ["Enforce", "Copy-paste configuration"]
 heroTitle: "The server rule is the contract."
 heroTitleEm: "The local check is the courtesy."
 heroLead: "Copy-pasteable configuration for validating branch names against the specification — for GitHub, GitLab, Bitbucket, plain Git and AI coding agents."
-heroMeta:
-  - "Every regex verbatim from spec.json"
-  - "RE2 and PCRE compatible"
-  - "Trunk branches pass unprefixed"
 ---
 
 Enforcement happens at two layers, and they solve different problems. A **server-side**
 rule cannot be bypassed, but the contributor only finds out when they push. A **local**
-check is instant and can be run before a branch exists, but anyone can skip it. Most
-teams want one of each: the server rule is the contract, the local check is the
-courtesy.
+check is instant and can be run before a branch exists, but anyone can skip it.
 
 Every regular expression below is the one published in
 [`spec.json`](https://conventionalbranch.org/spec.json), copied verbatim, and a

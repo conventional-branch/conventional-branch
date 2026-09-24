@@ -1,10 +1,8 @@
-{{- /* The normative text, beside a sidebar that keeps the version, the outline and the
-       machine-readable endpoints in reach while reading. */ -}}
+{{- /* The normative text, beside a sidebar that keeps the outline and the
+       machine-readable endpoints in reach while reading. The version and language
+       switches are in the header. */ -}}
 {{- $spec := partialCached "spec.html" . -}}
 {{- $landing := and .IsHome .Site.Params.landing -}}
-{{- $current := partial "version-current.html" . -}}
-{{- $latest := site.Params.versions.current -}}
-{{- $home := .Site.Home -}}
 {{- $typeNames := slice -}}
 {{- range $spec.types }}{{ $typeNames = $typeNames | append .type }}{{ range .aliases }}{{ $typeNames = $typeNames | append . }}{{ end }}{{ end -}}
 {{- /* The page has one h1, the hero's, so the specification's own title is demoted to
@@ -14,14 +12,7 @@
   <div class="container doc-grid">
     <aside class="doc-aside">
       <div class="doc-aside__inner">
-        <h2 id="spec-label" class="eyebrow">{{ if $landing }}<span class="eyebrow__num">04</span><span class="eyebrow__slash" aria-hidden="true">/</span>{{ end }}<span>{{ i18n "spec_eyebrow" }}</span></h2>
-        <div class="versions" role="group" aria-label="{{ i18n "versions_heading" }}">
-          {{- range sort site.Params.versions.list "value" "desc" }}
-          {{- $isLatest := eq . $latest }}
-          {{- $isCurrent := eq . $current }}
-          <a class="version{{ if $isCurrent }} is-current{{ end }}" href="{{ cond $isLatest $home.RelPermalink (print $home.RelPermalink . "/") }}"{{ if $isCurrent }} aria-current="page"{{ end }}><span class="mono">{{ strings.TrimPrefix "v" . }}</span><span class="version__tag">{{ if $isLatest }}{{ i18n "version_latest" }}{{ else }}{{ i18n "version_archived" }}{{ end }}</span></a>
-          {{- end }}
-        </div>
+        <h2 id="spec-label" class="eyebrow">{{ if $landing }}<span class="eyebrow__num">02</span><span class="eyebrow__slash" aria-hidden="true">/</span>{{ end }}<span>{{ i18n "spec_eyebrow" }}</span></h2>
         {{- partial "toc.html" (dict "page" . "collapseLast" true) }}
         <div class="aside-block aside-block--tools">
           <p class="aside-heading">{{ i18n "for_tools" }}</p>
@@ -33,10 +24,6 @@
           </ul>
         </div>
         <div class="aside-block aside-block--rule">
-          {{- $others := sub (len .AllTranslations) 1 }}
-          {{- if gt $others 0 }}
-          <p class="aside-note">{{ i18n "translations_note" (dict "Count" $others) }}</p>
-          {{- end }}
           <a class="aside-edit" href="https://github.com/conventional-branch/conventional-branch/blob/main/content/{{ replace .File.Path "\\" "/" }}">{{ partial "icon.html" (dict "name" "edit" "size" 15) }}{{ i18n "edit_page" }}</a>
         </div>
       </div>

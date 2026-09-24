@@ -13,7 +13,7 @@ brand blue is `$color-primary`, `#6699CC` — the version half of the adoption b
   language has `landing: true`, the mission, principles and adoption sections
   (`partials/home/`) frame it.
 - `about/single.html` renders the About and Enforce pages: a hero from the page's front
-  matter (`eyebrow`, `heroTitle`, `heroTitleEm`, `heroLead`, `heroMeta`), then the
+  matter (`eyebrow`, `heroTitle`, `heroTitleEm`, `heroLead`), then the
   Markdown beside its outline.
 
 Words come from the site's `i18n/` files, the homepage's lists from `data/home.yaml`, and

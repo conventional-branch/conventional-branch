@@ -4,10 +4,6 @@
   padding: clamp(48px, 7vw, 88px) 0;
 }
 
-.hero__eyebrow {
-  margin-bottom: clamp(24px, 3vw, 36px);
-}
-
 .hero__title {
   @include serif-display;
   margin: 0;
@@ -25,19 +21,12 @@
   font-size: clamp(42px, 5.6vw, 80px);
 }
 
-.hero__row {
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-  gap: 64px;
-  margin-top: clamp(32px, 4vw, 48px);
-}
-
 .hero__copy {
   display: flex;
   flex-direction: column;
   gap: 36px;
   max-width: 620px;
+  margin-top: clamp(32px, 4vw, 48px);
 }
 
 .hero__lead {
@@ -75,118 +64,8 @@
   }
 }
 
-// The whole convention, on a card beside the hero's copy.
-.convention {
-  display: flex;
-  flex-direction: column;
-  flex-shrink: 0;
-  gap: 18px;
-  width: 500px;
-  padding: 24px 28px 22px;
-  border: 1px solid $rule;
-  border-radius: $radius-md;
-  background: $card;
-}
-
-.convention__head {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 16px;
-}
-
-.convention__title {
-  @include eyebrow;
-  margin: 0;
-  color: $ink-3;
-}
-
-.convention__link {
-  @include mono;
-  font-size: 12px;
-}
-
-.convention__syntax {
-  @include mono;
-  margin: 0;
-  font-size: 24px;
-  font-weight: 500;
-  color: $ink;
-}
-
-.convention__type {
-  color: $color-primary-heading;
-}
-
-.convention__desc {
-  color: $ink-3;
-}
-
-.convention__list {
-  @include mono;
-  display: grid;
-  grid-template-columns: 80px minmax(0, 1fr);
-  row-gap: 10px;
-  margin: 0;
-  padding-top: 16px;
-  border-top: 1px solid $rule-soft;
-  font-size: 14px;
-  line-height: 1.5;
-
-  dt {
-    color: $ink-3;
-  }
-
-  dd {
-    margin: 0;
-    color: $ink;
-  }
-}
-
-.convention__sep {
-  color: $ink-faint;
-}
-
-.convention__note {
-  margin: 0;
-  color: $ink-3;
-  font-size: 13px;
-  line-height: 1.5;
-
-  code {
-    font-size: 12.5px;
-    color: $ink;
-  }
-}
-
-@include below($bp-lg) {
-  .hero__row {
-    flex-direction: column;
-    align-items: stretch;
-    gap: 40px;
-  }
-
-  .convention {
-    width: auto;
-    max-width: 560px;
-  }
-}
-
 @include below($bp-sm) {
   .hero__actions .button {
     width: 100%;
-  }
-
-  .convention {
-    padding: 20px;
-  }
-
-  .convention__list {
-    grid-template-columns: 1fr;
-    row-gap: 2px;
-
-    dd {
-      margin-bottom: 10px;
-    }
   }
 }

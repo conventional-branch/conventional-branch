@@ -1,8 +1,10 @@
+{{- /* Three steps, each pointing to where its details live: the snippet and the
+       configurations on /enforce/, the badge variants on /about/. */ -}}
 {{- $spec := partialCached "spec.html" . -}}
-<section class="section" id="adopt" aria-labelledby="adopt-title">
+<section class="section section--paper2" id="adopt" aria-labelledby="adopt-title">
   <div class="container">
     <div class="section__head">
-      {{- partial "eyebrow.html" (dict "num" "06" "text" (i18n "adopt_eyebrow")) -}}
+      <p class="eyebrow"><span class="eyebrow__num">03</span><span class="eyebrow__slash" aria-hidden="true">/</span><span>{{ i18n "adopt_eyebrow" }}</span></p>
       <h2 id="adopt-title" class="section__title">{{ i18n "adopt_title" }} <em>{{ i18n "adopt_title_em" }}</em></h2>
     </div>
     <ol class="steps">
@@ -10,40 +12,21 @@
         <span class="step__num" aria-hidden="true">1</span>
         <h3 class="step__title">{{ i18n "step_write_title" }}</h3>
         <p class="step__body">{{ i18n "step_write_body" }}</p>
-        <a class="snippet" href="/enforce/#a-snippet-for-agentsmd-or-claudemd">
-          <span class="snippet__file">AGENTS.md</span>
-          <span class="snippet__heading">## Branch naming</span>
-          <span>Branch names follow the <span class="snippet__em">[Conventional Branch]</span> specification: <span class="snippet__em">`&lt;type&gt;/&lt;description&gt;`</span>, lowercase, hyphen-separated.</span>
-        </a>
+        <a class="link-arrow" href="/enforce/#a-snippet-for-agentsmd-or-claudemd">{{ i18n "step_write_link" }}{{ partial "icon.html" (dict "name" "arrow" "size" 15) }}</a>
       </li>
       <li class="step">
         <span class="step__num" aria-hidden="true">2</span>
         <h3 class="step__title">{{ i18n "step_enforce_title" }}</h3>
         <p class="step__body">{{ i18n "step_enforce_body" }}</p>
-        <ul class="link-rows">
-          {{- range site.Data.home.enforce_links }}
-          <li><a class="link-row" href="/enforce/#{{ .anchor }}">{{ .label }}<span class="mono">{{ .format }}</span></a></li>
-          {{- end }}
-        </ul>
-        <a class="link-arrow" href="/enforce/">{{ i18n "adopt_all_configs" }}{{ partial "icon.html" (dict "name" "arrow" "size" 15) }}</a>
+        <a class="link-arrow" href="/enforce/">{{ i18n "step_enforce_link" }}{{ partial "icon.html" (dict "name" "arrow" "size" 15) }}</a>
       </li>
       <li class="step">
         <span class="step__num" aria-hidden="true">3</span>
         <h3 class="step__title">{{ i18n "step_show_title" }}</h3>
         <p class="step__body">{{ i18n "step_show_body" }}</p>
-        <div class="badge-demo">
-          <img src="/badge.svg" width="270" height="30" alt="Conventional Branch {{ $spec.version }}">
-          <div class="badge-demo__code">
-            <code id="badge-markdown">[![Conventional Branch](https://conventionalbranch.org/badge.svg)](https://conventionalbranch.org/)</code>
-            <button type="button" class="copy-button copy-button--paper" data-copy="badge-markdown">{{ partial "icon.html" (dict "name" "copy" "size" 13) }}<span>{{ i18n "copy" }}</span></button>
-          </div>
-        </div>
+        <img class="step__badge" src="/badge.svg" width="180" height="20" alt="Conventional Branch {{ $spec.version }}">
+        <a class="link-arrow" href="/about/#how-to-adopt">{{ i18n "step_show_link" }}{{ partial "icon.html" (dict "name" "arrow" "size" 15) }}</a>
       </li>
     </ol>
-    <div class="command">
-      <span class="command__label">{{ i18n "adopt_agent_label" }}</span>
-      <code class="command__code"><span class="command__prompt" aria-hidden="true">$ </span><span id="skill-command">{{ site.Data.tooling.install.command }}</span></code>
-      <button type="button" class="copy-button" data-copy="skill-command">{{ partial "icon.html" (dict "name" "copy" "size" 13) }}<span>{{ i18n "copy" }}</span></button>
-    </div>
   </div>
 </section>
