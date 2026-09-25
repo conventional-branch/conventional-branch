@@ -1,0 +1,23 @@
+data/history.yaml
+  s_240b8d40d061ae::t_3ae1d93c7623a8 1-3,5,7,11,14
+themes/conventional-branch/static/css/scss/components/_pages.scss
+  s_240b8d40d061ae::t_52f87af1fc3e69 392
+i18n/en.yaml
+  s_240b8d40d061ae::t_3ae1d93c7623a8 171
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "520a497b6d561658ac095da2991065378aa31c23",
+  "prompts": {},
+  "sessions": {
+    "s_240b8d40d061ae": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "d4747621-aab3-47e2-b1b5-64d1c75978db",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "Xianpeng Shen <xianpeng.shen@gmail.com>"
+    }
+  }
+}
