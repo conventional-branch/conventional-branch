@@ -1,35 +1,46 @@
-@use "variables";
+@use "variables" as *;
 
-@mixin up-to-mobile {
-  @media (max-width: #{variables.$mobile-width - 1px}) {
+// Below a breakpoint: mobile-first overrides are written as "up to" this width.
+@mixin below($width) {
+  @media (max-width: #{$width - 1px}) {
     @content;
   }
 }
 
-@mixin tablet {
-  @media (min-width: #{variables.$tablet-width}) and (max-width: #{variables.$desktop-width - 1px}) {
-    @content;
-  }
+// The small label that names a column or a field.
+@mixin eyebrow {
+  font-family: $font-sans;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.5;
 }
 
-@mixin desktop {
-  @media (min-width: #{variables.$desktop-width}) {
-    @content;
-  }
+@mixin mono {
+  font-family: $font-mono;
+  font-variant-ligatures: none;
 }
 
-@mixin gradient-primary($deg: 150deg) {
-  background: linear-gradient($deg, variables.$color-primary-deep 0%, variables.$color-primary 100%);
+// Headlines: the text face, bold, as the site's headings have always been.
+@mixin display-heading {
+  font-family: $font-sans;
+  font-weight: 700;
+  letter-spacing: -0.01em;
 }
 
-@mixin dropdown-animation-visible {
-  visibility: visible;
-  opacity: 1;
-  transform: translate(-50%, variables.$dropdown-options-space-from-label);
+@mixin twelve-columns {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  column-gap: $gutter;
 }
 
-@mixin dropdown-animation-hidden {
-  visibility: hidden;
-  opacity: 0;
-  transform: translate(-50%, 0);
+@mixin visually-hidden {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }

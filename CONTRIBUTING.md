@@ -21,6 +21,7 @@ We'd love your help to suggest improvements to the specification, fixing typos, 
 1. Ensure all files have the appropriate front matter fields required (see other language files as an example).
 1. Add the language to the `languages` section of `./config.yaml` (see the existing entries as an example).
 1. If your strings touch the tooling section, add the corresponding translations in `./data/tooling.yaml`.
+1. The site's own words — navigation, the specification's sidebar, the footer — are in `./i18n/en.yaml`, and any string a language has not translated falls back to English. To translate them, add `./i18n/[lang].yaml` with the same keys. The homepage's mission, principles and adoption sections are in the same file; they appear in a language only once its `landing` param in `./config.yaml` is `true`, so set that after translating them, and no page mixes two languages.
 
 ### Registering a new AI agent prefix
 
@@ -48,14 +49,14 @@ Guidelines for a good prefix:
 
 ### Adding your project to the adopters list
 
-The "Projects Using Conventional Branch" list on the [About page](./content/about/index.md) is the canonical record of adopters, and a condensed excerpt is mirrored in the README's "Used By" section.
+The "Projects Using Conventional Branch" list on the [About page](./content/about/index.md) is the canonical record of adopters, and a condensed excerpt is mirrored in the README's "Used By" section and on the homepage (`./data/home.yaml`).
 
 To add your project:
 
 1. Add a bullet to the list in `./content/about/index.md`, linking to the file where your project documents the convention (e.g. your `CONTRIBUTING.md`) and a short one-line description. The link must point at a file that actually documents the convention — the list is evidence, not a directory.
    Entries are removed when that file stops referencing the specification. A project is free to move on, and a list that quietly keeps claiming it is worth less than a shorter honest one.
 2. The list is roughly ordered by how widely recognized the organization is, so that it stays useful to skim. Add your entry wherever it fits; maintainers may move it.
-3. Open a pull request. If your project is widely recognizable, it may also be added to the shorter curated list in `README.md`, at the maintainers' discretion.
+3. Open a pull request. If your project is widely recognizable, it may also be added to the shorter curated lists in `README.md` and on the homepage, at the maintainers' discretion.
 
 ### Changing the grammar or types
 

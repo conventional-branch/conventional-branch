@@ -12,9 +12,17 @@
     gtag('config', 'G-RH9YBHW509');
   </script>
 
+  <meta name="color-scheme" content="light">
+  <meta name="theme-color" content="#2B5EA7">
+  {{/* Lets the stylesheet hide controls that only work with the script, like the
+       checker's example buttons, when it has not run. */}}
+  <script>document.documentElement.classList.add('js')</script>
+
+  {{/* JetBrains Mono for what machines read. Everything else is in the reader's system
+       font, which needs no download. */}}
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="{{ .Site.BaseURL }}css/style.css">
 

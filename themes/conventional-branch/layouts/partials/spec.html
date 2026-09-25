@@ -1,0 +1,6 @@
+{{- /* The machine-readable specification, static/spec.json, as data.
+
+       The homepage takes its checker regex, its type lists and its code sample from
+       here rather than restating them, so a release that updates spec.json updates the
+       page with it. Call it with partialCached: the file is read once per build. */ -}}
+{{- return (os.ReadFile "static/spec.json" | transform.Unmarshal) -}}

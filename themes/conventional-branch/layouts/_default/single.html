@@ -1,15 +1,24 @@
 <!DOCTYPE html>
 <html lang="{{ .Site.Language.Lang }}">
 {{- partial "head.html" . -}}
-<body class="conventional-branch--loading">
-{{- partial "header.html" . -}}
-{{- partial "welcome.html" . -}}
-<main>
-  <article class="container markdown-body">
-    {{.Content}}
-  </article>
+{{- /* Every language's specification page, current and archived. On a homepage whose
+       language has the landing copy, the specification comes straight after the hero,
+       and the checker, the mission and the adoption steps follow it. */ -}}
+{{- $landing := and .IsHome .Site.Params.landing }}
+<body class="page-spec{{ if $landing }} is-landing{{ end }}" data-copy-label="{{ i18n "copy" }}" data-copied-label="{{ i18n "copied" }}">
+<a class="skip-link" href="#main">{{ i18n "skip_to_content" }}</a>
+{{- partial "header.html" . }}
+<main id="main">
+  {{- partial "spec/hero.html" . }}
+  {{- partial "spec/body.html" . }}
+  {{- if $landing }}
+  {{- partial "home/checker.html" . }}
+  {{- partial "home/adopters.html" . }}
+  {{- partial "home/why.html" . }}
+  {{- partial "home/adopt.html" . }}
+  {{- end }}
 </main>
-{{- partial "footer.html" . -}}
-{{- partial "scripts.html" . -}}
+{{- partial "footer.html" . }}
+{{- partial "scripts.html" . }}
 </body>
 </html>

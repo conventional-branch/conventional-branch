@@ -1,0 +1,134 @@
+{{- /* The branch-name checker. It is rendered here in the state of its initial example,
+       so the section makes sense before (or without) the script, which then makes it
+       live. Everything the script judges by — the regex, the types, the trunk branches —
+       comes from spec.json, and the agent names from data/agents.yaml. */ -}}
+{{- $spec := partialCached "spec.html" . -}}
+{{- $checker := site.Data.home.checker -}}
+
+{{- /* Each type, with what a person and a pipeline make of it. */ -}}
+{{- $types := slice -}}
+{{- range $spec.types -}}
+  {{- $type := .type -}}
+  {{- $person := "" -}}
+  {{- $pipeline := "" -}}
+  {{- if eq .category "ai-source" -}}
+    {{- $name := i18n "checker_person_generic_agent" -}}
+    {{- range site.Data.agents.agents -}}
+      {{- if and (eq .prefix $type) (not .generic) }}{{ $name = .name }}{{ end -}}
+    {{- end -}}
+    {{- $person = i18n "checker_person_agent" (dict "Name" $name) -}}
+    {{- $pipeline = i18n "pipeline_agent" -}}
+  {{- else -}}
+    {{- $person = i18n (printf "checker_person_%s" $type) -}}
+    {{- $pipeline = i18n (printf "pipeline_%s" $type) -}}
+  {{- end -}}
+  {{- $types = $types | append (dict "type" $type "aliases" (.aliases | default slice) "category" .category "person" $person "pipeline" $pipeline) -}}
+{{- end -}}
+
+{{- /* The initial example, analysed the way the script will analyse it. */ -}}
+{{- $parts := split $checker.initial "/" -}}
+{{- $typeName := index $parts 0 -}}
+{{- $desc := index $parts 1 -}}
+{{- $initial := dict -}}
+{{- range $types -}}
+  {{- if or (eq .type $typeName) (in .aliases $typeName) }}{{ $initial = . }}{{ end -}}
+{{- end -}}
+
+{{- $data := dict
+  "regex" $spec.grammar.regex
+  "trunk" $spec.trunkBranches
+  "types" $types
+  "labels" (dict
+    "trunk" (i18n "checker_trunk_caption")
+    "missing" (i18n "checker_missing_caption"))
+  "trunkReading" (dict
+    "person" (i18n "checker_trunk_person")
+    "human" (i18n "checker_trunk_human")
+    "pipeline" (i18n "checker_trunk_pipeline"))
+  "status" (dict
+    "ok" (i18n "checker_ok" (dict "Version" $spec.version))
+    "bad" (i18n "checker_bad" (dict "Version" $spec.version))
+    "waiting" (i18n "checker_waiting"))
+  "messages" (dict
+    "missingType" (i18n "checker_msg_missing_type")
+    "uppercase" (i18n "checker_msg_uppercase")
+    "space" (i18n "checker_msg_space")
+    "underscore" (i18n "checker_msg_underscore")
+    "unknownType" (i18n "checker_msg_unknown_type")
+    "empty" (i18n "checker_msg_empty")
+    "slash" (i18n "checker_msg_slash")
+    "chars" (i18n "checker_msg_chars")
+    "doubleHyphen" (i18n "checker_msg_double_hyphen")
+    "doubleDot" (i18n "checker_msg_double_dot")
+    "leading" (i18n "checker_msg_leading")
+    "trailing" (i18n "checker_msg_trailing")
+    "hyphenDot" (i18n "checker_msg_hyphen_dot")
+    "grammar" (i18n "checker_msg_grammar"))
+-}}
+
+<section class="checker" aria-labelledby="checker-label" data-checker>
+  <div class="container">
+    <div class="checker__top">
+      <h2 id="checker-label" class="checker__label"><label for="checker-input">{{ i18n "checker_label" }}</label></h2>
+      <div class="checker__examples" role="group" aria-label="{{ i18n "checker_examples" }}">
+        <span class="checker__examples-label" aria-hidden="true">{{ i18n "checker_examples" }}</span>
+        {{- range $checker.examples }}
+        <button type="button" class="chip" data-example="{{ . }}">{{ . }}</button>
+        {{- end }}
+      </div>
+    </div>
+
+    <div class="checker__stage" data-stage>
+      <input id="checker-input" class="checker__input" type="text" value="{{ $checker.initial }}" spellcheck="false" autocomplete="off" autocapitalize="off" autocorrect="off" aria-describedby="checker-status" data-input>
+      <div class="checker__brackets" aria-hidden="true">
+        <span class="bracket" data-bracket="type" style="--len: {{ len $typeName }}"><span class="bracket__label">{{ i18n "checker_type" }}</span></span>
+        <span class="bracket bracket--sep" data-bracket="sep"></span>
+        <span class="bracket" data-bracket="desc" style="--len: {{ len $desc }}"><span class="bracket__label">{{ i18n "checker_description" }}</span></span>
+        <span class="bracket" data-bracket="whole" hidden><span class="bracket__label"></span></span>
+      </div>
+    </div>
+
+    <div class="checker__result">
+      <div class="checker__readings" data-readings>
+        <div class="reading">
+          <span class="reading__label">{{ i18n "checker_person" }}</span>
+          <p class="reading__person" data-person>{{ $initial.person }}: <em>“{{ replace $desc "-" " " }}”</em></p>
+        </div>
+        <div class="reading">
+          <span class="reading__label">{{ i18n "checker_machine" }}</span>
+          <pre class="reading__json" data-json>{
+  <span class="tok-k">"type"</span>: <span class="tok-s">"{{ $initial.type }}"</span>,
+  <span class="tok-k">"category"</span>: <span class="tok-s">"{{ $initial.category }}"</span>,
+  <span class="tok-k">"description"</span>: <span class="tok-s">"{{ $desc }}"</span>
+}</pre>
+        </div>
+        <div class="reading">
+          <span class="reading__label">{{ i18n "checker_pipeline" }}</span>
+          <p class="reading__pipeline" data-pipeline>{{ $initial.pipeline }}</p>
+          <span class="reading__note">{{ i18n "checker_pipeline_note" }}</span>
+        </div>
+      </div>
+      <div class="checker__error" data-error hidden>
+        <span class="checker__error-icon">{{ partial "icon.html" (dict "name" "x-circle" "size" 32 "stroke" 1.75) }}</span>
+        <div class="checker__error-body">
+          <p class="checker__message" data-message></p>
+          <button type="button" class="checker__fix" data-fix hidden>{{ i18n "checker_try" }} <span class="mono" data-fix-name></span>{{ partial "icon.html" (dict "name" "arrow") }}</button>
+        </div>
+      </div>
+      <div class="checker__empty" data-empty hidden>
+        <p>{{ i18n "checker_empty" }} <span class="mono">{{ $checker.initial }}</span></p>
+      </div>
+    </div>
+
+    <div class="checker__foot">
+      <p id="checker-status" class="checker__status" data-status>
+        <span class="checker__status-icon checker__status-icon--ok">{{ partial "icon.html" (dict "name" "check-circle" "size" 18) }}</span>
+        <span class="checker__status-icon checker__status-icon--bad">{{ partial "icon.html" (dict "name" "x-circle" "size" 18) }}</span>
+        <span data-status-text>{{ i18n "checker_ok" (dict "Version" $spec.version) }}</span>
+      </p>
+      <p class="checker__note">{{ i18n "checker_note" (dict "Link" `<a href="/spec.json">spec.json</a>`) | safeHTML }}</p>
+      <span class="visually-hidden" role="status" aria-live="polite" data-announce></span>
+    </div>
+  </div>
+  <script type="application/json" data-checker-data>{{ $data | jsonify | safeJS }}</script>
+</section>

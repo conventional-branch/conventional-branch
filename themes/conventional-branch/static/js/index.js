@@ -1,37 +1,25 @@
 import AnchorJS from 'anchor-js';
+import { initMenus } from './modules/menus';
+import { initChecker } from './modules/checker';
+import { enhanceExamples } from './modules/examples';
+import { initCopy } from './modules/copy';
+import { initToc } from './modules/toc';
 
-class App {
-  constructor(anchors) {
-    this.anchors = anchors;
-    this.onInit();
-  }
+function start() {
+  initMenus();
+  document.querySelectorAll('[data-checker]').forEach(initChecker);
+  document.querySelectorAll('.spec__body').forEach(enhanceExamples);
+  initCopy(document);
 
-  _addEventListeners() {
-    // using 'load' instead of 'DOMContentLoaded' because we want to wait the css
-    // https://javascript.info/onload-ondomcontentloaded
-    window.addEventListener('load', () => {
-      // wrapped in a timeout for wait css parsing
-      setTimeout(() => this._onPageLoaded(), 0);
-    });
-  }
+  // A "#" beside each heading, for citing a section of the specification.
+  const anchors = new AnchorJS({ placement: 'right', icon: '#' });
+  anchors.add('.markdown-body h2:not(.spec__title), .markdown-body h3');
 
-  _onPageLoaded() {
-    this.removeLoadingClass();
-  }
-
-  onInit() {
-    this.addAnchorsLinks();
-    this._addEventListeners();
-  }
-
-  addAnchorsLinks() {
-    this.anchors.options = {placement: 'left'};
-    this.anchors.add();
-  }
-
-  removeLoadingClass() {
-    document.body.classList.remove('conventional-branch--loading');
-  }
+  initToc();
 }
 
-const app = new App(new AnchorJS());
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', start);
+} else {
+  start();
+}

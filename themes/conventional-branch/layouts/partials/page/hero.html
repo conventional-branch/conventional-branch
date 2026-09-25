@@ -1,0 +1,11 @@
+{{- /* A page's hero, from its front matter:
+         heroTitle    the headline
+         heroLead     the standfirst, Markdown allowed */ -}}
+<section class="page-hero" aria-labelledby="page-title">
+  <div class="container">
+    <h1 id="page-title" class="page-hero__title">{{ .Params.heroTitle | default .Title }}</h1>
+    {{- with .Params.heroLead }}
+    <p class="page-hero__lead">{{ . | markdownify }}</p>
+    {{- end }}
+  </div>
+</section>

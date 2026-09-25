@@ -1,0 +1,148 @@
+@use "./../abstracts/index" as *;
+
+// Disclosure menus built on <details>, so they open and close without the script;
+// the script only closes the others, and closes on Escape or an outside click.
+.menu {
+  position: relative;
+
+  > summary {
+    list-style: none;
+
+    &::-webkit-details-marker {
+      display: none;
+    }
+  }
+}
+
+.menu__button {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  height: 36px;
+  padding: 0 10px 0 12px;
+  border: 1px solid rgba(#FFFFFF, 0.45);
+  border-radius: $radius-sm;
+  color: #FFFFFF;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  user-select: none;
+
+  .mono {
+    font-size: 13px;
+  }
+
+  &:hover,
+  .menu[open] > & {
+    border-color: #FFFFFF;
+  }
+
+  .menu[open] > & .icon--chevron {
+    transform: rotate(180deg);
+  }
+}
+
+.menu__button--icon {
+  width: 44px;
+  height: 44px;
+  justify-content: center;
+  padding: 0;
+  border-color: transparent;
+}
+
+.menu__panel {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  z-index: 30;
+  min-width: 220px;
+  max-height: min(70vh, 520px);
+  overflow: auto;
+  padding: 8px;
+  border: 1px solid $rule;
+  border-radius: $radius-md;
+  background: $card;
+  box-shadow: 0 12px 32px rgba($ink, 0.12);
+}
+
+.menu__heading {
+  @include eyebrow;
+  margin: 8px 10px 6px;
+  color: $ink-3;
+}
+
+.menu__list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.menu__link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  min-height: 40px;
+  padding: 0 10px;
+  border-radius: $radius-sm;
+  color: $ink-2;
+  font-size: 14px;
+
+  &:hover {
+    background: $paper-2;
+    color: $ink;
+    text-decoration: none;
+  }
+
+  &.is-current {
+    color: $ink;
+    font-weight: 600;
+  }
+}
+
+.menu__meta {
+  @include eyebrow;
+  font-size: 11px;
+  color: $ink-3;
+}
+
+// The phone menu: everything the header holds, stacked.
+.menu--nav {
+  display: none;
+
+  @include below($bp-md) {
+    display: block;
+  }
+}
+
+.menu__panel--nav {
+  width: min(calc(100vw - 2 * var(--pad)), 360px);
+  padding: 12px;
+
+  .menu__heading {
+    margin-top: 16px;
+  }
+}
+
+.menu__nav {
+  display: flex;
+  flex-direction: column;
+
+  .nav-link {
+    display: flex;
+    align-items: center;
+    min-height: 44px;
+    padding: 0 10px;
+    border-radius: $radius-sm;
+    font-size: 16px;
+
+    &:hover {
+      background: $paper-2;
+    }
+
+    &.is-current {
+      text-decoration: none;
+      box-shadow: inset 3px 0 0 $color-primary;
+    }
+  }
+}

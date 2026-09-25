@@ -1,64 +1,159 @@
-@use "./../abstracts/index";
+@use "./../abstracts/index" as *;
 
-.header {
+// The header is blue, like the hero it sits on. Over a specification page's hero it is
+// transparent, so the hero's gradient runs to the top of the page as it always has.
+.site-header {
+  position: relative;
+  z-index: 20;
+  background: $hero-from;
+  color: #FFFFFF;
+}
+
+.page-spec .site-header {
   position: absolute;
-  z-index: 10;
-  top: 12px;
+  top: 0;
+  right: 0;
   left: 0;
-  width: 100%;
+  background: transparent;
+}
 
-  .container {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    height: index.$header-height;
-    font-size: .8em;
-    font-weight: bold;
-    text-transform: uppercase;
-  }
+// The brand blue focus ring barely shows on blue, so on the header and the hero it is
+// white; the menus' white panels keep the blue one.
+.site-header :focus-visible,
+.hero :focus-visible {
+  outline-color: #FFFFFF;
+}
 
-  .logo {
-    width: 30px;
-    height: 30px;
-    background-color: transparent;
-    border: 2px solid #FFF;
-    border-radius: 50%;
-  }
+.site-header .menu__panel :focus-visible {
+  outline-color: $color-primary-heading;
+}
 
-  &__menu {
-    display: flex;
-    color: index.$color-neutral-light;
-    list-style: none;
-    margin-left: index.$gap-sm * 2;
-  }
+.site-header__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  height: $header-height;
+}
 
-  &__menu-item {
-    margin-right: index.$gap-sm;
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: #FFFFFF;
+  text-decoration: none;
 
-    &:last-child {
-      margin-right: 0;
-    }
+  &:hover {
+    color: #FFFFFF;
+    text-decoration: none;
   }
 }
 
-@include index.up-to-mobile {
-  .header {
-    .container {
-      align-items: flex-start;
-      height: auto;
-      margin-top: index.$gap-sm;
-    }
+.brand__mark {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border: 2px solid #FFFFFF;
+  border-radius: 50%;
+  color: #FFFFFF;
+}
 
+.brand__name {
+  font-size: 17px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+}
 
-    &__menu {
-      flex-direction: column;
-      justify-content: flex-end;
-      align-items: flex-end;
-      margin-top: index.$gap-sm * -1;
-    }
+.site-nav {
+  display: flex;
+  align-items: center;
+  gap: 36px;
+  font-size: 15px;
+  font-weight: 500;
+}
 
-    &__menu-item {
-      margin-right: 0;
-    }
+.nav-link {
+  color: $ink-2;
+
+  &:hover {
+    color: $ink;
+    text-decoration: none;
+  }
+
+  &.is-current {
+    color: $ink;
+    font-weight: 600;
+  }
+}
+
+.site-nav .nav-link {
+  color: #FFFFFF;
+  text-underline-offset: 8px;
+
+  &:hover {
+    color: #FFFFFF;
+    text-decoration: underline;
+  }
+
+  &.is-current {
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+  }
+}
+
+.site-header__tools {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.icon-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: $radius-sm;
+  color: #FFFFFF;
+
+  &:hover {
+    color: rgba(#FFFFFF, 0.8);
+  }
+}
+
+svg.github {
+  width: 20px;
+  height: 20px;
+  fill: currentColor;
+}
+
+@include below($bp-lg) {
+  .site-nav {
+    gap: 24px;
+  }
+}
+
+@include below($bp-md) {
+  .site-header__inner {
+    height: 60px;
+  }
+
+  .site-nav,
+  .menu--version,
+  .menu--language {
+    display: none;
+  }
+
+  .brand__mark {
+    width: 30px;
+    height: 30px;
+  }
+
+  .brand__name {
+    font-size: 16px;
   }
 }

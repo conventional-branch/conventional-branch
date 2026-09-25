@@ -3,11 +3,10 @@ type: about
 draft: false
 seoTitle: "AI Agent Branch Prefixes — Conventional Branch"
 seoDescription: "The registry of AI coding agent branch prefixes — ai/, claude/, codex/, copilot/, cursor/ — with tooling, CI/CD patterns and the projects using the specification."
+# The page hero; heroLead takes Markdown.
+heroTitle: "About Conventional Branch"
+heroLead: "Conventional Branch is inspired by [Conventional Commits](https://www.conventionalcommits.org). This page lists the branch prefixes registered for AI coding agents, the tools that support the specification and the projects that use it."
 ---
-
-# About
-
-The Conventional Branch specification was inspired by [Conventional Commits](https://www.conventionalcommits.org).
 
 ## AI Agent Source Prefixes
 
@@ -62,8 +61,6 @@ to skim.
 * [jal-co/shieldcn](https://github.com/jal-co/shieldcn): Beautiful README badges inspired by shadcn/ui.
 * [dunossauro/fastapi-do-zero](https://github.com/dunossauro/fastapi-do-zero/blob/main/aulas/contribua/contribua.md): Curso básico de FastAPI em português.
 * _[... and more projects using Conventional Branch](https://github.com/search?q=conventional-branch.github.io&type=code&p=1)._
-
-[![Conventional Branch](https://conventionalbranch.org/badge.svg)](https://conventionalbranch.org/)
 
 _Want your project on this list?_ [Send a pull request](https://github.com/conventional-branch/conventional-branch/pulls).
 

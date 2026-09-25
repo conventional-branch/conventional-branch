@@ -1,0 +1,15 @@
+# The project's major milestones, on the About page's timeline: only the events that
+# changed what the specification is or where it lives. CHANGELOG.md lists everything
+# else. Releases are marked `release: true` and drawn more strongly than the rest.
+- date: "2024-09"
+  text: Conventional Branch started, with the first draft of the specification
+- date: "2025-12"
+  text: Licensed under CC BY 4.0, free to use, adapt and translate
+- date: "2026-04"
+  text: A dedicated website at conventionalbranch.org
+- date: "2026-06-20"
+  text: 1.0.0, the first stable release
+  release: true
+- date: "2026-07-08"
+  text: "1.1.0: prefixes for AI coding agents, and the specification as JSON"
+  release: true

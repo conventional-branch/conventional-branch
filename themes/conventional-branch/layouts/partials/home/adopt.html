@@ -1,0 +1,31 @@
+{{- /* Three steps, each pointing to where its details live: the snippet and the
+       configurations on /enforce/, the badge variants on /about/. */ -}}
+{{- $spec := partialCached "spec.html" . -}}
+<section class="section section--paper2" id="adopt" aria-labelledby="adopt-title">
+  <div class="container">
+    <div class="section__head">
+      <h2 id="adopt-title" class="section__title">{{ i18n "adopt_title" }}</h2>
+    </div>
+    <ol class="steps">
+      <li class="step">
+        <span class="step__num" aria-hidden="true">1</span>
+        <h3 class="step__title">{{ i18n "step_write_title" }}</h3>
+        <p class="step__body">{{ i18n "step_write_body" }}</p>
+        <a class="link-arrow" href="/enforce/#a-snippet-for-agentsmd-or-claudemd">{{ i18n "step_write_link" }}{{ partial "icon.html" (dict "name" "arrow" "size" 15) }}</a>
+      </li>
+      <li class="step">
+        <span class="step__num" aria-hidden="true">2</span>
+        <h3 class="step__title">{{ i18n "step_enforce_title" }}</h3>
+        <p class="step__body">{{ i18n "step_enforce_body" }}</p>
+        <a class="link-arrow" href="/enforce/">{{ i18n "step_enforce_link" }}{{ partial "icon.html" (dict "name" "arrow" "size" 15) }}</a>
+      </li>
+      <li class="step">
+        <span class="step__num" aria-hidden="true">3</span>
+        <h3 class="step__title">{{ i18n "step_show_title" }}</h3>
+        <p class="step__body">{{ i18n "step_show_body" }}</p>
+        <img class="step__badge" src="/badge.svg" width="180" height="20" alt="Conventional Branch {{ $spec.version }}">
+        <a class="link-arrow" href="/about/#how-to-adopt">{{ i18n "step_show_link" }}{{ partial "icon.html" (dict "name" "arrow" "size" 15) }}</a>
+      </li>
+    </ol>
+  </div>
+</section>

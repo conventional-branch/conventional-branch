@@ -1,0 +1,40 @@
+{{- /* "On this page": the page's second-level headings, with the third-level ones
+       nested under them. `collapseLast` leaves the last section's subheadings out,
+       which on a specification page is the FAQ — every language ends with it, and
+       its questions are too long to list. */ -}}
+{{- $page := .page -}}
+{{- $sections := slice -}}
+{{- /* The tree's top is the page's h1 when it has one, and an empty placeholder when
+       the page starts at h2 — either way, the second-level headings are its children. */ -}}
+{{- range $page.Fragments.Headings -}}
+  {{- if eq .Level 2 -}}
+    {{- $sections = $sections | append . -}}
+  {{- else -}}
+    {{- range .Headings }}{{ if eq .Level 2 }}{{ $sections = $sections | append . }}{{ end }}{{ end -}}
+  {{- end -}}
+{{- end -}}
+{{- with $sections -}}
+{{- $last := sub (len $sections) 1 -}}
+<nav class="toc" aria-label="{{ i18n "on_this_page" }}">
+  <details class="toc__details" open>
+    <summary class="aside-heading toc__summary">{{ i18n "on_this_page" }}</summary>
+    <ol class="toc__list">
+      {{- range $i, $h := $sections }}
+      <li>
+        <a href="#{{ $h.ID }}"><span>{{ $h.Title | safeHTML }}</span></a>
+        {{- if and $h.Headings (not (and $.collapseLast (eq $i $last))) }}
+        <ol>
+          {{- range $h.Headings }}
+          <li><a href="#{{ .ID }}"><span>{{ .Title | safeHTML }}</span></a></li>
+          {{- end }}
+        </ol>
+        {{- end }}
+      </li>
+      {{- end }}
+    </ol>
+  </details>
+  {{- /* Closed before the first paint on a phone, so the text doesn't jump when the
+         deferred script runs. Without JavaScript the outline stays open. */}}
+  <script>if (matchMedia('(max-width: 899px)').matches) document.currentScript.previousElementSibling.open = false</script>
+</nav>
+{{- end -}}

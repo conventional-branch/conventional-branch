@@ -1,0 +1,46 @@
+@use "./../abstracts/index" as *;
+
+.section {
+  padding: clamp(56px, 7vw, 96px) 0;
+}
+
+.section--paper2 {
+  background: $paper-2;
+}
+
+.section--ink {
+  background: $ink;
+  color: $on-ink;
+
+  // Low specificity, so components on ink (buttons) keep their colours.
+  :where(a:not(.button)) {
+    color: $blue-on-ink;
+
+    &:hover {
+      color: #FFFFFF;
+    }
+  }
+}
+
+.section__head {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-width: 760px;
+  margin-bottom: clamp(32px, 4vw, 48px);
+}
+
+.section__title {
+  @include display-heading;
+  margin: 0;
+  font-size: clamp(26px, 3vw, 34px);
+  line-height: 1.2;
+  color: inherit;
+}
+
+.section__lead {
+  margin: 0;
+  color: $ink-2;
+  font-size: 18px;
+  line-height: 1.6;
+}

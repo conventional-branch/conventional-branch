@@ -1,19 +1,19 @@
-@use "./../abstracts/index";
+@use "./../abstracts/index" as *;
 
+// The banner-image shortcode: a picture on ink, full width of the text column.
 .banner-image {
   width: 100%;
-  border-radius: index.$radius-md;
-  margin: index.$gap-lg 0;
-  box-shadow: index.$shadow-soft;
-  @include index.gradient-primary(14deg);
+  margin: 48px 0;
+  padding: 24px;
+  border-radius: $radius-md;
+  background: $ink;
 
   img.banner-image__picture {
     display: block;
     width: 100%;
     min-height: 100px;
-    max-height: index.$banner-image-height;
-    object-fit: contain;
+    max-height: 300px;
     margin: auto;
-    background-color: transparent;
+    object-fit: contain;
   }
 }

@@ -1,0 +1,33 @@
+{{- /* The normative text, beside a sidebar that keeps the outline and the
+       machine-readable endpoints in reach while reading. The version and language
+       switches are in the header. */ -}}
+{{- $spec := partialCached "spec.html" . -}}
+{{- $typeNames := slice -}}
+{{- range $spec.types }}{{ $typeNames = $typeNames | append .type }}{{ range .aliases }}{{ $typeNames = $typeNames | append . }}{{ end }}{{ end -}}
+{{- /* The page has one h1, the hero's, so the specification's own title is demoted to
+       head its section. Its id is kept, so links to it still land. */ -}}
+{{- $content := replaceRE `(?s)<h1([^>]*)>(.*?)</h1>` `<h2 class="spec__title"$1>$2</h2>` .Content 1 -}}
+<section id="spec" class="spec" aria-label="{{ i18n "spec_eyebrow" }}">
+  <div class="container doc-grid">
+    <aside class="doc-aside">
+      <div class="doc-aside__inner">
+        {{- partial "toc.html" (dict "page" . "collapseLast" true) }}
+        <div class="aside-block aside-block--tools">
+          <p class="aside-heading">{{ i18n "for_tools" }}</p>
+          <ul class="aside-links">
+            <li><a href="/v{{ $spec.version }}/spec.json"><span class="mono">/v{{ $spec.version }}/spec.json</span><span>{{ i18n "endpoint_pinned" }}</span></a></li>
+            <li><a href="/spec.json"><span class="mono">/spec.json</span><span>{{ i18n "endpoint_latest" }}</span></a></li>
+            <li><a href="/schema/v1/spec.schema.json"><span class="mono">spec.schema.json</span><span>{{ i18n "endpoint_schema" }}</span></a></li>
+            <li><a href="/llms.txt"><span class="mono">/llms.txt</span><span>{{ i18n "endpoint_llms" }}</span></a></li>
+          </ul>
+        </div>
+        <div class="aside-block aside-block--rule">
+          <a class="aside-edit" href="https://github.com/conventional-branch/conventional-branch/blob/main/content/{{ replace .File.Path "\\" "/" }}">{{ partial "icon.html" (dict "name" "edit" "size" 15) }}{{ i18n "edit_page" }}</a>
+        </div>
+      </div>
+    </aside>
+    <article class="markdown-body doc-body spec__body" data-spec-types="{{ delimit $typeNames " " }}">
+      {{ $content | safeHTML }}
+    </article>
+  </div>
+</section>

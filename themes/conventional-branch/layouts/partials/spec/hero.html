@@ -1,0 +1,29 @@
+{{- /* The top of a specification page, in every language and version: the site's name
+       and one-line description beside the branch mark, on the blue the site has always
+       opened with. */ -}}
+{{- $current := partial "version-current.html" . -}}
+{{- $latest := site.Params.versions.current -}}
+{{- $isArchived := ne $current $latest -}}
+<section class="hero" aria-labelledby="hero-title">
+  <div class="container hero__inner">
+    <div class="hero__copy">
+      <h1 id="hero-title" class="hero__title">{{ .Param "Title" }}</h1>
+      <p class="hero__lead">{{ .Param "Description" }}</p>
+      {{- if $isArchived }}
+      <p class="notice">
+        {{- partial "icon.html" (dict "name" "info" "size" 18) -}}
+        <span>{{ i18n "archived_notice" (dict "Version" (strings.TrimPrefix "v" $current)) }} <a href="{{ .Site.Home.RelPermalink }}">{{ i18n "archived_link" (dict "Version" (strings.TrimPrefix "v" $latest)) }}</a></span>
+      </p>
+      {{- else }}
+      {{- with .Param "Actions" }}
+      <div class="hero__actions">
+        {{- range $i, $action := . }}
+        <a class="button {{ if eq $i 0 }}button--primary{{ else }}button--secondary{{ end }}" href="{{ $action.url }}">{{ $action.label }}</a>
+        {{- end }}
+      </div>
+      {{- end }}
+      {{- end }}
+    </div>
+    <span class="hero__mark">{{ partial "svg-branch.html" (dict "size" 180) }}</span>
+  </div>
+</section>

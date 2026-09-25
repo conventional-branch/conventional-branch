@@ -1,0 +1,44 @@
+# Structure of the homepage sections: what is listed, in which order, and where each
+# item links. The words themselves are in i18n/en.yaml, keyed by the entries here.
+
+# Organizations named on the homepage, each linked to the file where a project of
+# theirs documents the convention. An excerpt of the canonical adopters list on the
+# About page (content/about/index.md), in the same spirit as the README's "Used By".
+adopters:
+  - name: GCHQ
+    url: https://github.com/gchq/Bailo/blob/main/AGENTS.md
+  - name: Oak Ridge National Laboratory
+    url: https://github.com/ORNLSlicer/ORNLSlicer/blob/develop/docs/contributing/conventional-branch.md
+  - name: ByteDance Seed
+    url: https://github.com/ByteDance-Seed/cryofm/blob/main/CONTRIBUTING.md
+  - name: Government of British Columbia
+    url: https://github.com/bcgov/nr-pies
+  - name: Texas Instruments
+    url: https://github.com/TexasInstruments/processor-sdk-doc
+  - name: Enedis
+    url: https://github.com/Enedis-OSS/tic4eebus/blob/main/CONTRIBUTING.md
+  - name: ARTE Portugal
+    url: https://github.com/amagovpt/udata-pt/blob/main/CLAUDE.md
+  - name: LiteLLM
+    url: https://github.com/BerriAI/litellm/blob/main/CONTRIBUTING.md
+  - name: Ansible
+    url: https://github.com/ansible/metrics-utility/blob/devel/docs/CONTRIBUTING.md
+  - name: Sanity
+    url: https://github.com/sanity-io/sdk/blob/main/CONTRIBUTING.md
+
+# The branch-name checker. `initial` is what the page renders before any script
+# runs, so it has to be a valid name; the examples mix valid and invalid ones on
+# purpose, since seeing why a name fails is half of what the checker teaches.
+checker:
+  initial: feature/add-login-page
+  examples:
+    - fix/header-bug
+    - release/v1.2.0
+    - claude/refactor-auth-flow
+    - main
+    - Feature/Add-Login
+    - feature/new--login
+
+# What the project holds to, under "Why it exists" — only what the specification and
+# the rest of the page don't already say.
+principles: [stable, checked]

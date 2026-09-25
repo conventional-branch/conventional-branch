@@ -1,0 +1,10 @@
+{{- /* Every published version of the specification, newest first. The current one is
+       served at the language's root, archived ones under /<version>/. */ -}}
+{{- $home := .page.Site.Home -}}
+<p class="menu__heading">{{ i18n "versions_heading" }}</p>
+<ul class="menu__list">
+  {{- range sort site.Params.versions.list "value" "desc" }}
+  {{- $isLatest := eq . site.Params.versions.current }}
+  <li><a class="menu__link{{ if eq . $.current }} is-current{{ end }}" href="{{ cond $isLatest $home.RelPermalink (print $home.RelPermalink . "/") }}"><span class="mono">{{ strings.TrimPrefix "v" . }}</span><span class="menu__meta">{{ if $isLatest }}{{ i18n "version_latest" }}{{ else }}{{ i18n "version_archived" }}{{ end }}</span></a></li>
+  {{- end }}
+</ul>

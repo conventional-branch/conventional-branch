@@ -1,0 +1,171 @@
+# Interface strings and homepage copy for the site's templates.
+#
+# Hugo falls back to this file for any string a language has not translated, so the
+# navigation, sidebar and footer render in every language from day one. The
+# homepage sections that carry longer copy (everything under "Homepage" below) are
+# shown only for languages whose `landing` param is true in config.yaml: translate
+# those strings into i18n/<lang>.yaml first, then turn the flag on, so a page never
+# mixes two languages.
+
+# --- Navigation and chrome -------------------------------------------------------
+
+skip_to_content: "Skip to content"
+home_label: "Conventional Branch home"
+nav_primary: "Primary"
+nav_specification: "Specification"
+nav_enforce: "Enforce"
+nav_about: "About"
+nav_sponsor: "Sponsor"
+nav_menu: "Menu"
+github_label: "Conventional Branch on GitHub"
+version_label: "Specification version"
+versions_heading: "Versions"
+version_latest: "Latest"
+version_archived: "Archived"
+language_label: "Language"
+languages_heading: "Languages"
+copy: "Copy"
+copied: "Copied"
+
+# --- Specification pages -----------------------------------------------------------
+
+spec_eyebrow: "The specification"
+on_this_page: "On this page"
+for_tools: "For tools"
+endpoint_pinned: "pinned"
+endpoint_latest: "latest"
+endpoint_schema: "schema"
+endpoint_llms: "for LLMs"
+edit_page: "Edit this page on GitHub"
+license_short: "CC BY 4.0"
+archived_notice: "You are reading {{ .Version }}, an archived version of the specification."
+archived_link: "Read the current version, {{ .Version }}"
+
+# --- Footer ------------------------------------------------------------------------
+
+footer_label: "Footer"
+footer_col_spec: "Specification"
+footer_col_adopt: "Adopt"
+footer_col_project: "Project"
+footer_current: "{{ .Version }} — current"
+footer_archived: "{{ .Version }} — archived"
+footer_schema: "JSON Schema"
+footer_tooling: "Tooling"
+footer_skill: "Agent skill"
+footer_badge: "Badge"
+footer_adopters: "Adopters"
+footer_contributing: "Contributing"
+footer_changelog: "Changelog"
+footer_register: "Register an agent prefix"
+footer_licensed: "Licensed"
+footer_derived: "Derived from"
+footer_created: "Created & maintained by"
+
+# --- 404 ---------------------------------------------------------------------------
+
+notfound_title: "Page not found"
+notfound_lead: "There’s no page at this address. Try one of these:"
+
+# --- Homepage ----------------------------------------------------------------------
+
+checker_label: "Try a branch name"
+checker_examples: "Examples"
+checker_type: "type"
+checker_description: "description"
+checker_trunk_caption: "trunk branch"
+checker_missing_caption: "missing type/"
+checker_person: "A person reads"
+checker_machine: "A machine parses"
+checker_pipeline: "A pipeline can"
+checker_pipeline_note: "A common mapping — adapt it to your own pipeline."
+checker_ok: "Conforms to Conventional Branch {{ .Version }}"
+checker_bad: "Doesn’t conform to Conventional Branch {{ .Version }}"
+checker_waiting: "Waiting for a branch name"
+checker_note: "Checked in your browser against the regex published in {{ .Link }} — the same one every enforcement config uses."
+checker_try: "Try"
+checker_empty: "Type a branch name — for example"
+checker_trunk_person: "The trunk"
+checker_trunk_human: "no prefix needed"
+checker_trunk_pipeline: "Treat it as the integration target that every other branch merges into."
+checker_person_feature: "A new feature"
+checker_person_bugfix: "A bug fix"
+checker_person_hotfix: "An urgent fix"
+checker_person_release: "Release preparation"
+checker_person_chore: "A chore"
+checker_person_agent: "Work by {{ .Name }}"
+checker_person_generic_agent: "an AI agent"
+checker_msg_missing_type: "Missing a type. Names take the form <type>/<description>."
+checker_msg_uppercase: "Uppercase letters aren’t allowed — branch names are lowercase."
+checker_msg_space: "Spaces aren’t allowed — join words with hyphens."
+checker_msg_underscore: "Underscores aren’t allowed — use hyphens between words."
+checker_msg_unknown_type: "“{type}/” isn’t one of the Conventional Branch types."
+checker_msg_empty: "The description is empty — say what the work does."
+checker_msg_slash: "Use one slash only, between the type and the description."
+checker_msg_chars: "Only a–z, 0–9, hyphens and dots are allowed."
+checker_msg_double_hyphen: "Consecutive hyphens aren’t allowed."
+checker_msg_double_dot: "Consecutive dots aren’t allowed."
+checker_msg_leading: "The description can’t start with a hyphen or a dot."
+checker_msg_trailing: "The description can’t end with a hyphen or a dot."
+checker_msg_hyphen_dot: "A hyphen can’t sit next to a dot."
+checker_msg_grammar: "This doesn’t match the grammar."
+
+pipeline_feature: "Run the full test suite; deploy a preview environment."
+pipeline_bugfix: "Run the regression tests."
+pipeline_hotfix: "Require a security scan or an extra approval before merge."
+pipeline_release: "Trigger the release-candidate pipeline; deploy to staging."
+pipeline_chore: "Skip the preview deployment."
+pipeline_agent: "Run a heavier security, license and lint suite; require a human approval."
+
+adopters_label: "Used in projects at"
+adopters_all: "All adopters"
+
+why_title: "Why it exists"
+why_body: "Most teams already have a branch naming habit, but it lives in someone’s head and is enforced by hand in code review. Conventional Branch writes it down precisely enough for people to follow and for tools to check."
+
+principle_stable_title: "Stable versions"
+principle_stable_body: "Each release is frozen the day it’s published. Pin <code>/v{{ .Version }}/spec.json</code> and nothing your tools accept changes until you choose to upgrade."
+principle_checked_title: "Tested examples"
+principle_checked_body: "A conformance suite runs on every pull request. The examples in all {{ .Languages }} languages, the badge, llms.txt and every copy-paste config are tested against spec.json, so none of them can drift."
+
+adopt_title: "Adopt it in three steps"
+step_write_title: "Write it down"
+step_write_body: "Add the convention to your contributing guide — and to AGENTS.md or CLAUDE.md, so coding agents follow it too."
+step_write_link: "Copy the AGENTS.md snippet"
+step_enforce_title: "Enforce it"
+step_enforce_body: "Copy a ready-made configuration for GitHub, GitLab, Bitbucket or a Git hook."
+step_enforce_link: "See the configurations"
+step_show_title: "Show it"
+step_show_body: "Add the badge to your README, so contributors know the rule before they open a branch."
+step_show_link: "Copy the badge Markdown"
+
+# --- Enforce page ------------------------------------------------------------------
+
+layers_title: "Two layers of enforcement"
+layers_courtesy: "Fast, but can be skipped"
+layers_contract: "Can’t be bypassed"
+layers_local_title: "On your machine"
+layers_local_commitcheck: "Checks the type prefix at every commit."
+layers_local_hook: "No dependencies. The last local moment to catch a bad name."
+layers_local_alias: "Not a check — it makes it easier to be right."
+layers_local_agents: "Teaches coding agents the convention."
+layers_server_title: "On the server"
+layers_server_github: "Rejects a non-conforming branch outright."
+layers_server_gitlab: "Rejected at pre-receive. Premium or Ultimate."
+layers_server_bitbucket: "Pre-receive hooks enforce it on the server."
+layers_push: "refused if the name doesn’t match"
+layers_pr: "reported, not refused"
+layers_ci_title: "In CI"
+layers_ci_tag: "Reports in the pull request"
+
+# --- About page --------------------------------------------------------------------
+
+history_title: "Project history"
+history_note: "The milestones only; the changelog lists every change."
+history_link: "Read the changelog"
+people_title: "Maintainers and contributors"
+people_maintainer: "Created & maintained by"
+people_translate: "Translate the specification"
+contribute_title: "Contribute"
+contribute_typo: "Fix a typo or clarify a rule"
+sponsor_body: "If your team depends on Conventional Branch, sponsoring funds hosting, translations and keeping the spec current as tooling evolves — like adding the <code>ai/</code>, <code>claude/</code> and <code>codex/</code> prefixes when coding agents began opening their own branches."
+sponsor_button: "Become a sponsor"

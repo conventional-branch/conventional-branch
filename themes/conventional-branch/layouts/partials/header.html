@@ -1,48 +1,38 @@
-<header class="header">
-  <div class="container">
-    <a href="/">
-      <div class="logo"></div>
+{{- $home := .Site.Home -}}
+{{- $current := partial "version-current.html" . -}}
+<header class="site-header">
+  <div class="container site-header__inner">
+    <a class="brand" href="{{ $home.RelPermalink }}" aria-label="{{ i18n "home_label" }}">
+      <span class="brand__mark">{{ partial "svg-branch.html" (dict "size" 20) }}</span>
+      <span class="brand__name">Conventional Branch</span>
     </a>
-    <ul class="header__menu">
-      <li class="header__menu-item dropdown">
-        {{- $currentVersion := $.Site.Params.versions.current -}}
-        {{- if $.Page.Section -}}
-          {{- range $.Site.Params.versions.list -}}
-            {{- if eq $.Page.Section . -}}
-              {{- $currentVersion = . -}}
-            {{- end -}}
-          {{- end -}}
-        {{- end -}}
-        <button class="dropdown__label">{{ $currentVersion }}</button>
-        <ul class="dropdown__options">
-          {{- range $.Site.Params.versions.list -}}
-          {{/* The current version is served at the site root; older versions live under /<version>/. */}}
-          {{- $isCurrent := eq . $.Site.Params.versions.current -}}
-          {{- $url := cond $isCurrent $.Site.Home.RelPermalink (print $.Site.Home.RelPermalink . "/") -}}
-          <li class="dropdown__option{{ if eq $currentVersion . }} dropdown__option--active{{ end }}">
-            <a href="{{ $url }}">{{ . }}</a>
-          </li>
-          {{- end -}}
-        </ul>
-      </li>
-      <li class="header__menu-item dropdown">
-        <button class="dropdown__label">Languages</button>
-        <ul class="dropdown__options">
-          {{ range .Site.Home.AllTranslations }}
-          <li class="dropdown__option"><a href="{{ .Permalink }}">{{ .Language.Params.LanguageName }}</a></li>
-          {{ end }}
-        </ul>
-      </li>
-      <li class="header__menu-item dropdown">
-        <button class="dropdown__label">
-          <a href="/enforce" class="no-style-a">Enforce</a>
-        </button>
-      </li>
-      <li class="header__menu-item dropdown">
-        <button class="dropdown__label">
-          <a href="/about" class="no-style-a">About</a>
-        </button>
-      </li>
-    </ul>
+    <nav class="site-nav" aria-label="{{ i18n "nav_primary" }}">
+      {{- partial "nav-links.html" (dict "page" .) -}}
+    </nav>
+    <div class="site-header__tools">
+      <details class="menu menu--version">
+        <summary class="menu__button" aria-label="{{ i18n "version_label" }}: {{ $current }}"><span class="mono">{{ $current }}</span>{{ partial "icon.html" (dict "name" "chevron" "size" 14) }}</summary>
+        <div class="menu__panel">
+          {{- partial "menu-versions.html" (dict "page" . "current" $current) -}}
+        </div>
+      </details>
+      <details class="menu menu--language">
+        <summary class="menu__button" aria-label="{{ i18n "language_label" }}: {{ .Site.Params.languageName }}">{{ partial "icon.html" (dict "name" "globe" "size" 16 "stroke" 1.75) }}<span>{{ .Site.Params.languageName }}</span>{{ partial "icon.html" (dict "name" "chevron" "size" 14) }}</summary>
+        <div class="menu__panel">
+          {{- partial "menu-languages.html" . -}}
+        </div>
+      </details>
+      <a class="icon-button" href="https://github.com/conventional-branch/conventional-branch" aria-label="{{ i18n "github_label" }}">{{ partial "svg-github.html" . }}</a>
+      <details class="menu menu--nav">
+        <summary class="menu__button menu__button--icon" aria-label="{{ i18n "nav_menu" }}">{{ partial "icon.html" (dict "name" "menu" "size" 22 "stroke" 1.75) }}</summary>
+        <div class="menu__panel menu__panel--nav">
+          <nav class="menu__nav" aria-label="{{ i18n "nav_primary" }}">
+            {{- partial "nav-links.html" (dict "page" .) -}}
+          </nav>
+          {{- partial "menu-versions.html" (dict "page" . "current" $current) -}}
+          {{- partial "menu-languages.html" . -}}
+        </div>
+      </details>
+    </div>
   </div>
 </header>

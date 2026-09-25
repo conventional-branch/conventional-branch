@@ -1,0 +1,19 @@
+{{- $spec := partialCached "spec.html" . -}}
+{{- /* Counts the copy quotes, taken from the specification so they cannot go stale. */ -}}
+{{- $facts := dict "Version" $spec.version "Languages" (len .Site.Home.AllTranslations) -}}
+<section class="section" id="why" aria-labelledby="why-title">
+  <div class="container">
+    <div class="section__head">
+      <h2 id="why-title" class="section__title">{{ i18n "why_title" }}</h2>
+      <p class="section__lead">{{ i18n "why_body" }}</p>
+    </div>
+    <ul class="principles">
+      {{- range site.Data.home.principles }}
+      <li class="principle">
+        <h3 class="principle__title">{{ i18n (printf "principle_%s_title" .) }}</h3>
+        <p class="principle__body">{{ i18n (printf "principle_%s_body" .) $facts | safeHTML }}</p>
+      </li>
+      {{- end }}
+    </ul>
+  </div>
+</section>

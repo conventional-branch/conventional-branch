@@ -3,17 +3,14 @@ type: about
 draft: false
 seoTitle: "Enforce Git Branch Naming — Conventional Branch"
 seoDescription: "Copy-pasteable branch name validation for GitHub rulesets, GitLab push rules, Bitbucket Pipelines and a dependency-free Git hook, using the published regex."
+# The page hero; heroLead takes Markdown.
+heroTitle: "Enforce branch names"
+heroLead: "Copy-paste configuration that checks branch names against the specification, for GitHub, GitLab, Bitbucket, plain Git and AI coding agents."
 ---
-
-# Enforcing Conventional Branch
-
-Copy-pasteable configuration for validating branch names against the specification.
 
 Enforcement happens at two layers, and they solve different problems. A **server-side**
 rule cannot be bypassed, but the contributor only finds out when they push. A **local**
-check is instant and can be run before a branch exists, but anyone can skip it. Most
-teams want one of each: the server rule is the contract, the local check is the
-courtesy.
+check is instant and can be run before a branch exists, but anyone can skip it.
 
 Every regular expression below is the one published in
 [`spec.json`](https://conventionalbranch.org/spec.json), copied verbatim, and a

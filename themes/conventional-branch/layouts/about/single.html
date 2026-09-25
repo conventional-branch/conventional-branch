@@ -1,15 +1,34 @@
 <!DOCTYPE html>
 <html lang="{{ .Site.Language.Lang }}">
 {{- partial "head.html" . -}}
-<body class="conventional-branch--loading">
-{{- partial "header.html" . -}}
-{{- partial "mini_welcome.html" . -}}
-<main>
-  <article class="container markdown-body">
-    {{.Content}}
-  </article>
+{{- /* The About and Enforce pages: a hero from the page's front matter, then the
+       Markdown beside an outline of it. Each page adds its own sections around that. */ -}}
+{{- $slug := .File.ContentBaseName }}
+<body class="page-doc page-doc--{{ $slug }}" data-copy-label="{{ i18n "copy" }}" data-copied-label="{{ i18n "copied" }}">
+<a class="skip-link" href="#main">{{ i18n "skip_to_content" }}</a>
+{{- partial "header.html" . }}
+<main id="main">
+  {{- partial "page/hero.html" . }}
+  {{- if eq $slug "enforce" }}{{ partial "enforce/layers.html" . }}{{ end }}
+  <div class="container doc-grid">
+    <aside class="doc-aside">
+      <div class="doc-aside__inner">
+        {{- partial "toc.html" (dict "page" .) }}
+        <div class="aside-block aside-block--rule">
+          <a class="aside-edit" href="https://github.com/conventional-branch/conventional-branch/blob/main/content/{{ replace .File.Path "\\" "/" }}">{{ partial "icon.html" (dict "name" "edit" "size" 15) }}{{ i18n "edit_page" }}</a>
+        </div>
+      </div>
+    </aside>
+    <article class="markdown-body doc-body">
+      {{ .Content }}
+    </article>
+  </div>
+  {{- if eq $slug "about" }}
+  {{- partial "about/history.html" . }}
+  {{- partial "about/people.html" . }}
+  {{- end }}
 </main>
-{{- partial "footer.html" . -}}
-{{- partial "scripts.html" . -}}
+{{- partial "footer.html" . }}
+{{- partial "scripts.html" . }}
 </body>
 </html>

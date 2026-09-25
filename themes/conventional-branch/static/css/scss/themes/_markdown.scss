@@ -1,50 +1,330 @@
-@use "./../abstracts/index";
+@use "./../abstracts/index" as *;
 
-main article.markdown-body {
+// The rendered Markdown of the specification, Enforce and About pages, set for reading:
+// near-black on white, bold blue headings and tight spacing — how the specification read
+// before the redesign, and how a README reads on GitHub.
+.markdown-body {
+  color: $ink;
+  font-size: 16px;
   line-height: 1.75;
 
-  p {
-    margin-bottom: 1.1em;
+  > :first-child {
+    margin-top: 0;
   }
 
-  h1 {
-    font-size: 2.3em;
-    font-weight: 700;
-    letter-spacing: -0.02em;
-    line-height: 1.2;
-    color: index.$color-primary-heading;
-    margin-bottom: 0.5em;
+  h2,
+  h3,
+  h4 {
+    position: relative;
+    line-height: 1.3;
+    scroll-margin-top: 24px;
   }
 
   h2 {
+    margin: 48px 0 16px;
+    padding-bottom: 0.3em;
+    border-bottom: 1px solid $rule;
+    color: $color-primary-heading;
+    font-size: 24px;
     font-weight: 700;
-    letter-spacing: -0.01em;
-    line-height: 1.3;
-    color: index.$color-primary-heading;
   }
 
-  h3, h4, h5, h6 {
+  h3 {
+    margin: 32px 0 12px;
+    color: $color-primary-heading;
+    font-size: 20px;
     font-weight: 600;
-    color: index.$color-primary-heading-sub;
+  }
+
+  h4 {
+    margin: 24px 0 8px;
+    font-size: 17px;
+    font-weight: 600;
+  }
+
+  p {
+    margin: 0 0 1em;
+  }
+
+  strong {
+    font-weight: 600;
   }
 
   a {
-    color: index.$color-primary-heading;
+    text-decoration: underline;
+    text-decoration-color: rgba($color-primary-heading, 0.35);
+    text-underline-offset: 3px;
+
     &:hover {
-      color: index.$color-primary;
+      text-decoration-color: currentColor;
     }
   }
 
-  a.anchorjs-link:hover {
+  ul,
+  ol {
+    margin: 0 0 1em;
+    padding-left: 2em;
+  }
+
+  li {
+    margin: 0.25em 0;
+
+    > p {
+      margin-bottom: 0.5em;
+    }
+  }
+
+  hr {
+    margin: 32px 0;
+    border: 0;
+    border-top: 1px solid $rule;
+  }
+
+  blockquote {
+    margin: 0 0 1em;
+    padding: 0 1em;
+    border-left: 4px solid $rule-strong;
+    color: $ink-3;
+
+    p:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  img {
+    display: inline-block;
+    vertical-align: middle;
+  }
+
+  code {
+    padding: 0.15em 0.4em;
+    border-radius: $radius-sm;
+    background: $paper-2;
+    font-size: 0.85em;
+  }
+
+  pre {
+    margin: 0 0 16px;
+    padding: 16px 20px;
+    overflow-x: auto;
+    border-radius: $radius-md;
+    background: $paper;
+    font-size: 13.5px;
+    line-height: 1.6;
+    tab-size: 2;
+
+    code {
+      padding: 0;
+      border-radius: 0;
+      background: none;
+      font-size: inherit;
+    }
+  }
+
+  // A table as wide as its content, scrolling sideways on its own when that is wider
+  // than the column.
+  table {
+    display: block;
+    width: max-content;
+    max-width: 100%;
+    margin: 0 0 16px;
+    overflow-x: auto;
+    border-collapse: collapse;
+    font-size: 15px;
+    line-height: 1.5;
+  }
+
+  th,
+  td {
+    padding: 8px 14px;
+    border: 1px solid $rule;
+    text-align: left;
+    vertical-align: top;
+  }
+
+  th {
+    font-weight: 600;
+  }
+
+  // A branch name broken at a hyphen would look like one that ends in a hyphen.
+  td code {
+    white-space: nowrap;
+  }
+
+  tbody tr:nth-child(2n) {
+    background: $paper;
+  }
+
+  // AnchorJS's link beside a heading, for citing a section.
+  .anchorjs-link {
+    margin-left: 0.3em;
+    color: $ink-3;
+    font-family: $font-mono;
+    font-size: 0.7em;
+    font-weight: 400;
+    text-decoration: none;
+
+    &:hover {
+      color: $color-primary-heading;
+    }
+  }
+}
+
+// The specification's own title, heading its section.
+.markdown-body .spec__title {
+  margin: 0 0 16px;
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+// The adopters list on the About page (content/about/index.md), which CONTRIBUTING.md
+// names as the canonical record — so it stays a plain Markdown list, set here as a
+// two-column directory.
+.doc-body #projects-using-conventional-branch + p + ul {
+  columns: 2;
+  column-gap: 40px;
+  margin-top: 24px;
+  padding: 0;
+  list-style: none;
+
+  li {
+    margin: 0 0 16px;
+    padding-top: 12px;
+    border-top: 1px solid $rule;
+    font-size: 15px;
+    line-height: 1.55;
+    break-inside: avoid;
+  }
+
+  li > a:first-child {
+    font-family: $font-mono;
+    font-size: 14px;
+    font-weight: 500;
     text-decoration: none;
   }
 
-  code, pre, kbd, samp {
-    font-family: index.$font-mono;
+  @include below($bp-sm) {
+    columns: 1;
+  }
+}
+
+// A code block, wrapped by the script so its copy button stays put while the code
+// scrolls sideways.
+.code-block {
+  position: relative;
+  margin: 0 0 16px;
+
+  pre {
+    margin: 0;
+    padding-right: 96px;
   }
 
-  pre code {
-    font-size: 0.9em;
-    line-height: 1.6;
+  .copy-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    opacity: 0;
+    transition: opacity 0.15s ease;
+  }
+
+  &:hover .copy-button,
+  .copy-button:focus-visible,
+  .copy-button.is-copied {
+    opacity: 1;
+  }
+
+  // Without hover the button always shows, so the code starts below it.
+  @media (hover: none) {
+    pre {
+      padding-top: 48px;
+      padding-right: 20px;
+    }
+
+    .copy-button {
+      opacity: 1;
+    }
+  }
+}
+
+// The examples table, once the script has turned its marks into verdicts.
+.verdict {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.verdict--valid {
+  color: $color-primary-heading;
+}
+
+.verdict--invalid {
+  color: $invalid;
+}
+
+.markdown-body td mark {
+  padding: 0;
+  border-bottom: 2px solid $invalid;
+  background: $invalid-bg;
+  color: $invalid-fg;
+}
+
+@include below($bp-sm) {
+  .markdown-body {
+    h2 {
+      margin-top: 40px;
+    }
+
+    pre {
+      margin-inline: calc(-1 * var(--pad));
+      border-radius: 0;
+    }
+  }
+
+  .code-block pre {
+    margin-inline: calc(-1 * var(--pad));
+  }
+}
+
+// Highlighted code (Hugo's Chroma, as classes): names and keywords in blue, literals in
+// brown, comments dimmed.
+.chroma {
+  .k, .kc, .kd, .kn, .kp, .kr, .kt,
+  .n, .na, .nb, .nc, .nd, .nf, .nl, .nn, .no, .nt, .nv, .nx, .py {
+    color: $color-primary-heading;
+  }
+
+  .s, .sa, .sb, .sc, .dl, .sd, .s1, .s2, .se, .sh, .si, .sr, .ss, .sx,
+  .m, .mb, .mf, .mh, .mi, .il, .mo, .l, .ld {
+    color: $code-literal;
+  }
+
+  .c, .ch, .cm, .c1, .cs, .cp, .cpf {
+    color: $ink-3;
+    font-style: normal;
+  }
+
+  .o, .ow, .p {
+    color: $ink-2;
+  }
+
+  .err {
+    background: none;
+    color: $invalid-fg;
+  }
+
+  .gh, .gu {
+    color: $ink;
+    font-weight: 600;
+  }
+
+  .gi {
+    color: $color-primary-heading;
+  }
+
+  .gd {
+    color: $invalid-fg;
   }
 }

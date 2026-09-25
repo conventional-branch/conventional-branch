@@ -1,45 +1,113 @@
-@use "./../abstracts/index";
+@use "./../abstracts/index" as *;
 
-.footer {
-  margin: (index.$article-offset-top + (index.$gap-md*3)) 0 (index.$gap-md*3);
+.site-footer {
+  padding: 88px 0 48px;
+  // Invisible under paper; a divider where an ink section runs into the footer.
+  border-top: 1px solid $ink-line;
+  background: $ink;
+  color: $on-ink;
 
-  .container {
-    display: flex;
-    align-items: center;
-  }
+  a {
+    color: $on-ink-code;
 
-  &__license {
-    margin-right: auto;
-    a {
-      font-size: .7em;
-      text-decoration: none;
-      color: inherit;
-      &:hover {
-        text-decoration: underline;
-      }
-    }
-    .footer__sep {
-      margin: 0 2px;
-      font-size: .7em;
-    }
-    .footer__credit {
-      font-size: .7em;
-      a {
-        font-size: inherit;
-      }
+    &:hover {
+      color: #FFFFFF;
     }
   }
+}
 
-  &__logos {
-    margin-left: auto;
+.site-footer__top {
+  @include twelve-columns;
+  row-gap: 48px;
+}
+
+.site-footer__brand {
+  grid-column: span 5;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+.brand--footer {
+  color: $on-ink;
+
+  &:hover {
+    color: $on-ink;
   }
 
-  &__logo {
-    display: flex;
+  .brand__mark {
+    background: $on-ink;
+    color: $color-primary-heading;
+  }
+}
+
+.site-footer__nav {
+  grid-column: 7 / span 6;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 32px $gutter;
+}
+
+.footer-col {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+
+  a {
+    font-size: 15px;
+  }
+}
+
+.footer-col__title {
+  @include eyebrow;
+  margin: 0;
+  color: $on-ink-3;
+}
+
+.site-footer__bottom {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px 24px;
+  margin-top: 72px;
+  padding-top: 24px;
+  border-top: 1px solid $ink-line;
+  color: $on-ink-2;
+  font-size: 13px;
+
+  p {
+    margin: 0;
+  }
+}
+
+.site-footer__github {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+
+  svg.github {
+    width: 18px;
+    height: 18px;
+  }
+}
+
+@include below($bp-md) {
+  .site-footer {
+    padding: 56px 0 32px;
   }
 
-  .github {
-    width: index.$footer-logo-size;
-    height: index.$footer-logo-size;
+  .site-footer__brand,
+  .site-footer__nav {
+    grid-column: 1 / -1;
+  }
+
+  .site-footer__nav {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .site-footer__bottom {
+    margin-top: 48px;
   }
 }

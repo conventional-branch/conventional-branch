@@ -1,0 +1,9 @@
+{{- /* The page in every language it is published in. A page with no translations of
+       its own — Enforce and About are English only — offers the homepage instead. */ -}}
+{{- $source := cond .IsTranslated . .Site.Home -}}
+<p class="menu__heading">{{ i18n "languages_heading" }}</p>
+<ul class="menu__list">
+  {{- range sort $source.AllTranslations "Language.Params.weight" }}
+  <li><a class="menu__link{{ if eq .Language.Lang $.Language.Lang }} is-current{{ end }}" href="{{ .RelPermalink }}" lang="{{ .Language.Lang }}" hreflang="{{ .Language.Lang }}">{{ .Language.Params.languageName }}</a></li>
+  {{- end }}
+</ul>
