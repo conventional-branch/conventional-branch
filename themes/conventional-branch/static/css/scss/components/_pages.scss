@@ -389,7 +389,7 @@
 
 .timeline {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
   row-gap: 48px;
   margin: 0;
   padding: 0;

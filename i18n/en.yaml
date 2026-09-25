@@ -168,7 +168,7 @@ layers_ci_tag: "Reports in the pull request"
 
 history_eyebrow: "History"
 history_title: "From a team habit to a published standard."
-history_note: "Milestones from the project changelog."
+history_note: "The milestones only; the changelog lists every change."
 history_link: "Read the changelog"
 people_eyebrow: "People"
 people_title: "Maintained as"
