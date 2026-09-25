@@ -1,12 +1,11 @@
 # Conventional Branch theme
 
-The Hugo theme for [conventionalbranch.org](https://conventionalbranch.org/). The site is
-set like a printed standard: a serif (Newsreader) for display headlines, a monospace
-(JetBrains Mono) for what machines read, and the reader's system font for everything
-else. The Markdown pages are read on white, in near-black with bold blue headings, the way
-a README reads on GitHub; the sections around them sit on paper or, when written for
-machines, on ink. The brand blue is `$color-primary`, `#6699CC` — the version half of the
-adoption badge.
+The Hugo theme for [conventionalbranch.org](https://conventionalbranch.org/). It keeps the
+look the site has had since 2024: every specification page opens with the site's name
+and the branch mark in white on a blue gradient, and the text below reads like a README on
+GitHub, near-black on white in the reader's system font with bold blue headings. Code and
+the checker use a monospace (JetBrains Mono). The brand blue is `$color-primary`,
+`#6699CC`, the version half of the adoption badge.
 
 ## Pages
 
@@ -15,7 +14,7 @@ adoption badge.
   language has `landing: true`, the checker, mission and adoption sections
   (`partials/home/`) follow it.
 - `about/single.html` renders the About and Enforce pages: a hero from the page's front
-  matter (`eyebrow`, `heroTitle`, `heroTitleEm`, `heroLead`), then the
+  matter (`heroTitle`, `heroLead`), then the
   Markdown beside its outline.
 
 Words come from the site's `i18n/` files, the homepage's lists from `data/home.yaml`, and

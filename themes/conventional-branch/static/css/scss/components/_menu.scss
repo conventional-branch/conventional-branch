@@ -20,9 +20,9 @@
   gap: 7px;
   height: 36px;
   padding: 0 10px 0 12px;
-  border: 1px solid $rule;
+  border: 1px solid rgba(#FFFFFF, 0.45);
   border-radius: $radius-sm;
-  color: $ink;
+  color: #FFFFFF;
   font-size: 14px;
   font-weight: 500;
   cursor: pointer;
@@ -34,7 +34,7 @@
 
   &:hover,
   .menu[open] > & {
-    border-color: $ink;
+    border-color: #FFFFFF;
   }
 
   .menu[open] > & .icon--chevron {

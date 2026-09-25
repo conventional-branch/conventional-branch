@@ -2,15 +2,6 @@
 
 // A document beside its outline: the specification, and the Enforce and About pages.
 
-// The white the Markdown is read on, set off by a rule from a hero on paper.
-.doc-surface {
-  background: $reading-bg;
-}
-
-.hero + .doc-surface {
-  border-top: 1px solid $rule;
-}
-
 .doc-grid {
   @include twelve-columns;
   align-items: start;

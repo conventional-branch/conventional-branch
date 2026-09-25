@@ -4,9 +4,8 @@
 <section class="section" id="why" aria-labelledby="why-title">
   <div class="container">
     <div class="section__head">
-      {{- /* The statement is the section's content; its label is its heading. */}}
-      <h2 id="why-title" class="eyebrow">{{ i18n "why_eyebrow" }}</h2>
-      <p class="statement"><span class="statement__muted">{{ i18n "why_statement_muted" }}</span> {{ i18n "why_statement" }}</p>
+      <h2 id="why-title" class="section__title">{{ i18n "why_title" }}</h2>
+      <p class="section__lead">{{ i18n "why_body" }}</p>
     </div>
     <ul class="principles">
       {{- range site.Data.home.principles }}

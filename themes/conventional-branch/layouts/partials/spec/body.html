@@ -7,11 +7,10 @@
 {{- /* The page has one h1, the hero's, so the specification's own title is demoted to
        head its section. Its id is kept, so links to it still land. */ -}}
 {{- $content := replaceRE `(?s)<h1([^>]*)>(.*?)</h1>` `<h2 class="spec__title"$1>$2</h2>` .Content 1 -}}
-<section id="spec" class="spec doc-surface" aria-labelledby="spec-label">
+<section id="spec" class="spec" aria-label="{{ i18n "spec_eyebrow" }}">
   <div class="container doc-grid">
     <aside class="doc-aside">
       <div class="doc-aside__inner">
-        <h2 id="spec-label" class="eyebrow">{{ i18n "spec_eyebrow" }}</h2>
         {{- partial "toc.html" (dict "page" . "collapseLast" true) }}
         <div class="aside-block aside-block--tools">
           <p class="aside-heading">{{ i18n "for_tools" }}</p>

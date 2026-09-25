@@ -132,8 +132,6 @@
 .bracket__label {
   @include eyebrow;
   font-size: 12px;
-  font-weight: 400;
-  letter-spacing: 0.06em;
   line-height: 1;
   white-space: nowrap;
 }
@@ -164,9 +162,9 @@
 
 .reading__person {
   margin: 0;
-  font-family: $font-serif;
-  font-size: 27px;
-  line-height: 1.25;
+  font-size: 22px;
+  font-weight: 600;
+  line-height: 1.35;
   color: $on-ink;
 
   em {
@@ -223,9 +221,9 @@
 
 .checker__message {
   margin: 0;
-  font-family: $font-serif;
-  font-size: 30px;
-  line-height: 1.2;
+  font-size: 22px;
+  font-weight: 600;
+  line-height: 1.35;
   color: $on-ink;
 }
 
@@ -261,9 +259,8 @@
 
   p {
     margin: 0;
-    font-family: $font-serif;
-    font-size: 28px;
-    line-height: 1.25;
+    font-size: 22px;
+    line-height: 1.35;
     color: $on-ink-2;
   }
 
@@ -349,12 +346,9 @@
     row-gap: 18px;
   }
 
-  .reading__person {
-    font-size: 22px;
-  }
-
+  .reading__person,
   .checker__message {
-    font-size: 24px;
+    font-size: 19px;
   }
 
   .chip {

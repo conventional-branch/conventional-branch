@@ -7,14 +7,12 @@
   }
 }
 
-// The small mono label that names a section, a column or a field.
+// The small label that names a column or a field.
 @mixin eyebrow {
-  font-family: $font-mono;
-  font-size: 12px;
-  font-weight: 500;
-  letter-spacing: 0.08em;
+  font-family: $font-sans;
+  font-size: 13px;
+  font-weight: 600;
   line-height: 1.5;
-  text-transform: uppercase;
 }
 
 @mixin mono {
@@ -22,10 +20,11 @@
   font-variant-ligatures: none;
 }
 
-@mixin serif-display {
-  font-family: $font-serif;
-  font-weight: 400;
-  letter-spacing: -0.02em;
+// Headlines: the text face, bold, as the site's headings have always been.
+@mixin display-heading {
+  font-family: $font-sans;
+  font-weight: 700;
+  letter-spacing: -0.01em;
 }
 
 @mixin twelve-columns {

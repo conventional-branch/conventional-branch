@@ -63,14 +63,10 @@ footer_created: "Created & maintained by"
 
 # --- 404 ---------------------------------------------------------------------------
 
-notfound_title: "No branch by that name."
-notfound_lead: "There’s no page at this address. The specification, and everything built around it, is one of these:"
+notfound_title: "Page not found"
+notfound_lead: "There’s no page at this address. Try one of these:"
 
 # --- Homepage ----------------------------------------------------------------------
-
-hero_title: "Every branch declares"
-hero_title_em: "its purpose."
-hero_lead: "Conventional Branch is a small, open specification for Git branch names that people can read at a glance and machines can parse without guessing — so your CI/CD, review rules and AI agents can act on a branch from its name alone."
 
 checker_label: "Try a branch name"
 checker_examples: "Examples"
@@ -123,33 +119,30 @@ pipeline_agent: "Run a heavier security, license and lint suite; require a human
 adopters_label: "Used in projects at"
 adopters_all: "All adopters"
 
-why_eyebrow: "Why it exists"
-why_statement_muted: "Most teams already have a branch naming habit. It lives in someone’s head, gets explained to every new contributor, and is enforced by hand in code review."
-why_statement: "Conventional Branch writes it down once — precisely enough for people to follow and for machines to check."
+why_title: "Why it exists"
+why_body: "Most teams already have a branch naming habit, but it lives in someone’s head and is enforced by hand in code review. Conventional Branch writes it down precisely enough for people to follow and for tools to check."
 
-principle_stable_title: "Stable by contract"
+principle_stable_title: "Stable versions"
 principle_stable_body: "Each release is frozen the day it’s published. Pin <code>/v{{ .Version }}/spec.json</code> and nothing your tools accept changes until you choose to upgrade."
-principle_checked_title: "Checked, not just written"
+principle_checked_title: "Tested examples"
 principle_checked_body: "A conformance suite runs on every pull request. The examples in all {{ .Languages }} languages, the badge, llms.txt and every copy-paste config are tested against spec.json, so none of them can drift."
 
-adopt_eyebrow: "Adopt it"
-adopt_title: "From team habit to shared contract,"
-adopt_title_em: "in three steps."
+adopt_title: "Adopt it in three steps"
 step_write_title: "Write it down"
 step_write_body: "Add the convention to your contributing guide — and to AGENTS.md or CLAUDE.md, so coding agents follow it too."
 step_write_link: "Copy the AGENTS.md snippet"
 step_enforce_title: "Enforce it"
-step_enforce_body: "A server rule is the contract; a local hook is the courtesy. Copy a ready-made configuration for your platform."
-step_enforce_link: "GitHub, GitLab, Bitbucket, Git hooks"
+step_enforce_body: "Copy a ready-made configuration for GitHub, GitLab, Bitbucket or a Git hook."
+step_enforce_link: "See the configurations"
 step_show_title: "Show it"
 step_show_body: "Add the badge to your README, so contributors know the rule before they open a branch."
 step_show_link: "Copy the badge Markdown"
 
 # --- Enforce page ------------------------------------------------------------------
 
-layers_eyebrow: "Two layers"
-layers_courtesy: "the courtesy"
-layers_contract: "the contract"
+layers_title: "Two layers of enforcement"
+layers_courtesy: "Fast, but can be skipped"
+layers_contract: "Can’t be bypassed"
 layers_local_title: "On your machine"
 layers_local_commitcheck: "Checks the type prefix at every commit."
 layers_local_hook: "No dependencies. The last local moment to catch a bad name."
@@ -166,13 +159,10 @@ layers_ci_tag: "Reports in the pull request"
 
 # --- About page --------------------------------------------------------------------
 
-history_eyebrow: "History"
-history_title: "From a team habit to a published standard."
+history_title: "Project history"
 history_note: "The milestones only; the changelog lists every change."
 history_link: "Read the changelog"
-people_eyebrow: "People"
-people_title: "Maintained as"
-people_title_em: "free infrastructure."
+people_title: "Maintainers and contributors"
 people_maintainer: "Created & maintained by"
 people_translate: "Translate the specification"
 contribute_title: "Contribute"

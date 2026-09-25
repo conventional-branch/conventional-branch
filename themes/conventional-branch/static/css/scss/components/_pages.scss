@@ -3,27 +3,21 @@
 // --- A page's hero: About, Enforce ----------------------------------------------------------
 
 .page-hero {
-  padding: clamp(48px, 7vw, 96px) 0 clamp(44px, 6vw, 88px);
+  padding: clamp(40px, 6vw, 72px) 0;
   border-bottom: 1px solid $rule;
 }
 
 .page-hero__title {
-  @include serif-display;
-  max-width: 1100px;
-  margin: clamp(24px, 3vw, 36px) 0 0;
-  font-size: clamp(40px, 5.4vw, 76px);
-  line-height: 1.02;
-  letter-spacing: -0.025em;
+  @include display-heading;
+  margin: 0;
+  font-size: clamp(32px, 4vw, 46px);
+  line-height: 1.15;
   color: $ink;
-
-  em {
-    color: $color-primary-heading;
-  }
 }
 
 .page-hero__lead {
   max-width: 680px;
-  margin: 28px 0 0;
+  margin: 16px 0 0;
   color: $ink-2;
   font-size: clamp(17px, 1.45vw, 21px);
   line-height: 1.55;
@@ -32,12 +26,8 @@
 // --- Enforce: the two layers ---------------------------------------------------------------
 
 .layers {
-  padding: clamp(72px, 9vw, 120px) 0 clamp(72px, 9vw, 128px);
+  padding: clamp(56px, 7vw, 96px) 0;
   background: $paper-2;
-
-  .section__head {
-    margin-bottom: 56px;
-  }
 }
 
 .layers__grid {
@@ -106,7 +96,6 @@
 }
 
 .layer__tag {
-  @include mono;
   display: inline-flex;
   align-items: center;
   height: 26px;
@@ -114,8 +103,8 @@
   border: 1px solid $rule-strong;
   border-radius: $radius-sm;
   color: $ink-2;
-  font-size: 12px;
-  font-weight: 500;
+  font-size: 13px;
+  font-weight: 600;
 }
 
 .layer__tag--solid {
@@ -126,15 +115,14 @@
 }
 
 .layer__title {
-  @include serif-display;
+  @include display-heading;
   margin: 0;
-  font-size: 29px;
-  line-height: 1.15;
-  letter-spacing: -0.01em;
+  font-size: 24px;
+  line-height: 1.2;
 }
 
 .layer__title--small {
-  font-size: 24px;
+  font-size: 20px;
 }
 
 .layer__items {
@@ -363,13 +351,10 @@
 .history__head {
   @include twelve-columns;
   align-items: end;
-  margin-bottom: 64px;
+  margin-bottom: 48px;
 
-  > div:first-child {
+  > .section__title {
     grid-column: span 7;
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
   }
 }
 
@@ -475,11 +460,8 @@
 
 // --- About: people ------------------------------------------------------------------------------
 
-.people__head {
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
-  margin-bottom: 64px;
+.people__title {
+  margin-bottom: 48px;
 }
 
 .people__grid {
@@ -533,10 +515,9 @@
 }
 
 .people__name {
-  font-family: $font-serif;
-  font-size: 36px;
-  line-height: 1.1;
-  letter-spacing: -0.01em;
+  font-size: 26px;
+  font-weight: 700;
+  line-height: 1.2;
 }
 
 .people__handle {
@@ -572,12 +553,18 @@
   padding: clamp(64px, 10vw, 140px) 0;
 }
 
+.notfound__code {
+  margin: 0;
+  color: $color-primary-heading;
+  font-size: 15px;
+  font-weight: 700;
+}
+
 .notfound__title {
-  @include serif-display;
-  margin: 28px 0 0;
-  font-size: clamp(44px, 6vw, 88px);
-  line-height: 1;
-  letter-spacing: -0.03em;
+  @include display-heading;
+  margin: 12px 0 0;
+  font-size: clamp(34px, 4.5vw, 52px);
+  line-height: 1.1;
 }
 
 .notfound__lead {

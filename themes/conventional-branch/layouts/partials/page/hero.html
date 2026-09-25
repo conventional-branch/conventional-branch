@@ -1,15 +1,9 @@
 {{- /* A page's hero, from its front matter:
-         eyebrow      list of labels, joined with slashes
-         heroTitle    the headline, and heroTitleEm its emphasised second half
+         heroTitle    the headline
          heroLead     the standfirst, Markdown allowed */ -}}
 <section class="page-hero" aria-labelledby="page-title">
   <div class="container">
-    {{- with .Params.eyebrow }}
-    <p class="eyebrow">
-      {{- range $i, $label := . }}{{ if $i }}<span class="eyebrow__slash" aria-hidden="true">/</span>{{ end }}<span>{{ $label }}</span>{{ end -}}
-    </p>
-    {{- end }}
-    <h1 id="page-title" class="page-hero__title">{{ .Params.heroTitle | default .Title }}{{ with .Params.heroTitleEm }} <em>{{ . }}</em>{{ end }}</h1>
+    <h1 id="page-title" class="page-hero__title">{{ .Params.heroTitle | default .Title }}</h1>
     {{- with .Params.heroLead }}
     <p class="page-hero__lead">{{ . | markdownify }}</p>
     {{- end }}

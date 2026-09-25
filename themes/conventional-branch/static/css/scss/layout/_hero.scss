@@ -1,77 +1,135 @@
 @use "./../abstracts/index" as *;
 
+// The top of every specification page: the site's name, its one-line description and
+// the branch mark in white on the blue gradient, as the site has opened since 2024.
 .hero {
-  padding: clamp(48px, 7vw, 88px) 0;
+  padding: clamp(56px, 8vw, 104px) 0;
+  background: linear-gradient(150deg, $hero-from 0%, $hero-to 100%);
+  color: #FFFFFF;
 }
 
-.hero__title {
-  @include serif-display;
-  margin: 0;
-  font-size: clamp(46px, 7vw, 100px);
-  line-height: 0.98;
-  letter-spacing: -0.03em;
-  color: $ink;
-
-  em {
-    color: $color-primary-heading;
-  }
+// The header is laid over the hero on these pages.
+.page-spec .hero {
+  padding-top: calc(#{$header-height} + clamp(40px, 6vw, 80px));
 }
 
-.hero--plain .hero__title {
-  font-size: clamp(42px, 5.6vw, 80px);
-}
-
-// Newsreader has no Chinese or Japanese glyphs, and the serifs those fall back to
-// (Songti, Mincho) are too thin for a headline, so those titles are set in the system
-// sans, like the text below them.
-.hero__title:lang(zh),
-.hero__title:lang(ja) {
-  font-family: $font-sans;
-  font-weight: 600;
-  line-height: 1.15;
-  letter-spacing: 0;
+.hero__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 48px;
 }
 
 .hero__copy {
   display: flex;
+  flex: 1 1 auto;
   flex-direction: column;
-  gap: 36px;
-  max-width: 620px;
-  margin-top: clamp(32px, 4vw, 48px);
+  align-items: flex-start;
+  min-width: 0;
+  gap: 16px;
+  max-width: 680px;
+}
+
+.hero__title {
+  @include display-heading;
+  margin: 0;
+  font-size: clamp(38px, 5vw, 58px);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+// Chinese and Japanese titles are tracked normally.
+.hero__title:lang(zh),
+.hero__title:lang(ja) {
+  letter-spacing: 0;
 }
 
 .hero__lead {
   margin: 0;
-  font-size: clamp(17px, 1.5vw, 21px);
+  font-size: clamp(17px, 1.4vw, 19px);
   line-height: 1.55;
-  color: $ink-2;
 }
 
 .hero__actions {
   display: flex;
+  align-self: stretch;
   flex-wrap: wrap;
   gap: 12px;
+  margin-top: 20px;
 }
 
+// Pill buttons outlined in white, the first one filled.
+.hero .button {
+  min-height: 44px;
+  padding: 0 20px;
+  border-radius: 999px;
+  font-size: 15px;
+}
+
+.hero .button--primary {
+  background: #FFFFFF;
+  color: $color-primary-heading;
+
+  &:hover {
+    background: rgba(#FFFFFF, 0.88);
+    color: $color-link-hover;
+  }
+}
+
+.hero .button--secondary {
+  border-color: rgba(#FFFFFF, 0.75);
+  color: #FFFFFF;
+
+  &:hover {
+    border-color: #FFFFFF;
+    background: #FFFFFF;
+    color: $color-primary-heading;
+  }
+}
+
+.hero__mark {
+  display: flex;
+  flex-shrink: 0;
+  width: clamp(120px, 13vw, 170px);
+  margin-right: clamp(0px, 4vw, 64px);
+
+  svg {
+    width: 100%;
+    height: auto;
+  }
+}
+
+// On an archived version, in place of the actions.
 .notice {
   display: flex;
   align-items: flex-start;
   gap: 12px;
-  margin: 0;
-  padding: 16px 20px;
+  margin: 8px 0 0;
+  padding: 14px 18px;
   border-radius: $radius-md;
-  background: $paper-2;
-  color: $ink-2;
+  background: rgba($ink, 0.25);
   font-size: 15px;
   line-height: 1.6;
 
   .icon {
-    margin-top: 2px;
-    color: $color-primary-heading;
+    margin-top: 3px;
   }
 
   a {
+    color: #FFFFFF;
     font-weight: 600;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+}
+
+@include below($bp-md) {
+  .page-spec .hero {
+    padding-top: calc(60px + 40px);
+  }
+
+  .hero__mark {
+    display: none;
   }
 }
 

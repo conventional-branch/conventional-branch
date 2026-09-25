@@ -1,17 +1,14 @@
-{{- /* The top of a specification page. On a homepage whose language has the landing
-       copy it states the mission; everywhere else — translations, archived versions —
-       it carries that language's own title and description. */ -}}
-{{- $landing := and .IsHome .Site.Params.landing -}}
+{{- /* The top of a specification page, in every language and version: the site's name
+       and one-line description beside the branch mark, on the blue the site has always
+       opened with. */ -}}
 {{- $current := partial "version-current.html" . -}}
 {{- $latest := site.Params.versions.current -}}
 {{- $isArchived := ne $current $latest -}}
-<section class="hero{{ if $landing }} hero--landing{{ else }} hero--plain{{ end }}" aria-labelledby="hero-title">
-  <div class="container">
-    <h1 id="hero-title" class="hero__title">
-      {{- if $landing }}{{ i18n "hero_title" }}<br><em>{{ i18n "hero_title_em" }}</em>{{ else }}{{ .Param "Title" }}{{ end -}}
-    </h1>
+<section class="hero" aria-labelledby="hero-title">
+  <div class="container hero__inner">
     <div class="hero__copy">
-      <p class="hero__lead">{{ if $landing }}{{ i18n "hero_lead" }}{{ else }}{{ .Param "Description" }}{{ end }}</p>
+      <h1 id="hero-title" class="hero__title">{{ .Param "Title" }}</h1>
+      <p class="hero__lead">{{ .Param "Description" }}</p>
       {{- if $isArchived }}
       <p class="notice">
         {{- partial "icon.html" (dict "name" "info" "size" 18) -}}
@@ -21,11 +18,12 @@
       {{- with .Param "Actions" }}
       <div class="hero__actions">
         {{- range $i, $action := . }}
-        <a class="button {{ if eq $i 0 }}button--primary{{ else }}button--secondary{{ end }}" href="{{ $action.url }}">{{ $action.label }}{{ if ne $i 0 }}{{ partial "icon.html" (dict "name" "arrow") }}{{ end }}</a>
+        <a class="button {{ if eq $i 0 }}button--primary{{ else }}button--secondary{{ end }}" href="{{ $action.url }}">{{ $action.label }}</a>
         {{- end }}
       </div>
       {{- end }}
       {{- end }}
     </div>
+    <span class="hero__mark">{{ partial "svg-branch.html" (dict "size" 180) }}</span>
   </div>
 </section>

@@ -1,37 +1,41 @@
 // Conventional Branch — design tokens.
 //
-// The site is set like a printed standard: display headlines in a serif, machines'
-// words in a monospace, and everything else in the reader's own system font. Sections
-// written for people sit on paper, sections written for machines on ink, and the
-// Markdown pages on white, to be read.
+// The site keeps the look it has had since 2024: the brand blue, a blue hero with the
+// branch mark, and text on white in the reader's own system font, with a monospace for
+// what machines read. Sections written for machines, like the checker, sit on ink.
 
 // --- Brand ------------------------------------------------------------------------
 
 // The badge's version half (static/badge.svg). Used for graphics, for fills under ink
-// text and for text on ink — never for text on paper, where it reaches only 2.75:1.
+// text and for text on ink — never for text on white, where it reaches only 3.0:1.
 $color-primary: #6699CC;
 // The deeper blue the badge tried first; kept because static/badge.svg explains why
 // it lost. Not used on the site.
 $color-primary-deep: #3B6BB5;
-// Blue text, links and primary buttons on paper (5.9:1 on $paper).
+// Blue text, links and primary buttons (6.4:1 on white).
 $color-primary-heading: #2B5EA7;
 $color-link-hover: #1D4580;
 $color-button-hover: #1F4C8F;
 
-// --- Paper: the human-facing ground --------------------------------------------------
+// The hero: the blue gradient the site has always opened with, dark enough across its
+// whole length for white text (6.4:1 to 4.6:1), since on a phone the text runs into
+// its light end.
+$hero-from: #2B5EA7;
+$hero-to: #4577B8;
 
-$paper: #F7F6F1;
-$paper-2: #EFEDE6;
-$card: #FDFCF9;
-$rule: #DCD9CF;
-$rule-strong: #CFCBC0;
+// --- Light grounds ----------------------------------------------------------------
 
-// --- Ink: text on paper, and the machine-facing ground -------------------------------
+$paper: #F6F8FA;   // code blocks, zebra rows, quiet panels
+$paper-2: #EEF1F4; // inline code, alternate sections
+$card: #FFFFFF;
+$rule: #D8DEE4;
+$rule-strong: #C5CDD5;
+
+// --- Ink: text, and the machine-facing ground -------------------------------------
 
 $ink: #111A27;
-$ink-2: #3A4555;     // body copy, 9.0:1 on paper
-$ink-3: #5B6472;     // captions, 5.5:1 on paper
-$ink-muted: #7D8591; // large text only (24px and up), 3.4:1 on paper
+$ink-2: #3A4555;     // secondary copy, 9.7:1 on white
+$ink-3: #5B6472;     // captions, 6.0:1 on white
 $ink-faint: #9AA1AB; // separators, never text that has to be read
 
 $on-ink: #F7F6F1;
@@ -58,7 +62,6 @@ $invalid-fg: #9A3B12;
 
 // --- Type ---------------------------------------------------------------------------
 
-$font-serif: 'Newsreader', 'Iowan Old Style', 'Palatino Linotype', Georgia, serif;
 // The stack GitHub uses: each platform's own UI face, which also picks the right CJK font
 // for the page's language.
 $font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji';

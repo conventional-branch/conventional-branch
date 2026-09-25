@@ -10,20 +10,18 @@
 <main id="main">
   {{- partial "page/hero.html" . }}
   {{- if eq $slug "enforce" }}{{ partial "enforce/layers.html" . }}{{ end }}
-  <div class="doc-surface">
-    <div class="container doc-grid">
-      <aside class="doc-aside">
-        <div class="doc-aside__inner">
-          {{- partial "toc.html" (dict "page" .) }}
-          <div class="aside-block aside-block--rule">
-            <a class="aside-edit" href="https://github.com/conventional-branch/conventional-branch/blob/main/content/{{ replace .File.Path "\\" "/" }}">{{ partial "icon.html" (dict "name" "edit" "size" 15) }}{{ i18n "edit_page" }}</a>
-          </div>
+  <div class="container doc-grid">
+    <aside class="doc-aside">
+      <div class="doc-aside__inner">
+        {{- partial "toc.html" (dict "page" .) }}
+        <div class="aside-block aside-block--rule">
+          <a class="aside-edit" href="https://github.com/conventional-branch/conventional-branch/blob/main/content/{{ replace .File.Path "\\" "/" }}">{{ partial "icon.html" (dict "name" "edit" "size" 15) }}{{ i18n "edit_page" }}</a>
         </div>
-      </aside>
-      <article class="markdown-body doc-body">
-        {{ .Content }}
-      </article>
-    </div>
+      </div>
+    </aside>
+    <article class="markdown-body doc-body">
+      {{ .Content }}
+    </article>
   </div>
   {{- if eq $slug "about" }}
   {{- partial "about/history.html" . }}
