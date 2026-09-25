@@ -2,6 +2,8 @@
 draft: false
 aliases: ["/th/"]
 layout: single
+seoTitle: "หลักการตั้งชื่อ Git Branch — Conventional Branch"
+seoDescription: "ข้อกำหนดสำหรับการตั้งชื่อ branch ใน Git: คำนำหน้า feature/, bugfix/, hotfix/, release/ และ chore/ พร้อมไวยากรณ์ที่เป็นทางการ และวิธีบังคับใช้ใน GitHub และ GitLab"
 ---
 
 # Conventional Branch 1.1.0

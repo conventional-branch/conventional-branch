@@ -2,6 +2,8 @@
 draft: false
 aliases: ["/ru/"]
 layout: single
+seoTitle: "Соглашение об именовании веток Git — Conventional Branch"
+seoDescription: "Спецификация имён веток Git: префиксы feature/, bugfix/, hotfix/, release/ и chore/, формальная грамматика и способы проверки в GitHub и GitLab."
 ---
 
 # Conventional Branch 1.1.0
