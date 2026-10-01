@@ -22,7 +22,7 @@ jobs:
           ref: ${{ github.head_ref }}
 
       - name: ODS AI code quality gate
-        uses: open-delivery-spec/validate-action@4cfdc6fb1adf69b273c78755cd5dfa0b8d6de7ec # v1
+        uses: open-delivery-spec/validate-action@73523732feace0206ae9a9de98ffd11b5352a3a1 # v1
         with:
           diff-base: ${{ github.event.pull_request.base.sha || 'origin/main' }}
           branch: ${{ github.head_ref }}
