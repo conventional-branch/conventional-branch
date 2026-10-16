@@ -19,7 +19,9 @@ jobs:
         with:
           persist-credentials: true
           fetch-depth: 0
-          ref: ${{ github.head_ref }}
+          # On a pull request from a fork the head branch exists only in the
+          # fork; the head commit's SHA resolves for forks and branches alike.
+          ref: ${{ github.event.pull_request.head.sha }}
 
       - name: ODS AI code quality gate
         uses: open-delivery-spec/validate-action@73523732feace0206ae9a9de98ffd11b5352a3a1 # v1
