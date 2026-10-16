@@ -1,0 +1,21 @@
+content/enforce/index.md
+  s_b134afe9af2fb9::t_d1b993faf9f525 103-107,226,239,255-257,317-367
+skills/conventional-branch/SKILL.md
+  s_b134afe9af2fb9::t_e2ace1ae9a6bed 193
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "2e404842f4909211ea09f857bbe98df147702d17",
+  "prompts": {},
+  "sessions": {
+    "s_b134afe9af2fb9": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "2ed9f19e-0c7d-4d78-9f4a-632b11425ad0",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "Xianpeng Shen <xianpeng.shen@gmail.com>"
+    }
+  }
+}
