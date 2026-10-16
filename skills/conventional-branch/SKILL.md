@@ -48,7 +48,7 @@ Prefer the full names over aliases for consistency.
 | `claude/` | — | Claude Code by Anthropic |
 | `codex/` | — | OpenAI Codex |
 
-Use a vendor-specific prefix when you know which agent is producing the branch; use `ai/` as a vendor-neutral fallback.
+Use a vendor-specific prefix when you know which agent is producing the branch; use `ai/` as a vendor-neutral fallback. The list is closed: an agent not listed here uses `ai/`.
 
 ### Trunk Branches
 
