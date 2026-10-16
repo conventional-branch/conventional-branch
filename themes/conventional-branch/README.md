@@ -35,8 +35,8 @@ params:
     action:
       url: https://creativecommons.org/licenses/by/4.0/
   versions:
-    current: v1.1.0
-    list: ["v1.0.0", "v1.1.0"]
+    current: v1.2.0
+    list: ["v1.0.0", "v1.1.0", "v1.2.0"]
 
 languages:
   en:

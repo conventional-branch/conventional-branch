@@ -1,5 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="180" height="20" role="img" aria-label="Conventional Branch 1.1.0">
-  <title>Conventional Branch 1.1.0</title>
+<svg xmlns="http://www.w3.org/2000/svg" width="180" height="20" role="img" aria-label="Conventional Branch 1.2.0">
+  <title>Conventional Branch 1.2.0</title>
   <!--
     Adoption badge, served at https://conventionalbranch.org/badge.svg
 
@@ -49,7 +49,7 @@
   <g fill="#fff" text-anchor="middle" font-family="Verdana,Geneva,DejaVu Sans,sans-serif" font-size="110" text-rendering="geometricPrecision">
     <text aria-hidden="true" x="782" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="1085">Conventional Branch</text>
     <text x="782" y="140" transform="scale(.1)" textLength="1085">Conventional Branch</text>
-    <text aria-hidden="true" x="1598" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="255">1.1.0</text>
-    <text x="1598" y="140" transform="scale(.1)" textLength="255">1.1.0</text>
+    <text aria-hidden="true" x="1598" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="255">1.2.0</text>
+    <text x="1598" y="140" transform="scale(.1)" textLength="255">1.2.0</text>
   </g>
 </svg>

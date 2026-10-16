@@ -6,7 +6,7 @@ seoTitle: "Git 分支命名規範 — 約定式分支 Conventional Branch"
 seoDescription: "Git 分支命名規範：feature/、bugfix/、hotfix/、release/、chore/ 等分支前綴，附正式語法，以及在 GitHub、GitLab 中強制檢查的方法。"
 ---
 
-# 約定式分支 1.1.0
+# 約定式分支 1.2.0
 
 ## 概述
 
@@ -40,16 +40,18 @@ seoDescription: "Git 分支命名規範：feature/、bugfix/、hotfix/、release
 **AI 智能體來源前綴（AI Agent Source Prefixes）** — 識別由 AI 編碼智能體產生的分支：
 {{< agents >}}
 
+此列表已凍結：沒有專屬前綴的智能體使用 `ai/`。
+
 主幹分支（`main`、`master`、`develop`）不使用前綴。
 
 ---
 
 ### 基本規則
 
-1. **使用小寫英數、連字號與點**：一律使用小寫字母（`a-z`）、數字（`0-9`）與連字號（`-`）分隔單字，避免特殊字元、底線或空白。任何 branch 的描述中都可以使用點（`.`），通常用於表示版本號（例如 `release/v1.2.0`、`chore/upgrade-node-v20.11`）。
+1. **使用小寫英數、連字號與點**：一律使用小寫字母（`a-z`）、數字（`0-9`）與連字號（`-`）分隔單字，避免特殊字元、底線或空白。任何 branch 的描述中都可以使用點（`.`），通常用於表示版本號（例如 `release/v1.2.0`、`chore/upgrade-node-v20.11`）。 小寫規則的唯一例外是描述開頭的工單編號（見第 4 條）。
 2. **禁止連續、開頭或結尾的連字號或點**：連字號與點不得連續出現（例如 `feature/new--login`、`release/v1.-2.0`），也不得出現在描述的開頭或結尾（例如 `feature/-new-login`、`release/v1.2.0.`）。
 3. **保持清楚且精簡**：branch 名稱應在具描述性的同時保持精簡，清楚表達工作的內容與目的。
-4. **包含工單編號**：若適用，請包含專案管理工具的工單編號，方便追蹤。例如，對於工單 `issue-123`，branch 名稱可以是 `feature/issue-123-new-login`。
+4. **包含工單編號**：若適用，請包含專案管理工具的工單編號，方便追蹤。例如，對於工單 `issue-123`，branch 名稱可以是 `feature/issue-123-new-login`。 工單編號位於描述開頭時，可保留專案管理工具中的大寫形式，例如 `feature/PROJ-123-new-login`；描述的其餘部分仍須小寫。
 
 ### 形式文法
 
@@ -63,9 +65,11 @@ type            = "feature" / "feat" / "bugfix" / "fix"
                 / "hotfix" / "release" / "chore"
                 / "ai" / "copilot" / "cursor"
                 / "claude" / "codex"
-description     = desc-segment *("-" desc-segment)
+description     = (ticket-key / desc-segment) *("-" desc-segment)
+ticket-key      = UPPER *(UPPER / DIGIT) "-" 1*DIGIT
 desc-segment    = 1*(ALPHA / DIGIT) *("." 1*(ALPHA / DIGIT))
 ALPHA           = %x61-7A   ; 小寫字母 a-z
+UPPER           = %x41-5A   ; 大寫字母 A-Z，僅用於工單編號
 DIGIT           = %x30-39   ; 數字 0-9
 ```
 
@@ -87,7 +91,11 @@ DIGIT           = %x30-39   ; 數字 0-9
 | `chore/upgrade-node-v20.11` | ✅ | 非 release branch 中的點 |
 | `chore/update-dependencies` | ✅ | 非程式碼任務 |
 | `feature/issue-123-new-login` | ✅ | 含工單編號的功能分支 |
+| `feature/PROJ-123-new-login` | ✅ | 描述開頭的大寫工單編號 |
+| `release/PROJ-1234` | ✅ | 描述僅為工單編號 |
 | `Feature/Add-Login` | ❌ | 不允許大寫字母 |
+| `feature/new-login-PROJ-123` | ❌ | 工單編號必須位於描述開頭 |
+| `feature/Proj-123-new-login` | ❌ | 工單編號必須全部大寫 |
 | `feature/new--login` | ❌ | 不允許連續連字號 |
 | `feature/-new-login` | ❌ | 描述不能以連字號開頭 |
 | `feature/new-login-` | ❌ | 描述不能以連字號結尾 |
@@ -135,6 +143,12 @@ branch 與 commit 不同——branch 是暫時性的，通常只會使用到 mer
 
 原因有二。第一，Git 通常將 branch 參照存成 `.git/refs/heads/` 下的檔案，而 macOS 與 Windows 預設的檔案系統不區分大小寫：`Feature/login` 與 `feature/login` 在這些機器上指向同一路徑，在 Linux 上卻是兩個不同的 branch，因此同時允許兩種寫法的 repository 在不同 clone 中的行為可能不一致。第二，只有一種寫法更容易輸入、搜尋與比對：依 `release/*` 觸發的工具不必再考慮 `Release/*`。
 
+自 v1.2.0 起有一個例外：位於描述開頭的工單編號（例如 `PROJ-123`）可保留 Jira 等工具顯示的大寫形式。請完全依照工具中的寫法書寫工單編號，避免同一個 repository 中同時出現以 `PROJ-123` 和 `proj-123` 命名的 branch。
+
+### v1.2.0 與 v1.1.0 的主要差異是什麼？
+
+v1.2.0 允許描述以大寫工單編號開頭，例如 `feature/PROJ-123-new-login`，這在 v1.1.0 中是無效的。它也凍結了 AI 智能體來源前綴列表：今後不再新增廠商前綴，五個前綴以外的智能體一律使用 `ai/`。所有在 v1.1.0 下有效的 branch 名稱依然有效，沒有破壞性變更。
+
 ### v1.1.0 與 v1.0.0 的主要差異是什麼？
 
 v1.1.0 的主要新功能是引入了 **AI 智能體來源前綴（AI Agent Source Prefixes）**（具體原因見下一條常見問題）。同時，版本化網站增加了版本切換器，使用者可以瀏覽 v1.0.0 和 v1.1.0 兩種規範。所有現有的 v1.0.0 branch 名稱仍然完全有效 —— 沒有不相容的變更。
@@ -144,7 +158,7 @@ v1.1.0 的主要新功能是引入了 **AI 智能體來源前綴（AI Agent Sour
 AI 編碼智能體（GitHub Copilot、Cursor、Claude Code、OpenAI Codex 等）越來越多地被用於生成程式碼和建立 Pull Request。每個智能體都使用自己的分支前綴（例如 `copilot/`、`cursor/`）。透過在約定式分支規範中標準化這些前綴，我們可以實現：
 1. **快速識別** — 審查者和工具可以立即識別 AI 生成的 PR
 2. **工具驗證** — 諸如 commit-check 之類的工具可以驗證 AI 智能體分支是否符合規範
-3. **註冊標準** — 新的 AI 智能體可以採用已記錄的前綴，而不是自行建立臨時的模式
+3. **穩定的列表** — 自 v1.2.0 起這五個前綴固定不變，其他智能體使用 `ai/`，文法不會因新工具的出現而變動
 
 `ai/` 通用前綴適用於沒有專用前綴的 AI 智能體，或者適用於傾向於使用供應商中立識別碼的團隊。這是 **v1.1.0** 發佈的關鍵新特性 —— 版本間變更的完整摘要請參見上一條常見問題。
 

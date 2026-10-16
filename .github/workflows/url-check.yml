@@ -34,6 +34,7 @@ jobs:
             # These must never 404: something out there depends on each one.
             "https://conventionalbranch.org/spec.json"
             "https://conventionalbranch.org/v1.1.0/spec.json"
+            "https://conventionalbranch.org/v1.2.0/spec.json"
             "https://conventionalbranch.org/schema/v1/spec.schema.json"
             "https://conventionalbranch.org/de/"
             "https://conventionalbranch.org/es/"

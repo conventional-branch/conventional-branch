@@ -13,3 +13,6 @@
 - date: "2026-07-08"
   text: "1.1.0: prefixes for AI coding agents, and the specification as JSON"
   release: true
+- date: "2026-10-17"
+  text: "1.2.0: uppercase ticket keys, and a closed list of AI agent prefixes"
+  release: true

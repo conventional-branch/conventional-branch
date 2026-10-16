@@ -1,11 +1,10 @@
 # Registry of AI coding agent branch prefixes recognized by the
 # Conventional Branch specification.
 #
-# To register a new AI agent prefix, add an entry to `agents` below and open a
-# pull request (see the "Registering a new AI agent prefix" section in
-# CONTRIBUTING.md). The specification website renders this file as a table, so
-# the registry stays a single source of truth — no need to edit each language's
-# content file.
+# The registry is closed as of 1.2.0: no further prefixes are added, and an
+# agent without one of these uses the generic `ai/` (see "The AI agent prefix
+# registry" in CONTRIBUTING.md). The specification website renders this file as
+# a table, so the registry stays a single source of truth.
 #
 # Fields per agent:
 #   prefix    (required) the branch prefix, without the trailing slash

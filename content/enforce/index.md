@@ -52,7 +52,7 @@ thing that does. The `branch_name_pattern` rule takes a regular expression direc
         "name": "Branch names must follow the Conventional Branch specification",
         "negate": false,
         "operator": "regex",
-        "pattern": "^(?:main|master|develop|(?:feature|feat|bugfix|fix|hotfix|release|chore|ai|copilot|cursor|claude|codex)/[a-z0-9]+(?:\\.[a-z0-9]+)*(?:-[a-z0-9]+(?:\\.[a-z0-9]+)*)*)$"
+        "pattern": "^(?:main|master|develop|(?:feature|feat|bugfix|fix|hotfix|release|chore|ai|copilot|cursor|claude|codex)/(?:[A-Z][A-Z0-9]*-[0-9]+|[a-z0-9]+(?:\\.[a-z0-9]+)*)(?:-[a-z0-9]+(?:\\.[a-z0-9]+)*)*)$"
       }
     }
   ]
@@ -121,7 +121,7 @@ jobs:
         env:
           BRANCH: ${{ github.head_ref }}
         run: |
-          curl -sSfLo spec.json https://conventionalbranch.org/v1.1.0/spec.json
+          curl -sSfLo spec.json https://conventionalbranch.org/v1.2.0/spec.json
           python3 - <<'PY'
           import json, os, re, sys
 
@@ -150,7 +150,7 @@ Push rules reject the branch at `pre-receive`, before it reaches the server.
 Under **Settings → Repository → Push rules → Branch name**, paste:
 
 ```text
-^(?:main|master|develop|(?:feature|feat|bugfix|fix|hotfix|release|chore|ai|copilot|cursor|claude|codex)/[a-z0-9]+(?:\.[a-z0-9]+)*(?:-[a-z0-9]+(?:\.[a-z0-9]+)*)*)$
+^(?:main|master|develop|(?:feature|feat|bugfix|fix|hotfix|release|chore|ai|copilot|cursor|claude|codex)/(?:[A-Z][A-Z0-9]*-[0-9]+|[a-z0-9]+(?:\.[a-z0-9]+)*)(?:-[a-z0-9]+(?:\.[a-z0-9]+)*)*)$
 ```
 
 Three things worth knowing before you rely on it:
@@ -171,7 +171,7 @@ conventional-branch:
     - if: $CI_MERGE_REQUEST_SOURCE_BRANCH_NAME
   script:
     - apk add --no-cache curl
-    - curl -sSfLo spec.json https://conventionalbranch.org/v1.1.0/spec.json
+    - curl -sSfLo spec.json https://conventionalbranch.org/v1.2.0/spec.json
     - |
       python3 -c '
       import json, os, re, sys
@@ -198,7 +198,7 @@ pipelines:
           image: python:3-alpine
           script:
             - apk add --no-cache curl
-            - curl -sSfLo spec.json https://conventionalbranch.org/v1.1.0/spec.json
+            - curl -sSfLo spec.json https://conventionalbranch.org/v1.2.0/spec.json
             - |
               python3 -c '
               import json, os, re, sys
@@ -264,7 +264,7 @@ executable:
 # Reject a push from a branch that does not follow the Conventional Branch
 # specification. https://conventionalbranch.org/
 
-pattern='^(main|master|develop|(feature|feat|bugfix|fix|hotfix|release|chore|ai|copilot|cursor|claude|codex)/[a-z0-9]+(\.[a-z0-9]+)*(-[a-z0-9]+(\.[a-z0-9]+)*)*)$'
+pattern='^(main|master|develop|(feature|feat|bugfix|fix|hotfix|release|chore|ai|copilot|cursor|claude|codex)/([A-Z][A-Z0-9]*-[0-9]+|[a-z0-9]+(\.[a-z0-9]+)*)(-[a-z0-9]+(\.[a-z0-9]+)*)*)$'
 branch=$(git symbolic-ref --short HEAD)
 
 if ! printf '%s' "$branch" | grep -qE "$pattern"; then
@@ -332,7 +332,8 @@ instruction file your tooling reads:
 ## Branch naming
 
 Branch names follow the [Conventional Branch](https://conventionalbranch.org/)
-specification: `<type>/<description>`, lowercase, hyphen-separated.
+specification: `<type>/<description>`, lowercase, hyphen-separated. A ticket key
+such as `PROJ-123` may open the description in uppercase.
 
 Types: `feature/` (or `feat/`), `bugfix/` (or `fix/`), `hotfix/`, `release/`, `chore/`.
 `main`, `master` and `develop` take no prefix.
@@ -352,7 +353,7 @@ from the specification itself rather than by copying it out of a document:
 ```python
 import json, re, urllib.request
 
-SPEC = "https://conventionalbranch.org/v1.1.0/spec.json"  # pinned, never changes
+SPEC = "https://conventionalbranch.org/v1.2.0/spec.json"  # pinned, never changes
 
 spec = json.load(urllib.request.urlopen(SPEC))
 valid = re.compile(spec["grammar"]["regex"])

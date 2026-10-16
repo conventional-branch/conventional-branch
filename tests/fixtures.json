@@ -1,7 +1,7 @@
 {
   "description": "Conformance fixtures for the Conventional Branch specification. Any implementation (validators, editor extensions, agent skills) can load these cases and assert that its result matches `valid` for each `branch`. The canonical machine-readable spec lives in static/spec.json.",
   "spec": "Conventional Branch",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "cases": [
     { "branch": "main", "valid": true, "reason": "Trunk branch" },
     { "branch": "master", "valid": true, "reason": "Trunk branch" },
@@ -15,6 +15,10 @@
     { "branch": "chore/upgrade-node-v20.11", "valid": true, "reason": "Dots are allowed in any description, not only release branches" },
     { "branch": "chore/update-dependencies", "valid": true, "reason": "Non-code task" },
     { "branch": "feature/issue-123-new-login", "valid": true, "reason": "Feature with ticket number" },
+    { "branch": "feature/PROJ-123-new-login", "valid": true, "reason": "Uppercase ticket key at the start of the description" },
+    { "branch": "release/PROJ-1234", "valid": true, "reason": "Ticket key as the whole description" },
+    { "branch": "fix/ABC2-7-crash-on-save", "valid": true, "reason": "Digits in the ticket key's project part" },
+    { "branch": "feature/T-1", "valid": true, "reason": "Single-letter ticket key" },
     { "branch": "chore/123", "valid": true, "reason": "Digits-only description segment" },
     { "branch": "feature/a", "valid": true, "reason": "Single-character description" },
     { "branch": "ai/refactor-auth-flow", "valid": true, "reason": "Generic AI agent prefix" },
@@ -25,6 +29,12 @@
 
     { "branch": "Feature/Add-Login", "valid": false, "reason": "Uppercase letters not allowed" },
     { "branch": "Main", "valid": false, "reason": "Trunk branch must be lowercase" },
+    { "branch": "feature/new-login-PROJ-123", "valid": false, "reason": "Ticket key must open the description" },
+    { "branch": "feature/Proj-123-new-login", "valid": false, "reason": "Ticket key must be all uppercase" },
+    { "branch": "feature/PROJ-123-New-Login", "valid": false, "reason": "Only the ticket key may be uppercase" },
+    { "branch": "feature/PROJ-new-login", "valid": false, "reason": "Ticket key needs a number" },
+    { "branch": "feature/2PROJ-123", "valid": false, "reason": "Ticket key must start with a letter" },
+    { "branch": "feature/PROJ-123.1", "valid": false, "reason": "Dots are not part of a ticket key" },
     { "branch": "feature/new--login", "valid": false, "reason": "Consecutive hyphens not allowed" },
     { "branch": "feature/-new-login", "valid": false, "reason": "Leading hyphen in description" },
     { "branch": "feature/new-login-", "valid": false, "reason": "Trailing hyphen in description" },

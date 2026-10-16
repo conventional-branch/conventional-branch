@@ -6,6 +6,17 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 The version number tracks the specification itself; site and tooling changes are listed under the version they serve.
 
+## [1.2.0] - 2026-10-17
+
+### Added
+- **Uppercase ticket keys**: a description may open with a tracker key such as `PROJ-123`, which keeps its uppercase form — `feature/PROJ-123-new-login`, `release/PROJ-1234`. Everything after the key stays lowercase. The grammar gains `ticket-key`; the regex, examples (all eleven languages), fixtures, agent skill and homepage checker follow. `spec.json` adds `rules.ticketKey`, a new optional property in schema v1.
+- **Frozen spec endpoint**: [`/v1.2.0/spec.json`](https://conventionalbranch.org/v1.2.0/spec.json). The 1.1.0 text is archived at [/v1.1.0/](https://conventionalbranch.org/v1.1.0/).
+
+### Changed
+- **AI agent prefix registry closed**: `ai/`, `claude/`, `codex/`, `copilot/` and `cursor/` stay valid, no further vendor prefixes will be registered, and any other agent uses `ai/`.
+
+No breaking changes: every branch name valid under 1.1.0 is valid under 1.2.0.
+
 ## [1.1.0] - 2026-07-08
 
 ### Added

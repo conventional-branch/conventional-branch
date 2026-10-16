@@ -4,14 +4,14 @@ description: Create Git branches following the Conventional Branch specification
 license: CC BY 4.0
 compatibility: "Requires git. Optional: commit-check for automated branch name validation."
 metadata:
-  version: "1.1.0"
+  version: "1.2.0"
   spec: https://conventionalbranch.org
   source: https://github.com/conventional-branch/conventional-branch
 ---
 
 # Conventional Branch
 
-Create Git branches that follow the [Conventional Branch 1.1.0](https://conventionalbranch.org) specification — human-readable, machine-parseable, and automation-friendly.
+Create Git branches that follow the [Conventional Branch 1.2.0](https://conventionalbranch.org) specification — human-readable, machine-parseable, and automation-friendly.
 
 ## Branch Name Format
 
@@ -22,7 +22,7 @@ Create Git branches that follow the [Conventional Branch 1.1.0](https://conventi
 | Component | Format | Required | Example |
 |-----------|--------|----------|---------|
 | `type` | Defined prefix (see table below) | Yes | `feature`, `fix` |
-| `description` | kebab-case, lowercase | Yes | `add-login-page` |
+| `description` | kebab-case, lowercase; may open with an uppercase ticket key | Yes | `add-login-page`, `PROJ-123-add-login-page` |
 
 ### Branch Types
 
@@ -48,7 +48,7 @@ Prefer the full names over aliases for consistency.
 | `claude/` | — | Claude Code by Anthropic |
 | `codex/` | — | OpenAI Codex |
 
-Use a vendor-specific prefix when you know which agent is producing the branch; use `ai/` as a vendor-neutral fallback.
+Use a vendor-specific prefix when you know which agent is producing the branch; use `ai/` as a vendor-neutral fallback. The list is closed: an agent not listed here uses `ai/`.
 
 ### Trunk Branches
 
@@ -58,7 +58,7 @@ Use a vendor-specific prefix when you know which agent is producing the branch; 
 
 Branch names must follow these rules or they will be rejected by validation tools like [commit-check](https://github.com/commit-check/commit-check):
 
-- **Lowercase only** — no uppercase letters anywhere (`a-z` only)
+- **Lowercase only** — no uppercase letters, except a ticket key such as `PROJ-123` at the very start of the description
 - **Alphanumerics, hyphens, and dots** — `a-z`, `0-9`, `-`, `.`
 - **Dots** are allowed in any description, typically for version numbers (e.g., `release/v1.2.0`, `chore/upgrade-node-v20.11`)
 - **No underscores, spaces, or special characters**
@@ -75,9 +75,11 @@ type            = "feature" / "feat" / "bugfix" / "fix"
                 / "hotfix" / "release" / "chore"
                 / "ai" / "copilot" / "cursor"
                 / "claude" / "codex"
-description     = desc-segment *("-" desc-segment)
+description     = (ticket-key / desc-segment) *("-" desc-segment)
+ticket-key      = UPPER *(UPPER / DIGIT) "-" 1*DIGIT
 desc-segment    = 1*(ALPHA / DIGIT) *("." 1*(ALPHA / DIGIT))
 ALPHA           = %x61-7A
+UPPER           = %x41-5A
 DIGIT           = %x30-39
 ```
 
@@ -95,6 +97,8 @@ hotfix/security-patch
 release/v1.2.0
 chore/update-dependencies
 feature/issue-123-new-login
+feature/PROJ-123-new-login
+release/PROJ-1234
 ai/refactor-auth-flow
 copilot/add-login-page
 cursor/fix-header-bug
@@ -107,6 +111,8 @@ codex/optimize-query
 | Branch | Problem |
 |--------|---------|
 | `Feature/Add-Login` | Uppercase letters |
+| `feature/new-login-PROJ-123` | Ticket key not at the start of the description |
+| `feature/Proj-123-new-login` | Ticket key not all uppercase |
 | `feature/new--login` | Consecutive hyphens |
 | `feature/-new-login` | Leading hyphen |
 | `feature/new-login-` | Trailing hyphen |
@@ -133,13 +139,13 @@ Ask the user for (if not already clear):
 - **Branch type** — default to `feature` when uncertain
 - **Brief description** — what the branch is for
 
-Do not ask for a ticket number. If the user mentions one, include it in the description (e.g., `feature/issue-123-add-oauth`).
+Do not ask for a ticket number. If the user mentions one, put it at the start of the description, written the way their tracker writes it (e.g., `feature/PROJ-123-add-oauth` for a Jira key, `feature/issue-123-add-oauth` for a GitHub issue).
 
 ### 2. Validate the Name
 
 Before creating, check the assembled name against the **Naming Rules** above. If any rule fails, fix it silently:
 
-- Lowercase everything
+- Lowercase everything except a ticket key at the start of the description
 - Replace underscores and spaces with hyphens
 - Collapse consecutive hyphens
 - Strip leading/trailing hyphens

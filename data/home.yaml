@@ -32,6 +32,7 @@ checker:
   examples:
     - fix/header-bug
     - release/v1.2.0
+    - feature/PROJ-123-add-login
     - claude/refactor-auth-flow
     - main
     - Feature/Add-Login

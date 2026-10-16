@@ -5,8 +5,11 @@
 // finer rules below only explain *why* a name fails, and suggest the nearest valid one.
 
 // A description as the grammar defines it: lowercase letters and digits, words joined
-// by single hyphens, and dots between the parts of a version number.
-const DESCRIPTION = /^[a-z0-9]+(?:\.[a-z0-9]+)*(?:-[a-z0-9]+(?:\.[a-z0-9]+)*)*$/;
+// by single hyphens, and dots between the parts of a version number. It may open with
+// a ticket key such as PROJ-123, the one place uppercase letters are allowed.
+const DESCRIPTION = /^(?:[A-Z][A-Z0-9]*-[0-9]+|[a-z0-9]+(?:\.[a-z0-9]+)*)(?:-[a-z0-9]+(?:\.[a-z0-9]+)*)*$/;
+// A leading ticket key, however the name goes on after it.
+const TICKET = /^[A-Z][A-Z0-9]*-[0-9]+(?![A-Za-z0-9])/;
 
 // Near misses worth correcting rather than only rejecting.
 const TYPE_TYPOS = {
@@ -63,13 +66,15 @@ export function initChecker(root) {
 
   function reason(name, type, desc, typeKnown) {
     const m = data.messages;
-    if (/[A-Z]/.test(name)) return m.uppercase;
+    // A leading ticket key is allowed to be uppercase, so judge the rest of the name.
+    const rest = desc.replace(TICKET, '');
+    if (/[A-Z]/.test(type) || /[A-Z]/.test(rest)) return m.uppercase;
     if (/\s/.test(name)) return m.space;
     if (/_/.test(name)) return m.underscore;
     if (!typeKnown) return m.unknownType.replace('{type}', type);
     if (desc === '') return m.empty;
     if (desc.includes('/')) return m.slash;
-    if (/[^a-z0-9.-]/.test(desc)) return m.chars;
+    if (/[^a-z0-9.-]/.test(rest)) return m.chars;
     if (/--/.test(desc)) return m.doubleHyphen;
     if (/\.\./.test(desc)) return m.doubleDot;
     if (/^[-.]/.test(desc)) return m.leading;
@@ -81,8 +86,11 @@ export function initChecker(root) {
   function suggest(name, type, desc) {
     const lowered = type.trim().toLowerCase();
     const fixedType = TYPE_TYPOS[lowered] || lowered;
-    const fixedDesc = desc
-      .trim()
+    // Keep a leading ticket key as typed, and normalise the words after it.
+    const trimmed = desc.trim();
+    const key = (trimmed.match(TICKET) || [''])[0];
+    const words = trimmed
+      .slice(key.length)
       .toLowerCase()
       .replace(/[\s_/]+/g, '-')
       .replace(/[^a-z0-9.-]/g, '')
@@ -90,6 +98,7 @@ export function initChecker(root) {
       .replace(/-{2,}/g, '-')
       .replace(/\.{2,}/g, '.')
       .replace(/^[-.]+|[-.]+$/g, '');
+    const fixedDesc = [key, words].filter(Boolean).join('-');
     const candidate = `${fixedType}/${fixedDesc}`;
     return candidate !== name && pattern.test(candidate) ? candidate : '';
   }

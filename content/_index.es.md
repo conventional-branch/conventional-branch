@@ -6,7 +6,7 @@ seoTitle: "Convención de nombres de ramas Git — Conventional Branch"
 seoDescription: "Una especificación para nombrar ramas de Git: prefijos feature/, bugfix/, hotfix/, release/ y chore/, una gramática formal y cómo aplicarla en GitHub y GitLab."
 ---
 
-# Conventional Branch 1.1.0
+# Conventional Branch 1.2.0
 
 ## Resumen
 
@@ -40,16 +40,18 @@ La especificación de ramas admite los siguientes prefijos y debe estructurarse 
 **Prefijos de fuente de agente de IA** — identifican ramas generadas por agentes de codificación de IA:
 {{< agents >}}
 
+Esta lista está cerrada: un agente sin prefijo propio usa `ai/`.
+
 Las ramas troncales (`main`, `master`, `develop`) no usan prefijo.
 
 ---
 
 ### Reglas básicas
 
-1. **Usar alfanuméricos en minúsculas, guiones y puntos**: Utilice siempre letras minúsculas (`a-z`), números (`0-9`) y guiones (`-`) para separar palabras. Evite caracteres especiales, guiones bajos o espacios. Los puntos (`.`) se permiten en cualquier descripción, normalmente para números de versión (p. ej., `release/v1.2.0`, `chore/upgrade-node-v20.11`).
+1. **Usar alfanuméricos en minúsculas, guiones y puntos**: Utilice siempre letras minúsculas (`a-z`), números (`0-9`) y guiones (`-`) para separar palabras. Evite caracteres especiales, guiones bajos o espacios. Los puntos (`.`) se permiten en cualquier descripción, normalmente para números de versión (p. ej., `release/v1.2.0`, `chore/upgrade-node-v20.11`). La única excepción a las minúsculas es una clave de ticket al inicio de la descripción (véase la regla 4).
 2. **Sin guiones o puntos consecutivos, iniciales o finales**: Asegúrese de que los guiones y los puntos no aparezcan de forma consecutiva (p. ej., `feature/new--login`, `release/v1.-2.0`), ni al inicio o al final de la descripción (p. ej., `feature/-new-login`, `release/v1.2.0.`).
 3. **Ser claro y conciso**: El nombre de la rama debe ser descriptivo pero conciso, indicando claramente el propósito del trabajo.
-4. **Incluir números de ticket**: Si corresponde, incluya el número de ticket de su herramienta de gestión de proyectos para facilitar el seguimiento. Por ejemplo, para un ticket `issue-123`, el nombre de la rama podría ser `feature/issue-123-new-login`.
+4. **Incluir números de ticket**: Si corresponde, incluya el número de ticket de su herramienta de gestión de proyectos para facilitar el seguimiento. Por ejemplo, para un ticket `issue-123`, el nombre de la rama podría ser `feature/issue-123-new-login`. Una clave de ticket al inicio de la descripción puede conservar las mayúsculas de su herramienta de seguimiento, como en `feature/PROJ-123-new-login`; el resto de la descripción sigue en minúsculas.
 
 
 ### Gramática formal
@@ -64,9 +66,11 @@ type            = "feature" / "feat" / "bugfix" / "fix"
                 / "hotfix" / "release" / "chore"
                 / "ai" / "copilot" / "cursor"
                 / "claude" / "codex"
-description     = desc-segment *("-" desc-segment)
+description     = (ticket-key / desc-segment) *("-" desc-segment)
+ticket-key      = UPPER *(UPPER / DIGIT) "-" 1*DIGIT
 desc-segment    = 1*(ALPHA / DIGIT) *("." 1*(ALPHA / DIGIT))
 ALPHA           = %x61-7A   ; letras minúsculas a-z
+UPPER           = %x41-5A   ; mayúsculas A-Z, solo en la clave de ticket
 DIGIT           = %x30-39   ; dígitos 0-9
 ```
 
@@ -88,7 +92,11 @@ DIGIT           = %x30-39   ; dígitos 0-9
 | `chore/upgrade-node-v20.11` | ✅ | Puntos fuera de una rama de release |
 | `chore/update-dependencies` | ✅ | Tarea no relacionada con código |
 | `feature/issue-123-new-login` | ✅ | Funcionalidad con número de ticket |
+| `feature/PROJ-123-new-login` | ✅ | Clave de ticket en mayúsculas al inicio |
+| `release/PROJ-1234` | ✅ | Descripción formada solo por la clave de ticket |
 | `Feature/Add-Login` | ❌ | Mayúsculas no permitidas |
+| `feature/new-login-PROJ-123` | ❌ | La clave de ticket debe abrir la descripción |
+| `feature/Proj-123-new-login` | ❌ | La clave de ticket debe ir toda en mayúsculas |
 | `feature/new--login` | ❌ | Guiones consecutivos no permitidos |
 | `feature/-new-login` | ❌ | La descripción no puede comenzar con guion |
 | `feature/new-login-` | ❌ | La descripción no puede terminar con guion |
@@ -136,6 +144,12 @@ Sí, como una extensión del equipo. Los tipos de la gramática son los que acep
 
 Por dos razones. Primero, Git suele guardar las referencias de las ramas como archivos en `.git/refs/heads/`, y los sistemas de archivos predeterminados de macOS y Windows no distinguen mayúsculas de minúsculas: `Feature/login` y `feature/login` apuntan allí a la misma ruta, mientras que en Linux son dos ramas distintas. Por eso, un repositorio que permita ambas puede comportarse de forma distinta según el clon. Segundo, una sola grafía es más fácil de escribir, buscar y filtrar: una herramienta que se activa con `release/*` no tiene que prever también `Release/*`.
 
+Desde la v1.2.0 hay una excepción: una clave de ticket al inicio de la descripción, como `PROJ-123`, puede conservar las mayúsculas que muestran herramientas como Jira. Escriba cada clave exactamente como la muestra la herramienta, para que `PROJ-123` y `proj-123` nunca den nombre a ramas en el mismo repositorio.
+
+### ¿Cuáles son las principales diferencias entre v1.2.0 y v1.1.0?
+
+La v1.2.0 permite que una descripción empiece por una clave de ticket en mayúsculas, como `feature/PROJ-123-new-login`, algo que la v1.1.0 rechazaba. También cierra la lista de prefijos de fuente de agente de IA: no se añadirán más prefijos de proveedores, y un agente que no tenga uno de los cinco usa `ai/`. Todo nombre de rama válido en la v1.1.0 sigue siendo válido: no hay cambios incompatibles.
+
 ### ¿Cuáles son las principales diferencias entre v1.1.0 y v1.0.0?
 
 v1.1.0 añade **Prefijos de fuente de agente de IA** como la nueva característica principal (consulte la siguiente entrada de preguntas frecuentes para saber por qué se introdujeron). También incluye un sitio web versionado con un conmutador de versiones para que los usuarios puedan navegar tanto por la especificación v1.0.0 como por la v1.1.0. Todos los nombres de ramas v1.0.0 existentes siguen siendo totalmente válidos — sin cambios que rompan la compatibilidad.
@@ -145,7 +159,7 @@ v1.1.0 añade **Prefijos de fuente de agente de IA** como la nueva característi
 Los agentes de codificación de IA (GitHub Copilot, Cursor, Claude Code, OpenAI Codex, etc.) se utilizan cada vez más para generar código y crear pull requests. Cada agente usa su propio prefijo de rama (p. ej., `copilot/`, `cursor/`). Al estandarizar estos prefijos en la especificación Conventional Branch, permitimos:
 1. **Identificación rápida** — los revisores y las herramientas pueden reconocer inmediatamente los PRs generados por IA
 2. **Validación de herramientas** — herramientas como commit-check pueden validar las ramas de agentes de IA según la especificación
-3. **Un estándar de registro** — los nuevos agentes de IA pueden adoptar un prefijo documentado en lugar de inventar patrones ad-hoc
+3. **Una lista estable** — los cinco prefijos quedan fijados desde la v1.2.0 y cualquier otro agente usa `ai/`, de modo que la gramática no cambia con cada herramienta nueva
 
 El prefijo genérico `ai/` está disponible para cualquier agente de IA que no tenga un prefijo dedicado, o para equipos que prefieran un identificador neutro respecto al proveedor. Esta es la nueva característica clave lanzada en **v1.1.0** — para un resumen completo de los cambios entre versiones, consulte la entrada de preguntas frecuentes anterior.
 

@@ -125,6 +125,11 @@
         "noLeadingOrTrailingSeparators": {
           "type": "boolean"
         },
+        "ticketKey": {
+          "description": "A tracker issue key that may open the description, as a regex fragment. It is the only part of a branch name allowed to contain uppercase letters. Added in 1.2.0; absent before.",
+          "type": "string",
+          "minLength": 1
+        },
         "notes": {
           "description": "Prose that explains the rules and their edge cases.",
           "type": "string",

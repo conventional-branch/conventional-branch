@@ -6,7 +6,7 @@ seoTitle: "Konwencja nazewnictwa gałęzi Git — Conventional Branch"
 seoDescription: "Specyfikacja nazw gałęzi Git: prefiksy feature/, bugfix/, hotfix/, release/ i chore/, formalna gramatyka oraz sposób jej egzekwowania w GitHub i GitLab."
 ---
 
-# Conventional Branch 1.1.0
+# Conventional Branch 1.2.0
 
 ## Podsumowanie
 
@@ -40,16 +40,18 @@ Specyfikacja gałęzi obsługuje następujące prefiksy i powinna być zorganizo
 **Prefiksy źródła agenta AI** — identyfikują gałęzie generowane przez agentów kodujących AI:
 {{< agents >}}
 
+Ta lista jest zamknięta: agent bez własnego prefiksu używa `ai/`.
+
 Gałęzie główne (`main`, `master`, `develop`) nie używają prefiksu.
 
 ---
 
 ### Podstawowe zasady
 
-1. **Używaj małych liter, cyfr, myślników i kropek**: Zawsze używaj małych liter (`a-z`), cyfr (`0-9`) i myślników (`-`) do oddzielania słów. Unikaj znaków specjalnych, podkreśleń lub spacji. Kropki (`.`) są dozwolone w każdym opisie, zwykle w numerach wersji (np. `release/v1.2.0`, `chore/upgrade-node-v20.11`).
+1. **Używaj małych liter, cyfr, myślników i kropek**: Zawsze używaj małych liter (`a-z`), cyfr (`0-9`) i myślników (`-`) do oddzielania słów. Unikaj znaków specjalnych, podkreśleń lub spacji. Kropki (`.`) są dozwolone w każdym opisie, zwykle w numerach wersji (np. `release/v1.2.0`, `chore/upgrade-node-v20.11`). Jedynym wyjątkiem od małych liter jest klucz zgłoszenia na początku opisu (zob. zasada 4).
 2. **Bez następujących po sobie, wiodących lub końcowych myślników lub kropek**: Upewnij się, że myślniki i kropki nie pojawiają się kolejno po sobie (np. `feature/new--login`, `release/v1.-2.0`), ani na początku czy końcu opisu (np. `feature/-new-login`, `release/v1.2.0.`).
 3. **Zachowaj jasność i zwięzłość**: Nazwa gałęzi powinna być opisowa, ale zwięzła, jasno wskazująca cel pracy.
-4. **Dołącz numery biletów**: Jeśli to możliwe, dołącz numer biletu z narzędzia zarządzania projektami, aby ułatwić śledzenie. Na przykład, dla biletu `issue-123`, nazwa gałęzi mogłaby być `feature/issue-123-new-login`.
+4. **Dołącz numery biletów**: Jeśli to możliwe, dołącz numer biletu z narzędzia zarządzania projektami, aby ułatwić śledzenie. Na przykład, dla biletu `issue-123`, nazwa gałęzi mogłaby być `feature/issue-123-new-login`. Klucz zgłoszenia na początku opisu może zachować wielkie litery z narzędzia do śledzenia zgłoszeń, np. `feature/PROJ-123-new-login`; reszta opisu pozostaje pisana małymi literami.
 
 
 ### Formalna gramatyka
@@ -64,9 +66,11 @@ type            = "feature" / "feat" / "bugfix" / "fix"
                 / "hotfix" / "release" / "chore"
                 / "ai" / "copilot" / "cursor"
                 / "claude" / "codex"
-description     = desc-segment *("-" desc-segment)
+description     = (ticket-key / desc-segment) *("-" desc-segment)
+ticket-key      = UPPER *(UPPER / DIGIT) "-" 1*DIGIT
 desc-segment    = 1*(ALPHA / DIGIT) *("." 1*(ALPHA / DIGIT))
 ALPHA           = %x61-7A   ; małe litery a-z
+UPPER           = %x41-5A   ; wielkie litery A-Z, tylko w kluczu zgłoszenia
 DIGIT           = %x30-39   ; cyfry 0-9
 ```
 
@@ -88,7 +92,11 @@ DIGIT           = %x30-39   ; cyfry 0-9
 | `chore/upgrade-node-v20.11` | ✅ | Kropki poza gałęzią wydania |
 | `chore/update-dependencies` | ✅ | Zadanie niezwiązane z kodem |
 | `feature/issue-123-new-login` | ✅ | Funkcja z numerem biletu |
+| `feature/PROJ-123-new-login` | ✅ | Klucz zgłoszenia wielkimi literami na początku |
+| `release/PROJ-1234` | ✅ | Opis składający się tylko z klucza zgłoszenia |
 | `Feature/Add-Login` | ❌ | Wielkie litery są niedozwolone |
+| `feature/new-login-PROJ-123` | ❌ | Klucz zgłoszenia musi otwierać opis |
+| `feature/Proj-123-new-login` | ❌ | Klucz zgłoszenia musi być pisany wielkimi literami |
 | `feature/new--login` | ❌ | Kolejne myślniki są niedozwolone |
 | `feature/-new-login` | ❌ | Opis nie może zaczynać się myślnikiem |
 | `feature/new-login-` | ❌ | Opis nie może kończyć się myślnikiem |
@@ -136,6 +144,12 @@ Tak, jako rozszerzenie na poziomie zespołu. Typy w gramatyce to te, które akce
 
 Z dwóch powodów. Po pierwsze, Git zwykle przechowuje referencje gałęzi jako pliki w `.git/refs/heads/`, a domyślne systemy plików macOS i Windows nie rozróżniają wielkości liter: `Feature/login` i `feature/login` wskazują tam tę samą ścieżkę, a w Linuksie są dwiema różnymi gałęziami. Repozytorium, które dopuszcza obie formy, może więc zachowywać się różnie w zależności od klonu. Po drugie, jedna pisownia jest łatwiejsza do wpisania, wyszukania i dopasowania: narzędzie uruchamiane dla `release/*` nie musi uwzględniać także `Release/*`.
 
+Od wersji v1.2.0 obowiązuje jeden wyjątek: klucz zgłoszenia na początku opisu, taki jak `PROJ-123`, może zachować wielkie litery, które wyświetlają narzędzia takie jak Jira. Zapisuj każdy klucz dokładnie tak, jak pokazuje go narzędzie, aby `PROJ-123` i `proj-123` nigdy nie nazywały gałęzi w tym samym repozytorium.
+
+### Jakie są główne różnice między v1.2.0 a v1.1.0?
+
+Wersja v1.2.0 pozwala, by opis zaczynał się od klucza zgłoszenia pisanego wielkimi literami, np. `feature/PROJ-123-new-login`, czego v1.1.0 nie akceptowała. Zamyka też listę prefiksów źródła agenta AI: nie będą dodawane kolejne prefiksy dostawców, a agent spoza tej piątki używa `ai/`. Każda nazwa gałęzi poprawna w v1.1.0 pozostaje poprawna — brak zmian łamiących zgodność.
+
 ### Jakie są główne różnice między v1.1.0 a v1.0.0?
 
 v1.1.0 dodaje **Prefiksy źródła agenta AI** jako główną nową funkcję (dlaczego je wprowadzono, wyjaśnia następne pytanie w FAQ). Oferuje również witrynę z wersjonowaniem z przełącznikiem wersji, umożliwiającym użytkownikom przeglądanie specyfikacji v1.0.0 i v1.1.0. Wszystkie istniejące nazwy gałęzi v1.0.0 pozostają w pełni ważne — bez zmian łamiących zgodność.
@@ -145,7 +159,7 @@ v1.1.0 dodaje **Prefiksy źródła agenta AI** jako główną nową funkcję (dl
 Agenci kodujący AI (GitHub Copilot, Cursor, Claude Code, OpenAI Codex itp.) są coraz częściej używani do generowania kodu i tworzenia pull requestów. Każdy agent używa własnego prefiksu gałęzi (np. `copilot/`, `cursor/`). Poprzez standaryzację tych prefiksów w specyfikacji Conventional Branch, umożliwiamy:
 1. **Szybką identyfikację** — recenzenci i narzędzia mogą natychmiast rozpoznać PRy generowane przez AI
 2. **Walidację narzędziową** — narzędzia takie jak commit-check mogą walidować gałęzie agentów AI względem specyfikacji
-3. **Standard rejestracji** — nowi agenci AI mogą przyjąć udokumentowany prefiks zamiast wymyślać tymczasowe wzorce
+3. **Stała lista** — pięć prefiksów jest ustalonych od v1.2.0, a każdy inny agent używa `ai/`, więc gramatyka nie zmienia się przy każdym nowym narzędziu
 
 Generyczny prefiks `ai/` jest dostępny dla każdego agenta AI bez dedykowanego prefiksu lub dla zespołów, które preferują neutralnego dostawcę. To kluczowa nowa funkcja wydana w **v1.1.0** — pełne podsumowanie zmian między wersjami znajduje się w powyższym pytaniu FAQ.
 

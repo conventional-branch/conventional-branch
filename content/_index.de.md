@@ -6,7 +6,7 @@ seoTitle: "Git Branch-Namenskonvention — Conventional Branch"
 seoDescription: "Eine Spezifikation für Git-Branch-Namen: die Präfixe feature/, bugfix/, hotfix/, release/ und chore/, eine formale Grammatik und wie man sie in GitHub und GitLab durchsetzt."
 ---
 
-# Conventional Branch 1.1.0
+# Conventional Branch 1.2.0
 
 ## Zusammenfassung
 
@@ -40,16 +40,18 @@ Die Branch-Spezifikation unterstützt die folgenden Präfixe und sollte wie folg
 **AI-Agenten-Quellpräfixe** — identifizieren Branches, die von KI-Codierungsagenten erstellt wurden:
 {{< agents >}}
 
+Diese Liste ist abgeschlossen: Ein Agent ohne eigenes Präfix verwendet `ai/`.
+
 Trunk-Branches (`main`, `master`, `develop`) verwenden kein Präfix.
 
 ---
 
 ### Grundregeln
 
-1. **Verwenden Sie kleine Buchstaben und Zahlen, Bindestriche und Punkte**: Verwenden Sie immer Kleinbuchstaben (`a-z`), Zahlen (`0-9`) und Bindestriche (`-`), um Wörter zu trennen. Vermeiden Sie Sonderzeichen, Unterstriche oder Leerzeichen. Punkte (`.`) sind in jeder Beschreibung erlaubt, typischerweise für Versionsnummern (z.B. `release/v1.2.0`, `chore/upgrade-node-v20.11`).
+1. **Verwenden Sie kleine Buchstaben und Zahlen, Bindestriche und Punkte**: Verwenden Sie immer Kleinbuchstaben (`a-z`), Zahlen (`0-9`) und Bindestriche (`-`), um Wörter zu trennen. Vermeiden Sie Sonderzeichen, Unterstriche oder Leerzeichen. Punkte (`.`) sind in jeder Beschreibung erlaubt, typischerweise für Versionsnummern (z.B. `release/v1.2.0`, `chore/upgrade-node-v20.11`). Die einzige Ausnahme von der Kleinschreibung ist ein Ticket-Schlüssel am Anfang der Beschreibung (siehe Regel 4).
 2. **Keine aufeinanderfolgenden, führenden oder nachfolgenden Bindestriche oder Punkte**: Stellen Sie sicher, dass Bindestriche und Punkte nicht aufeinanderfolgen (z.B. `feature/new--login`, `release/v1.-2.0`), noch am Anfang oder Ende der Beschreibung (z.B. `feature/-new-login`, `release/v1.2.0.`).
 3. **Halten Sie es klar und prägnant**: Der Branch-Name sollte beschreibend aber prägnant sein und den Zweck der Arbeit klar angeben.
-4. **Ticket-Nummern einbeziehen**: Falls zutreffend, beziehen Sie die Ticket-Nummer aus Ihrem Projektmanagement-Tool ein, um die Verfolgung zu erleichtern. Zum Beispiel könnte für ein Ticket `issue-123` der Branch-Name `feature/issue-123-new-login` lauten.
+4. **Ticket-Nummern einbeziehen**: Falls zutreffend, beziehen Sie die Ticket-Nummer aus Ihrem Projektmanagement-Tool ein, um die Verfolgung zu erleichtern. Zum Beispiel könnte für ein Ticket `issue-123` der Branch-Name `feature/issue-123-new-login` lauten. Steht ein Ticket-Schlüssel am Anfang der Beschreibung, darf er die Großschreibung aus dem Tracker behalten, z.B. `feature/PROJ-123-new-login`; der Rest der Beschreibung bleibt kleingeschrieben.
 
 
 ### Formale Grammatik
@@ -64,9 +66,11 @@ type            = "feature" / "feat" / "bugfix" / "fix"
                 / "hotfix" / "release" / "chore"
                 / "ai" / "copilot" / "cursor"
                 / "claude" / "codex"
-description     = desc-segment *("-" desc-segment)
+description     = (ticket-key / desc-segment) *("-" desc-segment)
+ticket-key      = UPPER *(UPPER / DIGIT) "-" 1*DIGIT
 desc-segment    = 1*(ALPHA / DIGIT) *("." 1*(ALPHA / DIGIT))
 ALPHA           = %x61-7A   ; Kleinbuchstaben a-z
+UPPER           = %x41-5A   ; Großbuchstaben A-Z, nur im Ticket-Schlüssel
 DIGIT           = %x30-39   ; Ziffern 0-9
 ```
 
@@ -88,7 +92,11 @@ DIGIT           = %x30-39   ; Ziffern 0-9
 | `chore/upgrade-node-v20.11` | ✅ | Punkte außerhalb eines Release-Branches |
 | `chore/update-dependencies` | ✅ | Nicht-Code-Aufgabe |
 | `feature/issue-123-new-login` | ✅ | Feature mit Ticket-Nummer |
+| `feature/PROJ-123-new-login` | ✅ | Großgeschriebener Ticket-Schlüssel am Anfang |
+| `release/PROJ-1234` | ✅ | Ticket-Schlüssel als gesamte Beschreibung |
 | `Feature/Add-Login` | ❌ | Großbuchstaben nicht erlaubt |
+| `feature/new-login-PROJ-123` | ❌ | Ticket-Schlüssel muss am Anfang stehen |
+| `feature/Proj-123-new-login` | ❌ | Ticket-Schlüssel muss vollständig großgeschrieben sein |
 | `feature/new--login` | ❌ | Aufeinanderfolgende Bindestriche nicht erlaubt |
 | `feature/-new-login` | ❌ | Beschreibung darf nicht mit Bindestrich beginnen |
 | `feature/new-login-` | ❌ | Beschreibung darf nicht mit Bindestrich enden |
@@ -136,6 +144,12 @@ Ja, als Erweiterung auf Teamebene. Die Typen in der Grammatik sind die, die jede
 
 Aus zwei Gründen. Erstens speichert Git Branch-Referenzen meist als Dateien unter `.git/refs/heads/`, und die Standard-Dateisysteme von macOS und Windows unterscheiden nicht zwischen Groß- und Kleinschreibung: `Feature/login` und `feature/login` landen dort auf demselben Pfad, unter Linux sind es aber zwei verschiedene Branches. Ein Repository, das beides zulässt, kann sich deshalb von Klon zu Klon unterschiedlich verhalten. Zweitens ist eine einzige Schreibweise leichter zu tippen, zu suchen und abzugleichen: Ein Werkzeug, das auf `release/*` reagiert, muss nicht auch noch `Release/*` berücksichtigen.
 
+Seit v1.2.0 gibt es eine Ausnahme: Ein Ticket-Schlüssel am Anfang der Beschreibung, etwa `PROJ-123`, darf die Großschreibung behalten, die Tracker wie Jira anzeigen. Schreiben Sie jeden Schlüssel genau so, wie der Tracker ihn zeigt, damit `PROJ-123` und `proj-123` nie beide Branches im selben Repository benennen.
+
+### Was sind die Hauptunterschiede zwischen v1.2.0 und v1.1.0?
+
+v1.2.0 erlaubt, dass eine Beschreibung mit einem großgeschriebenen Ticket-Schlüssel beginnt, etwa `feature/PROJ-123-new-login`, was v1.1.0 ablehnte. Außerdem ist die Liste der KI-Agenten-Quellpräfixe nun abgeschlossen: Es kommen keine weiteren Herstellerpräfixe hinzu, und ein Agent ohne eines der fünf verwendet `ai/`. Jeder unter v1.1.0 gültige Branch-Name bleibt gültig — keine Breaking Changes.
+
 ### Was sind die Hauptunterschiede zwischen v1.1.0 und v1.0.0?
 
 v1.1.0 führt **AI-Agenten-Quellpräfixe** als wichtigstes neues Feature ein (siehe den nächsten FAQ-Eintrag für die Gründe). Außerdem bietet die versionierte Website einen Versionsumschalter, mit dem Benutzer sowohl die v1.0.0- als auch die v1.1.0-Spezifikation durchsuchen können. Alle vorhandenen v1.0.0-Branch-Namen bleiben vollständig gültig — keine breaking changes.
@@ -145,7 +159,7 @@ v1.1.0 führt **AI-Agenten-Quellpräfixe** als wichtigstes neues Feature ein (si
 KI-Codierungsagenten (GitHub Copilot, Cursor, Claude Code, OpenAI Codex usw.) werden zunehmend zur Codegenerierung und Erstellung von Pull Requests eingesetzt. Jeder Agent verwendet sein eigenes Branch-Präfix (z. B. `copilot/`, `cursor/`). Durch die Standardisierung dieser Präfixe in der Conventional-Branch-Spezifikation ermöglichen wir:
 1. **Schnelle Identifikation** — Prüfer und Tools können KI-generierte PRs sofort erkennen
 2. **Tool-Validierung** — Tools wie commit-check können KI-Agenten-Branches gegen die Spezifikation validieren
-3. **Einen Registrierungsstandard** — neue KI-Agenten können ein dokumentiertes Präfix übernehmen, anstatt Ad-hoc-Muster zu erfinden
+3. **Eine stabile Liste** — die fünf Präfixe stehen seit v1.2.0 fest, und jeder andere Agent verwendet `ai/`, sodass sich die Grammatik nicht mit jedem neuen Werkzeug ändert
 
 Der generische `ai/`-Präfix steht für jeden KI-Agenten ohne dedizierten Präfix zur Verfügung, oder für Teams, die einen anbieterneutralen Identifikator bevorzugen. Dies ist das wichtigste neue Feature, das in **v1.1.0** veröffentlicht wurde — eine vollständige Zusammenfassung der Änderungen zwischen den Versionen finden Sie im FAQ-Eintrag oben.
 

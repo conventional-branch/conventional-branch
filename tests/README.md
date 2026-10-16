@@ -7,7 +7,7 @@ Machine-readable spec and test fixtures for the Conventional Branch specificatio
 | File | Purpose |
 |---|---|
 | [`../static/spec.json`](../static/spec.json) | The canonical machine-readable spec: types, aliases, trunk branches, rules, ABNF, and a single anchored **validation regex**. |
-| [`../static/v1.1.0/spec.json`](../static/v1.1.0/spec.json) | A frozen copy of the spec as of 1.1.0. One such copy exists per released version and never changes. |
+| [`../static/v1.2.0/spec.json`](../static/v1.2.0/spec.json) | A frozen copy of the spec as of 1.2.0. One such copy exists per released version and never changes. |
 | [`../static/schema/v1/spec.schema.json`](../static/schema/v1/spec.schema.json) | A JSON Schema (draft 2020-12) describing the structure of `spec.json` itself, so a consumer can verify a document is a well-formed spec before trusting it. |
 | [`fixtures.json`](fixtures.json) | Language-agnostic conformance cases — a list of branch names with their expected `valid` result and a reason. Any implementation can load these and assert against its own validator. |
 | [`conformance.py`](conformance.py) | The reference check, run in CI. Standard library only. |
@@ -17,7 +17,7 @@ Machine-readable spec and test fixtures for the Conventional Branch specificatio
 | URL | Guarantee |
 |---|---|
 | [`/spec.json`](https://conventionalbranch.org/spec.json) | **Latest.** Always the current version. Its content changes when a new version of the specification is released. |
-| [`/v1.1.0/spec.json`](https://conventionalbranch.org/v1.1.0/spec.json) | **Permanent.** Frozen at publication and never modified. **Pin this** if a change in the spec should not silently change your tool's behavior. |
+| [`/v1.2.0/spec.json`](https://conventionalbranch.org/v1.2.0/spec.json) | **Permanent.** Frozen at publication and never modified. **Pin this** if a change in the spec should not silently change your tool's behavior. |
 | [`/schema/v1/spec.schema.json`](https://conventionalbranch.org/schema/v1/spec.schema.json) | **Permanent.** Schema `v1` only ever gains optional properties; anything that would invalidate a document valid under `v1` ships as `v2` at a new URL. |
 
 Concretely: a new specification version may add a type, extend the grammar, or
@@ -84,7 +84,7 @@ choosing it:
 ```python
 import json, re, urllib.request
 
-SPEC = "https://conventionalbranch.org/v1.1.0/spec.json"  # pinned, never changes
+SPEC = "https://conventionalbranch.org/v1.2.0/spec.json"  # pinned, never changes
 
 spec = json.load(urllib.request.urlopen(SPEC))
 valid = re.compile(spec["grammar"]["regex"])

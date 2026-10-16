@@ -6,7 +6,7 @@ seoTitle: "Convention de nommage des branches Git — Conventional Branch"
 seoDescription: "Une spécification pour nommer les branches Git : préfixes feature/, bugfix/, hotfix/, release/ et chore/, une grammaire formelle et comment l'appliquer dans GitHub et GitLab."
 ---
 
-# Conventional Branch 1.1.0
+# Conventional Branch 1.2.0
 
 ## Résumé
 
@@ -40,16 +40,18 @@ La spécification des branches prend en charge les préfixes suivants et doit ê
 **Préfixes de source d'agent IA** — identifient les branches générées par des agents de codage IA :
 {{< agents >}}
 
+Cette liste est close : un agent sans préfixe dédié utilise `ai/`.
+
 Les branches principales (`main`, `master`, `develop`) n'utilisent pas de préfixe.
 
 ---
 
 ### Règles de base
 
-1. **Utilisez des caractères alphanumériques en minuscules, des tirets et des points** : Utilisez toujours des lettres minuscules (`a-z`), des chiffres (`0-9`), et des tirets (`-`) pour séparer les mots. Évitez les caractères spéciaux, les underscores, ou les espaces. Les points (`.`) sont autorisés dans toute description, généralement pour les numéros de version (par exemple, `release/v1.2.0`, `chore/upgrade-node-v20.11`).
+1. **Utilisez des caractères alphanumériques en minuscules, des tirets et des points** : Utilisez toujours des lettres minuscules (`a-z`), des chiffres (`0-9`), et des tirets (`-`) pour séparer les mots. Évitez les caractères spéciaux, les underscores, ou les espaces. Les points (`.`) sont autorisés dans toute description, généralement pour les numéros de version (par exemple, `release/v1.2.0`, `chore/upgrade-node-v20.11`). La seule exception aux minuscules est une clé de ticket au début de la description (voir la règle 4).
 2. **Pas de tirets ou points consécutifs, en début ou en fin** : Assurez-vous que les tirets et les points n'apparaissent pas de manière consécutive (par exemple, `feature/new--login`, `release/v1.-2.0`), ni au début ou à la fin de la description (par exemple, `feature/-new-login`, `release/v1.2.0.`).
 3. **Restez clair et concis** : Le nom de la branche doit être descriptif mais concis, indiquant clairement l'objectif du travail.
-4. **Incluez les numéros de ticket** : Le cas échéant, incluez le numéro de ticket de votre outil de gestion de projet pour faciliter le suivi. Par exemple, pour un ticket `issue-123`, le nom de la branche pourrait être `feature/issue-123-new-login`.
+4. **Incluez les numéros de ticket** : Le cas échéant, incluez le numéro de ticket de votre outil de gestion de projet pour faciliter le suivi. Par exemple, pour un ticket `issue-123`, le nom de la branche pourrait être `feature/issue-123-new-login`. Une clé de ticket placée au début de la description peut garder la forme en majuscules de votre outil de suivi, par exemple `feature/PROJ-123-new-login` ; le reste de la description reste en minuscules.
 
 
 ### Grammaire formelle
@@ -64,9 +66,11 @@ type            = "feature" / "feat" / "bugfix" / "fix"
                 / "hotfix" / "release" / "chore"
                 / "ai" / "copilot" / "cursor"
                 / "claude" / "codex"
-description     = desc-segment *("-" desc-segment)
+description     = (ticket-key / desc-segment) *("-" desc-segment)
+ticket-key      = UPPER *(UPPER / DIGIT) "-" 1*DIGIT
 desc-segment    = 1*(ALPHA / DIGIT) *("." 1*(ALPHA / DIGIT))
 ALPHA           = %x61-7A   ; lettres minuscules a-z
+UPPER           = %x41-5A   ; majuscules A-Z, clé de ticket uniquement
 DIGIT           = %x30-39   ; chiffres 0-9
 ```
 
@@ -88,7 +92,11 @@ DIGIT           = %x30-39   ; chiffres 0-9
 | `chore/upgrade-node-v20.11` | ✅ | Points hors d'une branche de release |
 | `chore/update-dependencies` | ✅ | Tâche non liée au code |
 | `feature/issue-123-new-login` | ✅ | Fonctionnalité avec numéro de ticket |
+| `feature/PROJ-123-new-login` | ✅ | Clé de ticket en majuscules au début |
+| `release/PROJ-1234` | ✅ | Description réduite à une clé de ticket |
 | `Feature/Add-Login` | ❌ | Majuscules non autorisées |
+| `feature/new-login-PROJ-123` | ❌ | La clé de ticket doit ouvrir la description |
+| `feature/Proj-123-new-login` | ❌ | La clé de ticket doit être entièrement en majuscules |
 | `feature/new--login` | ❌ | Tirets consécutifs non autorisés |
 | `feature/-new-login` | ❌ | La description ne peut pas commencer par un tiret |
 | `feature/new-login-` | ❌ | La description ne peut pas se terminer par un tiret |
@@ -136,6 +144,12 @@ Oui, en tant qu'extension propre à l'équipe. Les types de la grammaire sont ce
 
 Pour deux raisons. D'abord, Git stocke le plus souvent les références de branches sous forme de fichiers dans `.git/refs/heads/`, et les systèmes de fichiers par défaut de macOS et de Windows ne distinguent pas la casse : `Feature/login` et `feature/login` y correspondent au même chemin, alors que sous Linux ce sont deux branches distinctes. Un dépôt qui autorise les deux peut donc se comporter différemment d'un clone à l'autre. Ensuite, une seule graphie est plus facile à taper, à rechercher et à filtrer : un outil déclenché par `release/*` n'a pas à prévoir aussi `Release/*`.
 
+Depuis la v1.2.0, il existe une exception : une clé de ticket au début de la description, comme `PROJ-123`, peut garder les majuscules qu'affichent des outils de suivi comme Jira. Écrivez chaque clé exactement comme l'outil l'affiche, afin que `PROJ-123` et `proj-123` ne nomment jamais tous deux des branches dans le même dépôt.
+
+### Quelles sont les principales différences entre v1.2.0 et v1.1.0 ?
+
+La v1.2.0 permet à une description de commencer par une clé de ticket en majuscules, comme `feature/PROJ-123-new-login`, ce que la v1.1.0 rejetait. Elle clôt aussi la liste des préfixes de source d'agent IA : aucun autre préfixe de fournisseur ne sera ajouté, et un agent qui n'a pas l'un des cinq utilise `ai/`. Tout nom de branche valide en v1.1.0 reste valide — aucun changement cassant.
+
 ### Quelles sont les principales différences entre v1.1.0 et v1.0.0 ?
 
 v1.1.0 ajoute les **Préfixes de source d'agent IA** comme nouvelle fonctionnalité principale (voir l'entrée FAQ suivante pour savoir pourquoi ils ont été introduits). Il propose également un site web versionné avec un sélecteur de version permettant aux utilisateurs de consulter les spécifications v1.0.0 et v1.1.0. Tous les noms de branches v1.0.0 existants restent totalement valides — aucun changement cassant.
@@ -145,7 +159,7 @@ v1.1.0 ajoute les **Préfixes de source d'agent IA** comme nouvelle fonctionnali
 Les agents de codage IA (GitHub Copilot, Cursor, Claude Code, OpenAI Codex, etc.) sont de plus en plus utilisés pour générer du code et créer des pull requests. Chaque agent utilise son propre préfixe de branche (par exemple, `copilot/`, `cursor/`). En normalisant ces préfixes dans la spécification Conventional Branch, nous permettons :
 1. **Identification rapide** — les réviseurs et les outils peuvent immédiatement reconnaître les PRs générées par IA
 2. **Validation par les outils** — des outils comme commit-check peuvent valider les branches d'agents IA par rapport à la spécification
-3. **Un standard d'enregistrement** — les nouveaux agents IA peuvent adopter un préfixe documenté au lieu d'inventer des motifs ad-hoc
+3. **Une liste stable** — les cinq préfixes sont figés depuis la v1.2.0 et tout autre agent utilise `ai/`, si bien que la grammaire ne change pas à chaque nouvel outil
 
 Le préfixe générique `ai/` est disponible pour tout agent IA sans préfixe dédié, ou pour les équipes qui préfèrent un identifiant neutre vis-à-vis du fournisseur. C'est la nouvelle fonctionnalité clé publiée dans **v1.1.0** — pour un résumé complet des changements entre versions, voir l'entrée FAQ ci-dessus.
 
