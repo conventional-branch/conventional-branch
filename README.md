@@ -91,7 +91,7 @@ copied from it cannot drift from the specification.
 
 ## 🏢 Used By
 
-Alongside the organizations named above, Conventional Branch is adopted by [Texas Instruments](https://github.com/TexasInstruments/processor-sdk-doc), [Ansible](https://github.com/ansible/metrics-utility), [Sanity](https://github.com/sanity-io/sdk), Portugal's state technology agency [ARTE](https://github.com/amagovpt/udata-pt), and [Enedis](https://github.com/Enedis-OSS/tic4eebus), France's largest electricity distributor. See the [full list](https://conventionalbranch.org/about/#projects-using-conventional-branch) and add your project via pull request.
+Alongside the organizations named above, Conventional Branch is adopted by [Ansible](https://github.com/ansible/metrics-utility), [Sanity](https://github.com/sanity-io/sdk), Portugal's state technology agency [ARTE](https://github.com/amagovpt/udata-pt), and [Enedis](https://github.com/Enedis-OSS/tic4eebus), France's largest electricity distributor. See the [full list](https://conventionalbranch.org/about/#projects-using-conventional-branch) and add your project via pull request.
 
 ## 🎉 Show Your Support
 
