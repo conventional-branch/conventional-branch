@@ -60,7 +60,7 @@ Branch names must follow these rules or they will be rejected by validation tool
 
 - **Lowercase only** — no uppercase letters anywhere (`a-z` only)
 - **Alphanumerics, hyphens, and dots** — `a-z`, `0-9`, `-`, `.`
-- **Dots allowed only** in `release/` version descriptions (e.g., `release/v1.2.0`)
+- **Dots** are allowed in any description, typically for version numbers (e.g., `release/v1.2.0`, `chore/upgrade-node-v20.11`)
 - **No underscores, spaces, or special characters**
 - **No consecutive hyphens** (`--`), **dots** (`..`), or **hyphen-dot adjacency** (`-.` or `.-`)
 - **No leading or trailing hyphens or dots** in the description

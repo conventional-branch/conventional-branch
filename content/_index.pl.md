@@ -46,7 +46,7 @@ Gałęzie główne (`main`, `master`, `develop`) nie używają prefiksu.
 
 ### Podstawowe zasady
 
-1. **Używaj małych liter, cyfr, myślników i kropek**: Zawsze używaj małych liter (`a-z`), cyfr (`0-9`) i myślników (`-`) do oddzielania słów. Unikaj znaków specjalnych, podkreśleń lub spacji. W przypadku gałęzi wydania kropki (`.`) mogą być używane w opisie do reprezentowania numerów wersji (np. `release/v1.2.0`).
+1. **Używaj małych liter, cyfr, myślników i kropek**: Zawsze używaj małych liter (`a-z`), cyfr (`0-9`) i myślników (`-`) do oddzielania słów. Unikaj znaków specjalnych, podkreśleń lub spacji. Kropki (`.`) są dozwolone w każdym opisie, zwykle w numerach wersji (np. `release/v1.2.0`, `chore/upgrade-node-v20.11`).
 2. **Bez następujących po sobie, wiodących lub końcowych myślników lub kropek**: Upewnij się, że myślniki i kropki nie pojawiają się kolejno po sobie (np. `feature/new--login`, `release/v1.-2.0`), ani na początku czy końcu opisu (np. `feature/-new-login`, `release/v1.2.0.`).
 3. **Zachowaj jasność i zwięzłość**: Nazwa gałęzi powinna być opisowa, ale zwięzła, jasno wskazująca cel pracy.
 4. **Dołącz numery biletów**: Jeśli to możliwe, dołącz numer biletu z narzędzia zarządzania projektami, aby ułatwić śledzenie. Na przykład, dla biletu `issue-123`, nazwa gałęzi mogłaby być `feature/issue-123-new-login`.
@@ -85,6 +85,7 @@ DIGIT           = %x30-39   ; cyfry 0-9
 | `fix/header-bug` | ✅ | Krótki alias dla bugfix |
 | `hotfix/security-patch` | ✅ | Pilna naprawa |
 | `release/v1.2.0` | ✅ | Wydanie z numerem wersji |
+| `chore/upgrade-node-v20.11` | ✅ | Kropki poza gałęzią wydania |
 | `chore/update-dependencies` | ✅ | Zadanie niezwiązane z kodem |
 | `feature/issue-123-new-login` | ✅ | Funkcja z numerem biletu |
 | `Feature/Add-Login` | ❌ | Wielkie litery są niedozwolone |
@@ -119,13 +120,21 @@ Podsumowując, conventional branch został zaprojektowany w celu poprawy organiz
 
 Conventional Branch jest zainspirowany przez [Conventional Commits](https://www.conventionalcommits.org) i podąża za podobną filozofią: wprowadzenie struktury czytelnej dla ludzi i maszyn do metadanych Git. Podczas gdy Conventional Commits standaryzuje wiadomości commitów, Conventional Branch standaryzuje nazwy gałęzi. Obie specyfikacje naturalnie się uzupełniają.
 
+### Czy Conventional Branch wymyśliło te prefiksy?
+
+Nie. Prefiksy takie jak `feature/`, `hotfix/` i `release/` spopularyzowało około 2010 roku narzędzie [git-flow](https://github.com/nvie/gitflow); są też domyślne w narzędziach takich jak [model gałęzi Bitbucket](https://support.atlassian.com/bitbucket-cloud/docs/configure-a-projects-branching-model/). Conventional Branch opiera się na tej praktyce, zamiast ją zastępować. Dodaje precyzyjną definicję, którą mogą współdzielić ludzie i narzędzia: stały zestaw typów, formalną gramatykę, wyrażenie regularne do walidacji opublikowane w [`spec.json`](/spec.json) oraz przypadki zgodności, dzięki czemu każdy walidator akceptuje dokładnie te same nazwy.
+
 ### Dlaczego typy gałęzi nie są tak szczegółowe jak w Conventional Commits (np. `build`, `ci`, `docs`, `style`, `refactor`)?
 
 Gałęzie różnią się od commitów — są tymczasowe i używane głównie do momentu scalenia. Wprowadzenie zbyt wielu typów dla gałęzi byłoby niepotrzebne i utrudniłoby ich zarządzanie oraz zapamiętywanie.
 
 ### Czy mogę zdefiniować własne typy gałęzi poza wymienionymi?
 
-Tak. Specyfikacja definiuje zalecany zestaw typów, ale zespoły mogą definiować dodatkowe niestandardowe typy dla swojego przepływu pracy. Ważne jest jednak, aby jasno dokumentować niestandardowe typy, tak aby wszyscy członkowie zespołu i zautomatyzowane narzędzia były ich świadome.
+Tak, jako rozszerzenie na poziomie zespołu. Typy w gramatyce to te, które akceptuje każde zgodne narzędzie, dlatego gałąź taka jak `unknown/some-task` jest nieprawidłowa według samej specyfikacji. Zespół, który potrzebuje dodatkowych typów (np. `experiment/`), powinien jawnie dodać je do swojego walidatora (na przykład w `allow_branch_types` w [commit-check](/enforce/#commit-check)) i opisać je w dokumentacji, aby członkowie zespołu i zautomatyzowane narzędzia działali zgodnie. Na przykład repozytorium samej specyfikacji dodaje w swojej [konfiguracji commit-check](https://github.com/conventional-branch/conventional-branch/blob/main/commit-check.toml) typ `dependabot/` dla gałęzi tworzonych przez Dependabot.
+
+### Dlaczego nazwy gałęzi muszą być pisane małymi literami?
+
+Z dwóch powodów. Po pierwsze, Git zwykle przechowuje referencje gałęzi jako pliki w `.git/refs/heads/`, a domyślne systemy plików macOS i Windows nie rozróżniają wielkości liter: `Feature/login` i `feature/login` wskazują tam tę samą ścieżkę, a w Linuksie są dwiema różnymi gałęziami. Repozytorium, które dopuszcza obie formy, może więc zachowywać się różnie w zależności od klonu. Po drugie, jedna pisownia jest łatwiejsza do wpisania, wyszukania i dopasowania: narzędzie uruchamiane dla `release/*` nie musi uwzględniać także `Release/*`.
 
 ### Jakie są główne różnice między v1.1.0 a v1.0.0?
 

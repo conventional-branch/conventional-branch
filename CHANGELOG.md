@@ -21,6 +21,10 @@ The version number tracks the specification itself; site and tooling changes are
 - **commit-check on the enforcement page** (2026-09): pre-commit, GitHub Action and `commit-check.toml` configuration, with the type and trunk lists held to `spec.json` by the conformance check. The repository now runs commit-check on its own pull requests.
 - **Redesigned website** (2026-09): a homepage that states what the specification is for and what it holds to, with a branch-name checker driven by `spec.json`; the specification with its outline beside it; and redesigned Enforce and About pages, adding a diagram of the two enforcement layers and the project's history.
 
+### Clarified
+- **Dots** (2026-10): the basic rules now say what the grammar has always allowed — dots in any description, not only on release branches — with `chore/upgrade-node-v20.11` added to the examples and fixtures. No branch name changes validity.
+- **FAQ** (2026-10): custom types are a team-level extension that a validator must be told about (`unknown/some-task` stays invalid under the specification itself); new entries explain the lowercase rule and credit git-flow for the prefixes the specification builds on.
+
 ### Removed
 - VSCode Conventional Branch extension delisted from tooling (2026-08).
 

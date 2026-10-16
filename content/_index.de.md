@@ -46,7 +46,7 @@ Trunk-Branches (`main`, `master`, `develop`) verwenden kein Präfix.
 
 ### Grundregeln
 
-1. **Verwenden Sie kleine Buchstaben und Zahlen, Bindestriche und Punkte**: Verwenden Sie immer Kleinbuchstaben (`a-z`), Zahlen (`0-9`) und Bindestriche (`-`), um Wörter zu trennen. Vermeiden Sie Sonderzeichen, Unterstriche oder Leerzeichen. Für Release-Branches können Punkte (`.`) in der Beschreibung verwendet werden, um Versionsnummern darzustellen (z.B. `release/v1.2.0`).
+1. **Verwenden Sie kleine Buchstaben und Zahlen, Bindestriche und Punkte**: Verwenden Sie immer Kleinbuchstaben (`a-z`), Zahlen (`0-9`) und Bindestriche (`-`), um Wörter zu trennen. Vermeiden Sie Sonderzeichen, Unterstriche oder Leerzeichen. Punkte (`.`) sind in jeder Beschreibung erlaubt, typischerweise für Versionsnummern (z.B. `release/v1.2.0`, `chore/upgrade-node-v20.11`).
 2. **Keine aufeinanderfolgenden, führenden oder nachfolgenden Bindestriche oder Punkte**: Stellen Sie sicher, dass Bindestriche und Punkte nicht aufeinanderfolgen (z.B. `feature/new--login`, `release/v1.-2.0`), noch am Anfang oder Ende der Beschreibung (z.B. `feature/-new-login`, `release/v1.2.0.`).
 3. **Halten Sie es klar und prägnant**: Der Branch-Name sollte beschreibend aber prägnant sein und den Zweck der Arbeit klar angeben.
 4. **Ticket-Nummern einbeziehen**: Falls zutreffend, beziehen Sie die Ticket-Nummer aus Ihrem Projektmanagement-Tool ein, um die Verfolgung zu erleichtern. Zum Beispiel könnte für ein Ticket `issue-123` der Branch-Name `feature/issue-123-new-login` lauten.
@@ -85,6 +85,7 @@ DIGIT           = %x30-39   ; Ziffern 0-9
 | `fix/header-bug` | ✅ | Kurzform für bugfix |
 | `hotfix/security-patch` | ✅ | Dringende Korrektur |
 | `release/v1.2.0` | ✅ | Release mit Versionsnummer |
+| `chore/upgrade-node-v20.11` | ✅ | Punkte außerhalb eines Release-Branches |
 | `chore/update-dependencies` | ✅ | Nicht-Code-Aufgabe |
 | `feature/issue-123-new-login` | ✅ | Feature mit Ticket-Nummer |
 | `Feature/Add-Login` | ❌ | Großbuchstaben nicht erlaubt |
@@ -119,13 +120,21 @@ Zusammenfassend ist Conventional Branch darauf ausgelegt, die Projektorganisatio
 
 Conventional Branch wurde von [Conventional Commits](https://www.conventionalcommits.org) inspiriert und verfolgt eine ähnliche Philosophie: menschlich- und maschinenlesbaren Struktur in Git-Metadaten einzubringen. Während Conventional Commits Commit-Nachrichten standardisiert, standardisiert Conventional Branch Branch-Namen. Die beiden Spezifikationen ergänzen sich auf natürliche Weise.
 
+### Hat Conventional Branch diese Präfixe erfunden?
+
+Nein. Präfixe wie `feature/`, `hotfix/` und `release/` wurden um 2010 durch das [git-flow](https://github.com/nvie/gitflow)-Tooling verbreitet und sind Standard in Werkzeugen wie dem [Branching-Modell von Bitbucket](https://support.atlassian.com/bitbucket-cloud/docs/configure-a-projects-branching-model/). Conventional Branch baut auf dieser Praxis auf, statt sie zu ersetzen. Es ergänzt eine präzise Definition, die Menschen und Werkzeuge teilen können: eine feste Menge von Typen, eine formale Grammatik, eine in [`spec.json`](/spec.json) veröffentlichte Validierungs-Regex und Konformitätsfälle, damit jeder Validator genau dieselben Namen akzeptiert.
+
 ### Warum sind Branch-Typen nicht so detailliert wie Conventional Commits (z. B. `build`, `ci`, `docs`, `style`, `refactor`)?
 
 Branches unterscheiden sich von Commits – sie sind temporär und werden hauptsächlich bis zum Merge verwendet. Zu viele Typen für Branches einzuführen, wäre unnötig und würde sie schwerer zu verwalten und zu merken machen.
 
 ### Kann ich eigene Branch-Typen über die aufgeführten hinaus definieren?
 
-Ja. Die Spezifikation definiert eine empfohlene Menge von Typen, aber Teams können zusätzliche benutzerdefinierte Typen für ihren Workflow definieren. Es ist jedoch wichtig, benutzerdefinierte Typen klar zu dokumentieren, damit alle Teammitglieder und automatisierte Tools davon wissen.
+Ja, als Erweiterung auf Teamebene. Die Typen in der Grammatik sind die, die jedes konforme Werkzeug akzeptiert; ein Branch wie `unknown/some-task` ist nach der Spezifikation selbst daher ungültig. Braucht ein Team weitere Typen (etwa `experiment/`), sollte es sie in seinem Validator ausdrücklich eintragen (zum Beispiel unter `allow_branch_types` in [commit-check](/enforce/#commit-check)) und dokumentieren, damit Teammitglieder und automatisierte Werkzeuge übereinstimmen. Das Repository der Spezifikation selbst ergänzt zum Beispiel in seiner [commit-check-Konfiguration](https://github.com/conventional-branch/conventional-branch/blob/main/commit-check.toml) `dependabot/` für die Branches, die Dependabot anlegt.
+
+### Warum müssen Branch-Namen kleingeschrieben werden?
+
+Aus zwei Gründen. Erstens speichert Git Branch-Referenzen meist als Dateien unter `.git/refs/heads/`, und die Standard-Dateisysteme von macOS und Windows unterscheiden nicht zwischen Groß- und Kleinschreibung: `Feature/login` und `feature/login` landen dort auf demselben Pfad, unter Linux sind es aber zwei verschiedene Branches. Ein Repository, das beides zulässt, kann sich deshalb von Klon zu Klon unterschiedlich verhalten. Zweitens ist eine einzige Schreibweise leichter zu tippen, zu suchen und abzugleichen: Ein Werkzeug, das auf `release/*` reagiert, muss nicht auch noch `Release/*` berücksichtigen.
 
 ### Was sind die Hauptunterschiede zwischen v1.1.0 und v1.0.0?
 
