@@ -46,7 +46,7 @@ Las ramas troncales (`main`, `master`, `develop`) no usan prefijo.
 
 ### Reglas básicas
 
-1. **Usar alfanuméricos en minúsculas, guiones y puntos**: Utilice siempre letras minúsculas (`a-z`), números (`0-9`) y guiones (`-`) para separar palabras. Evite caracteres especiales, guiones bajos o espacios. Para las ramas de release, los puntos (`.`) se pueden usar en la descripción para representar números de versión (p. ej., `release/v1.2.0`).
+1. **Usar alfanuméricos en minúsculas, guiones y puntos**: Utilice siempre letras minúsculas (`a-z`), números (`0-9`) y guiones (`-`) para separar palabras. Evite caracteres especiales, guiones bajos o espacios. Los puntos (`.`) se permiten en cualquier descripción, normalmente para números de versión (p. ej., `release/v1.2.0`, `chore/upgrade-node-v20.11`).
 2. **Sin guiones o puntos consecutivos, iniciales o finales**: Asegúrese de que los guiones y los puntos no aparezcan de forma consecutiva (p. ej., `feature/new--login`, `release/v1.-2.0`), ni al inicio o al final de la descripción (p. ej., `feature/-new-login`, `release/v1.2.0.`).
 3. **Ser claro y conciso**: El nombre de la rama debe ser descriptivo pero conciso, indicando claramente el propósito del trabajo.
 4. **Incluir números de ticket**: Si corresponde, incluya el número de ticket de su herramienta de gestión de proyectos para facilitar el seguimiento. Por ejemplo, para un ticket `issue-123`, el nombre de la rama podría ser `feature/issue-123-new-login`.
@@ -85,6 +85,7 @@ DIGIT           = %x30-39   ; dígitos 0-9
 | `fix/header-bug` | ✅ | Alias corto para bugfix |
 | `hotfix/security-patch` | ✅ | Corrección urgente |
 | `release/v1.2.0` | ✅ | Release con número de versión |
+| `chore/upgrade-node-v20.11` | ✅ | Puntos fuera de una rama de release |
 | `chore/update-dependencies` | ✅ | Tarea no relacionada con código |
 | `feature/issue-123-new-login` | ✅ | Funcionalidad con número de ticket |
 | `Feature/Add-Login` | ❌ | Mayúsculas no permitidas |
@@ -119,13 +120,21 @@ En resumen, conventional branch está diseñado para mejorar la organización de
 
 Conventional Branch está inspirado en [Conventional Commits](https://www.conventionalcommits.org) y sigue una filosofía similar: aportar estructura legible por humanos y máquinas a los metadatos de Git. Mientras que Conventional Commits estandariza los mensajes de commit, Conventional Branch estandariza los nombres de ramas. Ambas especificaciones se complementan de forma natural.
 
+### ¿Conventional Branch inventó estos prefijos?
+
+No. Prefijos como `feature/`, `hotfix/` y `release/` se popularizaron hacia 2010 con la herramienta [git-flow](https://github.com/nvie/gitflow) y son los valores predeterminados de herramientas como el [modelo de ramas de Bitbucket](https://support.atlassian.com/bitbucket-cloud/docs/configure-a-projects-branching-model/). Conventional Branch se basa en esa práctica en lugar de sustituirla. Lo que aporta es una definición precisa que personas y herramientas pueden compartir: un conjunto fijo de tipos, una gramática formal, una regex de validación publicada en [`spec.json`](/spec.json) y casos de conformidad, para que todos los validadores acepten exactamente los mismos nombres.
+
 ### ¿Por qué los tipos de ramas no son tan detallados como los Conventional Commits (p. ej., `build`, `ci`, `docs`, `style`, `refactor`)?
 
 Las ramas son diferentes de los commits: son temporales y se usan principalmente hasta que se fusionan. Introducir demasiados tipos para las ramas sería innecesario y dificultaría su gestión y memorización.
 
 ### ¿Puedo definir mis propios tipos de ramas más allá de los listados?
 
-Sí. La especificación define un conjunto recomendado de tipos, pero los equipos pueden definir tipos personalizados adicionales para su flujo de trabajo. Sin embargo, es importante documentar claramente los tipos personalizados para que todos los miembros del equipo y las herramientas automatizadas estén al tanto de ellos.
+Sí, como una extensión del equipo. Los tipos de la gramática son los que acepta cualquier herramienta conforme, así que una rama como `unknown/some-task` es inválida según la propia especificación. Un equipo que necesite más tipos (por ejemplo, `experiment/`) debe declararlos explícitamente en su validador (por ejemplo, en `allow_branch_types` de [commit-check](/enforce/#commit-check)) y documentarlos, para que los miembros del equipo y las herramientas automatizadas estén de acuerdo. El propio repositorio de la especificación, por ejemplo, añade `dependabot/` a su [configuración de commit-check](https://github.com/conventional-branch/conventional-branch/blob/main/commit-check.toml) para las ramas que abre Dependabot.
+
+### ¿Por qué los nombres de rama deben ir en minúsculas?
+
+Por dos razones. Primero, Git suele guardar las referencias de las ramas como archivos en `.git/refs/heads/`, y los sistemas de archivos predeterminados de macOS y Windows no distinguen mayúsculas de minúsculas: `Feature/login` y `feature/login` apuntan allí a la misma ruta, mientras que en Linux son dos ramas distintas. Por eso, un repositorio que permita ambas puede comportarse de forma distinta según el clon. Segundo, una sola grafía es más fácil de escribir, buscar y filtrar: una herramienta que se activa con `release/*` no tiene que prever también `Release/*`.
 
 ### ¿Cuáles son las principales diferencias entre v1.1.0 y v1.0.0?
 

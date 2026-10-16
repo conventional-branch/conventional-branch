@@ -12,6 +12,7 @@
     { "branch": "fix/header-bug", "valid": true, "reason": "Short alias for bugfix" },
     { "branch": "hotfix/security-patch", "valid": true, "reason": "Urgent fix" },
     { "branch": "release/v1.2.0", "valid": true, "reason": "Release with dotted version" },
+    { "branch": "chore/upgrade-node-v20.11", "valid": true, "reason": "Dots are allowed in any description, not only release branches" },
     { "branch": "chore/update-dependencies", "valid": true, "reason": "Non-code task" },
     { "branch": "feature/issue-123-new-login", "valid": true, "reason": "Feature with ticket number" },
     { "branch": "chore/123", "valid": true, "reason": "Digits-only description segment" },

@@ -46,7 +46,7 @@ Les branches principales (`main`, `master`, `develop`) n'utilisent pas de préfi
 
 ### Règles de base
 
-1. **Utilisez des caractères alphanumériques en minuscules, des tirets et des points** : Utilisez toujours des lettres minuscules (`a-z`), des chiffres (`0-9`), et des tirets (`-`) pour séparer les mots. Évitez les caractères spéciaux, les underscores, ou les espaces. Pour les branches de release, les points (`.`) peuvent être utilisés dans la description pour représenter les numéros de version (par exemple, `release/v1.2.0`).
+1. **Utilisez des caractères alphanumériques en minuscules, des tirets et des points** : Utilisez toujours des lettres minuscules (`a-z`), des chiffres (`0-9`), et des tirets (`-`) pour séparer les mots. Évitez les caractères spéciaux, les underscores, ou les espaces. Les points (`.`) sont autorisés dans toute description, généralement pour les numéros de version (par exemple, `release/v1.2.0`, `chore/upgrade-node-v20.11`).
 2. **Pas de tirets ou points consécutifs, en début ou en fin** : Assurez-vous que les tirets et les points n'apparaissent pas de manière consécutive (par exemple, `feature/new--login`, `release/v1.-2.0`), ni au début ou à la fin de la description (par exemple, `feature/-new-login`, `release/v1.2.0.`).
 3. **Restez clair et concis** : Le nom de la branche doit être descriptif mais concis, indiquant clairement l'objectif du travail.
 4. **Incluez les numéros de ticket** : Le cas échéant, incluez le numéro de ticket de votre outil de gestion de projet pour faciliter le suivi. Par exemple, pour un ticket `issue-123`, le nom de la branche pourrait être `feature/issue-123-new-login`.
@@ -85,6 +85,7 @@ DIGIT           = %x30-39   ; chiffres 0-9
 | `fix/header-bug` | ✅ | Alias court pour bugfix |
 | `hotfix/security-patch` | ✅ | Correction urgente |
 | `release/v1.2.0` | ✅ | Release avec numéro de version |
+| `chore/upgrade-node-v20.11` | ✅ | Points hors d'une branche de release |
 | `chore/update-dependencies` | ✅ | Tâche non liée au code |
 | `feature/issue-123-new-login` | ✅ | Fonctionnalité avec numéro de ticket |
 | `Feature/Add-Login` | ❌ | Majuscules non autorisées |
@@ -119,13 +120,21 @@ En résumé, conventional branch est conçu pour améliorer l'organisation du pr
 
 Conventional Branch est inspiré par [Conventional Commits](https://www.conventionalcommits.org) et suit une philosophie similaire : apporter une structure lisible par les humains et les machines aux métadonnées Git. Tandis que Conventional Commits standardise les messages de commit, Conventional Branch standardise les noms de branches. Les deux spécifications se complètent naturellement.
 
+### Conventional Branch a-t-il inventé ces préfixes ?
+
+Non. Des préfixes comme `feature/`, `hotfix/` et `release/` ont été popularisés vers 2010 par l'outil [git-flow](https://github.com/nvie/gitflow), et ce sont les valeurs par défaut d'outils comme le [modèle de branches de Bitbucket](https://support.atlassian.com/bitbucket-cloud/docs/configure-a-projects-branching-model/). Conventional Branch s'appuie sur cette pratique au lieu de la remplacer. Ce qu'il apporte, c'est une définition précise que les personnes et les outils peuvent partager : un ensemble fixe de types, une grammaire formelle, une regex de validation publiée dans [`spec.json`](/spec.json) et des cas de conformité, afin que chaque validateur accepte exactement les mêmes noms.
+
 ### Pourquoi les types de branches ne sont-ils pas aussi détaillés que les Conventional Commits (par ex. `build`, `ci`, `docs`, `style`, `refactor`) ?
 
 Les branches sont différentes des commits : elles sont temporaires et principalement utilisées jusqu’à leur fusion. Introduire trop de types pour les branches serait inutile et rendrait leur gestion et mémorisation plus difficiles.
 
 ### Puis-je définir mes propres types de branches au-delà de ceux listés ?
 
-Oui. La spécification définit un ensemble de types recommandés, mais les équipes peuvent définir des types personnalisés supplémentaires pour leur flux de travail. Il est cependant important de documenter clairement les types personnalisés afin que tous les membres de l'équipe et les outils automatisés en soient informés.
+Oui, en tant qu'extension propre à l'équipe. Les types de la grammaire sont ceux que tout outil conforme accepte ; une branche comme `unknown/some-task` est donc invalide au regard de la spécification elle-même. Une équipe qui a besoin d'autres types (par exemple `experiment/`) doit les déclarer explicitement dans son validateur (par exemple dans `allow_branch_types` de [commit-check](/enforce/#commit-check)) et les documenter, afin que les membres de l'équipe et les outils automatisés soient alignés. Le dépôt de la spécification lui-même ajoute par exemple `dependabot/` à sa [configuration commit-check](https://github.com/conventional-branch/conventional-branch/blob/main/commit-check.toml) pour les branches ouvertes par Dependabot.
+
+### Pourquoi les noms de branches doivent-ils être en minuscules ?
+
+Pour deux raisons. D'abord, Git stocke le plus souvent les références de branches sous forme de fichiers dans `.git/refs/heads/`, et les systèmes de fichiers par défaut de macOS et de Windows ne distinguent pas la casse : `Feature/login` et `feature/login` y correspondent au même chemin, alors que sous Linux ce sont deux branches distinctes. Un dépôt qui autorise les deux peut donc se comporter différemment d'un clone à l'autre. Ensuite, une seule graphie est plus facile à taper, à rechercher et à filtrer : un outil déclenché par `release/*` n'a pas à prévoir aussi `Release/*`.
 
 ### Quelles sont les principales différences entre v1.1.0 et v1.0.0 ?
 

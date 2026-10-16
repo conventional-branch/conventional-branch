@@ -46,7 +46,7 @@ Trunk branches (`main`, `master`, `develop`) do not use a prefix.
 
 ### Basic Rules
 
-1. **Use Lowercase Alphanumerics, Hyphens, and Dots**: Always use lowercase letters (`a-z`), numbers (`0-9`), and hyphens (`-`) to separate words. Avoid special characters, underscores, or spaces. For release branches, dots (`.`) may be used in the description to represent version numbers (e.g., `release/v1.2.0`).
+1. **Use Lowercase Alphanumerics, Hyphens, and Dots**: Always use lowercase letters (`a-z`), numbers (`0-9`), and hyphens (`-`) to separate words. Avoid special characters, underscores, or spaces. Dots (`.`) are allowed in any description, typically for version numbers (e.g., `release/v1.2.0`, `chore/upgrade-node-v20.11`).
 2. **No Consecutive, Leading, or Trailing Hyphens or Dots**: Ensure that hyphens and dots do not appear consecutively (e.g., `feature/new--login`, `release/v1.-2.0`), nor at the start or end of the description (e.g., `feature/-new-login`, `release/v1.2.0.`).
 3. **Keep It Clear and Concise**: The branch name should be descriptive yet concise, clearly indicating the purpose of the work.
 4. **Include Ticket Numbers**: If applicable, include the ticket number from your project management tool to make tracking easier. For example, for a ticket `issue-123`, the branch name could be `feature/issue-123-new-login`.
@@ -84,6 +84,7 @@ DIGIT           = %x30-39   ; 0-9
 | `fix/header-bug` | ✅ | Short alias for bugfix |
 | `hotfix/security-patch` | ✅ | Urgent fix |
 | `release/v1.2.0` | ✅ | Release with version |
+| `chore/upgrade-node-v20.11` | ✅ | Dots outside a release branch |
 | `chore/update-dependencies` | ✅ | Non-code task |
 | `feature/issue-123-new-login` | ✅ | Feature with ticket number |
 | `Feature/Add-Login` | ❌ | Uppercase letters not allowed |
@@ -118,13 +119,21 @@ In summary, conventional branch is designed to improve project organization, com
 
 Conventional Branch is inspired by [Conventional Commits](https://www.conventionalcommits.org) and follows a similar philosophy: bring human- and machine-readable structure to Git metadata. While Conventional Commits standardizes commit messages, Conventional Branch standardizes branch names. The two specifications complement each other naturally.
 
+### Did Conventional Branch invent these prefixes?
+
+No. Prefixes such as `feature/`, `hotfix/` and `release/` were popularized around 2010 by the [git-flow](https://github.com/nvie/gitflow) tooling, and they are the defaults in tools such as [Bitbucket's branching model](https://support.atlassian.com/bitbucket-cloud/docs/configure-a-projects-branching-model/). Conventional Branch builds on that practice rather than replacing it. What it adds is a precise definition that people and tools can share: a fixed set of types, a formal grammar, a validation regex published in [`spec.json`](/spec.json), and conformance cases, so that every validator accepts exactly the same names.
+
 ### Why aren't branch types as detailed as Conventional Commits (e.g., `build`, `ci`, `docs`, `style`, `refactor`)?
 
 Branches are different from commits—they are temporary and mainly used until merged. Introducing too many types for branches would be unnecessary and would make them harder to manage and remember.
 
 ### Can I define my own branch types beyond the ones listed?
 
-Yes. The specification defines a recommended set of types, but teams can define additional custom types to fit their workflow. It is important, however, to document custom types clearly so that all team members and automated tooling are aware of them.
+Yes, as a team-level extension. The types in the grammar are the ones every conforming tool accepts, so a branch such as `unknown/some-task` is invalid under the specification itself. A team that needs more types (say, `experiment/`) should list them explicitly in its validator (for example, `allow_branch_types` in [commit-check](/enforce/#commit-check)) and document them, so that team members and automated tooling agree on them. The specification's own repository, for instance, adds `dependabot/` to its [commit-check configuration](https://github.com/conventional-branch/conventional-branch/blob/main/commit-check.toml) for the branches Dependabot opens.
+
+### Why must branch names be lowercase?
+
+For two reasons. First, Git usually stores branch refs as files under `.git/refs/heads/`, and the default file systems on macOS and Windows are case-insensitive: `Feature/login` and `feature/login` map to the same path there but are two different branches on Linux, so a repository that allows both can behave differently from one clone to the next. Second, a single spelling is easier to type, search and match: a tool that triggers on `release/*` doesn't also have to anticipate `Release/*`.
 
 ### What are the main differences between v1.1.0 and v1.0.0?
 

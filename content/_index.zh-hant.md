@@ -46,7 +46,7 @@ seoDescription: "Git 分支命名規範：feature/、bugfix/、hotfix/、release
 
 ### 基本規則
 
-1. **使用小寫英數、連字號與點**：一律使用小寫字母（`a-z`）、數字（`0-9`）與連字號（`-`）分隔單字，避免特殊字元、底線或空白。對於 release branch，可在描述中使用點（`.`）表示版本號（例如 `release/v1.2.0`）。
+1. **使用小寫英數、連字號與點**：一律使用小寫字母（`a-z`）、數字（`0-9`）與連字號（`-`）分隔單字，避免特殊字元、底線或空白。任何 branch 的描述中都可以使用點（`.`），通常用於表示版本號（例如 `release/v1.2.0`、`chore/upgrade-node-v20.11`）。
 2. **禁止連續、開頭或結尾的連字號或點**：連字號與點不得連續出現（例如 `feature/new--login`、`release/v1.-2.0`），也不得出現在描述的開頭或結尾（例如 `feature/-new-login`、`release/v1.2.0.`）。
 3. **保持清楚且精簡**：branch 名稱應在具描述性的同時保持精簡，清楚表達工作的內容與目的。
 4. **包含工單編號**：若適用，請包含專案管理工具的工單編號，方便追蹤。例如，對於工單 `issue-123`，branch 名稱可以是 `feature/issue-123-new-login`。
@@ -84,6 +84,7 @@ DIGIT           = %x30-39   ; 數字 0-9
 | `fix/header-bug` | ✅ | bugfix 的簡寫形式 |
 | `hotfix/security-patch` | ✅ | 緊急修復 |
 | `release/v1.2.0` | ✅ | 含版本號的發布分支 |
+| `chore/upgrade-node-v20.11` | ✅ | 非 release branch 中的點 |
 | `chore/update-dependencies` | ✅ | 非程式碼任務 |
 | `feature/issue-123-new-login` | ✅ | 含工單編號的功能分支 |
 | `Feature/Add-Login` | ❌ | 不允許大寫字母 |
@@ -118,13 +119,21 @@ DIGIT           = %x30-39   ; 數字 0-9
 
 約定式分支的靈感來源於 [Conventional Commits](https://www.conventionalcommits.org)，遵循相似的理念：為 Git 中繼資料引入人機可讀的結構。約定式提交規範提交訊息，約定式分支規範 branch 名稱，兩者相輔相成、天然互補。
 
+### 約定式分支發明了這些前綴嗎？
+
+沒有。`feature/`、`hotfix/`、`release/` 這類前綴約在 2010 年由 [git-flow](https://github.com/nvie/gitflow) 工具推廣開來，也是 [Bitbucket branching model](https://support.atlassian.com/bitbucket-cloud/docs/configure-a-projects-branching-model/) 等工具的預設值。約定式分支建立在這項實務之上，而非取而代之。它補上的是一份人與工具都能共用的精確定義：固定的 type 集合、形式文法、發布於 [`spec.json`](/spec.json) 的驗證正規表示式，以及一致性測試案例，讓每個驗證工具接受的名稱完全相同。
+
 ### 為什麼 branch type 不像 Conventional Commits（例如 `build`、`ci`、`docs`、`style`、`refactor`）那麼詳細？
 
 branch 與 commit 不同——branch 是暫時性的，通常只會使用到 merge 為止。若為 branch 引入過多 type 並無必要，反而會讓管理與記憶變得更困難。
 
 ### 我可以定義規範列表之外的自訂 branch type 嗎？
 
-可以。本規範定義了一套推薦的 type，但團隊可根據工作流程定義額外的自訂 type。重要的是，需要將自訂 type 清楚記錄，讓所有團隊成員及自動化工具皆能知悉。
+可以，作為團隊層級的擴充。文法中列出的 type 是所有符合規範的工具都會接受的 type，因此像 `unknown/some-task` 這樣的 branch 依規範本身是無效的。若團隊需要更多 type（例如 `experiment/`），應在驗證工具中明確列出（例如 [commit-check](/enforce/#commit-check) 的 `allow_branch_types`），並寫入文件，讓團隊成員與自動化工具保持一致。例如，本規範自己的 repository 就在 [commit-check 設定](https://github.com/conventional-branch/conventional-branch/blob/main/commit-check.toml)中為 Dependabot 建立的 branch 加入了 `dependabot/`。
+
+### 為什麼 branch 名稱必須小寫？
+
+原因有二。第一，Git 通常將 branch 參照存成 `.git/refs/heads/` 下的檔案，而 macOS 與 Windows 預設的檔案系統不區分大小寫：`Feature/login` 與 `feature/login` 在這些機器上指向同一路徑，在 Linux 上卻是兩個不同的 branch，因此同時允許兩種寫法的 repository 在不同 clone 中的行為可能不一致。第二，只有一種寫法更容易輸入、搜尋與比對：依 `release/*` 觸發的工具不必再考慮 `Release/*`。
 
 ### v1.1.0 與 v1.0.0 的主要差異是什麼？
 
