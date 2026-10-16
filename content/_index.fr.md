@@ -40,6 +40,8 @@ La spécification des branches prend en charge les préfixes suivants et doit ê
 **Préfixes de source d'agent IA** — identifient les branches générées par des agents de codage IA :
 {{< agents >}}
 
+Cette liste est close : un agent sans préfixe dédié utilise `ai/`.
+
 Les branches principales (`main`, `master`, `develop`) n'utilisent pas de préfixe.
 
 ---
@@ -145,7 +147,7 @@ v1.1.0 ajoute les **Préfixes de source d'agent IA** comme nouvelle fonctionnali
 Les agents de codage IA (GitHub Copilot, Cursor, Claude Code, OpenAI Codex, etc.) sont de plus en plus utilisés pour générer du code et créer des pull requests. Chaque agent utilise son propre préfixe de branche (par exemple, `copilot/`, `cursor/`). En normalisant ces préfixes dans la spécification Conventional Branch, nous permettons :
 1. **Identification rapide** — les réviseurs et les outils peuvent immédiatement reconnaître les PRs générées par IA
 2. **Validation par les outils** — des outils comme commit-check peuvent valider les branches d'agents IA par rapport à la spécification
-3. **Un standard d'enregistrement** — les nouveaux agents IA peuvent adopter un préfixe documenté au lieu d'inventer des motifs ad-hoc
+3. **Une liste stable** — les cinq préfixes sont figés et tout autre agent utilise `ai/`, si bien que la grammaire ne change pas à chaque nouvel outil
 
 Le préfixe générique `ai/` est disponible pour tout agent IA sans préfixe dédié, ou pour les équipes qui préfèrent un identifiant neutre vis-à-vis du fournisseur. C'est la nouvelle fonctionnalité clé publiée dans **v1.1.0** — pour un résumé complet des changements entre versions, voir l'entrée FAQ ci-dessus.
 

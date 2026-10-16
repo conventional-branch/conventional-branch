@@ -40,6 +40,8 @@ A especificação de branch suporta os seguintes prefixos e deve ser estruturada
 **Prefixos de fonte de agente de IA** — identificam branches gerados por agentes de codificação de IA:
 {{< agents >}}
 
+Esta lista está fechada: um agente sem prefixo próprio usa `ai/`.
+
 Branches tronco (`main`, `master`, `develop`) não usam prefixo.
 
 ---
@@ -145,7 +147,7 @@ v1.1.0 adiciona **Prefixos de fonte de agente de IA** como a principal nova func
 Agentes de codificação de IA (GitHub Copilot, Cursor, Claude Code, OpenAI Codex, etc.) são cada vez mais usados para gerar código e criar pull requests. Cada agente usa seu próprio prefixo de branch (ex.: `copilot/`, `cursor/`). Ao padronizar esses prefixos na especificação Conventional Branch, possibilitamos:
 1. **Identificação rápida** — revisores e ferramentas podem reconhecer imediatamente PRs gerados por IA
 2. **Validação por ferramentas** — ferramentas como commit-check podem validar branches de agentes de IA contra a especificação
-3. **Um padrão de registro** — novos agentes de IA podem adotar um prefixo documentado em vez de inventar padrões ad-hoc
+3. **Uma lista estável** — os cinco prefixos são fixos e qualquer outro agente usa `ai/`, então a gramática não muda a cada nova ferramenta
 
 O prefixo genérico `ai/` está disponível para qualquer agente de IA sem um prefixo dedicado, ou para equipes que preferem um identificador neutro em relação ao fornecedor. Esta é a principal novidade lançada na **v1.1.0** — para um resumo completo das mudanças entre versões, veja a pergunta frequente acima.
 

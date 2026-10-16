@@ -40,6 +40,8 @@ Specyfikacja gałęzi obsługuje następujące prefiksy i powinna być zorganizo
 **Prefiksy źródła agenta AI** — identyfikują gałęzie generowane przez agentów kodujących AI:
 {{< agents >}}
 
+Ta lista jest zamknięta: agent bez własnego prefiksu używa `ai/`.
+
 Gałęzie główne (`main`, `master`, `develop`) nie używają prefiksu.
 
 ---
@@ -145,7 +147,7 @@ v1.1.0 dodaje **Prefiksy źródła agenta AI** jako główną nową funkcję (dl
 Agenci kodujący AI (GitHub Copilot, Cursor, Claude Code, OpenAI Codex itp.) są coraz częściej używani do generowania kodu i tworzenia pull requestów. Każdy agent używa własnego prefiksu gałęzi (np. `copilot/`, `cursor/`). Poprzez standaryzację tych prefiksów w specyfikacji Conventional Branch, umożliwiamy:
 1. **Szybką identyfikację** — recenzenci i narzędzia mogą natychmiast rozpoznać PRy generowane przez AI
 2. **Walidację narzędziową** — narzędzia takie jak commit-check mogą walidować gałęzie agentów AI względem specyfikacji
-3. **Standard rejestracji** — nowi agenci AI mogą przyjąć udokumentowany prefiks zamiast wymyślać tymczasowe wzorce
+3. **Stała lista** — pięć prefiksów jest ustalonych, a każdy inny agent używa `ai/`, więc gramatyka nie zmienia się przy każdym nowym narzędziu
 
 Generyczny prefiks `ai/` jest dostępny dla każdego agenta AI bez dedykowanego prefiksu lub dla zespołów, które preferują neutralnego dostawcę. To kluczowa nowa funkcja wydana w **v1.1.0** — pełne podsumowanie zmian między wersjami znajduje się w powyższym pytaniu FAQ.
 
