@@ -100,10 +100,11 @@ jobs:
 ```
 
 It reads the [`commit-check.toml`](#commit-check) described under local checks, so CI
-and every contributor's machine apply the same configuration. As of commit-check 2.18
-it validates the type prefix and the trunk names; the rules for the description —
-lowercase, hyphens, no doubled separators — are enforced by the ruleset above or the
-script below, not by the action.
+and every contributor's machine apply the same configuration. By default it validates
+the type prefix and the trunk names. To hold the description to the grammar as well —
+lowercase, hyphens, no doubled separators — set `require_description_grammar = true`
+in that file (commit-check 2.19 and later); otherwise those rules are left to the
+ruleset above or the script below.
 
 A script that applies the regex from the specification in full, if you would rather
 not depend on an action:
@@ -222,7 +223,7 @@ commit, so a wrong name is caught before it is anywhere but your machine:
 ```yaml
 repos:
   - repo: https://github.com/commit-check/commit-check
-    rev: v2.18.0
+    rev: v2.19.1
     hooks:
       - id: check-branch
 ```
@@ -235,6 +236,7 @@ Conventional Commits types (`docs/`, `refactor/`, …) and the `dependabot/` and
 ```toml
 [branch]
 conventional_branch = true
+require_description_grammar = true
 allow_branch_types = [
   "feature", "feat",
   "bugfix", "fix",
@@ -250,8 +252,9 @@ Both lists are the specification's own — the types with their aliases, and the
 branches — and the conformance check holds them to `spec.json` as it holds the regexes
 on this page, so a prefix registered in a future release cannot leave this file behind.
 The same file configures the GitHub Action above and `commit-check --branch` anywhere
-else. Like the action, it checks the type prefix; the description grammar is the hook
-below's to enforce, or the server rule's.
+else. `require_description_grammar` holds the part after the `/` to the specification's
+grammar too; leave it out, and commit-check checks only the type prefix, leaving the
+description to the hook below or the server rule.
 
 ### A hook with no dependencies
 
@@ -310,6 +313,57 @@ The `tr` handles the three ways people usually get it wrong without noticing:
 uppercase, underscores, and words typed with spaces instead of hyphens. It is a
 convenience rather than a check — a description with other punctuation in it still
 gets through, which is what the hook above is for.
+
+## Bots and automation
+
+Dependency and release bots name their own branches, and most of those names do not
+follow the specification: `dependabot/npm_and_yarn/lodash-4.17.21`, `renovate/lodash-4.x`,
+`release-please--branches--main`. A rule that rejects them also rejects the pull requests
+they open. Either leave them out of the check, or have the bot name its branches to fit.
+
+### Leave them out
+
+On GitHub, exclude their branches from the ruleset rather than loosening its pattern. In
+the ruleset above, fill in `exclude`:
+
+```json
+"conditions": {
+  "ref_name": {
+    "include": ["~ALL"],
+    "exclude": [
+      "refs/heads/dependabot/**/*",
+      "refs/heads/renovate/**/*",
+      "refs/heads/release-please--*"
+    ]
+  }
+}
+```
+
+commit-check skips the branch check for a commit whose author is on the `[branch]` table's
+`ignore_authors` list. Add the line to the `commit-check.toml` above:
+
+```toml
+ignore_authors = ["dependabot[bot]", "renovate[bot]", "github-actions[bot]"]
+```
+
+The pre-push hook needs no exception: bots push from their own infrastructure, not from a
+clone with your hooks installed.
+
+### Name them to fit
+
+- **Renovate**: `"branchPrefix": "chore/"` with `"branchNameStrict": true` turns
+  `renovate/lodash-4.x` into `chore/lodash-4-x`. Set `"branchPrefixOld": "renovate/"` for
+  the switch, so Renovate still finds the pull requests it already opened.
+- **Dependabot**: on github.com and GitHub Enterprise Cloud, `pull-request-branch-name`
+  takes a `prefix`, a `template`, a `word-separator` and a `branch-name-case`. Even so, a
+  dependency whose own name contains a `/`, such as a scoped npm package, adds a segment
+  the grammar does not allow, so leaving Dependabot out of the check is the reliable choice.
+- **release-please** has no option for its branch name yet
+  ([googleapis/release-please#2629](https://github.com/googleapis/release-please/issues/2629)),
+  so leave it out.
+- **peter-evans/create-pull-request** takes the branch name as its `branch` input; give it
+  one that fits, such as `chore/update-generated-files`, instead of the default
+  `create-pull-request/patch`.
 
 ## AI coding agents
 
