@@ -37,7 +37,6 @@ to skim.
 * [ByteDance-Seed/cryofm](https://github.com/ByteDance-Seed/cryofm/blob/main/CONTRIBUTING.md): Generative foundation model for cryo-EM density maps, by ByteDance Seed.
 * [bcgov/nr-pies](https://github.com/bcgov/nr-pies): Natural Resource Permitting Information Exchange by the Government of British Columbia.
 * [amagovpt/udata-pt](https://github.com/amagovpt/udata-pt/blob/main/CLAUDE.md): Portugal's open data platform, by ARTE, the state agency for technological reform.
-* [TexasInstruments/processor-sdk-doc](https://github.com/TexasInstruments/processor-sdk-doc): Texas Instruments Processor SDK documentation.
 * [Enedis-OSS/tic4eebus](https://github.com/Enedis-OSS/tic4eebus/blob/main/CONTRIBUTING.md): EEBUS OPEV use case by Enedis, France's largest electricity distributor.
 * [BerriAI/litellm](https://github.com/BerriAI/litellm/blob/main/CONTRIBUTING.md): A high-performance LLM proxy supporting 100+ models with spending tracking and guardrails.
 * [ansible/metrics-utility](https://github.com/ansible/metrics-utility/blob/devel/docs/CONTRIBUTING.md): Standalone utility for github.com/ansible/awx.
@@ -49,18 +48,17 @@ to skim.
 * [Technica-Engineering/FLYNC](https://github.com/Technica-Engineering/FLYNC/blob/main/CONTRIBUTING.md): Flexible YAML-based vehicle network configuration, by Technica Engineering.
 * [stellio-hub/stellio-context-broker](https://github.com/stellio-hub/stellio-context-broker/blob/develop/docs/contributing/development_guide.md): Stellio, an NGSI-LD compatible context broker.
 * [Curiosum](https://github.com/curiosum-dev): Building apps for innovators.
-* [ZeusAutomacao/DFe.NET](https://github.com/ZeusAutomacao/DFe.NET): Biblioteca em C# para emissão e impressão de NFe, NFCe, MDF-e e CT-e.
+* [ZeusAutomacao/DFe.NET](https://github.com/ZeusAutomacao/DFe.NET/blob/master/CONTRIBUTING.md): Biblioteca em C# para emissão e impressão de NFe, NFCe, MDF-e e CT-e.
 * [commit-check](https://github.com/commit-check/commit-check/blob/main/README.md): Policy engine for Git commit metadata, with Conventional Branch validation on by default.
 * [fau-advanced-separations/CADET-Process](https://github.com/fau-advanced-separations/CADET-Process/blob/dev/CONTRIBUTING.md): A framework for modelling and optimizing advanced chromatographic processes, by Advanced Separations @ FAU.
 * [devsoc-unsw/structs.sh](https://github.com/devsoc-unsw/structs.sh/blob/dev/docs/docs/contributing.md): An educational data structures and algorithms platform, by the UNSW Software Development Society.
 * [CSES-Open-Source/TritonScript](https://github.com/CSES-Open-Source/TritonScript/blob/main/CONTRIBUTING.md): Open source project by the Computer Science and Engineering Society at UC San Diego.
-* [RLinf/RLinf](https://github.com/RLinf/RLinf): Reinforcement Learning Infrastructure for Agentic AI.
 * [soma-smart/framefox](https://github.com/soma-smart/framefox/blob/main/CONTRIBUTING.md): Python web framework built on FastAPI, MVC and SQLModel.
 * [keyteki/keyteki](https://github.com/keyteki/keyteki/blob/master/AGENTS.md): The engine behind The Crucible Online, for playing KeyForge in the browser.
 * [karol-broda/snitch](https://github.com/karol-broda/snitch/blob/master/CONTRIBUTING.md): A prettier way to inspect network connections.
-* [jal-co/shieldcn](https://github.com/jal-co/shieldcn): Beautiful README badges inspired by shadcn/ui.
+* [jal-co/shieldcn](https://github.com/jal-co/shieldcn/blob/main/.github/CONTRIBUTING.md): Beautiful README badges inspired by shadcn/ui.
 * [dunossauro/fastapi-do-zero](https://github.com/dunossauro/fastapi-do-zero/blob/main/aulas/contribua/contribua.md): Curso básico de FastAPI em português.
-* _[... and more projects using Conventional Branch](https://github.com/search?q=conventional-branch.github.io&type=code&p=1)._
+* _[... and more projects using Conventional Branch](https://github.com/search?q=conventionalbranch.org+OR+conventional-branch.github.io&type=code)._
 
 _Want your project on this list?_ [Send a pull request](https://github.com/conventional-branch/conventional-branch/pulls).
 
