@@ -1,0 +1,89 @@
+README.md
+  s_b134afe9af2fb9::t_2dcd4bd9211cf8 75,119,126
+content/_index.zh.md
+  s_a983ac12a6b48e::t_edbe179cbe3d98 9,43-44,51,54,68-69,72,94-95,97-98,146-151,161
+content/enforce/index.md
+  s_b134afe9af2fb9::t_ee6c9f2b9ce185 55,124,153,174,201,267,335-336,356
+content/_index.zh-hant.md
+  s_a983ac12a6b48e::t_f253b2d0fcc873 9,43-44,51,54,68-69,72,94-95,97-98,146-151,161
+CHANGELOG.md
+  s_b134afe9af2fb9::t_0a583167377db5 9-19
+static/schema/v1/spec.schema.json
+  s_b134afe9af2fb9::t_1f0e0834bd8b2e 128-132
+static/llms.txt
+  s_b134afe9af2fb9::t_e605a2606fe5bc 5,7,9,16,21,33,40-41
+static/spec.json
+  s_b134afe9af2fb9::t_29a50564541a19 4,76-77,80-81
+content/_index.pt-br.md
+  s_a983ac12a6b48e::t_5f586e66d1b680 9,43-44,51,54,69-70,73,95-96,98-99,147-152,162
+content/_index.ja.md
+  s_a983ac12a6b48e::t_d75fae8763c79a 9,43-44,51,54,69-70,73,95-96,98-99,147-152,162
+data/home.yaml
+  s_b134afe9af2fb9::t_c55ecfb1acf5a8 35
+data/history.yaml
+  s_b134afe9af2fb9::t_ccf6ed4dced3dc 16-18
+tests/README.md
+  s_b134afe9af2fb9::t_00a76ded319dc2 10,20,87
+config.yaml
+  s_b134afe9af2fb9::t_3cf5ac5435d3ba 32-33
+content/_index.es.md
+  s_a983ac12a6b48e::t_b15ced3a87abdc 9,43-44,51,54,69-70,73,95-96,98-99,147-152,162
+static/v1.2.0/spec.json
+  s_b134afe9af2fb9::t_ae4c6723a0dbc0 1-83
+skills/conventional-branch/SKILL.md
+  s_b134afe9af2fb9::t_894da84c33962d 7,14,25,51,61,78-79,82,100-101,114-115,142,148
+content/about/index.md
+  s_b134afe9af2fb9::t_81dea77d645879 13,24,118,128
+data/agents.yaml
+  s_b134afe9af2fb9::t_a77b9f27370dfe 4-7
+content/_index.fr.md
+  s_a983ac12a6b48e::t_e664e8a384cee3 9,43-44,51,54,69-70,73,95-96,98-99,147-152,162
+themes/conventional-branch/README.md
+  s_b134afe9af2fb9::t_09349e76573058 38-39
+.github/workflows/url-check.yml
+  s_b134afe9af2fb9::t_75337ccb15e39d 37
+themes/conventional-branch/static/js/modules/checker.js
+  s_b134afe9af2fb9::t_92609adb913333 8-12,69-71,77,89-93,101
+content/_index.pl.md
+  s_a983ac12a6b48e::t_8a1d981047c404 9,43-44,51,54,69-70,73,95-96,98-99,147-152,162
+content/_index.th.md
+  s_a983ac12a6b48e::t_1e571d6d406e76 9,43-44,51,54,67-68,71,92-93,95-96,144-149,159
+i18n/en.yaml
+  s_b134afe9af2fb9::t_ef19e7a0e34fc9 97
+content/_index.de.md
+  s_a983ac12a6b48e::t_31cbd95ea19fff 9,43-44,51,54,69-70,73,95-96,98-99,147-152,162
+tests/fixtures.json
+  s_b134afe9af2fb9::t_a506d3a41f48a6 4,18-21,32-37
+content/_index.md
+  s_a983ac12a6b48e::t_b84cb0d62625f4 9,43-44,51,54,68-69,72,94-95,97-98,146-151,161
+CONTRIBUTING.md
+  s_b134afe9af2fb9::t_5cad72407d3cd1 26,28,30-32
+static/badge.svg
+  s_b134afe9af2fb9::t_7facd1f9624c6e 1-2,52-53
+content/_index.ru.md
+  s_a983ac12a6b48e::t_de93c424f9f11c 9,43-44,51,54,69-70,73,95-96,98-99,147-152,162
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "90b1dc95b14b43967bf1264e47dd3041fedfc383",
+  "prompts": {},
+  "sessions": {
+    "s_a983ac12a6b48e": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "cee72681-327b-45db-83cf-63b287b21d14",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "Xianpeng Shen <xianpeng.shen@gmail.com>"
+    },
+    "s_b134afe9af2fb9": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "2ed9f19e-0c7d-4d78-9f4a-632b11425ad0",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "Xianpeng Shen <xianpeng.shen@gmail.com>"
+    }
+  }
+}
