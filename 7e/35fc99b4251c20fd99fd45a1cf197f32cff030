@@ -1,0 +1,52 @@
+themes/conventional-branch/layouts/partials/head.html
+  s_0126da56744e3d::t_1c071f8aa37b8d 103
+  s_0126da56744e3d::t_4c862ade816bc7 3
+  s_0126da56744e3d::t_b9ba0d27ba5b87 92-95,99-102,109-113
+  s_0126da56744e3d::t_f718ae93072521 96-98,108
+  s_0126da56744e3d::t_abba0814f40902 104-107
+  s_0126da56744e3d::t_27bb8e3f6d56fe 42-46
+themes/conventional-branch/layouts/partials/spec/hero.html
+  s_0126da56744e3d::t_f1965aa2648272 12-14
+themes/conventional-branch/static/css/scss/layout/_hero.scss
+  s_0126da56744e3d::t_230ca4ece8c924 102-107,109,112-118,122,126-129,133-140,144-148,150-151,157,159
+  s_0126da56744e3d::t_b9c94b250f29fb 141-143,149,158
+  s_ecbcf0356d5867::t_201786102eb7be 160
+themes/conventional-branch/layouts/partials/version-banner.html
+  s_0126da56744e3d::t_5f87af1b5c2c2a 1-13
+content/_index.md
+  s_0126da56744e3d::t_72abde08f7ea47 148
+  s_0126da56744e3d::t_af7a3cfe7911e3 118-119,121-143,145-147,149-163
+  s_0126da56744e3d::t_8446276a0b42bf 144
+  s_0126da56744e3d::t_88c0c2c8d8b37d 120
+themes/conventional-branch/layouts/partials/version-redirect.html
+  s_0126da56744e3d::t_ee6a1d289962d5 1-21
+content/enforce/index.md
+  s_0126da56744e3d::t_b7349aa6b2a75c 4-5
+themes/conventional-branch/layouts/_default/single.html
+  s_0126da56744e3d::t_3fd3a83b366384 25
+  s_0126da56744e3d::t_95aa4f0331b416 8-9,11
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "7e35fc99b4251c20fd99fd45a1cf197f32cff030",
+  "prompts": {},
+  "sessions": {
+    "s_0126da56744e3d": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "17164b29-6f7a-48a0-bc38-7ad3fd078c97",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "Xianpeng Shen <xianpeng.shen@gmail.com>"
+    },
+    "s_ecbcf0356d5867": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "54458110-7b12-4460-9e64-673c40eaacb1",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "Xianpeng Shen <xianpeng.shen@gmail.com>"
+    }
+  }
+}
