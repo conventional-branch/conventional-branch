@@ -115,6 +115,52 @@ In summary, conventional branch is designed to improve project organization, com
 
 ## FAQ
 
+### What is a branch name?
+
+A branch name is the label Git gives a line of development, such as `main` or `feature/add-login-page`; Git keeps it as a ref under `refs/heads/`. Git accepts a wide range of names, so on its own a branch name says nothing reliable about the work on it. Conventional Branch gives it a structure, `<type>/<description>`: a type that says what the work is for, then a short, lowercase description with words separated by hyphens. For example:
+
+- `feature/add-login-page`
+- `bugfix/fix-header-bug`
+- `release/v1.2.0`
+
+Trunk branches (`main`, `master`, `develop`) take no prefix.
+
+### How should I name a feature branch?
+
+Start it with `feature/`, or the short alias `feat/`, and describe the feature after the slash. If the work has a ticket in your project management tool, include its number. For example:
+
+- `feature/add-login-page`
+- `feat/add-login-page`
+- `feature/issue-123-new-login`
+
+### What is a chore branch?
+
+A `chore/` branch is for non-code tasks, such as updating dependencies or documentation. Branch types are deliberately fewer than Conventional Commits types (see below), so this kind of maintenance goes under `chore/`. For example:
+
+- `chore/update-dependencies`
+- `chore/upgrade-node-v20.11`
+- `chore/update-generated-files`
+
+Some dependency bots, such as Renovate, can be set to use the prefix too; see [Bots and automation](/enforce/#name-them-to-fit).
+
+### How should I name a release branch?
+
+Use `release/` followed by what the branch prepares, typically the version number. Dots are allowed, but not at the start or end of the description, and not next to a hyphen:
+
+- `release/v1.2.0` — valid
+- `release/v1.2.0.` — invalid: trailing dot
+- `release/v1.-2.0` — invalid: hyphen next to a dot
+
+A consistent prefix also lets a pipeline act on `release/*`, for example to deploy automatically from release branches.
+
+### How should I name a hotfix branch?
+
+Use `hotfix/` for an urgent fix, and `bugfix/` (or `fix/`) for one that is not. Describe what is being fixed, and include the ticket number if there is one. For example:
+
+- `hotfix/security-patch`
+- `hotfix/issue-123-security-patch`
+- `bugfix/fix-header-bug`, for a fix that is not urgent
+
 ### How does Conventional Branch relate to Conventional Commits?
 
 Conventional Branch is inspired by [Conventional Commits](https://www.conventionalcommits.org) and follows a similar philosophy: bring human- and machine-readable structure to Git metadata. While Conventional Commits standardizes commit messages, Conventional Branch standardizes branch names. The two specifications complement each other naturally.

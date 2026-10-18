@@ -1,0 +1,13 @@
+{{- /* On an archived version, a strip across the top of the page that says so and links
+       to the current one. Search results land readers on old versions too, and the top
+       of the page is the one place every one of them sees before reading on. */ -}}
+{{- $current := partial "version-current.html" . -}}
+{{- $latest := site.Params.versions.current -}}
+{{- if ne $current $latest }}
+<div class="version-banner" role="note">
+  <div class="container version-banner__inner">
+    {{- partial "icon.html" (dict "name" "info" "size" 18) -}}
+    <p>{{ i18n "archived_notice" (dict "Version" (strings.TrimPrefix "v" $current)) }} <a href="{{ .Site.Home.RelPermalink }}">{{ i18n "archived_link" (dict "Version" (strings.TrimPrefix "v" $latest)) }}</a></p>
+  </div>
+</div>
+{{- end }}
