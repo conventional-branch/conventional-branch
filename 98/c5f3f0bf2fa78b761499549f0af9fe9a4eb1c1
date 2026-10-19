@@ -1,0 +1,37 @@
+content/_index.ja.md
+  s_292f8b395217a3::t_adbd6f79a40bec 119-164
+content/_index.de.md
+  s_292f8b395217a3::t_adbd6f79a40bec 119-164
+content/_index.pl.md
+  s_292f8b395217a3::t_adbd6f79a40bec 119-164
+content/_index.ru.md
+  s_292f8b395217a3::t_adbd6f79a40bec 119-164
+content/_index.es.md
+  s_292f8b395217a3::t_adbd6f79a40bec 119-164
+content/_index.pt-br.md
+  s_292f8b395217a3::t_adbd6f79a40bec 119-164
+content/_index.th.md
+  s_292f8b395217a3::t_adbd6f79a40bec 116-161
+content/_index.zh-hant.md
+  s_292f8b395217a3::t_adbd6f79a40bec 118-163
+content/_index.zh.md
+  s_292f8b395217a3::t_adbd6f79a40bec 118-163
+content/_index.fr.md
+  s_292f8b395217a3::t_adbd6f79a40bec 119-164
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "98c5f3f0bf2fa78b761499549f0af9fe9a4eb1c1",
+  "prompts": {},
+  "sessions": {
+    "s_292f8b395217a3": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "baba9437-237b-474d-bd54-929c7c197e6f",
+        "model": "unknown"
+      },
+      "human_author": "Xianpeng Shen <xianpeng.shen@gmail.com>"
+    }
+  }
+}
