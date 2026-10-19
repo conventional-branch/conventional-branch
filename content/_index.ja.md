@@ -116,6 +116,52 @@ DIGIT           = %x30-39   ; 数字 0-9
 
 ## よくある質問
 
+### ブランチ名とは何ですか？
+
+ブランチ名とは、Git が開発の流れに付けるラベルで、`main` や `feature/add-login-page` のようなものです。Git はこれを `refs/heads/` 配下の参照（ref）として保持します。Git は幅広い名前を受け付けるため、ブランチ名だけでは、そのブランチで行われている作業について確かなことは何もわかりません。Conventional Branch はブランチ名に `<type>/<description>` という構造を与えます。作業の目的を示すタイプに続けて、小文字の短い説明を置き、単語はハイフンで区切ります。例：
+
+- `feature/add-login-page`
+- `bugfix/fix-header-bug`
+- `release/v1.2.0`
+
+トランクブランチ（`main`、`master`、`develop`）にはプレフィックスを付けません。
+
+### feature ブランチにはどのような名前を付ければよいですか？
+
+`feature/`、または短縮形の `feat/` で始め、スラッシュの後に機能の内容を書きます。作業にプロジェクト管理ツールのチケットがある場合は、その番号を含めます。例：
+
+- `feature/add-login-page`
+- `feat/add-login-page`
+- `feature/issue-123-new-login`
+
+### chore ブランチとは何ですか？
+
+`chore/` ブランチは、依存関係やドキュメントの更新といった非コードタスクのためのものです。ブランチのタイプは意図的に Conventional Commits のタイプより少なくしてあるため（下記のよくある質問を参照）、この種のメンテナンス作業は `chore/` にまとめます。例：
+
+- `chore/update-dependencies`
+- `chore/upgrade-node-v20.11`
+- `chore/update-generated-files`
+
+Renovate など一部の依存関係更新ボットも、このプレフィックスを使うように設定できます。[ボットと自動化](/enforce/#name-them-to-fit)を参照してください。
+
+### release ブランチにはどのような名前を付ければよいですか？
+
+`release/` の後に、そのブランチが準備するもの（通常はバージョン番号）を続けます。ドットは使えますが、説明の先頭や末尾には置けず、ハイフンの隣にも置けません：
+
+- `release/v1.2.0` — 有効
+- `release/v1.2.0.` — 無効：末尾のドット
+- `release/v1.-2.0` — 無効：ドットに隣接するハイフン
+
+プレフィックスが一貫していれば、パイプラインで `release/*` を対象にした処理も行えます。たとえば、リリースブランチからの自動デプロイです。
+
+### hotfix ブランチにはどのような名前を付ければよいですか？
+
+緊急の修正には `hotfix/` を、緊急でない修正には `bugfix/`（または `fix/`）を使います。何を修正するのかを説明し、チケットがあればその番号を含めます。例：
+
+- `hotfix/security-patch`
+- `hotfix/issue-123-security-patch`
+- `bugfix/fix-header-bug`（緊急でない修正の場合）
+
 ### Conventional Branch と Conventional Commits の関係は？
 
 Conventional Branch は [Conventional Commits](https://www.conventionalcommits.org) に触発され、同様の哲学に基づいています：人間と機械が読めるような構造を Git メタデータに組み込むこと。Conventional Commits がコミットメッセージを標準化するのに対して、Conventional Branch はブランチ名を標準化します。両者は自然に補完し合います。

@@ -1,6 +1,6 @@
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1,maximum-scale=1,user-scalable=no">
+  <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
 
   <!-- Global site tag (gtag.js) - Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-RH9YBHW509"></script>
@@ -38,6 +38,11 @@
   {{- $title := .Param "seoTitle" | default (.Param "Title") -}}
   {{- with .Param "version" -}}
     {{- $title = printf "%s %s" $title (strings.TrimPrefix "v" .) -}}
+  {{- end -}}
+  {{- /* The 404 page would otherwise share the homepage's title, and be impossible to
+         pick out in an analytics report of page titles. */ -}}
+  {{- if eq .Kind "404" -}}
+    {{- $title = printf "%s — %s" (i18n "notfound_title") (.Param "Title") -}}
   {{- end -}}
   {{- $description := .Param "seoDescription" | default (.Param "Description") -}}
 
@@ -82,6 +87,28 @@
   {{- if .IsTranslated }}
   {{- range .Translations }}
   <meta property="og:locale:alternate" content="{{ .Site.Params.ogLocale | default "en_US" }}"/>
+  {{- end }}
+  {{- end }}
+
+  {{- /* The current specification's FAQ as FAQPage structured data, read from the page
+         itself so the two cannot disagree. Every language's specification ends with its
+         FAQ (toc.html relies on the same thing): each h3 after the last h2 is a
+         question, and what follows it up to the next one is the answer, as plain text
+         with a line per paragraph and per list item. Archived versions are left out,
+         so that one set of answers is published. */ -}}
+  {{- if .IsHome }}
+  {{- $faq := index (last 1 (split .Content "<h2")) 0 }}
+  {{- $questions := slice }}
+  {{- range after 1 (split $faq "<h3") }}
+    {{- $question := replaceRE `(?s)^[^>]*>(.*?)</h3>.*$` "$1" . | plainify | htmlUnescape }}
+    {{- /* plainify breaks lines only at </p>, so list items end with one too. */}}
+    {{- $answer := replaceRE `(?s)^.*?</h3>` "" . }}
+    {{- $answer = replaceRE `<li>` "- " (replaceRE `</(li|ul|ol)>` "</p>" $answer) }}
+    {{- $answer = replaceRE ` *\n[\n ]*` "\n" (replaceRE `[ \t]+` " " ($answer | plainify | htmlUnescape)) }}
+    {{- $questions = $questions | append (dict "@type" "Question" "name" (trim $question " \n") "acceptedAnswer" (dict "@type" "Answer" "text" (trim $answer " \n"))) }}
+  {{- end }}
+  {{- with $questions }}
+  <script type="application/ld+json">{{ dict "@context" "https://schema.org" "@type" "FAQPage" "mainEntity" . | jsonify | safeJS }}</script>
   {{- end }}
   {{- end }}
 </head>

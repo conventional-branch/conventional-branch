@@ -5,8 +5,10 @@
        language has the landing copy, the specification comes straight after the hero,
        and the checker, the mission and the adoption steps follow it. */ -}}
 {{- $landing := and .IsHome .Site.Params.landing }}
-<body class="page-spec{{ if $landing }} is-landing{{ end }}" data-copy-label="{{ i18n "copy" }}" data-copied-label="{{ i18n "copied" }}">
+{{- $archived := ne (partial "version-current.html" .) site.Params.versions.current }}
+<body class="page-spec{{ if $landing }} is-landing{{ end }}{{ if $archived }} is-archived{{ end }}" data-copy-label="{{ i18n "copy" }}" data-copied-label="{{ i18n "copied" }}">
 <a class="skip-link" href="#main">{{ i18n "skip_to_content" }}</a>
+{{- partial "version-banner.html" . }}
 {{- partial "header.html" . }}
 <main id="main">
   {{- partial "spec/hero.html" . }}
@@ -20,5 +22,6 @@
 </main>
 {{- partial "footer.html" . }}
 {{- partial "scripts.html" . }}
+{{- partial "version-redirect.html" . }}
 </body>
 </html>
