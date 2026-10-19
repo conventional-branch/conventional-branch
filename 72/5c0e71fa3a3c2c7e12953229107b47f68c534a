@@ -1,0 +1,19 @@
+content/enforce/index.md
+  s_0126da56744e3d::t_3a6fb7ef345ee6 4
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "725c0e71fa3a3c2c7e12953229107b47f68c534a",
+  "prompts": {},
+  "sessions": {
+    "s_0126da56744e3d": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "17164b29-6f7a-48a0-bc38-7ad3fd078c97",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "Xianpeng Shen <xianpeng.shen@gmail.com>"
+    }
+  }
+}
