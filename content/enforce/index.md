@@ -1,7 +1,7 @@
 ---
 type: about
 draft: false
-seoTitle: "Branch Name Pattern for GitHub & GitLab Rules — Conventional Branch"
+seoTitle: "Enforce a Branch Name Pattern on GitHub & GitLab — Conventional Branch"
 seoDescription: "A one-line regex, ready to copy: the branch name pattern for GitHub rulesets, GitLab push rules and Bitbucket, plus a pre-push hook and CI checks."
 # The page hero; heroLead takes Markdown.
 heroTitle: "Enforce branch names"
