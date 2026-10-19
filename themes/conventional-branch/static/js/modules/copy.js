@@ -1,5 +1,7 @@
 // A copy button on every code block in the rendered Markdown.
 
+import { track } from './analytics';
+
 const COPY_ICON = '<svg class="icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V6a2 2 0 0 1 2-2h8"/></svg>';
 
 function labels() {
@@ -40,6 +42,16 @@ async function copy(text, button) {
   }, 1600);
 }
 
+// What a block is called in analytics. A configuration someone might adopt names itself
+// in the Markdown, as ```json {data-snippet="github_ruleset"}, which Hugo puts on the
+// block's wrapper; any other block goes by its language, or "text" without one.
+function snippetName(pre) {
+  const named = pre.closest('[data-snippet]');
+  if (named) return named.dataset.snippet;
+  const code = pre.querySelector('code[data-lang]');
+  return code ? code.dataset.lang : 'text';
+}
+
 export function initCopy(root) {
   root.querySelectorAll('.markdown-body pre').forEach((pre) => {
     if (pre.parentElement.classList.contains('code-block')) return;
@@ -56,6 +68,10 @@ export function initCopy(root) {
     label.textContent = labels().copy;
     button.append(label);
     wrap.append(button);
-    button.addEventListener('click', () => copy(pre.textContent.replace(/\n$/, ''), button));
+    const snippet = snippetName(pre);
+    button.addEventListener('click', () => {
+      copy(pre.textContent.replace(/\n$/, ''), button);
+      track('copy_snippet', { snippet });
+    });
   });
 }
