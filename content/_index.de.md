@@ -40,6 +40,8 @@ Die Branch-Spezifikation unterstützt die folgenden Präfixe und sollte wie folg
 **AI-Agenten-Quellpräfixe** — identifizieren Branches, die von KI-Codierungsagenten erstellt wurden:
 {{< agents >}}
 
+Diese Liste ist abgeschlossen: Ein Agent ohne eigenes Präfix verwendet `ai/`.
+
 Trunk-Branches (`main`, `master`, `develop`) verwenden kein Präfix.
 
 ---
@@ -191,7 +193,7 @@ v1.1.0 führt **AI-Agenten-Quellpräfixe** als wichtigstes neues Feature ein (si
 KI-Codierungsagenten (GitHub Copilot, Cursor, Claude Code, OpenAI Codex usw.) werden zunehmend zur Codegenerierung und Erstellung von Pull Requests eingesetzt. Jeder Agent verwendet sein eigenes Branch-Präfix (z. B. `copilot/`, `cursor/`). Durch die Standardisierung dieser Präfixe in der Conventional-Branch-Spezifikation ermöglichen wir:
 1. **Schnelle Identifikation** — Prüfer und Tools können KI-generierte PRs sofort erkennen
 2. **Tool-Validierung** — Tools wie commit-check können KI-Agenten-Branches gegen die Spezifikation validieren
-3. **Einen Registrierungsstandard** — neue KI-Agenten können ein dokumentiertes Präfix übernehmen, anstatt Ad-hoc-Muster zu erfinden
+3. **Eine stabile Liste** — die fünf Präfixe stehen fest, und jeder andere Agent verwendet `ai/`, sodass sich die Grammatik nicht mit jedem neuen Werkzeug ändert
 
 Der generische `ai/`-Präfix steht für jeden KI-Agenten ohne dedizierten Präfix zur Verfügung, oder für Teams, die einen anbieterneutralen Identifikator bevorzugen. Dies ist das wichtigste neue Feature, das in **v1.1.0** veröffentlicht wurde — eine vollständige Zusammenfassung der Änderungen zwischen den Versionen finden Sie im FAQ-Eintrag oben.
 

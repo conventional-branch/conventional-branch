@@ -40,6 +40,8 @@ seoDescription: "Git 分支命名规范：feature/、bugfix/、hotfix/、release
 **AI 智能体源前缀（AI Agent Source Prefixes）** — 识别由 AI 编码智能体生成的分支：
 {{< agents >}}
 
+该列表已冻结：没有专属前缀的智能体使用 `ai/`。
+
 主干分支（`main`、`master`、`develop`）不使用前缀。
 
 ---
@@ -190,7 +192,7 @@ v1.1.0 的主要新特性是引入了 **AI 智能体源前缀（AI Agent Source 
 AI 编码智能体（GitHub Copilot、Cursor、Claude Code、OpenAI Codex 等）越来越多地被用于生成代码和创建 Pull Request。每个智能体都使用自己的分支前缀（例如 `copilot/`、`cursor/`）。通过在约定式分支规范中标准化这些前缀，我们可以实现：
 1. **快速识别** — 审查者和工具可以立即识别 AI 生成的 PR
 2. **工具验证** — 诸如 commit-check 之类的工具可以验证 AI 智能体分支是否符合规范
-3. **注册标准** — 新的 AI 智能体可以采用已记录的 prefix，而不是自行创建临时的模式
+3. **稳定的列表** — 这五个前缀固定不变，其他智能体使用 `ai/`，文法不会因为新工具的出现而改动
 
 `ai/` 通用前缀适用于没有专用前缀的 AI 智能体，或者适用于倾向于使用供应商无关标识符的团队。这是 **v1.1.0** 发布的关键新特性 —— 版本间变更的完整摘要请参见上一条常见问题。
 

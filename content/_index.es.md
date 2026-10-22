@@ -40,6 +40,8 @@ La especificación de ramas admite los siguientes prefijos y debe estructurarse 
 **Prefijos de fuente de agente de IA** — identifican ramas generadas por agentes de codificación de IA:
 {{< agents >}}
 
+Esta lista está cerrada: un agente sin prefijo propio usa `ai/`.
+
 Las ramas troncales (`main`, `master`, `develop`) no usan prefijo.
 
 ---
@@ -191,7 +193,7 @@ v1.1.0 añade **Prefijos de fuente de agente de IA** como la nueva característi
 Los agentes de codificación de IA (GitHub Copilot, Cursor, Claude Code, OpenAI Codex, etc.) se utilizan cada vez más para generar código y crear pull requests. Cada agente usa su propio prefijo de rama (p. ej., `copilot/`, `cursor/`). Al estandarizar estos prefijos en la especificación Conventional Branch, permitimos:
 1. **Identificación rápida** — los revisores y las herramientas pueden reconocer inmediatamente los PRs generados por IA
 2. **Validación de herramientas** — herramientas como commit-check pueden validar las ramas de agentes de IA según la especificación
-3. **Un estándar de registro** — los nuevos agentes de IA pueden adoptar un prefijo documentado en lugar de inventar patrones ad-hoc
+3. **Una lista estable** — los cinco prefijos son fijos y cualquier otro agente usa `ai/`, de modo que la gramática no cambia con cada herramienta nueva
 
 El prefijo genérico `ai/` está disponible para cualquier agente de IA que no tenga un prefijo dedicado, o para equipos que prefieran un identificador neutro respecto al proveedor. Esta es la nueva característica clave lanzada en **v1.1.0** — para un resumen completo de los cambios entre versiones, consulte la entrada de preguntas frecuentes anterior.
 

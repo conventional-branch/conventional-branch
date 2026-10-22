@@ -23,11 +23,13 @@ We'd love your help to suggest improvements to the specification, fixing typos, 
 1. If your strings touch the tooling section, add the corresponding translations in `./data/tooling.yaml`.
 1. The site's own words — navigation, the specification's sidebar, the footer — are in `./i18n/en.yaml`, and any string a language has not translated falls back to English. To translate them, add `./i18n/[lang].yaml` with the same keys. The homepage's mission, principles and adoption sections are in the same file; they appear in a language only once its `landing` param in `./config.yaml` is `true`, so set that after translating them, and no page mixes two languages.
 
-### Registering a new AI agent prefix
+### The AI agent prefix registry
 
-The AI agent source prefixes (`ai/`, `copilot/`, `cursor/`, …) are stored in a single registry, [`./data/agents.yaml`](./data/agents.yaml). The specification website and the About page render this file as a table, so a new prefix only needs to be added in one place.
+The AI agent source prefixes (`ai/`, `claude/`, `codex/`, `copilot/`, `cursor/`) are stored in a single registry, [`./data/agents.yaml`](./data/agents.yaml). The specification website and the About page render this file as a table.
 
-To register an agent:
+**The registry is closed.** Each vendor prefix added to the grammar is a change every validator has to pick up, and the list would never stop growing, so no further prefixes are registered: an agent without one of the five uses the vendor-neutral `ai/`. Pull requests that add a prefix will be declined.
+
+The steps below are kept as a record of how the existing entries are wired through the repository, should a future major version revisit the decision:
 
 1. Add an entry to the `agents:` list in `./data/agents.yaml`:
    ```yaml
@@ -35,17 +37,12 @@ To register an agent:
      name: Your Agent         # display name shown in the table
      vendor: Your Company     # organization behind the agent ("—" if none)
      homepage: https://...    # canonical product URL (the name links to it)
-     since: "1.2.0"           # the spec version that adds the prefix
+     since: "1.1.0"           # the spec version that added the prefix
    ```
 2. Keep the list roughly alphabetical after the generic `ai/` entry, and reuse an existing prefix rather than adding a near-duplicate.
 3. Add the prefix to the `type` rule of the ABNF grammar and to the examples table in `./content/_index*.md` (and mention it in `CHANGELOG.md`), so the normative grammar stays in sync with the registry. This means **all eleven language files, not just the English one** — the conformance check holds every translation to the same examples and the same grammar, so missing one fails CI rather than shipping a page that contradicts the spec. The same goes for the `allow_branch_types` list in the commit-check configuration on `./content/enforce/index.md` and in the repository's own `./commit-check.toml`.
 4. Add the prefix as a `type` (and update the `grammar.regex`) in [`./static/spec.json`](./static/spec.json), then run `python3 tests/conformance.py` to confirm everything still agrees. CI enforces this.
 
-Guidelines for a good prefix:
-
-- Use the agent's short, lowercase, well-known name (e.g. `copilot`, not `github-copilot`).
-- It must satisfy the branch-name grammar: lowercase `a-z`, digits, no separators.
-- Prefer registering a dedicated prefix over overloading `ai/`, which stays reserved as the vendor-neutral fallback.
 
 ### Adding your project to the adopters list
 
