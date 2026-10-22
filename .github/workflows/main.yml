@@ -9,11 +9,13 @@ on:
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
-# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
+# Read-only. The site is published to conventional-branch.github.io by the
+# Deploy step with PERSONAL_TOKEN, not with this token, and nothing here
+# deploys through GitHub Pages' own API (deploy-pages), which is what
+# `pages: write` and `id-token: write` are for. Pull requests run this job
+# too, with npm install and the build, so the token they get stays read-only.
 permissions:
-  contents: write
-  pages: write
-  id-token: write
+  contents: read
 
 # Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
 # However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
