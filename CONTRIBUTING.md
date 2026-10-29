@@ -29,6 +29,8 @@ The AI agent source prefixes (`ai/`, `claude/`, `codex/`, `copilot/`, `cursor/`)
 
 **The registry is closed as of 1.2.0.** Each vendor prefix added to the grammar is a change every validator has to pick up, and the list would never stop growing, so no further prefixes are registered: an agent without one of the five uses the vendor-neutral `ai/`. Pull requests that add a prefix will be declined.
 
+**Aliases of `ai/`.** The one exception is a generic word that a widely used tool hard-codes as its branch prefix, so that its users cannot change it — `agents/`, from VS Code's Agents window, is the case so far. It names no agent, so it means what `ai/` means, and it is accepted as an alias of `ai/` rather than as a prefix of its own, the way `feat` is an alias of `feature`. A vendor or product name never qualifies: an agent with a name of its own uses `ai/`. An alias is wired through the same files as a prefix (steps below), except that in `spec.json` it goes in the `aliases` of the `ai` type rather than in a new `type`, and its `agents.yaml` entry carries `alias_of: ai`.
+
 The steps below are kept as a record of how the existing entries are wired through the repository, should a future major version revisit the decision:
 
 1. Add an entry to the `agents:` list in `./data/agents.yaml`:

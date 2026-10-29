@@ -42,13 +42,13 @@ Prefer the full names over aliases for consistency.
 
 | Type | Alias | Purpose |
 |------|-------|---------|
-| `ai/` | — | Generic prefix for any AI coding agent |
+| `ai/` | `agents/` | Generic prefix for any AI coding agent |
 | `copilot/` | — | GitHub Copilot |
 | `cursor/` | — | Cursor |
 | `claude/` | — | Claude Code by Anthropic |
 | `codex/` | — | OpenAI Codex |
 
-Use a vendor-specific prefix when you know which agent is producing the branch; use `ai/` as a vendor-neutral fallback. The list is closed: an agent not listed here uses `ai/`.
+Use a vendor-specific prefix when you know which agent is producing the branch; use `ai/` as a vendor-neutral fallback. `agents/` is an alias of `ai/`, accepted because VS Code's Agents window hard-codes it. The list is closed: an agent not listed here uses `ai/`.
 
 ### Trunk Branches
 
@@ -73,7 +73,7 @@ trunk-branch    = "main" / "master" / "develop"
 prefixed-branch = type "/" description
 type            = "feature" / "feat" / "bugfix" / "fix"
                 / "hotfix" / "release" / "chore"
-                / "ai" / "copilot" / "cursor"
+                / "ai" / "agents" / "copilot" / "cursor"
                 / "claude" / "codex"
 description     = (ticket-key / desc-segment) *("-" desc-segment)
 ticket-key      = UPPER *(UPPER / DIGIT) "-" 1*DIGIT
@@ -100,6 +100,7 @@ feature/issue-123-new-login
 feature/PROJ-123-new-login
 release/PROJ-1234
 ai/refactor-auth-flow
+agents/add-dark-mode-toggle
 copilot/add-login-page
 cursor/fix-header-bug
 claude/security-patch

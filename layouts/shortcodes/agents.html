@@ -1,6 +1,15 @@
 {{- /* Renders the AI agent prefix registry (data/agents.yaml) as a table.
-       Column headers and the generic-agent label fall back to English. */ -}}
+       Column headers and the generic-agent label fall back to English.
+       An entry with alias_of is marked as an alias of that prefix. An archived
+       version's page lists only the entries that version had (since <= it). */ -}}
 {{- $data := .Site.Data.agents -}}
+{{- $pageVersion := partial "version-current.html" .Page -}}
+{{- $versions := slice -}}
+{{- $reached := false -}}
+{{- range site.Params.versions.list -}}
+  {{- if not $reached -}}{{- $versions = $versions | append . -}}{{- end -}}
+  {{- if eq . $pageVersion -}}{{- $reached = true -}}{{- end -}}
+{{- end -}}
 {{- $lang := .Page.Lang | default "en" -}}
 {{- $labels := $data.labels -}}
 {{- $hPrefix := index $labels.prefix $lang | default $labels.prefix.en -}}
@@ -18,16 +27,19 @@
   </thead>
   <tbody>
     {{- range $data.agents -}}
+    {{- if in $versions (printf "v%s" .since) -}}
     {{- $name := .name -}}
     {{- if .generic -}}
       {{- $name = index $labels.generic $lang | default $labels.generic.en -}}
     {{- end -}}
     <tr>
       <td><code>{{ .prefix }}/</code></td>
-      <td>{{ with .homepage }}<a href="{{ . }}" rel="noopener">{{ $name }}</a>{{ else }}{{ $name }}{{ end }}</td>
+      <td>{{ with .homepage }}<a href="{{ . }}" rel="noopener">{{ $name }}</a>{{ else }}{{ $name }}{{ end }}
+        {{- with .alias_of }} ({{ printf (index $labels.alias_of $lang | default $labels.alias_of.en) (printf "<code>%s/</code>" .) | safeHTML }}){{ end }}</td>
       <td>{{ .vendor }}</td>
       <td>v{{ .since }}</td>
     </tr>
+    {{- end -}}
     {{- end -}}
   </tbody>
 </table>

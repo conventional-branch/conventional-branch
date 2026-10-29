@@ -13,6 +13,9 @@
 #   homepage  canonical product URL (optional; the name links to it when present)
 #   since     the spec version the prefix was added in
 #   generic   set to true for the vendor-neutral `ai/` entry
+#   alias_of  for an alias rather than a prefix of its own: the type it stands
+#             for. The one kind accepted is a generic word that a widely used
+#             tool hard-codes and its users cannot change, as an alias of `ai`.
 
 # Translatable column headers and the generic-agent label. English is the
 # fallback for any language not listed.
@@ -77,12 +80,31 @@ labels:
     pt-br: Qualquer agente de IA
     ru: Любой AI-агент
     th: เอเจนต์ AI ใดก็ได้
+  # Shown after an alias entry's name; %s is the prefix it stands for.
+  alias_of:
+    en: alias of %s
+    zh: "%s 的别名"
+    zh-hant: "%s 的別名"
+    ja: "%s のエイリアス"
+    de: Alias von %s
+    es: alias de %s
+    fr: alias de %s
+    pl: alias %s
+    pt-br: alias de %s
+    ru: псевдоним %s
+    th: ชื่อแทนของ %s
 
 agents:
   - prefix: ai
     generic: true
     vendor: "—"
     since: "1.1.0"
+  - prefix: agents
+    alias_of: ai
+    name: VS Code Agents window
+    vendor: Microsoft
+    homepage: https://code.visualstudio.com/docs/copilot/agents/agents-window
+    since: "1.2.0"
   - prefix: claude
     name: Claude Code
     vendor: Anthropic

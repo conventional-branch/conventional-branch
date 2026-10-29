@@ -22,6 +22,7 @@
     { "branch": "chore/123", "valid": true, "reason": "Digits-only description segment" },
     { "branch": "feature/a", "valid": true, "reason": "Single-character description" },
     { "branch": "ai/refactor-auth-flow", "valid": true, "reason": "Generic AI agent prefix" },
+    { "branch": "agents/add-dark-mode-toggle", "valid": true, "reason": "Alias of ai/ (VS Code Agents window)" },
     { "branch": "claude/security-patch", "valid": true, "reason": "Claude Code by Anthropic" },
     { "branch": "codex/optimize-query", "valid": true, "reason": "OpenAI Codex" },
     { "branch": "copilot/add-login-page", "valid": true, "reason": "GitHub Copilot" },

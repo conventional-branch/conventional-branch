@@ -64,7 +64,7 @@ trunk-branch    = "main" / "master" / "develop"
 prefixed-branch = type "/" description
 type            = "feature" / "feat" / "bugfix" / "fix"
                 / "hotfix" / "release" / "chore"
-                / "ai" / "copilot" / "cursor"
+                / "ai" / "agents" / "copilot" / "cursor"
                 / "claude" / "codex"
 description     = (ticket-key / desc-segment) *("-" desc-segment)
 ticket-key      = UPPER *(UPPER / DIGIT) "-" 1*DIGIT
@@ -104,6 +104,7 @@ DIGIT           = %x30-39   ; 数字 0-9
 | `fix/header bug` | ❌ | スペースは使用不可 |
 | `fix/header_bug` | ❌ | アンダースコアは使用不可 |
 | `ai/refactor-auth-flow` | ✅ | 汎用 AI エージェントプレフィックス |
+| `agents/add-dark-mode-toggle` | ✅ | `ai/` のエイリアス（VS Code の Agents ウィンドウ） |
 | `copilot/add-login-page` | ✅ | GitHub Copilot |
 | `cursor/fix-header-bug` | ✅ | Cursor |
 | `claude/security-patch` | ✅ | Anthropic Claude Code |

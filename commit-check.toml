@@ -14,7 +14,7 @@ allow_branch_types = [
   "hotfix",
   "release",
   "chore",
-  "ai", "claude", "codex", "copilot", "cursor",
+  "ai", "agents", "claude", "codex", "copilot", "cursor",
   "dependabot",
 ]
 allow_branch_names = ["main", "master", "develop"]

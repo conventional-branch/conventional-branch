@@ -64,7 +64,7 @@ trunk-branch    = "main" / "master" / "develop"
 prefixed-branch = type "/" description
 type            = "feature" / "feat" / "bugfix" / "fix"
                 / "hotfix" / "release" / "chore"
-                / "ai" / "copilot" / "cursor"
+                / "ai" / "agents" / "copilot" / "cursor"
                 / "claude" / "codex"
 description     = (ticket-key / desc-segment) *("-" desc-segment)
 ticket-key      = UPPER *(UPPER / DIGIT) "-" 1*DIGIT
@@ -104,6 +104,7 @@ DIGIT           = %x30-39   ; cyfry 0-9
 | `fix/header bug` | ❌ | Spacje są niedozwolone |
 | `fix/header_bug` | ❌ | Podkreślenia są niedozwolone |
 | `ai/refactor-auth-flow` | ✅ | Generyczny prefiks agenta AI |
+| `agents/add-dark-mode-toggle` | ✅ | Alias `ai/` (okno Agents w VS Code) |
 | `copilot/add-login-page` | ✅ | GitHub Copilot |
 | `cursor/fix-header-bug` | ✅ | Cursor |
 | `claude/security-patch` | ✅ | Claude Code od Anthropic |

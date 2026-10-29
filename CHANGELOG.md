@@ -10,6 +10,7 @@ The version number tracks the specification itself; site and tooling changes are
 
 ### Added
 - **Uppercase ticket keys**: a description may open with a tracker key such as `PROJ-123`, which keeps its uppercase form — `feature/PROJ-123-new-login`, `release/PROJ-1234`. Everything after the key stays lowercase. The grammar gains `ticket-key`; the regex, examples (all eleven languages), fixtures, agent skill and homepage checker follow. `spec.json` adds `rules.ticketKey`, a new optional property in schema v1.
+- **`agents/` as an alias of `ai/`**: VS Code's Agents window names its branches `agents/<description>`, and its users cannot change the prefix. It names no agent, so it is accepted with the meaning of `ai/` rather than registered as a prefix of its own ([#196](https://github.com/conventional-branch/conventional-branch/issues/196)). The grammar, regex, examples (all eleven languages), fixtures, registry, enforce page and agent skill follow; `spec.json` lists it under the `ai` type's `aliases`.
 - **Frozen spec endpoint**: [`/v1.2.0/spec.json`](https://conventionalbranch.org/v1.2.0/spec.json). The 1.1.0 text is archived at [/v1.1.0/](https://conventionalbranch.org/v1.1.0/).
 
 ### Changed

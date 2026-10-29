@@ -27,6 +27,7 @@ Branch names follow this structure:
 | `release/` | Release preparation | `release/v1.2.0` |
 | `chore/` | Non-code tasks | `chore/update-dependencies` |
 | `ai/` | Generic AI agent prefix | `ai/refactor-auth-flow` |
+| `agents/` | Alias of `ai/` (VS Code Agents window) | `agents/add-dark-mode-toggle` |
 | `copilot/` | GitHub Copilot | `copilot/add-login-page` |
 | `cursor/` | Cursor | `cursor/fix-header-bug` |
 | `claude/` | Claude Code by Anthropic | `claude/security-patch` |

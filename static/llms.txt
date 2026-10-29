@@ -4,7 +4,7 @@
 
 The current version is 1.2.0. It defines a fixed set of type prefixes, the rules a description must follow, and a formal ABNF grammar.
 
-Purpose prefixes describe the intent of the work: `feature/` (alias `feat/`), `bugfix/` (alias `fix/`), `hotfix/`, `release/` and `chore/`. AI agent source prefixes identify branches opened by coding agents: `ai/` as the vendor-neutral fallback, plus `claude/`, `codex/`, `copilot/` and `cursor/`. That list is closed: any other agent uses `ai/`. The trunk branches `main`, `master` and `develop` take no prefix at all.
+Purpose prefixes describe the intent of the work: `feature/` (alias `feat/`), `bugfix/` (alias `fix/`), `hotfix/`, `release/` and `chore/`. AI agent source prefixes identify branches opened by coding agents: `ai/` as the vendor-neutral fallback (with the alias `agents/`, the prefix VS Code's Agents window uses), plus `claude/`, `codex/`, `copilot/` and `cursor/`. That list is closed: any other agent uses `ai/`. The trunk branches `main`, `master` and `develop` take no prefix at all.
 
 A description is lowercase `a-z`, digits, and hyphens between words. Dots are allowed for version numbers, as in `release/v1.2.0`. The one uppercase part allowed is a ticket key opening the description, as in `feature/PROJ-123-new-login`. Separators may not repeat, lead or trail, so `feature/new--login` and `feature/-new-login` are both invalid.
 
@@ -13,7 +13,7 @@ The specification deliberately keeps this list short rather than mirroring every
 A branch name conforms if and only if it matches this expression, which is the authoritative validator:
 
 ```
-^(?:main|master|develop|(?:feature|feat|bugfix|fix|hotfix|release|chore|ai|copilot|cursor|claude|codex)/(?:[A-Z][A-Z0-9]*-[0-9]+|[a-z0-9]+(?:\.[a-z0-9]+)*)(?:-[a-z0-9]+(?:\.[a-z0-9]+)*)*)$
+^(?:main|master|develop|(?:feature|feat|bugfix|fix|hotfix|release|chore|ai|agents|copilot|cursor|claude|codex)/(?:[A-Z][A-Z0-9]*-[0-9]+|[a-z0-9]+(?:\.[a-z0-9]+)*)(?:-[a-z0-9]+(?:\.[a-z0-9]+)*)*)$
 ```
 
 ## Specification

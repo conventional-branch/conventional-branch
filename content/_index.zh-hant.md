@@ -63,7 +63,7 @@ trunk-branch    = "main" / "master" / "develop"
 prefixed-branch = type "/" description
 type            = "feature" / "feat" / "bugfix" / "fix"
                 / "hotfix" / "release" / "chore"
-                / "ai" / "copilot" / "cursor"
+                / "ai" / "agents" / "copilot" / "cursor"
                 / "claude" / "codex"
 description     = (ticket-key / desc-segment) *("-" desc-segment)
 ticket-key      = UPPER *(UPPER / DIGIT) "-" 1*DIGIT
@@ -103,6 +103,7 @@ DIGIT           = %x30-39   ; 數字 0-9
 | `fix/header bug` | ❌ | 不允許空格 |
 | `fix/header_bug` | ❌ | 不允許底線 |
 | `ai/refactor-auth-flow` | ✅ | 通用 AI 編碼智能體前綴 |
+| `agents/add-dark-mode-toggle` | ✅ | `ai/` 的別名（VS Code Agents 視窗） |
 | `copilot/add-login-page` | ✅ | GitHub Copilot |
 | `cursor/fix-header-bug` | ✅ | Cursor |
 | `claude/security-patch` | ✅ | Anthropic Claude Code |

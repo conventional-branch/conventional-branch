@@ -12,7 +12,8 @@ apart silently:
                    validate themselves, in all eleven languages).
   3. Consistency — the regex accepts every declared type/alias and trunk
                    branch, and every AI agent prefix in data/agents.yaml is a
-                   declared type (no registry/spec drift).
+                   declared type, or a declared alias of the type its alias_of
+                   names (no registry/spec drift).
   4. Badge       — the version rendered in static/badge.svg is the version
                    spec.json declares, so the adoption badge cannot go stale.
   5. Schema      — spec.json, and every frozen copy of it, satisfies
@@ -174,13 +175,18 @@ def check_grammar_block(spec):
 
 
 def agent_prefixes():
-    # Minimal, dependency-free parse of the `- prefix: <name>` entries.
-    prefixes = []
+    """The registry's entries as (prefix, alias_of) pairs; alias_of is None for a
+    prefix of its own. Minimal, dependency-free parse of the `- prefix:` entries."""
+    entries = []
     for line in AGENTS.read_text(encoding="utf-8").splitlines():
         m = re.match(r"^\s*-\s*prefix:\s*([A-Za-z0-9]+)", line)
         if m:
-            prefixes.append(m.group(1))
-    return prefixes
+            entries.append([m.group(1), None])
+            continue
+        m = re.match(r"^\s+alias_of:\s*([A-Za-z0-9]+)", line)
+        if m and entries:
+            entries[-1][1] = m.group(1)
+    return [tuple(e) for e in entries]
 
 
 def check_consistency(spec, pattern):
@@ -198,11 +204,18 @@ def check_consistency(spec, pattern):
         if not pattern.fullmatch(trunk):
             failures.append(f"trunk branch {trunk!r} rejected by the spec regex")
 
-    # Every registered AI agent prefix must be a declared type (no drift).
-    for prefix in agent_prefixes():
-        if prefix not in declared:
+    # Every registered AI agent prefix must be a declared type, and every alias
+    # entry a declared alias of the type it names (no drift).
+    aliases = {t["type"]: set(t.get("aliases", [])) for t in spec["types"]}
+    for prefix, alias_of in agent_prefixes():
+        if alias_of is None and prefix not in declared:
             failures.append(
                 f"agent prefix {prefix!r} in data/agents.yaml is not a declared type in spec.json"
+            )
+        elif alias_of is not None and prefix not in aliases.get(alias_of, set()):
+            failures.append(
+                f"agent prefix {prefix!r} in data/agents.yaml is marked alias_of {alias_of!r}, "
+                f"but spec.json does not declare it as an alias of {alias_of!r}"
             )
     return failures
 

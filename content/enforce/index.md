@@ -52,7 +52,7 @@ thing that does. The `branch_name_pattern` rule takes a regular expression direc
         "name": "Branch names must follow the Conventional Branch specification",
         "negate": false,
         "operator": "regex",
-        "pattern": "^(?:main|master|develop|(?:feature|feat|bugfix|fix|hotfix|release|chore|ai|copilot|cursor|claude|codex)/(?:[A-Z][A-Z0-9]*-[0-9]+|[a-z0-9]+(?:\\.[a-z0-9]+)*)(?:-[a-z0-9]+(?:\\.[a-z0-9]+)*)*)$"
+        "pattern": "^(?:main|master|develop|(?:feature|feat|bugfix|fix|hotfix|release|chore|ai|agents|copilot|cursor|claude|codex)/(?:[A-Z][A-Z0-9]*-[0-9]+|[a-z0-9]+(?:\\.[a-z0-9]+)*)(?:-[a-z0-9]+(?:\\.[a-z0-9]+)*)*)$"
       }
     }
   ]
@@ -150,7 +150,7 @@ Push rules reject the branch at `pre-receive`, before it reaches the server.
 Under **Settings → Repository → Push rules → Branch name**, paste:
 
 ```text
-^(?:main|master|develop|(?:feature|feat|bugfix|fix|hotfix|release|chore|ai|copilot|cursor|claude|codex)/(?:[A-Z][A-Z0-9]*-[0-9]+|[a-z0-9]+(?:\.[a-z0-9]+)*)(?:-[a-z0-9]+(?:\.[a-z0-9]+)*)*)$
+^(?:main|master|develop|(?:feature|feat|bugfix|fix|hotfix|release|chore|ai|agents|copilot|cursor|claude|codex)/(?:[A-Z][A-Z0-9]*-[0-9]+|[a-z0-9]+(?:\.[a-z0-9]+)*)(?:-[a-z0-9]+(?:\.[a-z0-9]+)*)*)$
 ```
 
 Three things worth knowing before you rely on it:
@@ -241,7 +241,7 @@ allow_branch_types = [
   "hotfix",
   "release",
   "chore",
-  "ai", "claude", "codex", "copilot", "cursor",
+  "ai", "agents", "claude", "codex", "copilot", "cursor",
 ]
 allow_branch_names = ["main", "master", "develop"]
 ```
@@ -264,7 +264,7 @@ executable:
 # Reject a push from a branch that does not follow the Conventional Branch
 # specification. https://conventionalbranch.org/
 
-pattern='^(main|master|develop|(feature|feat|bugfix|fix|hotfix|release|chore|ai|copilot|cursor|claude|codex)/([A-Z][A-Z0-9]*-[0-9]+|[a-z0-9]+(\.[a-z0-9]+)*)(-[a-z0-9]+(\.[a-z0-9]+)*)*)$'
+pattern='^(main|master|develop|(feature|feat|bugfix|fix|hotfix|release|chore|ai|agents|copilot|cursor|claude|codex)/([A-Z][A-Z0-9]*-[0-9]+|[a-z0-9]+(\.[a-z0-9]+)*)(-[a-z0-9]+(\.[a-z0-9]+)*)*)$'
 branch=$(git symbolic-ref --short HEAD)
 
 if ! printf '%s' "$branch" | grep -qE "$pattern"; then
