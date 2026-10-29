@@ -34,7 +34,7 @@ carve out exceptions for your trunk branches.
 A ruleset rejects a non-conforming branch outright, and on github.com it is the only
 thing that does. The `branch_name_pattern` rule takes a regular expression directly.
 
-```json
+```json {data-snippet="github_ruleset"}
 {
   "name": "Conventional Branch",
   "target": "branch",
@@ -62,7 +62,7 @@ thing that does. The `branch_name_pattern` rule takes a regular expression direc
 Save it as `conventional-branch.json` and import it under **Settings → Rules → Rulesets
 → New ruleset → Import a ruleset**, or apply it from the command line:
 
-```bash
+```bash {data-snippet="github_ruleset_cli"}
 gh api repos/OWNER/REPO/rulesets --method POST --input conventional-branch.json
 ```
 
@@ -79,7 +79,7 @@ explained in the PR. [commit-check-action](https://github.com/commit-check/commi
 checks the branch name by default and reports the result as a job summary, and as a
 comment on the pull request if you let it:
 
-```yaml
+```yaml {data-snippet="github_action"}
 name: Branch name
 
 on: pull_request
@@ -109,7 +109,7 @@ ruleset above or the script below.
 A script that applies the regex from the specification in full, if you would rather
 not depend on an action:
 
-```yaml
+```yaml {data-snippet="github_actions_script"}
 name: Branch name
 
 on: pull_request
@@ -150,7 +150,7 @@ Push rules reject the branch at `pre-receive`, before it reaches the server.
 
 Under **Settings → Repository → Push rules → Branch name**, paste:
 
-```text
+```text {data-snippet="gitlab_push_rule"}
 ^(?:main|master|develop|(?:feature|feat|bugfix|fix|hotfix|release|chore|ai|copilot|cursor|claude|codex)/[a-z0-9]+(?:\.[a-z0-9]+)*(?:-[a-z0-9]+(?:\.[a-z0-9]+)*)*)$
 ```
 
@@ -165,7 +165,7 @@ Three things worth knowing before you rely on it:
 
 For the Free tier, the same check as a CI job:
 
-```yaml
+```yaml {data-snippet="gitlab_ci"}
 conventional-branch:
   image: python:3-alpine
   rules:
@@ -190,7 +190,7 @@ Bitbucket **Data Center** runs pre-receive hooks, so the rule can be enforced on
 server. Bitbucket **Cloud** does not run arbitrary server-side hooks — the check has to
 live in Pipelines, which means it reports a failure rather than refusing the push.
 
-```yaml
+```yaml {data-snippet="bitbucket"}
 pipelines:
   pull-requests:
     '**':
@@ -220,7 +220,7 @@ against the specification's type prefixes out of the box — `conventional_branc
 is its default — and as a [pre-commit](https://pre-commit.com) hook it runs at every
 commit, so a wrong name is caught before it is anywhere but your machine:
 
-```yaml
+```yaml {data-snippet="pre_commit"}
 repos:
   - repo: https://github.com/commit-check/commit-check
     rev: v2.19.4
@@ -233,7 +233,7 @@ Conventional Commits types (`docs/`, `refactor/`, …), the `dependabot/` and
 `renovate/` prefixes, and `agents/`, which VS Code's Agents window uses. To accept exactly the types the specification defines, add a
 `commit-check.toml` at the repository root:
 
-```toml
+```toml {data-snippet="commit_check_toml"}
 [branch]
 conventional_branch = true
 require_description_grammar = true
@@ -262,7 +262,7 @@ description to the hook below or the server rule.
 and this needs nothing installed. Save this as `.git/hooks/pre-push` and make it
 executable:
 
-```bash
+```bash {data-snippet="git_hook"}
 #!/bin/sh
 # Reject a push from a branch that does not follow the Conventional Branch
 # specification. https://conventionalbranch.org/
@@ -288,7 +288,7 @@ accepts exactly the same branch names.
 Git hooks are not copied by `git clone`. To share them with the team, commit the script
 to the repository and point Git at it once:
 
-```bash
+```bash {data-snippet="git_hooks_path"}
 git config core.hooksPath .githooks
 ```
 
@@ -296,7 +296,7 @@ git config core.hooksPath .githooks
 
 Enforcement tells people they are wrong. An alias makes it easier to be right:
 
-```ini
+```ini {data-snippet="git_alias"}
 [alias]
     feature = "!f() { git switch -c \"feature/$(printf '%s' \"$*\" | tr 'A-Z _' 'a-z--')\"; }; f"
     bugfix  = "!f() { git switch -c \"bugfix/$(printf '%s' \"$*\" | tr 'A-Z _' 'a-z--')\"; }; f"
@@ -304,7 +304,7 @@ Enforcement tells people they are wrong. An alias makes it easier to be right:
     chore   = "!f() { git switch -c \"chore/$(printf '%s' \"$*\" | tr 'A-Z _' 'a-z--')\"; }; f"
 ```
 
-```bash
+```bash {data-snippet="git_alias_usage"}
 git feature add login page   # creates and switches to feature/add-login-page
 git feature Fix_Header       # creates and switches to feature/fix-header
 ```
@@ -326,7 +326,7 @@ they open. Either leave them out of the check, or have the bot name its branches
 On GitHub, exclude their branches from the ruleset rather than loosening its pattern. In
 the ruleset above, fill in `exclude`:
 
-```json
+```json {data-snippet="github_ruleset_bot_exclude"}
 "conditions": {
   "ref_name": {
     "include": ["~ALL"],
@@ -342,7 +342,7 @@ the ruleset above, fill in `exclude`:
 commit-check skips the branch check for a commit whose author is on the `[branch]` table's
 `ignore_authors` list. Add the line to the `commit-check.toml` above:
 
-```toml
+```toml {data-snippet="commit_check_ignore_bots"}
 ignore_authors = ["dependabot[bot]", "renovate[bot]", "github-actions[bot]"]
 ```
 
@@ -372,7 +372,7 @@ ways to teach them the convention.
 
 ### The agent skill
 
-```bash
+```bash {data-snippet="agent_skill"}
 npx skills add conventional-branch/conventional-branch --skill conventional-branch
 ```
 
@@ -382,7 +382,7 @@ Several projects on the [adopters list](https://conventionalbranch.org/about/#pr
 already document the convention this way rather than for people. Paste it into whichever
 instruction file your tooling reads:
 
-```markdown
+```markdown {data-snippet="agents_md"}
 ## Branch naming
 
 Branch names follow the [Conventional Branch](https://conventionalbranch.org/)
@@ -403,7 +403,7 @@ vendor-neutral `ai/` — so the branch records who wrote it.
 The portable artifact is the regular expression, and the most reliable way to get it is
 from the specification itself rather than by copying it out of a document:
 
-```python
+```python {data-snippet="python"}
 import json, re, urllib.request
 
 SPEC = "https://conventionalbranch.org/v1.1.0/spec.json"  # pinned, never changes

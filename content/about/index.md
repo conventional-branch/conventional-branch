@@ -66,7 +66,7 @@ _Want your project on this list?_ [Send a pull request](https://github.com/conve
 
 Because the branch name already encodes its purpose, CI/CD pipelines can key their behavior off the prefix directly, without any extra metadata or configuration lookup. In GitHub Actions, that means an `if: startsWith(...)` condition per job:
 
-```yaml
+```yaml {data-snippet="ci_by_prefix"}
 jobs:
   test:
     if: startsWith(github.head_ref, 'feature/') || startsWith(github.head_ref, 'bugfix/')
@@ -107,13 +107,13 @@ Other CI/CD platforms support the same pattern using their own equivalent of a b
 
    [![Conventional Branch](https://conventionalbranch.org/badge.svg)](https://conventionalbranch.org/)
 
-   ```markdown
+   ```markdown {data-snippet="badge_markdown"}
    [![Conventional Branch](https://conventionalbranch.org/badge.svg)](https://conventionalbranch.org/)
    ```
 
    Or in HTML:
 
-   ```html
+   ```html {data-snippet="badge_html"}
    <a href="https://conventionalbranch.org/">
      <img alt="Conventional Branch 1.1.0" src="https://conventionalbranch.org/badge.svg">
    </a>
@@ -124,7 +124,7 @@ Other CI/CD platforms support the same pattern using their own equivalent of a b
    version, and takes `&style=flat-square`, `&style=plastic` or
    `&style=for-the-badge`:
 
-   ```markdown
+   ```markdown {data-snippet="badge_shields"}
    [![Conventional Branch](https://img.shields.io/badge/Conventional%20Branch-1.1.0-6699CC)](https://conventionalbranch.org/)
    ```
 
