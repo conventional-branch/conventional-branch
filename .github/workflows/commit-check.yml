@@ -17,7 +17,7 @@ jobs:
           persist-credentials: false
           fetch-depth: 0 # the message check reads every commit on the pull request
       - name: Check the branch name and commit messages
-        uses: commit-check/commit-check-action@fd3d923eab0876650f261d2a75572e8161a9a58e # v2.16.0
+        uses: commit-check/commit-check-action@b6819c7bfd40f576d670a78712646a67f2659ff3 # v2.18.2
         with:
           branch: true
           message: true
