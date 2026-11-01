@@ -118,4 +118,4 @@ Long-lived integration or environment branches that are part of the core specifi
 
 ### What tools can be used to automatically identify if a team member does not meet this specification?
 
-You can use [commit-check](https://github.com/commit-check/commit-check) to check branch specification or [commit-check-action](https://github.com/commit-check/commit-check-action) if your codes are hosted on GitHub.
+You can use [commit-check](https://github.com/commit-check/commit-check) to check branch specification or [commit-check-action](https://github.com/commit-check/commit-check-action) if your code is hosted on GitHub.
