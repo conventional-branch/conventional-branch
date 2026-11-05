@@ -1,0 +1,56 @@
+{#- The two layers enforcement happens at, each item linking to its configuration on
+    the page below. -#}
+{%- set s = config.extra.cb.s %}
+<header class="sumi-land-head">
+  <h2 id="layers">{{ s.layers_title }}</h2>
+</header>
+<div class="cb-layers">
+  <div class="cb-layer cb-layer--local">
+    <div class="cb-layer__top">
+      <span class="cb-layer__tag">{{ s.layers_courtesy }}</span>{{ icon('laptop') }}
+    </div>
+    <h3 class="cb-layer__title">{{ s.layers_local_title }}</h3>
+    <ul class="cb-layer__items">
+      <li><a href="#commit-check"><span><span class="cb-layer__item-title"><code>commit-check</code></span><span class="cb-layer__item-note">{{ s.layers_local_commitcheck }}</span></span>{{ icon('arrow-down') }}</a></li>
+      <li><a href="#a-hook-with-no-dependencies"><span><span class="cb-layer__item-title"><code>pre-push</code> hook</span><span class="cb-layer__item-note">{{ s.layers_local_hook }}</span></span>{{ icon('arrow-down') }}</a></li>
+      <li><a href="#a-branching-alias"><span><span class="cb-layer__item-title">Git aliases</span><span class="cb-layer__item-note">{{ s.layers_local_alias }}</span></span>{{ icon('arrow-down') }}</a></li>
+      <li><a href="#ai-coding-agents"><span><span class="cb-layer__item-title">Agent skill + <code>AGENTS.md</code></span><span class="cb-layer__item-note">{{ s.layers_local_agents }}</span></span>{{ icon('arrow-down') }}</a></li>
+    </ul>
+  </div>
+
+  <div class="cb-layer__arrow cb-layer__arrow--push" aria-hidden="true">
+    <code>git push</code>
+    <span class="cb-arrow-line"></span>
+    <span class="cb-layer__arrow-note">{{ s.layers_push }}</span>
+  </div>
+
+  <div class="cb-layer cb-layer--server">
+    <div class="cb-layer__top">
+      <span class="cb-layer__tag cb-layer__tag--solid">{{ s.layers_contract }}</span>{{ icon('server') }}
+    </div>
+    <h3 class="cb-layer__title">{{ s.layers_server_title }}</h3>
+    <ul class="cb-layer__items">
+      <li><a href="#rulesets"><span><span class="cb-layer__item-title">GitHub rulesets</span><span class="cb-layer__item-note">{{ s.layers_server_github }}</span></span>{{ icon('arrow-down') }}</a></li>
+      <li><a href="#gitlab"><span><span class="cb-layer__item-title">GitLab push rules</span><span class="cb-layer__item-note">{{ s.layers_server_gitlab }}</span></span>{{ icon('arrow-down') }}</a></li>
+      <li><a href="#bitbucket"><span><span class="cb-layer__item-title">Bitbucket Data Center</span><span class="cb-layer__item-note">{{ s.layers_server_bitbucket }}</span></span>{{ icon('arrow-down') }}</a></li>
+    </ul>
+  </div>
+
+  <div class="cb-layer__arrow cb-layer__arrow--pr" aria-hidden="true">
+    <code>pull request</code>
+    <span class="cb-arrow-line cb-arrow-line--dashed"></span>
+    <span class="cb-layer__arrow-note">{{ s.layers_pr }}</span>
+  </div>
+
+  <div class="cb-layer cb-layer--ci">
+    <div class="cb-layer__ci-head">
+      <h3 class="cb-layer__title">{{ s.layers_ci_title }}</h3>
+      <span class="cb-layer__ci-tag">{{ s.layers_ci_tag }}</span>
+    </div>
+    <ul class="cb-layer__ci-items">
+      <li><a href="#github-actions"><span class="cb-layer__item-title">GitHub Actions</span><code>commit-check-action</code></a></li>
+      <li><a href="#gitlab"><span class="cb-layer__item-title">GitLab CI</span><code>Free tier</code></a></li>
+      <li><a href="#bitbucket"><span class="cb-layer__item-title">Bitbucket Pipelines</span><code>Cloud</code></a></li>
+    </ul>
+  </div>
+</div>

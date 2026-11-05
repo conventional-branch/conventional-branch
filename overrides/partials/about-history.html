@@ -1,0 +1,18 @@
+{#- The project's milestones (data/history.yaml); the changelog lists everything else. -#}
+{%- set cb = config.extra.cb %}{% set s = cb.s %}
+<div class="cb-history__head">
+  <header class="sumi-land-head">
+    <h2 id="history">{{ s.history_title }}</h2>
+    <p class="sumi-land-lead">{{ s.history_note }}</p>
+  </header>
+  <a class="cb-link-arrow" href="{{ cb.repo }}/blob/main/CHANGELOG.md">{{ s.history_link }}{{ icon('arrow-right') }}</a>
+</div>
+<ol class="cb-timeline" style="--n: {{ cb.history | length }}">
+  {%- for m in cb.history %}
+  <li class="cb-milestone{% if m.release %} cb-milestone--release{% endif %}">
+    <time class="cb-milestone__date" datetime="{{ m.date }}">{{ m.date }}</time>
+    <span class="cb-milestone__track" aria-hidden="true"></span>
+    <p class="cb-milestone__text">{{ m.text }}</p>
+  </li>
+  {%- endfor %}
+</ol>

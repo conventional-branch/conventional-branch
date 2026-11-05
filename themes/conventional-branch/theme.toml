@@ -1,7 +1,0 @@
-name = "Conventional Branch"
-license = "MIT"
-description = "Hugo theme for Conventional Branch website"
-homepage = "https://github.com/conventional-branch/conventional-branch"
-tags = []
-features = []
-min_version = "0.42"

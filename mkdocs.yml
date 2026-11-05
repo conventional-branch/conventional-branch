@@ -1,0 +1,212 @@
+# conventionalbranch.org, built with MkDocs NG and the Sumi theme.
+#
+#   pip install -r requirements.txt
+#   mkdocs serve        # http://127.0.0.1:8000
+#   mkdocs build        # into site/
+#
+# The pages are in content/, one file per language (index.md, index.zh.md, ...). The
+# files served as they are (spec.json, the schema, llms.txt, the badge) are in static/,
+# and hooks.py publishes them at the site root. hooks.py also builds the homepage
+# sections; their words are in i18n/en.yaml and their lists in data/.
+
+site_name: Conventional Branch
+site_description: A specification for adding human and machine readable meaning to branch names
+# Production, also on a deploy preview: canonical and og:url always name the real site,
+# so a preview never competes with it in a search index.
+site_url: https://conventionalbranch.org/
+repo_url: https://github.com/conventional-branch/conventional-branch
+repo_name: conventional-branch/conventional-branch
+edit_uri: blob/main/content/
+docs_dir: content
+copyright: >-
+  Licensed <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> ·
+  Derived from <a href="https://www.conventionalcommits.org">Conventional Commits</a> ·
+  Created &amp; maintained by <a href="https://shenxianpeng.dev">Xianpeng Shen</a>
+
+theme:
+  name: sumi
+  custom_dir: overrides
+  accent: indigo
+  brand: Conventional Branch
+  logo: /img/logo.svg
+  logo_dark: /img/logo-dark.svg
+  favicon: /favicon.ico
+  social_image: https://conventionalbranch.org/img/git-flow-welcome.png
+  # A few pages and links, all in the header.
+  navigation_tabs: always
+  hide: [breadcrumbs, pager, feedback]
+  # The current version is served at the root, archived ones under /<version>/.
+  # The first entry is the current version: keep it in step with static/spec.json.
+  versions:
+    - {title: "1.1.0", path: ""}
+    - {title: "1.0.0", path: v1.0.0/}
+
+extra:
+  analytics:
+    provider: google
+    property: G-RH9YBHW509
+  social:
+    - icon: brand-github
+      link: https://github.com/conventional-branch/conventional-branch
+      name: GitHub
+
+extra_css:
+  - assets/conventional-branch.css
+extra_javascript:
+  - path: assets/conventional-branch.js
+    defer: true
+
+hooks:
+  - hooks.py
+
+plugins:
+  - search
+  - sumi
+
+markdown_extensions:
+  - tables
+  - smarty
+  - attr_list
+  - md_in_html
+  - toc:
+      permalink: true
+      # Heading ids keep their letters in every script, as they did on the Hugo site,
+      # so links such as /zh/#概述 still land.
+      slugify: !!python/object/apply:pymdownx.slugs.slugify
+        kwds: {case: lower}
+  - pymdownx.highlight
+  - pymdownx.superfences
+  - pymdownx.magiclink
+
+# Archived versions are reached from the version menu, not the navigation.
+not_in_nav: |
+  /v1.0.0/
+
+nav:
+  - Home: index.md
+  - Specification: "#spec"
+  - Enforce: enforce/index.md
+  - About: about/index.md
+  - Sponsor: https://github.com/sponsors/conventional-branch
+
+# The hero of each language's specification page is site_name and site_description,
+# with extra.actions as its buttons. The English homepage also shows the checker and
+# the sections under it; their words are only in English so far (i18n/en.yaml).
+languages:
+  en:
+    name: English
+    extra:
+      landing: true
+      actions:
+        - {text: Read the specification, link: "#spec"}
+        - {text: Enforce it in your repo, link: enforce/index.md}
+  zh:
+    name: 中文
+    fallback: false
+    site_name: 约定式分支
+    site_description: 一种用于给分支增加人机可读含义的规范
+    # Enforce and About are in English only: the other languages link to them
+    # instead of publishing an untranslated copy.
+    nav: &nav-translated
+      - Home: index.md
+      - Specification: "#spec"
+      - Enforce: /enforce/
+      - About: /about/
+      - Sponsor: https://github.com/sponsors/conventional-branch
+    extra:
+      actions:
+        - {text: 概述, link: "#概述"}
+        - {text: 完整规范, link: "#规范"}
+        - {text: 贡献, link: "https://github.com/conventional-branch/conventional-branch"}
+  pt-br:
+    name: Português brasileiro
+    fallback: false
+    site_description: Uma especificação para dar aos nomes dos branches um significado legível para humanos e máquinas
+    nav: *nav-translated
+    extra:
+      actions:
+        - {text: Resumo, link: "#resumo"}
+        - {text: Especificação Completa, link: "#especificação"}
+        - {text: GitHub, link: "https://github.com/conventional-branch/conventional-branch"}
+  fr:
+    name: Français
+    fallback: false
+    site_description: Une spécification pour ajouter un sens lisible par l'humain et la machine aux branches
+    nav: *nav-translated
+    extra:
+      actions:
+        - {text: Résumé, link: "#résumé"}
+        - {text: Spécification complète, link: "#spécification"}
+        - {text: Contribuer, link: "https://github.com/conventional-branch/conventional-branch"}
+  ja:
+    name: 日本語
+    fallback: false
+    site_name: 慣例的ブランチ
+    site_description: ブランチに人間と機械が読める意味を追加する仕様
+    nav: *nav-translated
+    extra:
+      actions:
+        - {text: 要約, link: "#要約"}
+        - {text: 完全な仕様, link: "#仕様"}
+        - {text: 貢献, link: "https://github.com/conventional-branch/conventional-branch"}
+  de:
+    name: Deutsch
+    fallback: false
+    site_description: Eine Spezifikation zur Ergänzung von menschen- und maschinenlesbarer Bedeutung für Branches
+    nav: *nav-translated
+    extra:
+      actions:
+        - {text: Zusammenfassung, link: "#zusammenfassung"}
+        - {text: Vollständige Spezifikation, link: "#spezifikation"}
+        - {text: Beitragen, link: "https://github.com/conventional-branch/conventional-branch"}
+  ru:
+    name: Русский
+    fallback: false
+    site_description: Спецификация для добавления человеко- и машиночитаемого смысла к веткам
+    nav: *nav-translated
+    extra:
+      actions:
+        - {text: Краткое изложение, link: "#краткое-изложение"}
+        - {text: Полная спецификация, link: "#спецификация"}
+        - {text: Внести вклад, link: "https://github.com/conventional-branch/conventional-branch"}
+  pl:
+    name: Polski
+    fallback: false
+    site_description: Specyfikacja dodawania znaczenia czytelnego dla ludzi i maszyn do gałęzi
+    nav: *nav-translated
+    extra:
+      actions:
+        - {text: Podsumowanie, link: "#podsumowanie"}
+        - {text: Pełna specyfikacja, link: "#specyfikacja"}
+        - {text: Wnieś wkład, link: "https://github.com/conventional-branch/conventional-branch"}
+  zh-hant:
+    name: 繁體中文
+    fallback: false
+    site_name: 約定式分支
+    site_description: 一種為 Git branch 增添人機可讀含義的規範
+    nav: *nav-translated
+    extra:
+      actions:
+        - {text: 概述, link: "#概述"}
+        - {text: 完整規範, link: "#規範"}
+        - {text: 貢獻, link: "https://github.com/conventional-branch/conventional-branch"}
+  es:
+    name: Español
+    fallback: false
+    site_description: Una especificación para añadir significado legible por humanos y máquinas a las ramas
+    nav: *nav-translated
+    extra:
+      actions:
+        - {text: Resumen, link: "#resumen"}
+        - {text: Especificación completa, link: "#especificación"}
+        - {text: Contribuir, link: "https://github.com/conventional-branch/conventional-branch"}
+  th:
+    name: ภาษาไทย
+    fallback: false
+    site_description: ข้อกำหนดสำหรับการเพิ่มความหมายที่ทั้งมนุษย์และเครื่องจักรสามารถอ่านได้ให้กับชื่อ Branch
+    nav: *nav-translated
+    extra:
+      actions:
+        - {text: สรุปโดยย่อ, link: "#บทสรุป"}
+        - {text: ข้อกำหนดฉบับเต็ม, link: "#ข้อกําหนด"}
+        - {text: มีส่วนร่วม, link: "https://github.com/conventional-branch/conventional-branch"}

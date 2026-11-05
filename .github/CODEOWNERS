@@ -2,6 +2,6 @@
 * @conventional-branch/developers
 
 # Individual file ownership
-content/_index.md          @shenxianpeng
-content/_index.zh.md       @shenxianpeng
-content/_index.pt-br.md    @marlondecol
+content/index.md          @shenxianpeng
+content/index.zh.md       @shenxianpeng
+content/index.pt-br.md    @marlondecol

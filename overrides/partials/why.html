@@ -1,0 +1,16 @@
+{#- What the project holds to. The counts are taken from the specification and the
+    site, so they cannot go stale. -#}
+{%- set cb = config.extra.cb %}{% set s = cb.s %}
+<header class="sumi-land-head">
+  <h2 id="why">{{ s.why_title }}</h2>
+  <p class="sumi-land-lead">{{ s.why_body }}</p>
+</header>
+<div class="sumi-features" style="--cols: {{ cb.home.principles | length }}">
+  {%- for p in cb.home.principles %}
+  <div class="sumi-feature">
+    <span class="sumi-feature-icon">{{ icon({'stable': 'lock', 'checked': 'list-checks'}[p] or 'check') }}</span>
+    <h3>{{ s['principle_' ~ p ~ '_title'] }}</h3>
+    <p>{{ s['principle_' ~ p ~ '_body'] | replace('{Version}', cb.spec.version) | replace('{Languages}', cb.languages) }}</p>
+  </div>
+  {%- endfor %}
+</div>

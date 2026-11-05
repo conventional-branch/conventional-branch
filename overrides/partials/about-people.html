@@ -1,0 +1,23 @@
+{%- set cb = config.extra.cb %}{% set s = cb.s %}
+<header class="sumi-land-head">
+  <h2 id="people">{{ s.people_title }}</h2>
+</header>
+<div class="sumi-features cb-people" style="--cols: 3">
+  <div class="sumi-feature">
+    <span class="sumi-feature-icon">{{ icon('user') }}</span>
+    <h3>{{ s.people_maintainer }}</h3>
+    <p><a href="https://shenxianpeng.dev">Xianpeng Shen</a> · <code>shenxianpeng.dev</code></p>
+  </div>
+  <div class="sumi-feature">
+    <span class="sumi-feature-icon">{{ icon('git-pull-request') }}</span>
+    <h3>{{ s.contribute_title }}</h3>
+    <p><a class="cb-link-arrow" href="{{ cb.repo }}/blob/main/CONTRIBUTING.md#contributing">{{ s.contribute_typo }}{{ icon('arrow-right') }}</a></p>
+    <p><a class="cb-link-arrow" href="{{ cb.repo }}/blob/main/CONTRIBUTING.md#adding-a-translation">{{ s.people_translate }}{{ icon('arrow-right') }}</a></p>
+  </div>
+  <div class="sumi-feature">
+    <span class="sumi-feature-icon">{{ icon('heart') }}</span>
+    <h3>{{ s.nav_sponsor }}</h3>
+    <p>{{ s.sponsor_body }}</p>
+    <p><a class="sumi-btn sumi-btn--primary" href="https://github.com/sponsors/conventional-branch">{{ icon('heart') }}<span>{{ s.sponsor_button }}</span></a></p>
+  </div>
+</div>

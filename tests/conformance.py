@@ -48,7 +48,7 @@ STATIC = ROOT / "static"
 SPEC = STATIC / "spec.json"
 SCHEMA = STATIC / "schema" / "v1" / "spec.schema.json"
 FIXTURES = ROOT / "tests" / "fixtures.json"
-SPEC_PAGE = ROOT / "content" / "_index.md"
+SPEC_PAGE = ROOT / "content" / "index.md"
 ENFORCE_PAGE = ROOT / "content" / "enforce" / "index.md"
 
 # The current specification is rendered once per language, and every one of those
@@ -58,7 +58,7 @@ ENFORCE_PAGE = ROOT / "content" / "enforce" / "index.md"
 # The glob is deliberately not recursive: content/v1.0.0/ is a frozen older
 # specification with a narrower grammar, and holding it to today's regex would
 # report the archive as broken for correctly preserving what 1.0.0 said.
-SPEC_PAGES = sorted((ROOT / "content").glob("_index*.md"))
+SPEC_PAGES = sorted((ROOT / "content").glob("index*.md"))
 AGENTS = ROOT / "data" / "agents.yaml"
 BADGE = STATIC / "badge.svg"
 LLMS = STATIC / "llms.txt"
@@ -127,9 +127,9 @@ def check_docs_table(pattern):
         if path == SPEC_PAGE:
             continue
         for branch in sorted(set(reference) - set(rows)):
-            failures.append(f"{name}: missing the {branch!r} example content/_index.md has")
+            failures.append(f"{name}: missing the {branch!r} example content/index.md has")
         for branch in sorted(set(rows) - set(reference)):
-            failures.append(f"{name}: has a {branch!r} example content/_index.md does not")
+            failures.append(f"{name}: has a {branch!r} example content/index.md does not")
 
     return count, failures
 
