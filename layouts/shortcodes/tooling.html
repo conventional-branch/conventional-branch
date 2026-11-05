@@ -22,5 +22,5 @@
 {{- with $tooling.install }}
 {{- $label := index .label $lang | default (index .label "en") -}}
 <p>{{ $label }}</p>
-<pre><code class="language-bash">{{ .command }}</code></pre>
+<pre data-snippet="agent_skill"><code class="language-bash">{{ .command }}</code></pre>
 {{- end }}

@@ -9,7 +9,22 @@
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
 
-    gtag('config', 'G-RH9YBHW509');
+    {{/* A browser that has opened any page with ?internal=1 is tagged
+         traffic_type=internal from then on (?internal=0 clears it), which the
+         property's "Internal Traffic" data filter matches, so the maintainers' own
+         visits can be left out of the reports. The tag goes on the config call
+         itself, because that call sends the page_view. localStorage throws when site
+         data is blocked; the visit is then simply counted, untagged. */}}
+    (function () {
+      var internal = false;
+      try {
+        var mark = new URLSearchParams(location.search).get('internal');
+        if (mark === '1') localStorage.setItem('cb-internal', '1');
+        else if (mark === '0') localStorage.removeItem('cb-internal');
+        internal = localStorage.getItem('cb-internal') === '1';
+      } catch (e) {}
+      gtag('config', 'G-RH9YBHW509', internal ? { traffic_type: 'internal' } : {});
+    })();
   </script>
 
   <meta name="color-scheme" content="light">
