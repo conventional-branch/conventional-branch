@@ -1,0 +1,5 @@
+mkdocs-ng>=1.11.1
+# Sumi 0.4.0 adds what this site needs (mkdocs-ng/mkdocs-sumi#27, merged). Until it is on
+# PyPI the build installs it from the main branch.
+mkdocs-sumi @ git+https://github.com/mkdocs-ng/mkdocs-sumi@main
+pymdown-extensions>=10

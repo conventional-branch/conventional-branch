@@ -1,0 +1,24 @@
+{#- Three steps, each pointing to where its details live: the snippet and the
+    configurations on /enforce/, the badge variants on /about/. -#}
+{%- set cb = config.extra.cb %}{% set s = cb.s %}
+<header class="sumi-land-head">
+  <h2 id="adopt">{{ s.adopt_title }}</h2>
+</header>
+<ol class="sumi-steplist cb-steps">
+  <li>
+    <h3>{{ s.step_write_title }}</h3>
+    <div><p>{{ s.step_write_body }}</p>
+    <p><a class="cb-link-arrow" href="/enforce/#a-snippet-for-agentsmd-or-claudemd">{{ s.step_write_link }}{{ icon('arrow-right') }}</a></p></div>
+  </li>
+  <li>
+    <h3>{{ s.step_enforce_title }}</h3>
+    <div><p>{{ s.step_enforce_body }}</p>
+    <p><a class="cb-link-arrow" href="/enforce/">{{ s.step_enforce_link }}{{ icon('arrow-right') }}</a></p></div>
+  </li>
+  <li>
+    <h3>{{ s.step_show_title }}</h3>
+    <div><p>{{ s.step_show_body }}</p>
+    <p><img class="cb-badge" src="/badge.svg" width="180" height="20" alt="Conventional Branch {{ cb.spec.version }}"></p>
+    <p><a class="cb-link-arrow" href="/about/#how-to-adopt">{{ s.step_show_link }}{{ icon('arrow-right') }}</a></p></div>
+  </li>
+</ol>

@@ -1,4 +1,0 @@
----
-type: about
-draft: true
----

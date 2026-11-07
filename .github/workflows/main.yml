@@ -13,7 +13,7 @@ on:
 # Deploy step with PERSONAL_TOKEN, not with this token, and nothing here
 # deploys through GitHub Pages' own API (deploy-pages), which is what
 # `pages: write` and `id-token: write` are for. Pull requests run this job
-# too, with npm install and the build, so the token they get stays read-only.
+# too, with pip install and the build, so the token they get stays read-only.
 permissions:
   contents: read
 
@@ -32,31 +32,26 @@ jobs:
   # Build job
   build:
     runs-on: ubuntu-latest
-    env:
-      HUGO_VERSION: 0.128.0
     steps:
-      - name: Install Hugo CLI
-        run: |
-          wget -O ${{ runner.temp }}/hugo.deb https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_extended_${HUGO_VERSION}_linux-amd64.deb \
-          && sudo dpkg -i ${{ runner.temp }}/hugo.deb
       - name: Checkout
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
-          submodules: recursive
           fetch-depth: 0
-      - name: Install Node.js dependencies
-        run: "[[ -f package-lock.json || -f npm-shrinkwrap.json ]] && npm ci || true"
-      - name: Build with Hugo
-        env:
-          HUGO_CACHEDIR: ${{ runner.temp }}/hugo_cache
-          HUGO_ENVIRONMENT: deployment
-        run: make all
+      - name: Set up Python
+        uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
+        with:
+          python-version: "3.13"
+          cache: pip
+      - name: Install MkDocs NG and Sumi
+        run: pip install -r requirements.txt
+      - name: Build with MkDocs NG
+        run: mkdocs build --strict
       - name: Upload artifact
         if: github.event_name != 'pull_request'
         uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5.0.0
         with:
-          path: ./public
+          path: ./site
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@84c30a85c19949d7eee79c4ff27748b70285e453 # v4.1.0
@@ -70,4 +65,4 @@ jobs:
           publish_branch: main
           user_name: 'github-actions[bot]'
           user_email: 'github-actions[bot]@users.noreply.github.com'
-          publish_dir: ./public
+          publish_dir: ./site

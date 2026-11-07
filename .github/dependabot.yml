@@ -2,12 +2,12 @@
 
 version: 2
 updates:
-- package-ecosystem: npm
-  directory: /themes/conventional-branch/
+- package-ecosystem: pip
+  directory: /
   schedule:
     interval: monthly
   groups:
-    npm-deps:
+    pip-deps:
       patterns:
         - "*"
 - package-ecosystem: github-actions

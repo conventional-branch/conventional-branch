@@ -1,0 +1,93 @@
+{#- The branch-name checker. It is rendered in the state of its initial example, so it
+    makes sense before (or without) the script, which then makes it live. Everything
+    it judges by (the regex, the types, the trunk branches) comes from spec.json, and
+    the agent names from data/agents.yaml; hooks.py reads them. -#}
+{%- set cb = config.extra.cb %}{% set s = cb.s %}{% set spec = cb.spec %}
+{%- set checker = cb.home.checker %}
+{%- set type_name, desc = checker.initial.split('/', 1) %}
+{%- set ns = namespace(initial=None) %}
+{%- for t in cb.types if t.type == type_name or type_name in t.aliases %}{% set ns.initial = t %}{% endfor %}
+{%- set initial = ns.initial %}
+{%- set data = {
+  'regex': spec.grammar.regex,
+  'trunk': spec.trunkBranches,
+  'types': cb.types,
+  'labels': {'trunk': s.checker_trunk_caption, 'missing': s.checker_missing_caption},
+  'trunkReading': {'person': s.checker_trunk_person, 'human': s.checker_trunk_human, 'pipeline': s.checker_trunk_pipeline},
+  'status': {
+    'ok': s.checker_ok | replace('{Version}', spec.version),
+    'bad': s.checker_bad | replace('{Version}', spec.version),
+    'waiting': s.checker_waiting},
+  'messages': {
+    'missingType': s.checker_msg_missing_type, 'uppercase': s.checker_msg_uppercase,
+    'space': s.checker_msg_space, 'underscore': s.checker_msg_underscore,
+    'unknownType': s.checker_msg_unknown_type, 'empty': s.checker_msg_empty,
+    'slash': s.checker_msg_slash, 'chars': s.checker_msg_chars,
+    'doubleHyphen': s.checker_msg_double_hyphen, 'doubleDot': s.checker_msg_double_dot,
+    'leading': s.checker_msg_leading, 'trailing': s.checker_msg_trailing,
+    'hyphenDot': s.checker_msg_hyphen_dot, 'grammar': s.checker_msg_grammar},
+} %}
+<div class="cb-checker" data-checker>
+  <div class="checker__top">
+    <h2 id="checker-label" class="checker__label"><label for="checker-input">{{ s.checker_label }}</label></h2>
+    <div class="checker__examples" role="group" aria-label="{{ s.checker_examples }}">
+      <span class="checker__examples-label" aria-hidden="true">{{ s.checker_examples }}</span>
+      {%- for example in checker.examples %}
+      <button type="button" class="checker__chip" data-example="{{ example }}">{{ example }}</button>
+      {%- endfor %}
+    </div>
+  </div>
+
+  <div class="checker__stage" data-stage>
+    <input id="checker-input" class="checker__input" type="text" value="{{ checker.initial }}" spellcheck="false" autocomplete="off" autocapitalize="off" autocorrect="off" aria-describedby="checker-status" data-input>
+    <div class="checker__brackets" aria-hidden="true">
+      <span class="bracket" data-bracket="type" style="--len: {{ type_name | length }}"><span class="bracket__label">{{ s.checker_type }}</span></span>
+      <span class="bracket bracket--sep" data-bracket="sep"></span>
+      <span class="bracket" data-bracket="desc" style="--len: {{ desc | length }}"><span class="bracket__label">{{ s.checker_description }}</span></span>
+      <span class="bracket" data-bracket="whole" hidden><span class="bracket__label"></span></span>
+    </div>
+  </div>
+
+  <div class="checker__result">
+    <div class="checker__readings" data-readings>
+      <div class="reading">
+        <span class="reading__label">{{ s.checker_person }}</span>
+        <p class="reading__person" data-person>{{ initial.person }}: <em>“{{ desc | replace('-', ' ') }}”</em></p>
+      </div>
+      <div class="reading">
+        <span class="reading__label">{{ s.checker_machine }}</span>
+        <pre class="reading__json" data-json>{
+  <span class="tok-k">"type"</span>: <span class="tok-s">"{{ initial.type }}"</span>,
+  <span class="tok-k">"category"</span>: <span class="tok-s">"{{ initial.category }}"</span>,
+  <span class="tok-k">"description"</span>: <span class="tok-s">"{{ desc }}"</span>
+}</pre>
+      </div>
+      <div class="reading">
+        <span class="reading__label">{{ s.checker_pipeline }}</span>
+        <p class="reading__pipeline" data-pipeline>{{ initial.pipeline }}</p>
+        <span class="reading__note">{{ s.checker_pipeline_note }}</span>
+      </div>
+    </div>
+    <div class="checker__error" data-error hidden>
+      <span class="checker__error-icon">{{ icon('circle-x') }}</span>
+      <div class="checker__error-body">
+        <p class="checker__message" data-message></p>
+        <button type="button" class="checker__fix" data-fix hidden>{{ s.checker_try }} <code data-fix-name></code>{{ icon('arrow-right') }}</button>
+      </div>
+    </div>
+    <div class="checker__empty" data-empty hidden>
+      <p>{{ s.checker_empty }} <code>{{ checker.initial }}</code></p>
+    </div>
+  </div>
+
+  <div class="checker__foot">
+    <p id="checker-status" class="checker__status" data-status>
+      <span class="checker__status-icon checker__status-icon--ok">{{ icon('circle-check') }}</span>
+      <span class="checker__status-icon checker__status-icon--bad">{{ icon('circle-x') }}</span>
+      <span data-status-text>{{ s.checker_ok | replace('{Version}', spec.version) }}</span>
+    </p>
+    <p class="checker__note">{{ s.checker_note | replace('{Link}', '<a href="/spec.json">spec.json</a>') }}</p>
+    <span class="cb-visually-hidden" role="status" aria-live="polite" data-announce></span>
+  </div>
+  <script type="application/json" data-checker-data>{{ data | tojson }}</script>
+</div>

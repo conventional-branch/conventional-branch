@@ -1,0 +1,8 @@
+# Deploy previews for pull requests. The live site is built by
+# .github/workflows/main.yml and served from GitHub Pages.
+[build]
+  command = "pip install -r requirements.txt && mkdocs build"
+  publish = "site"
+
+[build.environment]
+  PYTHON_VERSION = "3.12"

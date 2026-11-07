@@ -1,0 +1,21 @@
+{#- conventionalbranch.org: Sumi's pages, with the site's own title and FAQ data. -#}
+{% extends "base.html" %}
+
+{#- A search result has to tell one page from another: the document title comes from
+    the page's seoTitle where it sets one (hooks.py also names the version of an
+    archived specification), leaving the visible heading alone. -#}
+{% block htmltitle %}
+  {%- if cb_title %}
+  <title>{{ cb_title | e }}</title>
+  {%- else %}
+  {{ super() }}
+  {%- endif %}
+{% endblock %}
+
+{% block extrahead %}
+  {#- The current specification's FAQ as FAQPage structured data, read from the page
+      itself (hooks.py) so the two cannot disagree. -#}
+  {%- if page and page.meta.cb_faq %}
+  <script type="application/ld+json">{{ page.meta.cb_faq | safe }}</script>
+  {%- endif %}
+{% endblock %}

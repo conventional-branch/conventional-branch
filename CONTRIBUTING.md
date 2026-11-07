@@ -2,14 +2,14 @@
 
 ## Repo Layout
 
-We use [HUGO](https://gohugo.io/) as static site generator, so we use the [directory structure](https://gohugo.io/getting-started/directory-structure/) HUGO proposes.
+The site is built with [MkDocs NG](https://mkdocs-ng.org/) and the [Sumi](https://sumi.mkdocs-ng.org/) theme. `./mkdocs.yml` holds the configuration, and `./hooks.py` builds the homepage sections and publishes `./static/` at the site root.
 
 #### Our implementation
 
-* `./content/_index.md`: the **current** version of the specification, served at the site root (`/`). This is where changes to the in-progress version SHOULD be made.
+* `./content/index.md`: the **current** version of the specification, served at the site root (`/`). This is where changes to the in-progress version SHOULD be made.
 * `./content/vX.Y.Z/`: archived snapshots of previously released versions (e.g. `./content/v1.0.0/`), browsable via the version switcher. These should not change once released.
-* `./content/_index.[lang].md` and `./content/vX.Y.Z/_index.[lang].md`: translations of a given version. The default (English) file has no language code; every other language adds one (e.g. `_index.fr.md`).
-* The list of versions and the current version are configured under `params.versions` in `./config.yaml`.
+* `./content/index.[lang].md` and `./content/vX.Y.Z/index.[lang].md`: translations of a given version. The default (English) file has no language code; every other language adds one (e.g. `index.fr.md`).
+* The list of versions is `theme.versions` in `./mkdocs.yml`; the first entry is the current version.
 
 ## Contributing
 
@@ -17,11 +17,11 @@ We'd love your help to suggest improvements to the specification, fixing typos, 
 
 ### Adding a translation
 
-1. Copy `./content/_index.md` to `./content/_index.[lang].md` (e.g. `_index.es.md`) and translate the content. If you also want the translation available for an archived version, repeat under the matching `./content/vX.Y.Z/` directory.
+1. Copy `./content/index.md` to `./content/index.[lang].md` (e.g. `index.es.md`) and translate the content. If you also want the translation available for an archived version, repeat under the matching `./content/vX.Y.Z/` directory.
 1. Ensure all files have the appropriate front matter fields required (see other language files as an example).
-1. Add the language to the `languages` section of `./config.yaml` (see the existing entries as an example).
+1. Add the language to the `languages` section of `./mkdocs.yml` (see the existing entries as an example).
 1. If your strings touch the tooling section, add the corresponding translations in `./data/tooling.yaml`.
-1. The site's own words — navigation, the specification's sidebar, the footer — are in `./i18n/en.yaml`, and any string a language has not translated falls back to English. To translate them, add `./i18n/[lang].yaml` with the same keys. The homepage's mission, principles and adoption sections are in the same file; they appear in a language only once its `landing` param in `./config.yaml` is `true`, so set that after translating them, and no page mixes two languages.
+1. The interface strings (search, menus, the table of contents) come from the Sumi theme. The homepage's checker, adopters, "why" and adoption sections are in `./i18n/en.yaml` and show only on the English homepage (`extra.landing` in `./mkdocs.yml`), so no page mixes two languages.
 
 ### Registering a new AI agent prefix
 
@@ -38,7 +38,7 @@ To register an agent:
      since: "1.2.0"           # the spec version that adds the prefix
    ```
 2. Keep the list roughly alphabetical after the generic `ai/` entry, and reuse an existing prefix rather than adding a near-duplicate.
-3. Add the prefix to the `type` rule of the ABNF grammar and to the examples table in `./content/_index*.md` (and mention it in `CHANGELOG.md`), so the normative grammar stays in sync with the registry. This means **all eleven language files, not just the English one** — the conformance check holds every translation to the same examples and the same grammar, so missing one fails CI rather than shipping a page that contradicts the spec. The same goes for the `allow_branch_types` list in the commit-check configuration on `./content/enforce/index.md` and in the repository's own `./commit-check.toml`.
+3. Add the prefix to the `type` rule of the ABNF grammar and to the examples table in `./content/index*.md` (and mention it in `CHANGELOG.md`), so the normative grammar stays in sync with the registry. This means **all eleven language files, not just the English one** — the conformance check holds every translation to the same examples and the same grammar, so missing one fails CI rather than shipping a page that contradicts the spec. The same goes for the `allow_branch_types` list in the commit-check configuration on `./content/enforce/index.md` and in the repository's own `./commit-check.toml`.
 4. Add the prefix as a `type` (and update the `grammar.regex`) in [`./static/spec.json`](./static/spec.json), then run `python3 tests/conformance.py` to confirm everything still agrees. CI enforces this.
 
 Guidelines for a good prefix:
@@ -72,11 +72,11 @@ Adding a property to `spec.json` means adding it to the schema too, otherwise th
 
 ### Releasing a new version
 
-The current version lives only at the site root (`./content/_index*.md`) — it is **not** duplicated under `./content/`. To cut a new version (e.g. `v1.2.0`):
+The current version lives only at the site root (`./content/index*.md`) — it is **not** duplicated under `./content/`. To cut a new version (e.g. `v1.2.0`):
 
 1. Snapshot the version you are leaving behind: copy the current root files into `./content/<previous-version>/` (e.g. `./content/v1.1.0/`). This becomes an immutable archive browsable via the version switcher.
-1. Edit the root `./content/_index*.md` files to reflect the new version.
-1. In `./config.yaml`, append the new version to `params.versions.list` and set `params.versions.current` to it.
+1. Edit the root `./content/index*.md` files to reflect the new version.
+1. In `./mkdocs.yml`, set the first entry of `theme.versions` to the new version and add the previous one below it with `path: v<previous>/`. Add `/v<previous>/` to `not_in_nav` too. The build fails if the first entry does not match `version` in `spec.json`.
 1. Bump `version` in [`./static/spec.json`](./static/spec.json) and freeze a copy of it under the new version:
    ```bash
    mkdir -p static/v1.2.0 && cp static/spec.json static/v1.2.0/spec.json
@@ -90,12 +90,14 @@ The version switcher links the current version to the site root and every archiv
 
 ### Running project locally
 
-There's a docker-compose.yml file ready that will help you to check if the website looks good!
-To run it make sure you have [docker-compose installed](https://docs.docker.com/compose/install/#install-compose) on your machine and just use the command `docker-compose up` to make it run locally.
+You need Python 3.10 or newer:
 
-or you can run `make all-dev` to run the project locally.
+```bash
+pip install -r requirements.txt
+mkdocs serve
+```
 
-Once the website will be compiled, you can see the website visiting `http://localhost:1313`
+Then open `http://127.0.0.1:8000`. `mkdocs build` writes the site to `./site/`.
 
 ## Pull Requests
 
