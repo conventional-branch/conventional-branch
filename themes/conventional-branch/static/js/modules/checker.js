@@ -4,6 +4,8 @@
 // A name is judged by the regex published in spec.json, which the page embeds. The
 // finer rules below only explain *why* a name fails, and suggest the nearest valid one.
 
+import { track } from './analytics';
+
 // A description as the grammar defines it: lowercase letters and digits, words joined
 // by single hyphens, and dots between the parts of a version number.
 const DESCRIPTION = /^[a-z0-9]+(?:\.[a-z0-9]+)*(?:-[a-z0-9]+(?:\.[a-z0-9]+)*)*$/;
@@ -22,6 +24,9 @@ const TYPE_TYPOS = {
 // In a monospace face every character is 0.6em wide, which is what lets the name be
 // sized to fit its line.
 const ADVANCE = 0.6;
+
+// How long typing has to pause before a name counts as checked.
+const SETTLE = 1000;
 
 export function initChecker(root) {
   const dataNode = root.querySelector('[data-checker-data]');
@@ -94,6 +99,9 @@ export function initChecker(root) {
     return candidate !== name && pattern.test(candidate) ? candidate : '';
   }
 
+  // `kind` is the name's type for analytics, always one the page itself defines:
+  // a type from spec.json, "trunk", "unknown" for a prefix the specification doesn't
+  // have, or "none" when there is no prefix at all. Never anything the reader typed.
   function analyze(name) {
     const base = { state: 'empty', split: false, whole: false };
     if (name === '') return base;
@@ -102,6 +110,7 @@ export function initChecker(root) {
       return {
         ...base,
         state: 'ok',
+        kind: 'trunk',
         whole: true,
         caption: data.labels.trunk,
         reading: {
@@ -115,7 +124,7 @@ export function initChecker(root) {
 
     const slash = name.indexOf('/');
     if (slash < 0) {
-      return { ...base, state: 'bad', whole: true, caption: data.labels.missing, message: data.messages.missingType, fix: '' };
+      return { ...base, state: 'bad', kind: 'none', whole: true, caption: data.labels.missing, message: data.messages.missingType, fix: '' };
     }
 
     const type = name.slice(0, slash);
@@ -123,6 +132,7 @@ export function initChecker(root) {
     const info = types.get(type);
     const parts = {
       ...base,
+      kind: info ? info.type : 'unknown',
       split: true,
       typeLength: type.length,
       descLength: desc.length,
@@ -218,9 +228,33 @@ export function initChecker(root) {
     }, 600);
   }
 
-  input.addEventListener('input', render);
+  // A checked name is counted once typing pauses, as a verdict and a type from
+  // analyze() — never the name itself, which can carry a ticket number or the name of
+  // an internal project. The example buttons don't count: those names aren't the
+  // reader's own.
+  let reportTimer = 0;
+  let reported = '';
+  function report() {
+    clearTimeout(reportTimer);
+    reportTimer = setTimeout(() => {
+      const name = input.value;
+      if (name === '' || name === reported) return;
+      reported = name;
+      const result = analyze(name);
+      track('check_branch_name', {
+        result: result.state === 'ok' ? 'valid' : 'invalid',
+        type: result.kind,
+      });
+    }, SETTLE);
+  }
+
+  input.addEventListener('input', () => {
+    render();
+    report();
+  });
   root.querySelectorAll('[data-example]').forEach((button) => {
     button.addEventListener('click', () => {
+      clearTimeout(reportTimer);
       input.value = button.dataset.example;
       render();
     });
@@ -229,6 +263,7 @@ export function initChecker(root) {
     if (!suggestion) return;
     input.value = suggestion;
     render();
+    report();
     input.focus();
   });
 
