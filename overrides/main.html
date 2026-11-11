@@ -12,6 +12,38 @@
   {%- endif %}
 {% endblock %}
 
+{#- Sumi's Google Analytics tag, plus one thing: a browser that has opened any page
+    with ?internal=1 is tagged traffic_type=internal from then on (?internal=0 clears
+    it), which the property's "Internal Traffic" data filter matches, so the
+    maintainers' own visits can be left out of the reports. The tag goes on the config
+    call itself, because that call sends the page_view. localStorage throws when site
+    data is blocked; the visit is then simply counted, untagged. -#}
+{% block analytics %}
+  {%- set ga = (config.extra.analytics or {}).property %}
+  {%- if ga %}
+  <script>
+    if (window.name !== 'sumi-pane') {
+      window.dataLayer = window.dataLayer || [];
+      window.gtag = function () { dataLayer.push(arguments); };
+      gtag('js', new Date());
+      (function () {
+        var internal = false;
+        try {
+          var mark = new URLSearchParams(location.search).get('internal');
+          if (mark === '1') localStorage.setItem('cb-internal', '1');
+          else if (mark === '0') localStorage.removeItem('cb-internal');
+          internal = localStorage.getItem('cb-internal') === '1';
+        } catch (e) {}
+        gtag('config', {{ ga | tojson }}, internal ? { traffic_type: 'internal' } : {});
+      })();
+      var s = document.createElement('script'); s.async = true;
+      s.src = 'https://www.googletagmanager.com/gtag/js?id=' + encodeURIComponent({{ ga | tojson }});
+      document.head.appendChild(s);
+    }
+  </script>
+  {%- endif %}
+{% endblock %}
+
 {% block extrahead %}
   {#- The current specification's FAQ as FAQPage structured data, read from the page
       itself (hooks.py) so the two cannot disagree. -#}

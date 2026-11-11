@@ -153,7 +153,7 @@ def _tooling(config, lang: str, mode: str) -> str:
         out.append(f"- [{item['name']}]({item['url']}): {_pick(text, lang)}")
     install = data.get("install")
     if install:
-        out += ["", _pick(install["label"], lang), "", "```bash", install["command"], "```"]
+        out += ["", _pick(install["label"], lang), "", "```bash {data-snippet=\"agent_skill\"}", install["command"], "```"]
     return "\n".join(out)
 
 

@@ -74,7 +74,9 @@ markdown_extensions:
       # so links such as /zh/#概述 still land.
       slugify: !!python/object/apply:pymdownx.slugs.slugify
         kwds: {case: lower}
-  - pymdownx.highlight
+  - pymdownx.highlight:
+      # language-<name> on each code block: analytics names a copied block by it.
+      pygments_lang_class: true
   - pymdownx.superfences
   - pymdownx.magiclink
 
