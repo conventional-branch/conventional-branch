@@ -116,6 +116,52 @@ Em resumo, o Conventional Branch foi projetado para melhorar a organização do 
 
 ## Perguntas frequentes
 
+### O que é um nome de branch?
+
+Um nome de branch é o rótulo que o Git dá a uma linha de desenvolvimento, como `main` ou `feature/add-login-page`; o Git o guarda como uma ref em `refs/heads/`. O Git aceita uma grande variedade de nomes, então, sozinho, um nome de branch não diz nada confiável sobre o trabalho feito nele. O Conventional Branch dá a ele uma estrutura, `<tipo>/<descrição>`: um tipo que diz para que serve o trabalho, seguido de uma descrição curta, em letras minúsculas, com as palavras separadas por hífens. Por exemplo:
+
+- `feature/add-login-page`
+- `bugfix/fix-header-bug`
+- `release/v1.2.0`
+
+Branches tronco (`main`, `master`, `develop`) não usam prefixo.
+
+### Como devo nomear um branch de feature?
+
+Comece com `feature/`, ou com o alias curto `feat/`, e descreva a funcionalidade depois da barra. Se o trabalho tiver um ticket na sua ferramenta de gestão de projetos, inclua o número dele. Por exemplo:
+
+- `feature/add-login-page`
+- `feat/add-login-page`
+- `feature/issue-123-new-login`
+
+### O que é um branch de chore?
+
+Um branch `chore/` é para tarefas não relacionadas ao código, como atualizar dependências ou documentação. Os tipos de branch são, de propósito, menos numerosos que os tipos do Conventional Commits (veja abaixo), então esse tipo de manutenção fica em `chore/`. Por exemplo:
+
+- `chore/update-dependencies`
+- `chore/upgrade-node-v20.11`
+- `chore/update-generated-files`
+
+Alguns bots de dependências, como o Renovate, também podem ser configurados para usar esse prefixo; veja [Bots e automação](/enforce/#name-them-to-fit).
+
+### Como devo nomear um branch de release?
+
+Use `release/` seguido do que o branch prepara, normalmente o número da versão. Pontos são permitidos, mas não no início ou no fim da descrição, nem ao lado de um hífen:
+
+- `release/v1.2.0` — válido
+- `release/v1.2.0.` — inválido: ponto no final
+- `release/v1.-2.0` — inválido: hífen ao lado de um ponto
+
+Um prefixo consistente também permite que um pipeline atue sobre `release/*`, por exemplo para fazer a implantação automática a partir de branches de release.
+
+### Como devo nomear um branch de hotfix?
+
+Use `hotfix/` para uma correção urgente e `bugfix/` (ou `fix/`) para uma que não seja. Descreva o que está sendo corrigido e inclua o número do ticket, se houver. Por exemplo:
+
+- `hotfix/security-patch`
+- `hotfix/issue-123-security-patch`
+- `bugfix/fix-header-bug`, para uma correção que não é urgente
+
 ### Como o Conventional Branch se relaciona com o Conventional Commits?
 
 O Conventional Branch foi inspirado pelo [Conventional Commits](https://www.conventionalcommits.org) e segue uma filosofia semelhante: trazer estrutura legível por humanos e máquinas para os metadados do Git. Enquanto o Conventional Commits padroniza mensagens de commit, o Conventional Branch padroniza nomes de branches. As duas especificações se complementam naturalmente.

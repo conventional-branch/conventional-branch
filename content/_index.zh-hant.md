@@ -115,6 +115,52 @@ DIGIT           = %x30-39   ; 數字 0-9
 
 ## FAQ
 
+### 什麼是 branch 名稱？
+
+branch 名稱是 Git 為一條開發線所取的標籤，例如 `main` 或 `feature/add-login-page`；Git 會把它存成 `refs/heads/` 底下的一個 ref。Git 接受的名稱範圍很廣，因此光看 branch 名稱，無法可靠地得知 branch 上在進行什麼工作。約定式分支為它規定了 `<type>/<description>` 的結構：先是說明工作用途的 type，接著是簡短的小寫描述，單字之間以連字號分隔。例如：
+
+- `feature/add-login-page`
+- `bugfix/fix-header-bug`
+- `release/v1.2.0`
+
+主幹分支（`main`、`master`、`develop`）不使用前綴。
+
+### feature branch 應該如何命名？
+
+以 `feature/` 或其簡寫形式 `feat/` 開頭，並在斜線後描述該功能。若這項工作在專案管理工具中有對應的工單，請包含工單編號。例如：
+
+- `feature/add-login-page`
+- `feat/add-login-page`
+- `feature/issue-123-new-login`
+
+### 什麼是 chore branch？
+
+`chore/` branch 用於非程式碼任務，例如更新相依套件或文件。branch type 刻意比 Conventional Commits 的 type 少（見下文），因此這類維護工作都歸入 `chore/`。例如：
+
+- `chore/update-dependencies`
+- `chore/upgrade-node-v20.11`
+- `chore/update-generated-files`
+
+Renovate 等部分相依套件更新機器人也可以設定為使用這個前綴；請參閱[機器人與自動化](/enforce/#name-them-to-fit)。
+
+### release branch 應該如何命名？
+
+使用 `release/`，後面接上該 branch 要準備的內容，通常是版本號。可以使用點，但不能出現在描述的開頭或結尾，也不能緊鄰連字號：
+
+- `release/v1.2.0` — 有效
+- `release/v1.2.0.` — 無效：以點結尾
+- `release/v1.-2.0` — 無效：連字號緊鄰點號
+
+一致的前綴也能讓管線針對 `release/*` 觸發動作，例如從 release branch 自動部署。
+
+### hotfix branch 應該如何命名？
+
+緊急修復使用 `hotfix/`，不緊急的修復則使用 `bugfix/`（或 `fix/`）。描述要修復的內容；若有工單，請包含工單編號。例如：
+
+- `hotfix/security-patch`
+- `hotfix/issue-123-security-patch`
+- `bugfix/fix-header-bug`，用於不緊急的修復
+
 ### 約定式分支與約定式提交（Conventional Commits）有什麼關係？
 
 約定式分支的靈感來源於 [Conventional Commits](https://www.conventionalcommits.org)，遵循相似的理念：為 Git 中繼資料引入人機可讀的結構。約定式提交規範提交訊息，約定式分支規範 branch 名稱，兩者相輔相成、天然互補。

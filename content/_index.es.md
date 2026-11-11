@@ -116,6 +116,52 @@ En resumen, conventional branch está diseñado para mejorar la organización de
 
 ## Preguntas frecuentes
 
+### ¿Qué es un nombre de rama?
+
+Un nombre de rama es la etiqueta que Git da a una línea de desarrollo, como `main` o `feature/add-login-page`; Git lo guarda como una referencia (ref) en `refs/heads/`. Git acepta una gran variedad de nombres, así que un nombre de rama, por sí solo, no dice nada fiable sobre el trabajo que contiene. Conventional Branch le da una estructura, `<tipo>/<descripción>`: un tipo que indica para qué es el trabajo, seguido de una descripción breve, en minúsculas, con las palabras separadas por guiones. Por ejemplo:
+
+- `feature/add-login-page`
+- `bugfix/fix-header-bug`
+- `release/v1.2.0`
+
+Las ramas troncales (`main`, `master`, `develop`) no llevan prefijo.
+
+### ¿Cómo debo nombrar una rama de feature?
+
+Empiécela con `feature/`, o con el alias corto `feat/`, y describa la funcionalidad después de la barra. Si el trabajo tiene un ticket en su herramienta de gestión de proyectos, incluya su número. Por ejemplo:
+
+- `feature/add-login-page`
+- `feat/add-login-page`
+- `feature/issue-123-new-login`
+
+### ¿Qué es una rama de chore?
+
+Una rama `chore/` es para tareas no relacionadas con código, como actualizar dependencias o documentación. Los tipos de rama son, a propósito, menos que los tipos de Conventional Commits (véase más abajo), así que este tipo de mantenimiento va en `chore/`. Por ejemplo:
+
+- `chore/update-dependencies`
+- `chore/upgrade-node-v20.11`
+- `chore/update-generated-files`
+
+Algunos bots de dependencias, como Renovate, también pueden configurarse para usar este prefijo; consulte [Bots y automatización](/enforce/#name-them-to-fit).
+
+### ¿Cómo debo nombrar una rama de release?
+
+Use `release/` seguido de lo que prepara la rama, normalmente el número de versión. Se permiten puntos, pero no al inicio ni al final de la descripción, ni junto a un guion:
+
+- `release/v1.2.0` — válido
+- `release/v1.2.0.` — inválido: punto al final
+- `release/v1.-2.0` — inválido: guion junto a un punto
+
+Un prefijo coherente también permite que un pipeline actúe sobre `release/*`, por ejemplo para desplegar automáticamente desde las ramas de release.
+
+### ¿Cómo debo nombrar una rama de hotfix?
+
+Use `hotfix/` para una corrección urgente y `bugfix/` (o `fix/`) para una que no lo sea. Describa lo que se corrige e incluya el número de ticket, si lo hay. Por ejemplo:
+
+- `hotfix/security-patch`
+- `hotfix/issue-123-security-patch`
+- `bugfix/fix-header-bug`, para una corrección que no es urgente
+
 ### ¿Cómo se relaciona Conventional Branch con Conventional Commits?
 
 Conventional Branch está inspirado en [Conventional Commits](https://www.conventionalcommits.org) y sigue una filosofía similar: aportar estructura legible por humanos y máquinas a los metadatos de Git. Mientras que Conventional Commits estandariza los mensajes de commit, Conventional Branch estandariza los nombres de ramas. Ambas especificaciones se complementan de forma natural.

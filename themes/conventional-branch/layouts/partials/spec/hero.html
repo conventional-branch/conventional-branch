@@ -9,12 +9,9 @@
     <div class="hero__copy">
       <h1 id="hero-title" class="hero__title">{{ .Param "Title" }}</h1>
       <p class="hero__lead">{{ .Param "Description" }}</p>
-      {{- if $isArchived }}
-      <p class="notice">
-        {{- partial "icon.html" (dict "name" "info" "size" 18) -}}
-        <span>{{ i18n "archived_notice" (dict "Version" (strings.TrimPrefix "v" $current)) }} <a href="{{ .Site.Home.RelPermalink }}">{{ i18n "archived_link" (dict "Version" (strings.TrimPrefix "v" $latest)) }}</a></span>
-      </p>
-      {{- else }}
+      {{- /* An archived version says so in version-banner.html, at the top of the page,
+             and offers no actions: they belong to the current one. */}}
+      {{- if not $isArchived }}
       {{- with .Param "Actions" }}
       <div class="hero__actions">
         {{- range $i, $action := . }}

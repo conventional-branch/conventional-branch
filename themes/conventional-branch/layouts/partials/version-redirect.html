@@ -1,0 +1,21 @@
+{{- /* The current version is served at the site root, but /<version>/ is where every
+       archived version lives and where each version's frozen spec.json is published, so
+       it is an address people try for the current one too. Built with the root page,
+       this publishes a page there that forwards to the root, the way a Hugo alias does.
+       When the version is archived, its own section takes the address over, and the
+       forward moves to the next current version without anyone touching this. */ -}}
+{{- if eq .RelPermalink "/" -}}
+  {{- $root := .Site.Params.canonicalBaseURL -}}
+  {{- $page := printf `<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>%s</title>
+    <link rel="canonical" href="%s">
+    <meta charset="utf-8">
+    <meta http-equiv="refresh" content="0; url=/">
+  </head>
+</html>
+` $root $root -}}
+  {{- $forward := resources.FromString (printf "%s/index.html" site.Params.versions.current) $page -}}
+  {{- $forward.Publish -}}
+{{- end -}}

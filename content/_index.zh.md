@@ -115,6 +115,52 @@ DIGIT           = %x30-39   ; 数字 0-9
 
 ## 常见问题
 
+### 什么是分支名称？
+
+分支名称是 Git 给一条开发线起的标签，例如 `main` 或 `feature/add-login-page`；Git 把它作为 `refs/heads/` 下的一个引用（ref）保存。Git 能接受的名称范围很广，所以分支名称本身并不能可靠地说明分支上在做什么工作。约定式分支为它规定了 `<type>/<description>` 的结构：先是说明工作用途的类型，然后是简短的小写描述，单词之间用连字符分隔。例如：
+
+- `feature/add-login-page`
+- `bugfix/fix-header-bug`
+- `release/v1.2.0`
+
+主干分支（`main`、`master`、`develop`）不使用前缀。
+
+### feature 分支应该如何命名？
+
+以 `feature/` 或其简写形式 `feat/` 开头，在斜杠后描述该功能。如果这项工作在项目管理工具中有对应的工单，请包含工单编号。例如：
+
+- `feature/add-login-page`
+- `feat/add-login-page`
+- `feature/issue-123-new-login`
+
+### 什么是 chore 分支？
+
+`chore/` 分支用于非代码任务，例如更新依赖项或文档。分支类型有意比 Conventional Commits 的类型少（见下文），因此这类维护工作都归入 `chore/`。例如：
+
+- `chore/update-dependencies`
+- `chore/upgrade-node-v20.11`
+- `chore/update-generated-files`
+
+Renovate 等一些依赖更新机器人也可以配置为使用这个前缀；参见[机器人与自动化](/enforce/#name-them-to-fit)。
+
+### release 分支应该如何命名？
+
+使用 `release/`，后面跟上该分支要准备的内容，通常是版本号。可以使用点，但不能出现在描述的开头或结尾，也不能紧邻连字符：
+
+- `release/v1.2.0` — 有效
+- `release/v1.2.0.` — 无效：以点结尾
+- `release/v1.-2.0` — 无效：连字符紧邻点号
+
+统一的前缀还能让管道针对 `release/*` 触发操作，例如从发布分支自动部署。
+
+### hotfix 分支应该如何命名？
+
+紧急修复使用 `hotfix/`，不紧急的修复使用 `bugfix/`（或 `fix/`）。描述要修复的内容；如果有工单，请包含工单编号。例如：
+
+- `hotfix/security-patch`
+- `hotfix/issue-123-security-patch`
+- `bugfix/fix-header-bug`，用于不紧急的修复
+
 ### 约定式分支与约定式提交（Conventional Commits）有什么关系？
 
 约定式分支的灵感来源于 [Conventional Commits](https://www.conventionalcommits.org)，遵循相似的理念：为 Git 元数据引入人机可读的结构。约定式提交规范化了提交信息，约定式分支规范化了分支名称。两者相辅相成，天然互补。

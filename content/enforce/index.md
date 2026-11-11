@@ -1,8 +1,8 @@
 ---
 type: about
 draft: false
-seoTitle: "Enforce Git Branch Naming — Conventional Branch"
-seoDescription: "Copy-pasteable branch name validation for GitHub rulesets, GitLab push rules, Bitbucket Pipelines and a dependency-free Git hook, using the published regex."
+seoTitle: "Enforce a Branch Name Pattern on GitHub & GitLab — Conventional Branch"
+seoDescription: "A one-line regex, ready to copy: the branch name pattern for GitHub rulesets, GitLab push rules and Bitbucket, plus a pre-push hook and CI checks."
 # The page hero; heroLead takes Markdown.
 heroTitle: "Enforce branch names"
 heroLead: "Copy-paste configuration that checks branch names against the specification, for GitHub, GitLab, Bitbucket, plain Git and AI coding agents."
@@ -223,14 +223,14 @@ commit, so a wrong name is caught before it is anywhere but your machine:
 ```yaml {data-snippet="pre_commit"}
 repos:
   - repo: https://github.com/commit-check/commit-check
-    rev: v2.19.1
+    rev: v2.19.4
     hooks:
       - id: check-branch
 ```
 
 Its default type list is a superset of the specification's: it also accepts the
-Conventional Commits types (`docs/`, `refactor/`, …) and the `dependabot/` and
-`renovate/` prefixes. To accept exactly the types the specification defines, add a
+Conventional Commits types (`docs/`, `refactor/`, …), the `dependabot/` and
+`renovate/` prefixes, and `agents/`, which VS Code's Agents window uses. To accept exactly the types the specification defines, add a
 `commit-check.toml` at the repository root:
 
 ```toml {data-snippet="commit_check_toml"}

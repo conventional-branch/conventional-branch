@@ -99,33 +99,63 @@
   }
 }
 
-// On an archived version, in place of the actions.
-.notice {
-  display: flex;
-  align-items: flex-start;
-  gap: 12px;
-  margin: 8px 0 0;
-  padding: 14px 18px;
-  border-radius: $radius-md;
-  background: rgba($ink, 0.25);
+// On an archived version, a strip above the header (partials/version-banner.html). Sand
+// rather than blue, so it reads as a warning and not as part of the masthead.
+.version-banner {
+  border-bottom: 1px solid #E6CFA8;
+  background: #FCF1DE;
+  color: $ink;
   font-size: 15px;
-  line-height: 1.6;
+  line-height: 1.55;
 
   .icon {
-    margin-top: 3px;
+    flex-shrink: 0;
+    margin-top: 2px;
+    color: $code-literal;
+  }
+
+  p {
+    margin: 0;
   }
 
   a {
-    color: #FFFFFF;
+    color: $color-primary-heading;
     font-weight: 600;
     text-decoration: underline;
     text-underline-offset: 3px;
+
+    &:hover {
+      color: $color-link-hover;
+    }
   }
+}
+
+.version-banner__inner {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding-top: 12px;
+  padding-bottom: 12px;
+}
+
+// The header is laid over the hero from the top of the page, which under the strip is
+// not where the hero starts. So the header stays in the flow there, and the hero is
+// pulled up beneath it by its height: the page looks as it always has, a strip lower.
+.page-spec.is-archived .site-header {
+  position: relative;
+}
+
+.page-spec.is-archived .hero {
+  margin-top: -$header-height;
 }
 
 @include below($bp-md) {
   .page-spec .hero {
     padding-top: calc(60px + 40px);
+  }
+
+  .page-spec.is-archived .hero {
+    margin-top: -60px;
   }
 
   .hero__mark {
