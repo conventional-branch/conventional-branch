@@ -10,7 +10,7 @@ seoDescription: "A Git branch naming convention: feature/, bugfix/, hotfix/, rel
 
 ## Summary
 
-Conventional Branch refers to a structured and standardized naming convention for Git branches which aims to make branch more readable and actionable. We've suggested some branch prefixes you might want to use but you can also specify your own naming convention. A consistent naming convention makes it easier to identify branches by type.
+Conventional Branch refers to a structured and standardized naming convention for Git branches which aims to make branches more readable and actionable. We've suggested some branch prefixes you might want to use but you can also specify your own naming convention. A consistent naming convention makes it easier to identify branches by type.
 
 ### Key Points
 
@@ -200,4 +200,4 @@ Long-lived integration or environment branches that are part of the core specifi
 
 ### What tools can be used to automatically identify if a team member does not meet this specification?
 
-You can use [commit-check](https://github.com/commit-check/commit-check) to check branch specification or [commit-check-action](https://github.com/commit-check/commit-check-action) if your codes are hosted on GitHub.
+You can use [commit-check](https://github.com/commit-check/commit-check) to check branch specification or [commit-check-action](https://github.com/commit-check/commit-check-action) if your code is hosted on GitHub.

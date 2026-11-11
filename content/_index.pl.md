@@ -116,6 +116,52 @@ Podsumowując, conventional branch został zaprojektowany w celu poprawy organiz
 
 ## FAQ
 
+### Czym jest nazwa gałęzi?
+
+Nazwa gałęzi to etykieta, którą Git nadaje linii rozwoju, na przykład `main` lub `feature/add-login-page`; Git przechowuje ją jako referencję (ref) w `refs/heads/`. Git akceptuje bardzo różne nazwy, więc sama nazwa gałęzi nie mówi nic pewnego o pracy, która się na niej odbywa. Conventional Branch nadaje jej strukturę `<typ>/<opis>`: typ, który mówi, czemu służy praca, a po nim krótki opis małymi literami, ze słowami oddzielonymi myślnikami. Na przykład:
+
+- `feature/add-login-page`
+- `bugfix/fix-header-bug`
+- `release/v1.2.0`
+
+Gałęzie główne (`main`, `master`, `develop`) nie używają prefiksu.
+
+### Jak nazwać gałąź feature?
+
+Zacznij ją od `feature/` lub krótkiego aliasu `feat/` i opisz funkcję po ukośniku. Jeśli praca ma bilet w twoim narzędziu zarządzania projektami, dołącz jego numer. Na przykład:
+
+- `feature/add-login-page`
+- `feat/add-login-page`
+- `feature/issue-123-new-login`
+
+### Czym jest gałąź chore?
+
+Gałąź `chore/` służy do zadań niezwiązanych z kodem, takich jak aktualizacja zależności lub dokumentacji. Typów gałęzi jest celowo mniej niż typów Conventional Commits (zobacz niżej), więc tego rodzaju prace utrzymaniowe trafiają do `chore/`. Na przykład:
+
+- `chore/update-dependencies`
+- `chore/upgrade-node-v20.11`
+- `chore/update-generated-files`
+
+Niektóre boty aktualizujące zależności, takie jak Renovate, również można skonfigurować tak, aby używały tego prefiksu; zobacz [Boty i automatyzacja](/enforce/#name-them-to-fit).
+
+### Jak nazwać gałąź release?
+
+Użyj `release/`, a po nim tego, co gałąź przygotowuje, zwykle numeru wersji. Kropki są dozwolone, ale nie na początku ani na końcu opisu i nie obok myślnika:
+
+- `release/v1.2.0` — prawidłowa
+- `release/v1.2.0.` — nieprawidłowa: kropka na końcu
+- `release/v1.-2.0` — nieprawidłowa: myślnik obok kropki
+
+Spójny prefiks pozwala też potokowi reagować na `release/*`, na przykład automatycznie wdrażać z gałęzi wydania.
+
+### Jak nazwać gałąź hotfix?
+
+Użyj `hotfix/` dla pilnej poprawki, a `bugfix/` (lub `fix/`) dla poprawki, która nie jest pilna. Opisz, co jest poprawiane, i dołącz numer biletu, jeśli istnieje. Na przykład:
+
+- `hotfix/security-patch`
+- `hotfix/issue-123-security-patch`
+- `bugfix/fix-header-bug` — dla poprawki, która nie jest pilna
+
 ### Jak Conventional Branch ma się do Conventional Commits?
 
 Conventional Branch jest zainspirowany przez [Conventional Commits](https://www.conventionalcommits.org) i podąża za podobną filozofią: wprowadzenie struktury czytelnej dla ludzi i maszyn do metadanych Git. Podczas gdy Conventional Commits standaryzuje wiadomości commitów, Conventional Branch standaryzuje nazwy gałęzi. Obie specyfikacje naturalnie się uzupełniają.

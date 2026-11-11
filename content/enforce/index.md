@@ -223,14 +223,14 @@ commit, so a wrong name is caught before it is anywhere but your machine:
 ```yaml
 repos:
   - repo: https://github.com/commit-check/commit-check
-    rev: v2.19.1
+    rev: v2.19.4
     hooks:
       - id: check-branch
 ```
 
 Its default type list is a superset of the specification's: it also accepts the
-Conventional Commits types (`docs/`, `refactor/`, …) and the `dependabot/` and
-`renovate/` prefixes. To accept exactly the types the specification defines, add a
+Conventional Commits types (`docs/`, `refactor/`, …), the `dependabot/` and
+`renovate/` prefixes, and `agents/`, which VS Code's Agents window uses. To accept exactly the types the specification defines, add a
 `commit-check.toml` at the repository root:
 
 ```toml
