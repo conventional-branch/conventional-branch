@@ -223,7 +223,7 @@ commit, so a wrong name is caught before it is anywhere but your machine:
 ```yaml {data-snippet="pre_commit"}
 repos:
   - repo: https://github.com/commit-check/commit-check
-    rev: v2.19.4
+    rev: v2.20.4
     hooks:
       - id: check-branch
 ```
