@@ -1,0 +1,12 @@
+{#- Organizations whose projects document the convention: an excerpt of the canonical
+    list on the About page (data/home.yaml). -#}
+{%- set cb = config.extra.cb %}{% set s = cb.s %}
+<div class="cb-adopters">
+  <h2 class="cb-adopters__label">{{ s.adopters_label }}</h2>
+  <ul class="cb-adopters__list">
+    {%- for a in cb.home.adopters %}
+    <li><a href="{{ a.url }}">{{ a.name }}</a></li>
+    {%- endfor %}
+    <li class="cb-adopters__all"><a href="/about/#projects-using-conventional-branch">{{ s.adopters_all }}{{ icon('arrow-right') }}</a></li>
+  </ul>
+</div>

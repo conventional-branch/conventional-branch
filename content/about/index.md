@@ -105,27 +105,27 @@ Other CI/CD platforms support the same pattern using their own equivalent of a b
 2. **Enforce it automatically** using one of the tools listed above.
 3. **Add the badge** to your repository README to signal adoption:
 
-   [![Conventional Branch](https://conventionalbranch.org/badge.svg)](https://conventionalbranch.org/)
+    [![Conventional Branch](https://conventionalbranch.org/badge.svg)](https://conventionalbranch.org/)
 
-   ```markdown {data-snippet="badge_markdown"}
-   [![Conventional Branch](https://conventionalbranch.org/badge.svg)](https://conventionalbranch.org/)
-   ```
+    ```markdown {data-snippet="badge_markdown"}
+    [![Conventional Branch](https://conventionalbranch.org/badge.svg)](https://conventionalbranch.org/)
+    ```
 
-   Or in HTML:
+    Or in HTML:
 
-   ```html {data-snippet="badge_html"}
-   <a href="https://conventionalbranch.org/">
-     <img alt="Conventional Branch 1.1.0" src="https://conventionalbranch.org/badge.svg">
-   </a>
-   ```
+    ```html {data-snippet="badge_html"}
+    <a href="https://conventionalbranch.org/">
+      <img alt="Conventional Branch 1.1.0" src="https://conventionalbranch.org/badge.svg">
+    </a>
+    ```
 
-   Prefer to generate it yourself, or want a different shape? The
-   [shields.io](https://shields.io) equivalent carries the same colors and
-   version, and takes `&style=flat-square`, `&style=plastic` or
-   `&style=for-the-badge`:
+    Prefer to generate it yourself, or want a different shape? The
+    [shields.io](https://shields.io) equivalent carries the same colors and
+    version, and takes `&style=flat-square`, `&style=plastic` or
+    `&style=for-the-badge`:
 
-   ```markdown {data-snippet="badge_shields"}
-   [![Conventional Branch](https://img.shields.io/badge/Conventional%20Branch-1.1.0-6699CC)](https://conventionalbranch.org/)
-   ```
+    ```markdown {data-snippet="badge_shields"}
+    [![Conventional Branch](https://img.shields.io/badge/Conventional%20Branch-1.1.0-6699CC)](https://conventionalbranch.org/)
+    ```
 
 4. **Configure your CI/CD** to trigger different workflows based on branch prefix (e.g., auto-deploy on `release/` branches) — see [CI/CD Integration](#cicd-integration) above.

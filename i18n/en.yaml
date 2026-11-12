@@ -1,70 +1,20 @@
-# Interface strings and homepage copy for the site's templates.
-#
-# Hugo falls back to this file for any string a language has not translated, so the
-# navigation, sidebar and footer render in every language from day one. The
-# homepage sections that carry longer copy (everything under "Homepage" below) are
-# shown only for languages whose `landing` param is true in config.yaml: translate
-# those strings into i18n/<lang>.yaml first, then turn the flag on, so a page never
-# mixes two languages.
+# Words for the homepage sections that hooks.py adds (checker, adopters, why, adopt)
+# and for the Enforce and About pages. They show only on English pages
+# (`extra.landing` in mkdocs.yml), so a page never mixes two languages. The theme's
+# own interface strings (search, menus, table of contents) come from Sumi.
 
-# --- Navigation and chrome -------------------------------------------------------
+# --- Shared --------------------------------------------------------------------------
 
-skip_to_content: "Skip to content"
-home_label: "Conventional Branch home"
-nav_primary: "Primary"
-nav_specification: "Specification"
-nav_enforce: "Enforce"
-nav_about: "About"
 nav_sponsor: "Sponsor"
-nav_menu: "Menu"
-github_label: "Conventional Branch on GitHub"
-version_label: "Specification version"
-versions_heading: "Versions"
-version_latest: "Latest"
-version_archived: "Archived"
-language_label: "Language"
-languages_heading: "Languages"
 copy: "Copy"
-copied: "Copied"
 
 # --- Specification pages -----------------------------------------------------------
 
-spec_eyebrow: "The specification"
-on_this_page: "On this page"
 for_tools: "For tools"
 endpoint_pinned: "pinned"
 endpoint_latest: "latest"
 endpoint_schema: "schema"
 endpoint_llms: "for LLMs"
-edit_page: "Edit this page on GitHub"
-license_short: "CC BY 4.0"
-archived_notice: "You are reading {{ .Version }}, an archived version of the specification."
-archived_link: "Read the current version, {{ .Version }}"
-
-# --- Footer ------------------------------------------------------------------------
-
-footer_label: "Footer"
-footer_col_spec: "Specification"
-footer_col_adopt: "Adopt"
-footer_col_project: "Project"
-footer_current: "{{ .Version }} — current"
-footer_archived: "{{ .Version }} — archived"
-footer_schema: "JSON Schema"
-footer_tooling: "Tooling"
-footer_skill: "Agent skill"
-footer_badge: "Badge"
-footer_adopters: "Adopters"
-footer_contributing: "Contributing"
-footer_changelog: "Changelog"
-footer_register: "Register an agent prefix"
-footer_licensed: "Licensed"
-footer_derived: "Derived from"
-footer_created: "Created & maintained by"
-
-# --- 404 ---------------------------------------------------------------------------
-
-notfound_title: "Page not found"
-notfound_lead: "There’s no page at this address. Try one of these:"
 
 # --- Homepage ----------------------------------------------------------------------
 
@@ -78,10 +28,10 @@ checker_person: "A person reads"
 checker_machine: "A machine parses"
 checker_pipeline: "A pipeline can"
 checker_pipeline_note: "A common mapping — adapt it to your own pipeline."
-checker_ok: "Conforms to Conventional Branch {{ .Version }}"
-checker_bad: "Doesn’t conform to Conventional Branch {{ .Version }}"
+checker_ok: "Conforms to Conventional Branch {Version}"
+checker_bad: "Doesn’t conform to Conventional Branch {Version}"
 checker_waiting: "Waiting for a branch name"
-checker_note: "Checked in your browser against the regex published in {{ .Link }} — the same one every enforcement config uses."
+checker_note: "Checked in your browser against the regex published in {Link} — the same one every enforcement config uses."
 checker_try: "Try"
 checker_empty: "Type a branch name — for example"
 checker_trunk_person: "The trunk"
@@ -92,7 +42,7 @@ checker_person_bugfix: "A bug fix"
 checker_person_hotfix: "An urgent fix"
 checker_person_release: "Release preparation"
 checker_person_chore: "A chore"
-checker_person_agent: "Work by {{ .Name }}"
+checker_person_agent: "Work by {Name}"
 checker_person_generic_agent: "an AI agent"
 checker_msg_missing_type: "Missing a type. Names take the form <type>/<description>."
 checker_msg_uppercase: "Uppercase letters aren’t allowed — branch names are lowercase."
@@ -123,9 +73,9 @@ why_title: "Why it exists"
 why_body: "Most teams already have a branch naming habit, but it lives in someone’s head and is enforced by hand in code review. Conventional Branch writes it down precisely enough for people to follow and for tools to check."
 
 principle_stable_title: "Stable versions"
-principle_stable_body: "Each release is frozen the day it’s published. Pin <code>/v{{ .Version }}/spec.json</code> and nothing your tools accept changes until you choose to upgrade."
+principle_stable_body: "Each release is frozen the day it’s published. Pin <code>/v{Version}/spec.json</code> and nothing your tools accept changes until you choose to upgrade."
 principle_checked_title: "Tested examples"
-principle_checked_body: "A conformance suite runs on every pull request. The examples in all {{ .Languages }} languages, the badge, llms.txt and every copy-paste config are tested against spec.json, so none of them can drift."
+principle_checked_body: "A conformance suite runs on every pull request. The examples in all {Languages} languages, the badge, llms.txt and every copy-paste config are tested against spec.json, so none of them can drift."
 
 adopt_title: "Adopt it in three steps"
 step_write_title: "Write it down"

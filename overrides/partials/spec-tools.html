@@ -1,0 +1,12 @@
+{#- Under the outline of a specification page: the machine-readable endpoints, so
+    they stay in reach while reading. -#}
+{%- set cb = config.extra.cb %}{% set s = cb.s %}{% set v = cb.spec.version %}
+<div class="cb-tools">
+  <div class="sumi-rail-title">{{ s.for_tools }}</div>
+  <ul>
+    <li><a href="/v{{ v }}/spec.json"><code>/v{{ v }}/spec.json</code><span>{{ s.endpoint_pinned }}</span></a></li>
+    <li><a href="/spec.json"><code>/spec.json</code><span>{{ s.endpoint_latest }}</span></a></li>
+    <li><a href="/schema/v1/spec.schema.json"><code>spec.schema.json</code><span>{{ s.endpoint_schema }}</span></a></li>
+    <li><a href="/llms.txt"><code>/llms.txt</code><span>{{ s.endpoint_llms }}</span></a></li>
+  </ul>
+</div>

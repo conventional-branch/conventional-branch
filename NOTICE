@@ -25,10 +25,3 @@ the Conventional Commits specification and its website:
 Changes were made: the specification was adapted from commit messages to
 Git branch names, and the content, grammar, and site were rewritten
 accordingly.
-
-
-Third-party components
-----------------------
-
-The Hugo theme in themes/conventional-branch/ is distributed under the MIT
-License; see themes/conventional-branch/LICENSE.
