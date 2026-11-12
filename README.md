@@ -68,6 +68,12 @@ Install the skill to teach your AI agent how to create properly named branches:
 npx skills add conventional-branch/conventional-branch --skill conventional-branch
 ```
 
+Or with [APM](https://github.com/microsoft/apm) (Agent Package Manager), pinned to a release tag so Dependabot can open update PRs for it:
+
+```bash
+apm install conventional-branch/conventional-branch/skills/conventional-branch#v1.1.0
+```
+
 ## 🤖 Machine-Readable Spec
 
 The specification is published in a machine-readable form so tools don't have to parse Markdown:
