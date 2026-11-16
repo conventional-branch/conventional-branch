@@ -25,7 +25,7 @@ A branch name conforms if and only if it matches this expression, which is the a
 
 ## Enforcement
 
-- [commit-check](https://github.com/commit-check/commit-check): Checks the branch name against the specification's type prefixes by default, as a pre-commit hook (`check-branch`) or as `commit-check --branch` in any CI. Also checks commit messages against Conventional Commits. Configuration for both is on the enforcement page.
+- [commit-check](https://github.com/commit-check/commit-check): Checks the branch's type prefix by default, and the full grammar with `require_description_grammar = true` and the specification's type list, as on the enforcement page; runs as a pre-commit hook (`check-branch`) or as `commit-check --branch` in any CI. Also checks commit messages against Conventional Commits. Configuration for both is on the enforcement page.
 - [commit-check-action](https://github.com/commit-check/commit-check-action): The same check as a GitHub Action, reporting a failure as a job summary and, optionally, as a pull request comment.
 
 ## For tools
