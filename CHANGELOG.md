@@ -51,7 +51,7 @@ The version number tracks the specification itself; site and tooling changes are
 - Naming rules combined and revised for clarity (2025-03).
 - Branch naming specification further refined (2025-09).
 - License updated from MIT to **CC-BY-4.0** (2025-12).
-- Specification established as industry-standard with dedicated website at [conventionalbranch.org](https://conventionalbranch.org) (2026-04).
+- Dedicated website at [conventionalbranch.org](https://conventionalbranch.org) (2026-04).
 - Versioned content structure with version switcher UI for browsing spec versions (2026-06).
 
 [1.1.0]: https://github.com/conventional-branch/conventional-branch/compare/v1.0.0...v1.1.0
