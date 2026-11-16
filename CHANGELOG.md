@@ -24,6 +24,7 @@ The version number tracks the specification itself; site and tooling changes are
 ### Clarified
 - **Dots** (2026-10): the basic rules now say what the grammar has always allowed — dots in any description, not only on release branches — with `chore/upgrade-node-v20.11` added to the examples and fixtures. No branch name changes validity.
 - **FAQ** (2026-10): custom types are a team-level extension that a validator must be told about (`unknown/some-task` stays invalid under the specification itself); new entries explain the lowercase rule and credit git-flow for the prefixes the specification builds on.
+- **Normative wording** (2026-11): the rules now use the RFC 2119 key words (MUST, MUST NOT, SHOULD, MAY), in all eleven languages, and a ticket number is said to be lowercased like the rest of the description. The summary no longer suggests that a team's own prefixes conform; it says what the FAQ already did, that extra types are a documented team extension. No branch name changes validity.
 
 ### Removed
 - VSCode Conventional Branch extension delisted from tooling (2026-08).

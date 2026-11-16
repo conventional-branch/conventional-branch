@@ -10,7 +10,7 @@ seoDescription: "Git 分支命名規範：feature/、bugfix/、hotfix/、release
 
 ## 概述
 
-約定式分支（Conventional Branch）是指針對 Git branch 的結構化、標準化命名慣例，旨在讓 branch 更易讀且更具可操作性。我們提供一些您可能想採用的 branch 前綴建議，但您也可以自行制定命名慣例。一致的命名慣例能讓您更容易依類型辨識 branch。
+約定式分支（Conventional Branch）是指針對 Git branch 的結構化、標準化命名慣例，旨在讓 branch 更易讀且更具可操作性。它規定了一組固定的 branch 類型，所有符合規範的工具都接受這些類型；團隊若需要更多類型，可作為有文件說明的擴充自行加入（見 FAQ）。一致的命名慣例能讓您更容易依類型辨識 branch。
 
 ### 要點
 
@@ -20,9 +20,11 @@ seoDescription: "Git 分支命名規範：feature/、bugfix/、hotfix/、release
 
 ## 規範
 
+本規範中的關鍵詞「必須」（MUST）、「禁止」（MUST NOT）、「應當」（SHOULD）與「可以」（MAY）依 [RFC 2119](https://www.rfc-editor.org/rfc/rfc2119) 的定義解釋。
+
 ### branch 命名前綴
 
-此 branch 規範支援以下前綴，並應採用如下結構：
+除主幹分支外，branch 名稱必須（MUST）採用以下結構，並使用下列類型之一：
 
 ---
 
@@ -46,10 +48,10 @@ seoDescription: "Git 分支命名規範：feature/、bugfix/、hotfix/、release
 
 ### 基本規則
 
-1. **使用小寫英數、連字號與點**：一律使用小寫字母（`a-z`）、數字（`0-9`）與連字號（`-`）分隔單字，避免特殊字元、底線或空白。任何 branch 的描述中都可以使用點（`.`），通常用於表示版本號（例如 `release/v1.2.0`、`chore/upgrade-node-v20.11`）。
-2. **禁止連續、開頭或結尾的連字號或點**：連字號與點不得連續出現（例如 `feature/new--login`、`release/v1.-2.0`），也不得出現在描述的開頭或結尾（例如 `feature/-new-login`、`release/v1.2.0.`）。
-3. **保持清楚且精簡**：branch 名稱應在具描述性的同時保持精簡，清楚表達工作的內容與目的。
-4. **包含工單編號**：若適用，請包含專案管理工具的工單編號，方便追蹤。例如，對於工單 `issue-123`，branch 名稱可以是 `feature/issue-123-new-login`。
+1. **使用小寫英數、連字號與點**：描述必須（MUST）只使用小寫字母（`a-z`）、數字（`0-9`）、用於分隔單字的連字號（`-`）與點（`.`），禁止（MUST NOT）包含大寫字母、特殊字元、底線或空白。任何 branch 的描述中都可以（MAY）使用點，通常用於表示版本號（例如 `release/v1.2.0`、`chore/upgrade-node-v20.11`）。
+2. **禁止連續、開頭或結尾的連字號或點**：連字號與點禁止（MUST NOT）連續出現（例如 `feature/new--login`、`release/v1.-2.0`），也禁止出現在描述的開頭或結尾（例如 `feature/-new-login`、`release/v1.2.0.`）。
+3. **保持清楚且精簡**：branch 名稱應當（SHOULD）在具描述性的同時保持精簡，清楚表達工作的內容與目的。
+4. **包含工單編號**：若適用，描述應當（SHOULD）包含專案管理工具的工單編號，方便追蹤。工單編號與描述的其餘部分一樣使用小寫（`PROJ-123` 寫作 `proj-123`）。例如，對於工單 `issue-123`，branch 名稱可以是 `feature/issue-123-new-login`。
 
 ### 形式文法
 
