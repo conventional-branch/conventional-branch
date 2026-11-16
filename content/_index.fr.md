@@ -10,7 +10,7 @@ seoDescription: "Une spécification pour nommer les branches Git : préfixes fea
 
 ## Résumé
 
-Conventional Branch fait référence à une convention de nommage structurée et standardisée pour les branches Git qui vise à rendre les branches plus lisibles et exploitables. Nous avons suggéré quelques préfixes de branches que vous pourriez vouloir utiliser, mais vous pouvez également spécifier votre propre convention de nommage. Une convention de nommage cohérente facilite l'identification des branches par type.
+Conventional Branch fait référence à une convention de nommage structurée et standardisée pour les branches Git qui vise à rendre les branches plus lisibles et exploitables. Elle définit un ensemble fixe de types de branches que tout outil conforme accepte ; une équipe qui a besoin d'autres types peut les ajouter sous forme d'extension documentée (voir la FAQ). Une convention de nommage cohérente facilite l'identification des branches par type.
 
 ### Points clés
 
@@ -20,9 +20,11 @@ Conventional Branch fait référence à une convention de nommage structurée et
 
 ## Spécification
 
+Les mots-clés « DOIT » (MUST), « NE DOIT PAS » (MUST NOT), « DEVRAIT » (SHOULD) et « PEUT » (MAY) dans ce document doivent être interprétés comme décrit dans la [RFC 2119](https://www.rfc-editor.org/rfc/rfc2119).
+
 ### Préfixes de nommage des branches
 
-La spécification des branches prend en charge les préfixes suivants et doit être structurée comme suit :
+Un nom de branche, hors branches principales, DOIT (MUST) être structuré comme suit, avec l'un des types ci-dessous :
 
 ---
 
@@ -46,10 +48,10 @@ Les branches principales (`main`, `master`, `develop`) n'utilisent pas de préfi
 
 ### Règles de base
 
-1. **Utilisez des caractères alphanumériques en minuscules, des tirets et des points** : Utilisez toujours des lettres minuscules (`a-z`), des chiffres (`0-9`), et des tirets (`-`) pour séparer les mots. Évitez les caractères spéciaux, les underscores, ou les espaces. Les points (`.`) sont autorisés dans toute description, généralement pour les numéros de version (par exemple, `release/v1.2.0`, `chore/upgrade-node-v20.11`).
-2. **Pas de tirets ou points consécutifs, en début ou en fin** : Assurez-vous que les tirets et les points n'apparaissent pas de manière consécutive (par exemple, `feature/new--login`, `release/v1.-2.0`), ni au début ou à la fin de la description (par exemple, `feature/-new-login`, `release/v1.2.0.`).
-3. **Restez clair et concis** : Le nom de la branche doit être descriptif mais concis, indiquant clairement l'objectif du travail.
-4. **Incluez les numéros de ticket** : Le cas échéant, incluez le numéro de ticket de votre outil de gestion de projet pour faciliter le suivi. Par exemple, pour un ticket `issue-123`, le nom de la branche pourrait être `feature/issue-123-new-login`.
+1. **Utilisez des caractères alphanumériques en minuscules, des tirets et des points** : La description DOIT (MUST) utiliser uniquement des lettres minuscules (`a-z`), des chiffres (`0-9`), des tirets (`-`) pour séparer les mots et des points (`.`). Elle NE DOIT PAS (MUST NOT) contenir de majuscules, de caractères spéciaux, d'underscores ou d'espaces. Les points PEUVENT (MAY) apparaître dans toute description, généralement pour les numéros de version (par exemple, `release/v1.2.0`, `chore/upgrade-node-v20.11`).
+2. **Pas de tirets ou points consécutifs, en début ou en fin** : Les tirets et les points NE DOIVENT PAS (MUST NOT) apparaître de manière consécutive (par exemple, `feature/new--login`, `release/v1.-2.0`), ni au début ou à la fin de la description (par exemple, `feature/-new-login`, `release/v1.2.0.`).
+3. **Restez clair et concis** : Le nom de la branche DEVRAIT (SHOULD) être descriptif mais concis, indiquant clairement l'objectif du travail.
+4. **Incluez les numéros de ticket** : Le cas échéant, la description DEVRAIT (SHOULD) inclure le numéro de ticket de votre outil de gestion de projet pour faciliter le suivi. Comme le reste de la description, il s'écrit en minuscules (`PROJ-123` devient `proj-123`). Par exemple, pour un ticket `issue-123`, le nom de la branche pourrait être `feature/issue-123-new-login`.
 
 
 ### Grammaire formelle

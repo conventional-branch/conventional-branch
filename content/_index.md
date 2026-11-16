@@ -10,7 +10,7 @@ seoDescription: "A Git branch naming convention: feature/, bugfix/, hotfix/, rel
 
 ## Summary
 
-Conventional Branch refers to a structured and standardized naming convention for Git branches which aims to make branches more readable and actionable. We've suggested some branch prefixes you might want to use but you can also specify your own naming convention. A consistent naming convention makes it easier to identify branches by type.
+Conventional Branch refers to a structured and standardized naming convention for Git branches which aims to make branches more readable and actionable. It defines a fixed set of branch types that every conforming tool accepts; a team that needs more types can add them as a documented extension (see the FAQ). A consistent naming convention makes it easier to identify branches by type.
 
 ### Key Points
 
@@ -20,9 +20,11 @@ Conventional Branch refers to a structured and standardized naming convention fo
 
 ## Specification
 
+The key words “MUST”, “MUST NOT”, “SHOULD” and “MAY” in this document are to be interpreted as described in [RFC 2119](https://www.rfc-editor.org/rfc/rfc2119).
+
 ### Branch Naming Prefixes
 
-The branch specification supports the following prefixes and should be structured as:
+A branch name, other than a trunk branch, MUST be structured as follows, using one of the types below:
 
 ---
 
@@ -46,10 +48,10 @@ Trunk branches (`main`, `master`, `develop`) do not use a prefix.
 
 ### Basic Rules
 
-1. **Use Lowercase Alphanumerics, Hyphens, and Dots**: Always use lowercase letters (`a-z`), numbers (`0-9`), and hyphens (`-`) to separate words. Avoid special characters, underscores, or spaces. Dots (`.`) are allowed in any description, typically for version numbers (e.g., `release/v1.2.0`, `chore/upgrade-node-v20.11`).
-2. **No Consecutive, Leading, or Trailing Hyphens or Dots**: Ensure that hyphens and dots do not appear consecutively (e.g., `feature/new--login`, `release/v1.-2.0`), nor at the start or end of the description (e.g., `feature/-new-login`, `release/v1.2.0.`).
-3. **Keep It Clear and Concise**: The branch name should be descriptive yet concise, clearly indicating the purpose of the work.
-4. **Include Ticket Numbers**: If applicable, include the ticket number from your project management tool to make tracking easier. For example, for a ticket `issue-123`, the branch name could be `feature/issue-123-new-login`.
+1. **Use Lowercase Alphanumerics, Hyphens, and Dots**: The description MUST use only lowercase letters (`a-z`), numbers (`0-9`), hyphens (`-`) to separate words, and dots (`.`). It MUST NOT contain uppercase letters, special characters, underscores or spaces. Dots MAY appear in any description, typically for version numbers (e.g., `release/v1.2.0`, `chore/upgrade-node-v20.11`).
+2. **No Consecutive, Leading, or Trailing Hyphens or Dots**: Hyphens and dots MUST NOT appear consecutively (e.g., `feature/new--login`, `release/v1.-2.0`), nor at the start or end of the description (e.g., `feature/-new-login`, `release/v1.2.0.`).
+3. **Keep It Clear and Concise**: The branch name SHOULD be descriptive yet concise, clearly indicating the purpose of the work.
+4. **Include Ticket Numbers**: If applicable, the description SHOULD include the ticket number from your project management tool, to make tracking easier. Like the rest of the description it is written in lowercase (`PROJ-123` becomes `proj-123`). For example, for a ticket `issue-123`, the branch name could be `feature/issue-123-new-login`.
 
 ### Formal Grammar
 

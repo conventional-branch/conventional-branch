@@ -10,7 +10,7 @@ seoDescription: "Eine Spezifikation für Git-Branch-Namen: die Präfixe feature/
 
 ## Zusammenfassung
 
-Conventional Branch bezieht sich auf eine strukturierte und standardisierte Namenskonvention für Git-Branches, die darauf abzielt, Branches lesbarer und umsetzbarer zu machen. Wir haben einige Branch-Präfixe vorgeschlagen, die Sie verwenden könnten, aber Sie können auch Ihre eigene Namenskonvention festlegen. Eine einheitliche Namenskonvention erleichtert die Identifizierung von Branches nach Typ.
+Conventional Branch bezieht sich auf eine strukturierte und standardisierte Namenskonvention für Git-Branches, die darauf abzielt, Branches lesbarer und umsetzbarer zu machen. Sie legt eine feste Menge von Branch-Typen fest, die jedes konforme Werkzeug akzeptiert; ein Team, das weitere Typen braucht, kann sie als dokumentierte Erweiterung ergänzen (siehe FAQ). Eine einheitliche Namenskonvention erleichtert die Identifizierung von Branches nach Typ.
 
 ### Wichtige Punkte
 
@@ -20,9 +20,11 @@ Conventional Branch bezieht sich auf eine strukturierte und standardisierte Name
 
 ## Spezifikation
 
+Die Schlüsselwörter „MUSS“ (MUST), „DARF NICHT“ (MUST NOT), „SOLLTE“ (SHOULD) und „KANN“ (MAY) in diesem Dokument sind wie in [RFC 2119](https://www.rfc-editor.org/rfc/rfc2119) beschrieben zu interpretieren.
+
 ### Branch-Namens-Präfixe
 
-Die Branch-Spezifikation unterstützt die folgenden Präfixe und sollte wie folgt strukturiert sein:
+Ein Branch-Name, der kein Trunk-Branch ist, MUSS (MUST) wie folgt aufgebaut sein und einen der unten aufgeführten Typen verwenden:
 
 ---
 
@@ -46,10 +48,10 @@ Trunk-Branches (`main`, `master`, `develop`) verwenden kein Präfix.
 
 ### Grundregeln
 
-1. **Verwenden Sie kleine Buchstaben und Zahlen, Bindestriche und Punkte**: Verwenden Sie immer Kleinbuchstaben (`a-z`), Zahlen (`0-9`) und Bindestriche (`-`), um Wörter zu trennen. Vermeiden Sie Sonderzeichen, Unterstriche oder Leerzeichen. Punkte (`.`) sind in jeder Beschreibung erlaubt, typischerweise für Versionsnummern (z.B. `release/v1.2.0`, `chore/upgrade-node-v20.11`).
-2. **Keine aufeinanderfolgenden, führenden oder nachfolgenden Bindestriche oder Punkte**: Stellen Sie sicher, dass Bindestriche und Punkte nicht aufeinanderfolgen (z.B. `feature/new--login`, `release/v1.-2.0`), noch am Anfang oder Ende der Beschreibung (z.B. `feature/-new-login`, `release/v1.2.0.`).
-3. **Halten Sie es klar und prägnant**: Der Branch-Name sollte beschreibend aber prägnant sein und den Zweck der Arbeit klar angeben.
-4. **Ticket-Nummern einbeziehen**: Falls zutreffend, beziehen Sie die Ticket-Nummer aus Ihrem Projektmanagement-Tool ein, um die Verfolgung zu erleichtern. Zum Beispiel könnte für ein Ticket `issue-123` der Branch-Name `feature/issue-123-new-login` lauten.
+1. **Verwenden Sie kleine Buchstaben und Zahlen, Bindestriche und Punkte**: Die Beschreibung MUSS (MUST) ausschließlich Kleinbuchstaben (`a-z`), Zahlen (`0-9`), Bindestriche (`-`) zur Trennung von Wörtern und Punkte (`.`) verwenden. Sie DARF NICHT (MUST NOT) Großbuchstaben, Sonderzeichen, Unterstriche oder Leerzeichen enthalten. Punkte KÖNNEN (MAY) in jeder Beschreibung vorkommen, typischerweise für Versionsnummern (z.B. `release/v1.2.0`, `chore/upgrade-node-v20.11`).
+2. **Keine aufeinanderfolgenden, führenden oder nachfolgenden Bindestriche oder Punkte**: Bindestriche und Punkte DÜRFEN NICHT (MUST NOT) aufeinanderfolgen (z.B. `feature/new--login`, `release/v1.-2.0`) und auch nicht am Anfang oder Ende der Beschreibung stehen (z.B. `feature/-new-login`, `release/v1.2.0.`).
+3. **Halten Sie es klar und prägnant**: Der Branch-Name SOLLTE (SHOULD) beschreibend, aber prägnant sein und den Zweck der Arbeit klar angeben.
+4. **Ticket-Nummern einbeziehen**: Falls zutreffend, SOLLTE (SHOULD) die Beschreibung die Ticket-Nummer aus Ihrem Projektmanagement-Tool enthalten, um die Verfolgung zu erleichtern. Wie der Rest der Beschreibung wird sie kleingeschrieben (`PROJ-123` wird zu `proj-123`). Zum Beispiel könnte für ein Ticket `issue-123` der Branch-Name `feature/issue-123-new-login` lauten.
 
 
 ### Formale Grammatik

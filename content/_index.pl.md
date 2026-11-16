@@ -10,7 +10,7 @@ seoDescription: "Specyfikacja nazw gałęzi Git: prefiksy feature/, bugfix/, hot
 
 ## Podsumowanie
 
-Conventional Branch odnosi się do uporządkowanej i ustandaryzowanej konwencji nazewnictwa gałęzi Git, której celem jest uczynienie gałęzi bardziej czytelnymi i wykonalnymi. Zaproponowaliśmy kilka prefiksów gałęzi, które możesz chcieć używać, ale możesz także określić własną konwencję nazewnictwa. Spójna konwencja nazewnictwa ułatwia identyfikację gałęzi według typu.
+Conventional Branch odnosi się do uporządkowanej i ustandaryzowanej konwencji nazewnictwa gałęzi Git, której celem jest uczynienie gałęzi bardziej czytelnymi i wykonalnymi. Określa ona stały zestaw typów gałęzi, które akceptuje każde zgodne narzędzie; zespół, który potrzebuje więcej typów, może dodać je jako udokumentowane rozszerzenie (zob. FAQ). Spójna konwencja nazewnictwa ułatwia identyfikację gałęzi według typu.
 
 ### Kluczowe punkty
 
@@ -20,9 +20,11 @@ Conventional Branch odnosi się do uporządkowanej i ustandaryzowanej konwencji 
 
 ## Specyfikacja
 
+Słowa kluczowe „MUSI” (MUST), „NIE MOŻE” (MUST NOT), „POWINIEN” (SHOULD) i „MOŻE” (MAY) w tym dokumencie należy interpretować zgodnie z [RFC 2119](https://www.rfc-editor.org/rfc/rfc2119).
+
 ### Prefiksy nazw gałęzi
 
-Specyfikacja gałęzi obsługuje następujące prefiksy i powinna być zorganizowana jako:
+Nazwa gałęzi, z wyjątkiem gałęzi głównych, MUSI (MUST) mieć następującą strukturę i używać jednego z poniższych typów:
 
 ---
 
@@ -46,10 +48,10 @@ Gałęzie główne (`main`, `master`, `develop`) nie używają prefiksu.
 
 ### Podstawowe zasady
 
-1. **Używaj małych liter, cyfr, myślników i kropek**: Zawsze używaj małych liter (`a-z`), cyfr (`0-9`) i myślników (`-`) do oddzielania słów. Unikaj znaków specjalnych, podkreśleń lub spacji. Kropki (`.`) są dozwolone w każdym opisie, zwykle w numerach wersji (np. `release/v1.2.0`, `chore/upgrade-node-v20.11`).
-2. **Bez następujących po sobie, wiodących lub końcowych myślników lub kropek**: Upewnij się, że myślniki i kropki nie pojawiają się kolejno po sobie (np. `feature/new--login`, `release/v1.-2.0`), ani na początku czy końcu opisu (np. `feature/-new-login`, `release/v1.2.0.`).
-3. **Zachowaj jasność i zwięzłość**: Nazwa gałęzi powinna być opisowa, ale zwięzła, jasno wskazująca cel pracy.
-4. **Dołącz numery biletów**: Jeśli to możliwe, dołącz numer biletu z narzędzia zarządzania projektami, aby ułatwić śledzenie. Na przykład, dla biletu `issue-123`, nazwa gałęzi mogłaby być `feature/issue-123-new-login`.
+1. **Używaj małych liter, cyfr, myślników i kropek**: Opis MUSI (MUST) zawierać wyłącznie małe litery (`a-z`), cyfry (`0-9`), myślniki (`-`) oddzielające słowa oraz kropki (`.`). NIE MOŻE (MUST NOT) zawierać wielkich liter, znaków specjalnych, podkreśleń ani spacji. Kropki MOGĄ (MAY) występować w każdym opisie, zwykle w numerach wersji (np. `release/v1.2.0`, `chore/upgrade-node-v20.11`).
+2. **Bez następujących po sobie, wiodących lub końcowych myślników lub kropek**: Myślniki i kropki NIE MOGĄ (MUST NOT) występować kolejno po sobie (np. `feature/new--login`, `release/v1.-2.0`), ani na początku czy końcu opisu (np. `feature/-new-login`, `release/v1.2.0.`).
+3. **Zachowaj jasność i zwięzłość**: Nazwa gałęzi POWINNA (SHOULD) być opisowa, ale zwięzła, jasno wskazująca cel pracy.
+4. **Dołącz numery biletów**: Jeśli to możliwe, opis POWINIEN (SHOULD) zawierać numer biletu z narzędzia zarządzania projektami, aby ułatwić śledzenie. Tak jak resztę opisu, zapisuje się go małymi literami (`PROJ-123` staje się `proj-123`). Na przykład, dla biletu `issue-123`, nazwa gałęzi mogłaby być `feature/issue-123-new-login`.
 
 
 ### Formalna gramatyka

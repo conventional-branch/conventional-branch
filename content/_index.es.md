@@ -10,7 +10,7 @@ seoDescription: "Una especificación para nombrar ramas de Git: prefijos feature
 
 ## Resumen
 
-Conventional Branch hace referencia a una convención de nomenclatura estructurada y estandarizada para ramas de Git, cuyo objetivo es hacer que las ramas sean más legibles y accionables. Hemos sugerido algunos prefijos de rama que quizás desee utilizar, pero también puede especificar su propia convención de nomenclatura. Una convención de nomenclatura coherente facilita la identificación de las ramas por tipo.
+Conventional Branch hace referencia a una convención de nomenclatura estructurada y estandarizada para ramas de Git, cuyo objetivo es hacer que las ramas sean más legibles y accionables. Define un conjunto fijo de tipos de rama que toda herramienta conforme acepta; un equipo que necesite más tipos puede añadirlos como una extensión documentada (consulte las preguntas frecuentes). Una convención de nomenclatura coherente facilita la identificación de las ramas por tipo.
 
 ### Puntos clave
 
@@ -20,9 +20,11 @@ Conventional Branch hace referencia a una convención de nomenclatura estructura
 
 ## Especificación
 
+Las palabras clave «DEBE» (MUST), «NO DEBE» (MUST NOT), «DEBERÍA» (SHOULD) y «PUEDE» (MAY) de este documento se interpretan según lo descrito en [RFC 2119](https://www.rfc-editor.org/rfc/rfc2119).
+
 ### Prefijos de nomenclatura de ramas
 
-La especificación de ramas admite los siguientes prefijos y debe estructurarse de la siguiente manera:
+Un nombre de rama, salvo las ramas troncales, DEBE (MUST) estructurarse de la siguiente manera, usando uno de los tipos indicados a continuación:
 
 ---
 
@@ -46,10 +48,10 @@ Las ramas troncales (`main`, `master`, `develop`) no usan prefijo.
 
 ### Reglas básicas
 
-1. **Usar alfanuméricos en minúsculas, guiones y puntos**: Utilice siempre letras minúsculas (`a-z`), números (`0-9`) y guiones (`-`) para separar palabras. Evite caracteres especiales, guiones bajos o espacios. Los puntos (`.`) se permiten en cualquier descripción, normalmente para números de versión (p. ej., `release/v1.2.0`, `chore/upgrade-node-v20.11`).
-2. **Sin guiones o puntos consecutivos, iniciales o finales**: Asegúrese de que los guiones y los puntos no aparezcan de forma consecutiva (p. ej., `feature/new--login`, `release/v1.-2.0`), ni al inicio o al final de la descripción (p. ej., `feature/-new-login`, `release/v1.2.0.`).
-3. **Ser claro y conciso**: El nombre de la rama debe ser descriptivo pero conciso, indicando claramente el propósito del trabajo.
-4. **Incluir números de ticket**: Si corresponde, incluya el número de ticket de su herramienta de gestión de proyectos para facilitar el seguimiento. Por ejemplo, para un ticket `issue-123`, el nombre de la rama podría ser `feature/issue-123-new-login`.
+1. **Usar alfanuméricos en minúsculas, guiones y puntos**: La descripción DEBE (MUST) usar solo letras minúsculas (`a-z`), números (`0-9`), guiones (`-`) para separar palabras y puntos (`.`). NO DEBE (MUST NOT) contener letras mayúsculas, caracteres especiales, guiones bajos ni espacios. Los puntos PUEDEN (MAY) aparecer en cualquier descripción, normalmente para números de versión (p. ej., `release/v1.2.0`, `chore/upgrade-node-v20.11`).
+2. **Sin guiones o puntos consecutivos, iniciales o finales**: Los guiones y los puntos NO DEBEN (MUST NOT) aparecer de forma consecutiva (p. ej., `feature/new--login`, `release/v1.-2.0`), ni al inicio o al final de la descripción (p. ej., `feature/-new-login`, `release/v1.2.0.`).
+3. **Ser claro y conciso**: El nombre de la rama DEBERÍA (SHOULD) ser descriptivo pero conciso, indicando claramente el propósito del trabajo.
+4. **Incluir números de ticket**: Si corresponde, la descripción DEBERÍA (SHOULD) incluir el número de ticket de su herramienta de gestión de proyectos para facilitar el seguimiento. Como el resto de la descripción, se escribe en minúsculas (`PROJ-123` pasa a ser `proj-123`). Por ejemplo, para un ticket `issue-123`, el nombre de la rama podría ser `feature/issue-123-new-login`.
 
 
 ### Gramática formal
