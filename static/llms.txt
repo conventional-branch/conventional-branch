@@ -8,7 +8,7 @@ Purpose prefixes describe the intent of the work: `feature/` (alias `feat/`), `b
 
 A description is lowercase `a-z`, digits, and hyphens between words. Dots are allowed for version numbers, as in `release/v1.2.0`. Separators may not repeat, lead or trail, so `feature/new--login` and `feature/-new-login` are both invalid.
 
-The specification deliberately keeps this list short rather than mirroring every Conventional Commits type. A branch is temporary and usually contains several kinds of commit, so its name states the purpose of the work rather than classifying a change. Teams that need more are free to define their own additional types.
+The specification deliberately keeps this list short rather than mirroring every Conventional Commits type. A branch is temporary and usually contains several kinds of commit, so its name states the purpose of the work rather than classifying a change. Teams that need more can add their own types as a documented extension that their validator is told about; such names do not conform to the specification itself.
 
 A branch name conforms if and only if it matches this expression, which is the authoritative validator:
 

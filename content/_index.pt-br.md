@@ -10,7 +10,7 @@ seoDescription: "Uma especificação para nomes de branches Git: os prefixos fea
 
 ## Resumo
 
-Conventional Branch é uma convenção estruturada e padronizada para nomeação de branches no Git, que visa tornar os nomes dos branches mais legíveis e acionáveis. Sugerimos alguns prefixos de branch que você pode usar, mas também é possível especificar sua própria convenção de nomes. Uma convenção consistente facilita a identificação dos branches pelo tipo.
+Conventional Branch é uma convenção estruturada e padronizada para nomeação de branches no Git, que visa tornar os nomes dos branches mais legíveis e acionáveis. Ela define um conjunto fixo de tipos de branch que toda ferramenta compatível aceita; uma equipe que precise de mais tipos pode adicioná-los como uma extensão documentada (veja as perguntas frequentes). Uma convenção consistente facilita a identificação dos branches pelo tipo.
 
 ### Pontos-chave
 
@@ -20,9 +20,11 @@ Conventional Branch é uma convenção estruturada e padronizada para nomeação
 
 ## Especificação
 
+As palavras-chave “DEVE” (MUST), “NÃO DEVE” (MUST NOT), “DEVERIA” (SHOULD) e “PODE” (MAY) neste documento devem ser interpretadas conforme descrito na [RFC 2119](https://www.rfc-editor.org/rfc/rfc2119).
+
 ### Prefixos de nomeação de branch
 
-A especificação de branch suporta os seguintes prefixos e deve ser estruturada da seguinte forma:
+Um nome de branch, exceto os branches tronco, DEVE (MUST) ser estruturado da seguinte forma, usando um dos tipos abaixo:
 
 ---
 
@@ -46,10 +48,10 @@ Branches tronco (`main`, `master`, `develop`) não usam prefixo.
 
 ### Regras básicas
 
-1. **Use letras minúsculas, números, hífens e pontos**: sempre use letras minúsculas (`a-z`), números (`0-9`) e hífens (`-`) para separar palavras. Evite caracteres especiais, underlines ou espaços. Pontos (`.`) são permitidos em qualquer descrição, normalmente para números de versão (ex.: `release/v1.2.0`, `chore/upgrade-node-v20.11`).
-2. **Sem hífens ou pontos consecutivos, iniciais ou finais**: certifique-se de que hífens e pontos não apareçam consecutivamente (ex.: `feature/novo--login`, `release/v1.-2.0`), nem no início ou fim da descrição (ex.: `feature/-novo-login`, `release/v1.2.0.`).
-3. **Seja claro e conciso**: o nome do branch deve ser descritivo, mas conciso, indicando claramente o propósito do trabalho.
-4. **Inclua o número do ticket**: se aplicável, inclua o número do ticket da sua ferramenta de gestão de projetos para facilitar o rastreamento. Por exemplo, para o ticket `issue-123`, o nome do branch pode ser `feature/issue-123-novo-login`.
+1. **Use letras minúsculas, números, hífens e pontos**: A descrição DEVE (MUST) usar apenas letras minúsculas (`a-z`), números (`0-9`), hífens (`-`) para separar palavras e pontos (`.`). NÃO DEVE (MUST NOT) conter letras maiúsculas, caracteres especiais, underlines ou espaços. Pontos PODEM (MAY) aparecer em qualquer descrição, normalmente para números de versão (ex.: `release/v1.2.0`, `chore/upgrade-node-v20.11`).
+2. **Sem hífens ou pontos consecutivos, iniciais ou finais**: Hífens e pontos NÃO DEVEM (MUST NOT) aparecer consecutivamente (ex.: `feature/novo--login`, `release/v1.-2.0`), nem no início ou fim da descrição (ex.: `feature/-novo-login`, `release/v1.2.0.`).
+3. **Seja claro e conciso**: O nome do branch DEVERIA (SHOULD) ser descritivo, mas conciso, indicando claramente o propósito do trabalho.
+4. **Inclua o número do ticket**: Se aplicável, a descrição DEVERIA (SHOULD) incluir o número do ticket da sua ferramenta de gestão de projetos para facilitar o rastreamento. Como o resto da descrição, ele é escrito em minúsculas (`PROJ-123` vira `proj-123`). Por exemplo, para o ticket `issue-123`, o nome do branch pode ser `feature/issue-123-novo-login`.
 
 
 ### Gramática formal
