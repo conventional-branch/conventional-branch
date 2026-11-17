@@ -58,7 +58,7 @@ Enforce the specification automatically in your project:
 
 | Tool | Description |
 |---|---|
-| [commit-check](https://github.com/commit-check/commit-check) | CLI and pre-commit hook. Checks the branch's type prefix by default, and the full grammar with the [configuration on the enforcement page](https://conventionalbranch.org/enforce/#commit-check), which passes every conformance fixture. It always accepts `PR-<n>` and GitHub merge queue branches (`gh-readonly-queue/...`), which the specification does not. Also checks commit messages against Conventional Commits |
+| [commit-check](https://github.com/commit-check/commit-check) | CLI and pre-commit hook. Checks the branch's type prefix by default, and the full grammar with the [configuration on the enforcement page](https://conventionalbranch.org/enforce/#commit-check), which passes every conformance fixture. It always accepts any name starting with `PR-` (such as `PR-123`) and GitHub merge queue branches (`gh-readonly-queue/...`), which the specification does not. Also checks commit messages against Conventional Commits |
 | [commit-check-action](https://github.com/commit-check/commit-check-action) | The same check as a GitHub Action, with the failure reported as a job summary and, optionally, as a PR comment |
 | [Conventional Branch Skill](skills/conventional-branch/SKILL.md) | Agent skill for AI coding assistants (Claude Code, Cursor, Pi, etc.) |
 
