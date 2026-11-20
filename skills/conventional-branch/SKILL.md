@@ -190,7 +190,7 @@ As a pre-commit hook, so a wrong name is caught at the first commit:
 ```yaml
 repos:
   - repo: https://github.com/commit-check/commit-check
-    rev: v2.20.4
+    rev: v2.23.1
     hooks:
       - id: check-branch
 ```
