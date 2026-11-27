@@ -149,9 +149,11 @@ default so the badge sits comfortably next to the other badges in your README.
 ## 🤝 Contributing
 
 We welcome contributions from the community!  
-Whether it's fixing a typo, improving documentation, or proposing a new branch naming convention — please check out our [contributing guidelines](CONTRIBUTING.md).
+Whether it's fixing a typo, adding a translation, improving documentation, or proposing a new branch naming convention — please check out our [contributing guidelines](CONTRIBUTING.md).
 
-No contribution is too small. Thank you for helping us grow! 💙
+No contribution is too small. Thank you for helping improve Conventional Branch! 💙
+
+[![Contributors](https://contrib.rocks/image?repo=conventional-branch/conventional-branch)](https://github.com/conventional-branch/conventional-branch/graphs/contributors)
 
 ## 📄 License and Attribution
 
