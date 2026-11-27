@@ -35,10 +35,9 @@ to skim.
 * [gchq/Bailo](https://github.com/gchq/Bailo/blob/main/AGENTS.md): Machine learning lifecycle management, by GCHQ, the UK's intelligence, security and cyber agency.
 * [ORNLSlicer/ORNLSlicer](https://github.com/ORNLSlicer/ORNLSlicer/blob/develop/docs/contributing/conventional-branch.md): Toolpath planning and slicing for additive manufacturing, developed at Oak Ridge National Laboratory.
 * [ByteDance-Seed/cryofm](https://github.com/ByteDance-Seed/cryofm/blob/main/CONTRIBUTING.md): Generative foundation model for cryo-EM density maps, by ByteDance Seed.
-* [bcgov/nr-pies](https://github.com/bcgov/nr-pies): Natural Resource Permitting Information Exchange by the Government of British Columbia.
+* [bcgov/nr-pies](https://github.com/bcgov/nr-pies/blob/main/branch.helper.mts): Natural Resource Permitting Information Exchange by the Government of British Columbia.
 * [amagovpt/udata-pt](https://github.com/amagovpt/udata-pt/blob/main/CLAUDE.md): Portugal's open data platform, by ARTE, the state agency for technological reform.
 * [Enedis-OSS/tic4eebus](https://github.com/Enedis-OSS/tic4eebus/blob/main/CONTRIBUTING.md): EEBUS OPEV use case by Enedis, France's largest electricity distributor.
-* [BerriAI/litellm](https://github.com/BerriAI/litellm/blob/main/CONTRIBUTING.md): A high-performance LLM proxy supporting 100+ models with spending tracking and guardrails.
 * [ansible/metrics-utility](https://github.com/ansible/metrics-utility/blob/devel/docs/CONTRIBUTING.md): Standalone utility for github.com/ansible/awx.
 * [sanity-io/sdk](https://github.com/sanity-io/sdk/blob/main/CONTRIBUTING.md): Sanity App SDK.
 * [cuga-project/cuga-agent](https://github.com/cuga-project/cuga-agent/blob/main/CONTRIBUTING.md): CUGA, an open-source generalist agent harness for the enterprise.
