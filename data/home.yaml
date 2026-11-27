@@ -12,13 +12,11 @@ adopters:
   - name: ByteDance Seed
     url: https://github.com/ByteDance-Seed/cryofm/blob/main/CONTRIBUTING.md
   - name: Government of British Columbia
-    url: https://github.com/bcgov/nr-pies
+    url: https://github.com/bcgov/nr-pies/blob/main/branch.helper.mts
   - name: Enedis
     url: https://github.com/Enedis-OSS/tic4eebus/blob/main/CONTRIBUTING.md
   - name: ARTE Portugal
     url: https://github.com/amagovpt/udata-pt/blob/main/CLAUDE.md
-  - name: LiteLLM
-    url: https://github.com/BerriAI/litellm/blob/main/CONTRIBUTING.md
   - name: Ansible
     url: https://github.com/ansible/metrics-utility/blob/devel/docs/CONTRIBUTING.md
   - name: Sanity
