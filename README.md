@@ -9,7 +9,7 @@
 
 Conventional Branch defines a small branch naming convention, `<type>/<description>`, in which every branch declares its own purpose. That turns a branch name into something your CI/CD pipelines, review policies, and tooling can act on directly, instead of a team habit that has to be explained to each new contributor and enforced by hand in code review.
 
-The convention is published as a [machine-readable spec](#-machine-readable-spec) with conformance fixtures, so validating branch names is a solved problem for any tool that wants to support it. It is used by [LiteLLM](https://github.com/BerriAI/litellm/blob/main/CONTRIBUTING.md) and across the [Government of British Columbia](https://github.com/bcgov/nr-pies)'s natural resource services, and in projects at the UK's [GCHQ](https://github.com/gchq/Bailo/blob/main/AGENTS.md), [Oak Ridge National Laboratory](https://github.com/ORNLSlicer/ORNLSlicer/blob/develop/docs/contributing/conventional-branch.md) and [ByteDance](https://github.com/ByteDance-Seed/cryofm/blob/main/CONTRIBUTING.md), among [others](#-used-by).
+The convention is published as a [machine-readable spec](#-machine-readable-spec) with conformance fixtures, so validating branch names is a solved problem for any tool that wants to support it. It is used across the [Government of British Columbia](https://github.com/bcgov/nr-pies/blob/main/branch.helper.mts)'s natural resource services, and in projects at the UK's [GCHQ](https://github.com/gchq/Bailo/blob/main/AGENTS.md), [Oak Ridge National Laboratory](https://github.com/ORNLSlicer/ORNLSlicer/blob/develop/docs/contributing/conventional-branch.md) and [ByteDance](https://github.com/ByteDance-Seed/cryofm/blob/main/CONTRIBUTING.md), among [others](#-used-by).
 
 ## 🚀 Quick Start
 
@@ -58,9 +58,15 @@ Enforce the specification automatically in your project:
 
 | Tool | Description |
 |---|---|
-| [commit-check](https://github.com/commit-check/commit-check) | CLI and pre-commit hook. Checks the branch's type prefix by default, and the full grammar with the [configuration on the enforcement page](https://conventionalbranch.org/enforce/#commit-check), which passes every conformance fixture. It always accepts any name starting with `PR-` (such as `PR-123`) and GitHub merge queue branches (`gh-readonly-queue/...`), which the specification does not. Also checks commit messages against Conventional Commits |
+| [commit-check](https://github.com/commit-check/commit-check) | CLI and pre-commit hook. Also checks commit messages against Conventional Commits |
 | [commit-check-action](https://github.com/commit-check/commit-check-action) | The same check as a GitHub Action, with the failure reported as a job summary and, optionally, as a PR comment |
 | [Conventional Branch Skill](skills/conventional-branch/SKILL.md) | Agent skill for AI coding assistants (Claude Code, Cursor, Pi, etc.) |
+
+commit-check checks the branch's type prefix by default, and the full grammar with the
+[configuration on the enforcement page](https://conventionalbranch.org/enforce/#commit-check),
+which passes every conformance fixture. It always accepts any name starting with `PR-`
+(such as `PR-123`) and GitHub merge queue branches (`gh-readonly-queue/...`), which the
+specification does not.
 
 Another validator is listed here once it passes every case in [`tests/fixtures.json`](tests/fixtures.json): open a pull request that adds it and says which version you tested.
 
@@ -99,7 +105,7 @@ copied from it cannot drift from the specification.
 
 ## 🏢 Used By
 
-Alongside the organizations named above, Conventional Branch is adopted by [Ansible](https://github.com/ansible/metrics-utility), [Sanity](https://github.com/sanity-io/sdk), Portugal's state technology agency [ARTE](https://github.com/amagovpt/udata-pt), and [Enedis](https://github.com/Enedis-OSS/tic4eebus), France's largest electricity distributor. See the [full list](https://conventionalbranch.org/about/#projects-using-conventional-branch) and add your project via pull request.
+Alongside the organizations named above, Conventional Branch is adopted by [Ansible](https://github.com/ansible/metrics-utility/blob/devel/docs/CONTRIBUTING.md), [Sanity](https://github.com/sanity-io/sdk/blob/main/CONTRIBUTING.md), Portugal's state technology agency [ARTE](https://github.com/amagovpt/udata-pt/blob/main/CLAUDE.md), and [Enedis](https://github.com/Enedis-OSS/tic4eebus/blob/main/CONTRIBUTING.md), France's largest electricity distributor. See the [full list](https://conventionalbranch.org/about/#projects-using-conventional-branch) and add your project via pull request.
 
 ## 🎉 Show Your Support
 
@@ -109,7 +115,7 @@ If you find this useful, consider giving it a ⭐️ on [GitHub](https://github.
 
 Conventional Branch is maintained as free infrastructure. If your team depends on the spec, [sponsoring](https://github.com/sponsors/conventional-branch) funds hosting, translations, and keeping the spec current as tooling evolves — see [SPONSORS.md](SPONSORS.md) for current sponsors and tiers.
 
-## 🛡 Badges!
+## 🛡️ Badges
 
 Let others know your project follows the Conventional Branch spec. Pick whichever
 of the two suits your README — they carry the same colors and version.
